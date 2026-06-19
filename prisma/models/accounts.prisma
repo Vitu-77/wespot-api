@@ -1,0 +1,35 @@
+model User {
+  id        String        @id @default(uuid())
+  name      String?
+  email     String        @unique
+  password  String?
+  avatarUrl String?       @map("avatar_url")
+  role      WorkspaceRole
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  workspaceId String    @map("workspace_id")
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+
+  authAccounts AuthAccount[]
+
+  @@index([name, email])
+  @@map("users")
+}
+
+model AuthAccount {
+  id                String       @id @default(uuid())
+  provider          AuthProvider
+  providerAccountId String       @map("provider_account_id")
+
+  accessToken  String? @map("access_token")
+  refreshToken String? @map("refresh_token")
+
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map("auth_accounts")
+}

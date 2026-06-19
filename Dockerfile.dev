@@ -1,0 +1,23 @@
+FROM node:24-slim
+
+RUN apt-get update && \
+    apt-get install -y ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+RUN corepack enable && corepack prepare pnpm@10.18.3 --activate
+
+ENV pnpm_config_minimum_release_age=0
+ENV HUSKY=0
+
+COPY package.json pnpm-lock.yaml ./
+
+RUN pnpm install
+
+COPY . .
+# COPY certs/rds-ca.pem /app/certs/rds-ca.pem # => Certificado do RSD(AWS)
+
+EXPOSE 3000
+
+CMD ["pnpm", "start:dev"]

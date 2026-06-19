@@ -1,0 +1,54 @@
+model Spot {
+  id               String     @id @default(uuid())
+  title            String
+  status           SpotStatus
+  script           String
+  voiceId          String?    @map("voice_id")
+  audioUrl         String?    @map("audio_url")
+  starred          Boolean
+  expectedDuration Int        @map("expected_duration")
+  audioDuration    Int?       @map("audio_duration")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  workspaceId String    @map("workspace_id")
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+
+  brandId String? @map("brand_id")
+  brand   Brand?  @relation(fields: [brandId], references: [id])
+
+  inputId String?    @unique @map("input_id")
+  input   SpotInput?
+
+  costs SpotCost[]
+
+  @@index([brandId, status, title])
+  @@map("spots")
+}
+
+model SpotInput {
+  id   String @id @default(uuid())
+  data Json
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  spotId String @unique @map("spot_id")
+  spot   Spot   @relation(fields: [spotId], references: [id])
+
+  @@map("spot_inputs")
+}
+
+model SpotCost {
+  id String @id @default(cuid())
+
+  provider  CostProvider
+  service   CostService
+  costCents Int          @map("cost_cents")
+  metadata  Json?
+
+  spotId String @unique @map("spot_id")
+  spot   Spot   @relation(fields: [spotId], references: [id])
+
+  @@map("spot_costs")
+}

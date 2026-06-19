@@ -1,0 +1,11 @@
+enum WorkspaceType {
+  INDIVIDUAL
+  COMPANY
+  AGENCY
+}
+
+enum WorkspaceRole {
+  OWNER
+  ADMIN
+  MEMBER
+}

@@ -1,0 +1,42 @@
+model Brand {
+  id          String          @id @default(uuid())
+  name        String
+  description String?
+  segment     BusinessSegment
+  logoUrl     String?         @map("logo_url")
+  slogan      String?
+  phoneNumber String?         @map("phone_number")
+  whatsapp    String?
+  instagram   String?
+  tiktok      String?
+  facebook    String?
+  website     String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  workspaceId String    @map("workspace_id")
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+
+  spots     Spot[]
+  addresses BrandAddress[]
+
+  @@index([workspaceId])
+  @@map("brands")
+}
+
+model BrandAddress {
+  id           String         @id @default(uuid())
+  state        BrazilianState
+  city         String
+  neighborhood String
+  street       String
+  number       String
+  complement   String
+
+  brandId String @map("brand_id")
+  brand   Brand  @relation(fields: [brandId], references: [id])
+
+  @@index([brandId])
+  @@map("brand_addresses")
+}

@@ -1,0 +1,14 @@
+model Workspace {
+  id   String        @id @default(uuid())
+  name String
+  type WorkspaceType
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  users  User[]
+  brands Brand[]
+  spots  Spot[]
+
+  @@map("workspaces")
+}
