@@ -18,16 +18,6 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
- * Model User
- * 
- */
-export type User = Prisma.UserModel
-/**
- * Model AuthAccount
- * 
- */
-export type AuthAccount = Prisma.AuthAccountModel
-/**
  * Model Brand
  * 
  */
@@ -53,7 +43,17 @@ export type SpotInput = Prisma.SpotInputModel
  */
 export type SpotCost = Prisma.SpotCostModel
 /**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
  * Model Workspace
  * 
  */
 export type Workspace = Prisma.WorkspaceModel
+/**
+ * Model WorkspaceMember
+ * 
+ */
+export type WorkspaceMember = Prisma.WorkspaceMemberModel

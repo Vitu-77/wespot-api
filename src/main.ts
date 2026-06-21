@@ -13,6 +13,10 @@ async function bootstrap() {
 
   app.enableShutdownHooks(['SIGINT', 'SIGTERM', 'SIGUSR2']);
 
+  app.setGlobalPrefix('api/v1', {
+    exclude: ['docs/*'],
+  });
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

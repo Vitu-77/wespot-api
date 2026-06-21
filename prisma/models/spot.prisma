@@ -13,10 +13,10 @@ model Spot {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   workspaceId String    @map("workspace_id")
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
   brandId String? @map("brand_id")
-  brand   Brand?  @relation(fields: [brandId], references: [id])
+  brand   Brand?  @relation(fields: [brandId], references: [id], onDelete: SetNull)
 
   inputId String?    @unique @map("input_id")
   input   SpotInput?
@@ -34,7 +34,7 @@ model SpotInput {
   createdAt DateTime @default(now()) @map("created_at")
 
   spotId String @unique @map("spot_id")
-  spot   Spot   @relation(fields: [spotId], references: [id])
+  spot   Spot   @relation(fields: [spotId], references: [id], onDelete: Cascade)
 
   @@map("spot_inputs")
 }
@@ -48,7 +48,7 @@ model SpotCost {
   metadata  Json?
 
   spotId String @unique @map("spot_id")
-  spot   Spot   @relation(fields: [spotId], references: [id])
+  spot   Spot   @relation(fields: [spotId], references: [id], onDelete: Cascade)
 
   @@map("spot_costs")
 }

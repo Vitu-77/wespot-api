@@ -5,12 +5,12 @@ import { env } from 'src/env';
 
 const config = {
   schema: 'public',
-  sslmode: env.APP_ENV === 'development' ? undefined : 'verify-full',
+  sslmode: env.APP_ENV === 'development' ? 'disable' : 'verify-full',
   // sslrootcert:
   //   env.APP_ENV === 'development' ? undefined : '/app/certs/rds-ca.pem',
 };
 
-const configParams = new URLSearchParams(config as any).toString();
+const configParams = new URLSearchParams(config).toString();
 const connectionString = `tkplay://${env.POSTGRES_USER}:${env.POSTGRES_PASSWORD}@${env.POSTGRES_HOST}:${env.POSTGRES_PORT}/${env.POSTGRES_DB}?${configParams}`;
 const adapter = new PrismaPg({ connectionString });
 

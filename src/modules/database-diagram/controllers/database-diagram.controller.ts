@@ -2,7 +2,7 @@ import { Controller, Get, Res } from '@nestjs/common';
 import { type Response } from 'express';
 import { GetDbDiagramService } from 'src/modules/database-diagram/services/get-db-diagram/get-er-diagram.service';
 
-@Controller('db')
+@Controller('docs/db')
 export class DatabaseDiagramController {
   constructor(private readonly getDbDiagramService: GetDbDiagramService) {}
 

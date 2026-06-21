@@ -51,14 +51,14 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User',
-  AuthAccount: 'AuthAccount',
   Brand: 'Brand',
   BrandAddress: 'BrandAddress',
   Spot: 'Spot',
   SpotInput: 'SpotInput',
   SpotCost: 'SpotCost',
-  Workspace: 'Workspace'
+  User: 'User',
+  Workspace: 'Workspace',
+  WorkspaceMember: 'WorkspaceMember'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -75,33 +75,6 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
-
-export const UserScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  password: 'password',
-  avatarUrl: 'avatarUrl',
-  role: 'role',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  workspaceId: 'workspaceId'
-} as const
-
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-export const AuthAccountScalarFieldEnum = {
-  id: 'id',
-  provider: 'provider',
-  providerAccountId: 'providerAccountId',
-  accessToken: 'accessToken',
-  refreshToken: 'refreshToken',
-  userId: 'userId'
-} as const
-
-export type AuthAccountScalarFieldEnum = (typeof AuthAccountScalarFieldEnum)[keyof typeof AuthAccountScalarFieldEnum]
 
 
 export const BrandScalarFieldEnum = {
@@ -181,6 +154,21 @@ export const SpotCostScalarFieldEnum = {
 export type SpotCostScalarFieldEnum = (typeof SpotCostScalarFieldEnum)[keyof typeof SpotCostScalarFieldEnum]
 
 
+export const UserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  password: 'password',
+  avatarUrl: 'avatarUrl',
+  authProvider: 'authProvider',
+  authProviderId: 'authProviderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
 export const WorkspaceScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -190,6 +178,17 @@ export const WorkspaceScalarFieldEnum = {
 } as const
 
 export type WorkspaceScalarFieldEnum = (typeof WorkspaceScalarFieldEnum)[keyof typeof WorkspaceScalarFieldEnum]
+
+
+export const WorkspaceMemberScalarFieldEnum = {
+  role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  workspaceId: 'workspaceId',
+  userId: 'userId'
+} as const
+
+export type WorkspaceMemberScalarFieldEnum = (typeof WorkspaceMemberScalarFieldEnum)[keyof typeof WorkspaceMemberScalarFieldEnum]
 
 
 export const SortOrder = {
