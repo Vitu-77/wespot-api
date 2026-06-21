@@ -4,11 +4,15 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { JwtService, JwtSignOptions } from '@nestjs/jwt';
 import { Request } from 'express';
+
+type JwtAlgorithm = NonNullable<JwtSignOptions['algorithm']>;
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+  public JWT_ALGORITHM: JwtAlgorithm = 'HS256';
+
   constructor(private readonly jwtService: JwtService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -20,21 +24,21 @@ export class AuthGuard implements CanActivate {
     }
 
     try {
+      const payload = await this.jwtService.verifyAsync(token, {
+        algorithms: [this.JWT_ALGORITHM],
+      });
+
       // 💡 Here the JWT secret key that's used for verifying the payload
       // is the key that was passed in the JwtModule
-      const payload = await this.jwtService.verifyAsync(token);
       console.log(payload);
       // 💡 We're assigning the payload to the request object here
       // so that we can access it in our route handlers
       request.context = {
         session: {
           id: 'ascasc',
-          accessToken: 'abc',
-          refreshToken: 'asc',
-          user: {
-            name: 'Victor',
-            workspaceId: 'asc',
-          } as any,
+          refreshTokenHash: 'asc',
+          createdAt: new Date(),
+          userId: 'ascasc',
         },
       };
 

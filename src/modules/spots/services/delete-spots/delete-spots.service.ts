@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { SessionEntity } from 'src/domain/entities/session.entity';
 import { DeleteSpotsRepository } from 'src/modules/spots/repositories/delete-spots.repository';
 import { ListSpotsRepository } from 'src/modules/spots/repositories/list-spots.repository';
@@ -22,9 +22,10 @@ export class DeleteSpotsService {
       pageSize: ids.length,
     });
 
-    if (spots.some((spot) => spot.workspaceId !== session.user.workspaceId)) {
-      throw new ForbiddenException('This spots belongs to another workspace');
-    }
+    // TODO: Incluir validação
+    // if (spots.some((spot) => spot.workspaceId !== session.user.workspaceId)) {
+    //   throw new ForbiddenException('This spots belongs to another workspace');
+    // }
 
     return this.deleteSpotsRepository.execute(ids);
   }

@@ -5,12 +5,12 @@ import { ARGON_OPTIONS } from 'src/config/argon-options';
 import { env } from 'src/env';
 
 @Injectable()
-export class ComparePasswordService {
-  public PEPPER = env.PASSWORD_PEPPER;
+export class HashStringService {
+  public PEPPER = env.HASH_PEPPER;
 
   constructor() {}
 
-  async execute(hash: string, password: string) {
-    return argon.verify(hash, `${password}::${this.PEPPER}`, ARGON_OPTIONS);
+  async execute(password: string) {
+    return argon.hash(`${password}::${this.PEPPER}`, ARGON_OPTIONS);
   }
 }

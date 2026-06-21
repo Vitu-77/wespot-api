@@ -15,8 +15,8 @@ export const envSchema = z.object({
   REDIS_HOST: z.string(),
   DATABASE_URL: z.string(),
   REDIS_PORT: z.coerce.number(),
-  PASSWORD_SECRET: z.string().min(64),
-  PASSWORD_PEPPER: z.string().min(64),
+  HASH_SECRET: z.string().min(64),
+  HASH_PEPPER: z.string().min(64),
   GOOGLE_OAUTH_CLIENT_ID: z.string(),
 });
 

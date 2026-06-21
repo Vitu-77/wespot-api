@@ -1,10 +1,19 @@
 import { Module } from '@nestjs/common';
-import { AccountsController } from 'src/modules/accounts/controllers/accounts.controller';
+import { JwtModule } from '@nestjs/jwt';
+import { CompareHashService } from 'src/modules/auth/services/compare-hash/compare-password.service';
+import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
+import { HashStringService } from 'src/modules/auth/services/hash-string/hash-password.service';
 import { ValidateDisposableEmailService } from 'src/modules/auth/services/validate-disposable-email/validate-disposable-email.service';
 
 @Module({
-  imports: [],
-  controllers: [AccountsController],
-  providers: [ValidateDisposableEmailService],
+  imports: [JwtModule],
+  controllers: [],
+  providers: [
+    ValidateDisposableEmailService,
+    CompareHashService,
+    CreateSessionService,
+    HashStringService,
+  ],
+  exports: [ValidateDisposableEmailService, HashStringService],
 })
-export class AccountsModule {}
+export class AuthModule {}

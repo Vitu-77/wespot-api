@@ -1,4 +1,4 @@
-import { WorkspaceRole } from 'prisma-types/enums';
+import { AuthProvider, WorkspaceRole } from 'prisma-types/enums';
 import { BaseEntity } from 'src/domain/entities/base.entity';
 
 export type UserEntity = BaseEntity & {
@@ -7,6 +7,7 @@ export type UserEntity = BaseEntity & {
   password: string | null;
   avatarUrl: string | null;
   role: WorkspaceRole;
+  authProvider: AuthProvider;
 
   workspaceId: string;
   // workspace:

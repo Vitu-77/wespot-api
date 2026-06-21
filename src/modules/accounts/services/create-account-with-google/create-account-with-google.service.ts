@@ -7,11 +7,11 @@ import {
 import { OAuth2Client } from 'google-auth-library';
 import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 import { env } from 'src/env';
-import { AuthService } from 'src/infra/tokens/tokens.service';
 
 import { CreateUserRepository } from 'src/modules/accounts/repositories/create-user.repository';
 import { GetUserByEmailRepository } from 'src/modules/accounts/repositories/get-user-by-email.repository';
 import { CreateAccountWithGoogleDto } from 'src/modules/accounts/services/create-account-with-google/create-account-with-google.dto';
+import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
 import { logger } from 'src/shared/utils/logger';
 
 @Injectable()
@@ -19,9 +19,9 @@ export class CreateAccountWithGoogleService {
   private googleOAuthClient = new OAuth2Client(env.GOOGLE_OAUTH_CLIENT_ID);
 
   constructor(
-    private readonly authService: AuthService,
     private readonly createUserRepository: CreateUserRepository,
     private readonly getUserByEmailRepository: GetUserByEmailRepository,
+    private readonly createSessionService: CreateSessionService,
   ) {}
 
   async execute(data: CreateAccountWithGoogleDto) {
@@ -53,12 +53,9 @@ export class CreateAccountWithGoogleService {
 
       const user = await this.getUserByEmailRepository.execute(payload.email);
 
-      console.log(payload);
-      console.log(user);
-
       if (user) {
         if (user.authProvider === 'GOOGLE') {
-          // Efetuar login e retornar tokens
+          return this.createSessionService.execute(user);
         }
 
         if (user.authProvider === 'EMAIL') {
@@ -76,7 +73,7 @@ export class CreateAccountWithGoogleService {
         email: payload.email,
       });
 
-      const { accessToken } = this.authService.createAuthTokens(newUser);
+      return this.createSessionService.execute(newUser);
     } catch (error: any) {
       if (error?.response?.error in ErrorCodes) {
         throw error;

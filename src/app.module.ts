@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import { envSchema, EnvType } from 'src/env';
-import { AuthModule } from 'src/infra/tokens/tokens.module';
 import { PrismaModule } from 'src/infra/prisma/prisma.module';
 import { RedisModule } from 'src/infra/redis/redis.module';
 import { AccountsModule } from 'src/modules/accounts/accounts.module';
+import { AuthModule } from 'src/modules/auth/auth.module';
 import { DatabaseDiagramModule } from 'src/modules/database-diagram/database-diagram.module';
 import { SpotsModule } from 'src/modules/spots/spots.module';
 
@@ -28,11 +28,11 @@ import { SpotsModule } from 'src/modules/spots/spots.module';
     }),
 
     // Infra-modules
-    AuthModule,
     PrismaModule,
     RedisModule,
 
     // Application-modules
+    AuthModule,
     AccountsModule,
     SpotsModule,
     DatabaseDiagramModule,

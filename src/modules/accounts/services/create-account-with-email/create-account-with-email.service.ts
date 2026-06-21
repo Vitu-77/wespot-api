@@ -5,17 +5,21 @@ import {
 } from '@nestjs/common';
 import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 
-import { AuthService } from 'src/infra/tokens/tokens.service';
 import { CreateUserRepository } from 'src/modules/accounts/repositories/create-user.repository';
 import { GetUserByEmailRepository } from 'src/modules/accounts/repositories/get-user-by-email.repository';
 import { CreateAccountWithEmailDto } from 'src/modules/accounts/services/create-account-with-email/create-account-with-email.dto';
+import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
+import { HashStringService } from 'src/modules/auth/services/hash-string/hash-password.service';
+import { ValidateDisposableEmailService } from 'src/modules/auth/services/validate-disposable-email/validate-disposable-email.service';
 
 @Injectable()
 export class CreateAccountWithEmailService {
   constructor(
-    private readonly authService: AuthService,
+    private readonly hashStringService: HashStringService,
+    private readonly createSessionService: CreateSessionService,
     private readonly createUserRepository: CreateUserRepository,
     private readonly getUserByEmailRepository: GetUserByEmailRepository,
+    private readonly validateDisposableEmailService: ValidateDisposableEmailService,
   ) {}
 
   async execute(data: CreateAccountWithEmailDto) {
@@ -25,7 +29,7 @@ export class CreateAccountWithEmailService {
       });
     }
 
-    await this.authService.validateDisposableEmail(data.email);
+    await this.validateDisposableEmailService.execute(data.email);
     const user = await this.getUserByEmailRepository.execute(data.email);
 
     if (user) {
@@ -42,10 +46,12 @@ export class CreateAccountWithEmailService {
       }
     }
 
-    return this.createUserRepository.execute({
+    const newUser = await this.createUserRepository.execute({
       ...data,
       authProvider: 'EMAIL',
-      password: await this.authService.encrypt(data.password),
+      password: await this.hashStringService.execute(data.password),
     });
+
+    return this.createSessionService.execute(newUser);
   }
 }
