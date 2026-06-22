@@ -48,6 +48,7 @@ export class CreateAccountWithEmailService {
 
     const newUser = await this.createUserRepository.execute({
       ...data,
+      emailValidated: false,
       authProvider: 'EMAIL',
       password: await this.hashStringService.execute(data.password),
     });

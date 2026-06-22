@@ -32,6 +32,7 @@ export type UserMinAggregateOutputType = {
   avatarUrl: string | null
   authProvider: $Enums.AuthProvider | null
   authProviderId: string | null
+  emailValidated: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -44,6 +45,7 @@ export type UserMaxAggregateOutputType = {
   avatarUrl: string | null
   authProvider: $Enums.AuthProvider | null
   authProviderId: string | null
+  emailValidated: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -56,6 +58,7 @@ export type UserCountAggregateOutputType = {
   avatarUrl: number
   authProvider: number
   authProviderId: number
+  emailValidated: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -70,6 +73,7 @@ export type UserMinAggregateInputType = {
   avatarUrl?: true
   authProvider?: true
   authProviderId?: true
+  emailValidated?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -82,6 +86,7 @@ export type UserMaxAggregateInputType = {
   avatarUrl?: true
   authProvider?: true
   authProviderId?: true
+  emailValidated?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -94,6 +99,7 @@ export type UserCountAggregateInputType = {
   avatarUrl?: true
   authProvider?: true
   authProviderId?: true
+  emailValidated?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -179,6 +185,7 @@ export type UserGroupByOutputType = {
   avatarUrl: string | null
   authProvider: $Enums.AuthProvider
   authProviderId: string | null
+  emailValidated: boolean
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -212,6 +219,7 @@ export type UserWhereInput = {
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   authProvider?: Prisma.EnumAuthProviderFilter<"User"> | $Enums.AuthProvider
   authProviderId?: Prisma.StringNullableFilter<"User"> | string | null
+  emailValidated?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   workspaces?: Prisma.WorkspaceMemberListRelationFilter
@@ -225,6 +233,7 @@ export type UserOrderByWithRelationInput = {
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   authProvider?: Prisma.SortOrder
   authProviderId?: Prisma.SortOrderInput | Prisma.SortOrder
+  emailValidated?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   workspaces?: Prisma.WorkspaceMemberOrderByRelationAggregateInput
@@ -241,6 +250,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   authProvider?: Prisma.EnumAuthProviderFilter<"User"> | $Enums.AuthProvider
   authProviderId?: Prisma.StringNullableFilter<"User"> | string | null
+  emailValidated?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   workspaces?: Prisma.WorkspaceMemberListRelationFilter
@@ -254,6 +264,7 @@ export type UserOrderByWithAggregationInput = {
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   authProvider?: Prisma.SortOrder
   authProviderId?: Prisma.SortOrderInput | Prisma.SortOrder
+  emailValidated?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -272,6 +283,7 @@ export type UserScalarWhereWithAggregatesInput = {
   avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   authProvider?: Prisma.EnumAuthProviderWithAggregatesFilter<"User"> | $Enums.AuthProvider
   authProviderId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  emailValidated?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -284,6 +296,7 @@ export type UserCreateInput = {
   avatarUrl?: string | null
   authProvider: $Enums.AuthProvider
   authProviderId?: string | null
+  emailValidated: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   workspaces?: Prisma.WorkspaceMemberCreateNestedManyWithoutUserInput
@@ -297,6 +310,7 @@ export type UserUncheckedCreateInput = {
   avatarUrl?: string | null
   authProvider: $Enums.AuthProvider
   authProviderId?: string | null
+  emailValidated: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   workspaces?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutUserInput
@@ -310,6 +324,7 @@ export type UserUpdateInput = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
   authProviderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailValidated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspaces?: Prisma.WorkspaceMemberUpdateManyWithoutUserNestedInput
@@ -323,6 +338,7 @@ export type UserUncheckedUpdateInput = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
   authProviderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailValidated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspaces?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutUserNestedInput
@@ -336,6 +352,7 @@ export type UserCreateManyInput = {
   avatarUrl?: string | null
   authProvider: $Enums.AuthProvider
   authProviderId?: string | null
+  emailValidated: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -348,6 +365,7 @@ export type UserUpdateManyMutationInput = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
   authProviderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailValidated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -360,6 +378,7 @@ export type UserUncheckedUpdateManyInput = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
   authProviderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailValidated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -372,6 +391,7 @@ export type UserCountOrderByAggregateInput = {
   avatarUrl?: Prisma.SortOrder
   authProvider?: Prisma.SortOrder
   authProviderId?: Prisma.SortOrder
+  emailValidated?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -384,6 +404,7 @@ export type UserMaxOrderByAggregateInput = {
   avatarUrl?: Prisma.SortOrder
   authProvider?: Prisma.SortOrder
   authProviderId?: Prisma.SortOrder
+  emailValidated?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -396,6 +417,7 @@ export type UserMinOrderByAggregateInput = {
   avatarUrl?: Prisma.SortOrder
   authProvider?: Prisma.SortOrder
   authProviderId?: Prisma.SortOrder
+  emailValidated?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -431,6 +453,7 @@ export type UserCreateWithoutWorkspacesInput = {
   avatarUrl?: string | null
   authProvider: $Enums.AuthProvider
   authProviderId?: string | null
+  emailValidated: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -443,6 +466,7 @@ export type UserUncheckedCreateWithoutWorkspacesInput = {
   avatarUrl?: string | null
   authProvider: $Enums.AuthProvider
   authProviderId?: string | null
+  emailValidated: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -471,6 +495,7 @@ export type UserUpdateWithoutWorkspacesInput = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
   authProviderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailValidated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -483,6 +508,7 @@ export type UserUncheckedUpdateWithoutWorkspacesInput = {
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authProvider?: Prisma.EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
   authProviderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailValidated?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -526,6 +552,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   avatarUrl?: boolean
   authProvider?: boolean
   authProviderId?: boolean
+  emailValidated?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   workspaces?: boolean | Prisma.User$workspacesArgs<ExtArgs>
@@ -540,6 +567,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   avatarUrl?: boolean
   authProvider?: boolean
   authProviderId?: boolean
+  emailValidated?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -552,6 +580,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   avatarUrl?: boolean
   authProvider?: boolean
   authProviderId?: boolean
+  emailValidated?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -564,11 +593,12 @@ export type UserSelectScalar = {
   avatarUrl?: boolean
   authProvider?: boolean
   authProviderId?: boolean
+  emailValidated?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "avatarUrl" | "authProvider" | "authProviderId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "avatarUrl" | "authProvider" | "authProviderId" | "emailValidated" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspaces?: boolean | Prisma.User$workspacesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -589,6 +619,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     avatarUrl: string | null
     authProvider: $Enums.AuthProvider
     authProviderId: string | null
+    emailValidated: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1022,6 +1053,7 @@ export interface UserFieldRefs {
   readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
   readonly authProvider: Prisma.FieldRef<"User", 'AuthProvider'>
   readonly authProviderId: Prisma.FieldRef<"User", 'String'>
+  readonly emailValidated: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }

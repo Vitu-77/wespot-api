@@ -16,6 +16,7 @@ export class CreateUserRepository {
         password: data.password ?? null,
         authProviderId: data.authProviderId ?? null,
         avatarUrl: data.avatarUrl,
+        emailValidated: data.emailValidated,
       },
     });
 

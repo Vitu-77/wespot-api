@@ -1,3 +1,17 @@
+type Params = {
+  username: string;
+  code: number;
+  codeValidationInSeconds: number;
+};
+
+const logoUrl = 'https://ik.imagekit.io/wespot/Group%2043.svg';
+
+export const createVerificationCodeEmail = ({
+  code,
+  username,
+  codeValidationInSeconds,
+}: Params) => {
+  return `
 <!DOCTYPE html>
 
 <html lang="pt-BR">
@@ -16,12 +30,12 @@
           style="max-width:600px;background:#ffffff;border-radius:16px;padding:40px;">
           <tr>
             <td align="center">
-              <img src="${logoUrl}" alt="TalkPlay" width="180"
-                style="display:block;border:0;outline:none;text-decoration:none;" />
-
-              <h1 style="margin:0;font-size:28px;color:#111827;">
-                Verificação de E-mail
-              </h1>
+              <img
+                src="${logoUrl}"
+                alt="WeSpot"
+                width="180"
+                style="display:block;border:0;outline:none;text-decoration:none;"
+              />
 
               <p style="margin:24px 0 8px;color:#4b5563;font-size:16px;line-height:24px;">
                 Olá, ${username}!
@@ -47,7 +61,7 @@
               </div>
 
               <p style="margin:0;color:#6b7280;font-size:14px;line-height:22px;">
-                Este código expira em <strong>60 minutos</strong>.
+                Este código expira em <strong>${Math.ceil(codeValidationInSeconds / 60)} minutos</strong>.
               </p>
 
               <p style="margin:24px 0 0;color:#6b7280;font-size:14px;line-height:22px;">
@@ -66,5 +80,6 @@
     </tr>
   </table>
 </body>
-
 </html>
+`;
+};

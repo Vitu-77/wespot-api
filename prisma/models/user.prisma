@@ -6,6 +6,7 @@ model User {
   avatarUrl      String?      @map("avatar_url")
   authProvider   AuthProvider @map("auth_provider")
   authProviderId String?      @map("auth_provider_id")
+  emailValidated Boolean      @map("email_validated")
 
   // TODO: Incluir campo para verificação de email com código
 

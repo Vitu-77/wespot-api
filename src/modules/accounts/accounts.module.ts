@@ -7,6 +7,9 @@ import { CreateAccountWithGoogleService } from 'src/modules/accounts/services/cr
 import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthModule } from 'src/modules/auth/auth.module';
+import { SendVerificationCodeService } from 'src/modules/accounts/services/send-verification-code/create-account.service';
+import { UpdateUserRepository } from 'src/modules/accounts/repositories/update-user.repository';
+import { ValidateAccountEmailService } from 'src/modules/accounts/services/validate-account-email/validate-account-email.service';
 
 @Module({
   imports: [AuthModule],
@@ -14,11 +17,15 @@ import { AuthModule } from 'src/modules/auth/auth.module';
   providers: [
     JwtService,
 
-    CreateSessionService,
     CreateUserRepository,
+    UpdateUserRepository,
     GetUserByEmailRepository,
+
+    CreateSessionService,
     CreateAccountWithEmailService,
     CreateAccountWithGoogleService,
+    SendVerificationCodeService,
+    ValidateAccountEmailService,
   ],
 })
 export class AccountsModule {}

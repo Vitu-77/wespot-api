@@ -11,6 +11,7 @@ import { env } from 'src/env';
 import { CreateUserRepository } from 'src/modules/accounts/repositories/create-user.repository';
 import { GetUserByEmailRepository } from 'src/modules/accounts/repositories/get-user-by-email.repository';
 import { CreateAccountWithGoogleDto } from 'src/modules/accounts/services/create-account-with-google/create-account-with-google.dto';
+import { SendVerificationCodeService } from 'src/modules/accounts/services/send-verification-code/create-account.service';
 import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
 import { logger } from 'src/shared/utils/logger';
 
@@ -19,6 +20,7 @@ export class CreateAccountWithGoogleService {
   private googleOAuthClient = new OAuth2Client(env.GOOGLE_OAUTH_CLIENT_ID);
 
   constructor(
+    private readonly sendVerificationCodeService: SendVerificationCodeService,
     private readonly createUserRepository: CreateUserRepository,
     private readonly getUserByEmailRepository: GetUserByEmailRepository,
     private readonly createSessionService: CreateSessionService,
@@ -65,12 +67,18 @@ export class CreateAccountWithGoogleService {
         }
       }
 
+      await this.sendVerificationCodeService.execute({
+        email: payload.email,
+        name: payload.name,
+      });
+
       const newUser = await this.createUserRepository.execute({
         authProvider: 'GOOGLE',
         authProviderId: payload.sub,
         name: payload.name,
         avatarUrl: payload.picture,
         email: payload.email,
+        emailValidated: false,
       });
 
       return this.createSessionService.execute(newUser);
