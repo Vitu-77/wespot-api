@@ -19,7 +19,7 @@ export const envSchema = z.object({
   HASH_PEPPER: z.string().min(64),
   GOOGLE_OAUTH_CLIENT_ID: z.string(),
   RESEND_API_KEY: z.string(),
-  EMAIL_SENDER: z.email(),
+  SUPPORT_EMAIL_SENDER: z.email(),
 });
 
 export type EnvType = z.infer<typeof envSchema>;

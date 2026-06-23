@@ -1,6 +1,6 @@
 import { Resend, ErrorResponse } from 'resend';
-
 import { BadRequestException, Injectable } from '@nestjs/common';
+
 import { env } from 'src/env';
 import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 
@@ -8,6 +8,8 @@ type SendMailParams = {
   to: string[];
   title: string;
   content: string;
+  fromMail: string;
+  fromName: string;
 };
 
 @Injectable()
@@ -18,7 +20,7 @@ export class EmailService {
     this.client = new Resend(env.RESEND_API_KEY);
   }
 
-  async send({ to, content, title }: SendMailParams) {
+  async send({ to, content, title, fromMail, fromName }: SendMailParams) {
     let attempts = 0;
     let sent = false;
     let error: ErrorResponse | null = null;
@@ -27,7 +29,7 @@ export class EmailService {
       const delayMs = attempts * 2 * 1000;
       await new Promise((res) => setTimeout(res, delayMs));
       const response = await this.client.emails.send({
-        from: `Suporte WeSpot <${env.EMAIL_SENDER}>`,
+        from: `${fromName} <${fromMail}>`,
         to,
         subject: title,
         html: content,

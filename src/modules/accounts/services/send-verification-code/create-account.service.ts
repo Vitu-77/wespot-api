@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { randomInt } from 'node:crypto';
+import { env } from 'src/env';
 import { EmailService } from 'src/infra/email/email.service';
 import { createVerificationCodeEmail } from 'src/infra/email/templates/verification-code-template';
 import { RedisService } from 'src/infra/redis/redis.service';
@@ -27,8 +28,10 @@ export class SendVerificationCodeService {
     );
 
     return this.emailService.send({
-      to: [email],
       title: 'Código de verificação',
+      to: [email],
+      fromMail: env.SUPPORT_EMAIL_SENDER,
+      fromName: 'Suporte WeSpot',
       content: createVerificationCodeEmail({
         code,
         username: name,
