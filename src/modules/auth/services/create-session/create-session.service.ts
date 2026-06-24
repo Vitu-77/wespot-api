@@ -4,8 +4,8 @@ import { SessionEntity } from 'src/domain/entities/session.entity';
 import { UserEntity } from 'src/domain/entities/user.entity';
 
 import { env } from 'src/env';
+import { ArgonService } from 'src/infra/argon/argon.service';
 import { RedisService } from 'src/infra/redis/redis.service';
-import { HashStringService } from 'src/modules/auth/services/hash-string/hash-password.service';
 
 type JwtAlgorithm = NonNullable<JwtSignOptions['algorithm']>;
 
@@ -20,7 +20,7 @@ export class CreateSessionService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly redisService: RedisService,
-    private readonly hashStringService: HashStringService,
+    private readonly argonService: ArgonService,
   ) {}
 
   async execute(user: UserEntity) {
@@ -54,7 +54,7 @@ export class CreateSessionService {
     const session: SessionEntity = {
       id: sessionId,
       userId: user.id,
-      refreshTokenHash: await this.hashStringService.execute(refreshToken),
+      refreshTokenHash: await this.argonService.hashString(refreshToken),
       createdAt: new Date(),
     };
 

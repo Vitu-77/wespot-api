@@ -11,7 +11,8 @@ import { env } from 'src/env';
 import { CreateUserRepository } from 'src/modules/accounts/repositories/create-user.repository';
 import { GetUserByEmailRepository } from 'src/modules/accounts/repositories/get-user-by-email.repository';
 import { CreateAccountWithGoogleDto } from 'src/modules/accounts/services/create-account-with-google/create-account-with-google.dto';
-import { SendVerificationCodeService } from 'src/modules/accounts/services/send-verification-code/create-account.service';
+import { SendVerificationCodeService } from 'src/modules/accounts/services/send-verification-code/send-verification-code.service';
+import { EnsureAccountCreationService } from 'src/modules/accounts/services/ensure-account-creation/ensure-account-creation.service';
 import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
 import { logger } from 'src/shared/utils/logger';
 
@@ -24,6 +25,7 @@ export class CreateAccountWithGoogleService {
     private readonly createUserRepository: CreateUserRepository,
     private readonly getUserByEmailRepository: GetUserByEmailRepository,
     private readonly createSessionService: CreateSessionService,
+    private readonly ensureAccountCreationService: EnsureAccountCreationService,
   ) {}
 
   async execute(data: CreateAccountWithGoogleDto) {
@@ -67,6 +69,7 @@ export class CreateAccountWithGoogleService {
         }
       }
 
+      await this.ensureAccountCreationService.execute(data.fingerprintId);
       await this.sendVerificationCodeService.execute({
         email: payload.email,
         name: payload.name,
@@ -79,6 +82,7 @@ export class CreateAccountWithGoogleService {
         avatarUrl: payload.picture,
         email: payload.email,
         emailValidated: false,
+        fingerprint: data.fingerprintId,
       });
 
       return this.createSessionService.execute(newUser);

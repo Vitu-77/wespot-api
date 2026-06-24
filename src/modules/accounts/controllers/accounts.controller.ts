@@ -3,15 +3,15 @@ import { CreateAccountWithEmailDto } from 'src/modules/accounts/services/create-
 import { CreateAccountWithEmailService } from 'src/modules/accounts/services/create-account-with-email/create-account-with-email.service';
 import { CreateAccountWithGoogleDto } from 'src/modules/accounts/services/create-account-with-google/create-account-with-google.dto';
 import { CreateAccountWithGoogleService } from 'src/modules/accounts/services/create-account-with-google/create-account-with-google.service';
-import { ValidateAccountEmailDto } from 'src/modules/accounts/services/validate-account-email/validate-account-email.dto';
-import { ValidateAccountEmailService } from 'src/modules/accounts/services/validate-account-email/validate-account-email.service';
+import { ValidateVerificationCodeDto } from 'src/modules/accounts/services/validate-verification-code/validate-verification-code.dto';
+import { ValidateVerificationCodeService } from 'src/modules/accounts/services/validate-verification-code/validate-verification-code.service';
 
 @Controller('accounts')
 export class AccountsController {
   constructor(
     private readonly createAccountWithEmailService: CreateAccountWithEmailService,
     private readonly createAccountWithGoogleService: CreateAccountWithGoogleService,
-    private readonly validateAccountEmailService: ValidateAccountEmailService,
+    private readonly validateVerificationCodeService: ValidateVerificationCodeService,
   ) {}
 
   @Post('/signup/email')
@@ -25,7 +25,7 @@ export class AccountsController {
   }
 
   @Patch('/validate-email')
-  validateEmail(@Body() body: ValidateAccountEmailDto) {
-    return this.validateAccountEmailService.execute(body);
+  verifyEmail(@Body() body: ValidateVerificationCodeDto) {
+    return this.validateVerificationCodeService.execute(body);
   }
 }

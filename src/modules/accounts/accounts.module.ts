@@ -7,9 +7,11 @@ import { CreateAccountWithGoogleService } from 'src/modules/accounts/services/cr
 import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
 import { JwtService } from '@nestjs/jwt';
 import { AuthModule } from 'src/modules/auth/auth.module';
-import { SendVerificationCodeService } from 'src/modules/accounts/services/send-verification-code/create-account.service';
+import { SendVerificationCodeService } from 'src/modules/accounts/services/send-verification-code/send-verification-code.service';
 import { UpdateUserRepository } from 'src/modules/accounts/repositories/update-user.repository';
-import { ValidateAccountEmailService } from 'src/modules/accounts/services/validate-account-email/validate-account-email.service';
+import { ValidateVerificationCodeService } from 'src/modules/accounts/services/validate-verification-code/validate-verification-code.service';
+import { EnsureAccountCreationService } from 'src/modules/accounts/services/ensure-account-creation/ensure-account-creation.service';
+import { ValidateDisposableEmailService } from 'src/modules/accounts/services/validate-disposable-email/validate-disposable-email.service';
 
 @Module({
   imports: [AuthModule],
@@ -25,7 +27,9 @@ import { ValidateAccountEmailService } from 'src/modules/accounts/services/valid
     CreateAccountWithEmailService,
     CreateAccountWithGoogleService,
     SendVerificationCodeService,
-    ValidateAccountEmailService,
+    ValidateVerificationCodeService,
+    EnsureAccountCreationService,
+    ValidateDisposableEmailService,
   ],
 })
 export class AccountsModule {}

@@ -8,17 +8,17 @@ import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 import { RedisService } from 'src/infra/redis/redis.service';
 import { GetUserByEmailRepository } from 'src/modules/accounts/repositories/get-user-by-email.repository';
 import { UpdateUserRepository } from 'src/modules/accounts/repositories/update-user.repository';
-import { ValidateAccountEmailDto } from 'src/modules/accounts/services/validate-account-email/validate-account-email.dto';
+import { ValidateVerificationCodeDto } from 'src/modules/accounts/services/validate-verification-code/validate-verification-code.dto';
 
 @Injectable()
-export class ValidateAccountEmailService {
+export class ValidateVerificationCodeService {
   constructor(
     private readonly redisSerivce: RedisService,
     private readonly getUserByEmailRepository: GetUserByEmailRepository,
     private readonly updateUserRepository: UpdateUserRepository,
   ) {}
 
-  async execute({ code, email }: ValidateAccountEmailDto) {
+  async execute({ code, email }: ValidateVerificationCodeDto) {
     const redisKey = `verification-code:${email}`;
     const storedCode = await this.redisSerivce.get(redisKey);
 

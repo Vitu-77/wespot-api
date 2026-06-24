@@ -163,6 +163,7 @@ export const UserScalarFieldEnum = {
   authProvider: 'authProvider',
   authProviderId: 'authProviderId',
   emailValidated: 'emailValidated',
+  fingerprint: 'fingerprint',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

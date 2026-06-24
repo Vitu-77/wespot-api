@@ -8,18 +8,20 @@ import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 import { CreateUserRepository } from 'src/modules/accounts/repositories/create-user.repository';
 import { GetUserByEmailRepository } from 'src/modules/accounts/repositories/get-user-by-email.repository';
 import { CreateAccountWithEmailDto } from 'src/modules/accounts/services/create-account-with-email/create-account-with-email.dto';
+import { EnsureAccountCreationService } from 'src/modules/accounts/services/ensure-account-creation/ensure-account-creation.service';
 import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
-import { HashStringService } from 'src/modules/auth/services/hash-string/hash-password.service';
-import { ValidateDisposableEmailService } from 'src/modules/auth/services/validate-disposable-email/validate-disposable-email.service';
+import { ValidateDisposableEmailService } from 'src/modules/accounts/services/validate-disposable-email/validate-disposable-email.service';
+import { ArgonService } from 'src/infra/argon/argon.service';
 
 @Injectable()
 export class CreateAccountWithEmailService {
   constructor(
-    private readonly hashStringService: HashStringService,
+    private readonly argonService: ArgonService,
     private readonly createSessionService: CreateSessionService,
     private readonly createUserRepository: CreateUserRepository,
     private readonly getUserByEmailRepository: GetUserByEmailRepository,
     private readonly validateDisposableEmailService: ValidateDisposableEmailService,
+    private readonly ensureAccountCreationService: EnsureAccountCreationService,
   ) {}
 
   async execute(data: CreateAccountWithEmailDto) {
@@ -46,11 +48,13 @@ export class CreateAccountWithEmailService {
       }
     }
 
+    await this.ensureAccountCreationService.execute(data.fingerprintId);
     const newUser = await this.createUserRepository.execute({
       ...data,
       emailValidated: false,
       authProvider: 'EMAIL',
-      password: await this.hashStringService.execute(data.password),
+      password: await this.argonService.hashString(data.password),
+      fingerprint: data.fingerprintId,
     });
 
     return this.createSessionService.execute(newUser);

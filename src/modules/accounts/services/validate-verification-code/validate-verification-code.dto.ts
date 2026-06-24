@@ -1,6 +1,6 @@
 import { IsEmail, IsString, Length } from 'class-validator';
 
-export class ValidateAccountEmailDto {
+export class ValidateVerificationCodeDto {
   @IsEmail()
   email!: string;
 
