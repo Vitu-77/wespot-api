@@ -1,15 +1,14 @@
-import { SessionEntity } from 'src/domain/entities/session.entity';
-
 export {};
 
 declare global {
   type RequestContext = {
-    session?: SessionEntity | null;
+    userId: string;
+    workspaceId?: string | null;
   };
 
   namespace Express {
     interface Request {
-      context: RequestContext;
+      ctx: RequestContext;
     }
   }
 }

@@ -6,6 +6,8 @@ import {
 } from '@nestjs/common';
 import { JwtService, JwtSignOptions } from '@nestjs/jwt';
 import { Request } from 'express';
+import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
+import { AccessTokenPayload } from 'src/modules/auth/services/create-session/create-session.service';
 
 type JwtAlgorithm = NonNullable<JwtSignOptions['algorithm']>;
 
@@ -17,41 +19,46 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request: Request = context.switchToHttp().getRequest();
-    const token = this.extractTokenFromHeader(request);
+    const token = this.getAccessToken(request);
 
     if (!token) {
-      throw new UnauthorizedException('Auth token is missing');
+      throw new UnauthorizedException('Auth token is missing', {
+        description: ErrorCodes.AUTH_TOKEN_IS_MISSING,
+      });
     }
 
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
-        algorithms: [this.JWT_ALGORITHM],
-      });
-
-      // 💡 Here the JWT secret key that's used for verifying the payload
-      // is the key that was passed in the JwtModule
-      console.log(payload);
-      // 💡 We're assigning the payload to the request object here
-      // so that we can access it in our route handlers
-      request.context = {
-        session: {
-          id: 'ascasc',
-          refreshTokenHash: 'asc',
-          createdAt: new Date(),
-          userId: 'ascasc',
+      const payload = await this.jwtService.verifyAsync<AccessTokenPayload>(
+        token,
+        {
+          algorithms: [this.JWT_ALGORITHM],
         },
-      };
+      );
 
-      // return true;
+      request.ctx = {
+        userId: payload.sub,
+        workspaceId: this.getWorkspaceId(request),
+      };
     } catch {
-      throw new UnauthorizedException('Auth token is invalid');
+      throw new UnauthorizedException('Auth token is invalid', {
+        description: ErrorCodes.INVALID_AUTH_TOKEN,
+      });
     }
 
     return true;
   }
 
-  private extractTokenFromHeader(request: Request): string | undefined {
+  private getAccessToken(request: Request): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
+  }
+
+  private getWorkspaceId(request: Request): string | undefined {
+    const workspaceId = request.headers['x-workspace-id'];
+    return workspaceId
+      ? Array.isArray(workspaceId)
+        ? workspaceId[0]
+        : workspaceId
+      : undefined;
   }
 }

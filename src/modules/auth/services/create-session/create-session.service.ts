@@ -2,12 +2,23 @@ import { Injectable } from '@nestjs/common';
 import { JwtService, JwtSignOptions } from '@nestjs/jwt';
 import { SessionEntity } from 'src/domain/entities/session.entity';
 import { UserEntity } from 'src/domain/entities/user.entity';
+import { AuthTokenType } from 'src/domain/enums/auth-token-type.enum';
 
 import { env } from 'src/env';
 import { ArgonService } from 'src/infra/argon/argon.service';
 import { RedisService } from 'src/infra/redis/redis.service';
 
 type JwtAlgorithm = NonNullable<JwtSignOptions['algorithm']>;
+
+export type AccessTokenPayload = {
+  sub: string;
+  type: AuthTokenType.ACCESS;
+};
+
+export type RefreshTokenPayload = {
+  sub: string;
+  type: AuthTokenType.REFRESH;
+};
 
 @Injectable()
 export class CreateSessionService {
@@ -24,12 +35,10 @@ export class CreateSessionService {
   ) {}
 
   async execute(user: UserEntity) {
-    const sessionId = crypto.randomUUID();
-
     const accessToken = await this.jwtService.signAsync(
       {
         sub: user.id,
-        type: 'access',
+        type: AuthTokenType.ACCESS,
       },
       {
         secret: this.SECRET,
@@ -41,8 +50,7 @@ export class CreateSessionService {
     const refreshToken = await this.jwtService.signAsync(
       {
         sub: user.id,
-        sid: sessionId,
-        type: 'refresh',
+        type: AuthTokenType.REFRESH,
       },
       {
         secret: this.SECRET,
@@ -52,14 +60,14 @@ export class CreateSessionService {
     );
 
     const session: SessionEntity = {
-      id: sessionId,
       userId: user.id,
       refreshTokenHash: await this.argonService.hashString(refreshToken),
       createdAt: new Date(),
     };
 
+    await this.redisService.del(`session:${user.id}`);
     await this.redisService.set(
-      `session:${sessionId}`,
+      `session:${user.id}`,
       JSON.stringify(session),
       this.REFRESH_TOKEN_EXPIRES_IN,
     );

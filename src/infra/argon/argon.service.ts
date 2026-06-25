@@ -14,10 +14,10 @@ export class ArgonService {
 
   async compareHash(
     hash: string,
-    string: string,
+    stringToCompare: string,
     options?: Partial<ArgonOptions>,
   ) {
-    return argon.verify(hash, `${string}::${this.PEPPER}`, {
+    return argon.verify(hash, `${stringToCompare}::${this.PEPPER}`, {
       ...this.ARGON_OPTIONS,
       ...(options ?? {}),
     });
