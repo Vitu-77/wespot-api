@@ -3,6 +3,8 @@ import { DeleteSpotsDto } from 'src/modules/spots/services/delete-spots/delete-s
 import { DeleteSpotsService } from 'src/modules/spots/services/delete-spots/delete-spots.service';
 import { ListSpotsDto } from 'src/modules/spots/services/list-spots/list-spots.dto';
 import { ListSpotsService } from 'src/modules/spots/services/list-spots/list-spots.service';
+import { CurrentUserId } from 'src/shared/decorators/current-user-id.decorator';
+import { CurrentWorkspaceId } from 'src/shared/decorators/current-workspace-id.decorator';
 
 @Controller('spots')
 export class SpotsController {
@@ -17,10 +19,15 @@ export class SpotsController {
   }
 
   @Delete('/')
-  deleteSpots(@Body() body: DeleteSpotsDto) {
+  deleteSpots(
+    @Body() body: DeleteSpotsDto,
+    @CurrentUserId() userId: string,
+    @CurrentWorkspaceId() workspaceId: string,
+  ) {
     return this.deleteSpotsService.execute({
       ...body,
-      session: {} as any,
+      userId,
+      workspaceId,
     });
   }
 }

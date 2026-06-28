@@ -8,13 +8,12 @@ import { OAuth2Client } from 'google-auth-library';
 import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 import { env } from 'src/env';
 
-import { CreateUserRepository } from 'src/modules/accounts/repositories/create-user.repository';
-import { GetUserByEmailRepository } from 'src/modules/accounts/repositories/get-user-by-email.repository';
 import { CreateAccountWithGoogleDto } from 'src/modules/accounts/services/create-account-with-google/create-account-with-google.dto';
 import { SendVerificationCodeService } from 'src/modules/accounts/services/send-verification-code/send-verification-code.service';
 import { EnsureAccountCreationService } from 'src/modules/accounts/services/ensure-account-creation/ensure-account-creation.service';
 import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
 import { logger } from 'src/shared/utils/logger';
+import { UserRepository } from 'src/infra/database/repositories/user.repository';
 
 @Injectable()
 export class CreateAccountWithGoogleService {
@@ -22,8 +21,7 @@ export class CreateAccountWithGoogleService {
 
   constructor(
     private readonly sendVerificationCodeService: SendVerificationCodeService,
-    private readonly createUserRepository: CreateUserRepository,
-    private readonly getUserByEmailRepository: GetUserByEmailRepository,
+    private readonly userRepository: UserRepository,
     private readonly createSessionService: CreateSessionService,
     private readonly ensureAccountCreationService: EnsureAccountCreationService,
   ) {}
@@ -55,7 +53,7 @@ export class CreateAccountWithGoogleService {
         );
       }
 
-      const user = await this.getUserByEmailRepository.execute(payload.email);
+      const user = await this.userRepository.getByEmail(payload.email);
 
       if (user) {
         if (user.authProvider === 'GOOGLE') {
@@ -75,7 +73,7 @@ export class CreateAccountWithGoogleService {
         name: payload.name,
       });
 
-      const newUser = await this.createUserRepository.execute({
+      const newUser = await this.userRepository.create({
         authProvider: 'GOOGLE',
         authProviderId: payload.sub,
         name: payload.name,

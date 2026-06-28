@@ -5,17 +5,15 @@ import {
 } from '@nestjs/common';
 import { UserEntity } from 'src/domain/entities/user.entity';
 import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
+import { UserRepository } from 'src/infra/database/repositories/user.repository';
 import { RedisService } from 'src/infra/redis/redis.service';
-import { GetUserByEmailRepository } from 'src/modules/accounts/repositories/get-user-by-email.repository';
-import { UpdateUserRepository } from 'src/modules/accounts/repositories/update-user.repository';
 import { ValidateVerificationCodeDto } from 'src/modules/accounts/services/validate-verification-code/validate-verification-code.dto';
 
 @Injectable()
 export class ValidateVerificationCodeService {
   constructor(
     private readonly redisSerivce: RedisService,
-    private readonly getUserByEmailRepository: GetUserByEmailRepository,
-    private readonly updateUserRepository: UpdateUserRepository,
+    private readonly userRepository: UserRepository,
   ) {}
 
   async execute({ code, email }: ValidateVerificationCodeDto) {
@@ -34,7 +32,7 @@ export class ValidateVerificationCodeService {
       });
     }
 
-    const user = await this.getUserByEmailRepository.execute(email);
+    const user = await this.userRepository.getByEmail(email);
 
     if (!user) {
       throw new NotFoundException('User not found', {
@@ -42,7 +40,7 @@ export class ValidateVerificationCodeService {
       });
     }
 
-    await this.updateUserRepository.execute(user.id, { emailValidated: true });
+    await this.userRepository.updateById(user.id, { emailValidated: true });
     await this.redisSerivce.del(redisKey);
 
     return {

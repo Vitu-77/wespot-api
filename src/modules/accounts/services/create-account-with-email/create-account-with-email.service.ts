@@ -5,21 +5,19 @@ import {
 } from '@nestjs/common';
 import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 
-import { CreateUserRepository } from 'src/modules/accounts/repositories/create-user.repository';
-import { GetUserByEmailRepository } from 'src/modules/accounts/repositories/get-user-by-email.repository';
 import { CreateAccountWithEmailDto } from 'src/modules/accounts/services/create-account-with-email/create-account-with-email.dto';
 import { EnsureAccountCreationService } from 'src/modules/accounts/services/ensure-account-creation/ensure-account-creation.service';
 import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
 import { ValidateDisposableEmailService } from 'src/modules/accounts/services/validate-disposable-email/validate-disposable-email.service';
 import { ArgonService } from 'src/infra/argon/argon.service';
+import { UserRepository } from 'src/infra/database/repositories/user.repository';
 
 @Injectable()
 export class CreateAccountWithEmailService {
   constructor(
     private readonly argonService: ArgonService,
     private readonly createSessionService: CreateSessionService,
-    private readonly createUserRepository: CreateUserRepository,
-    private readonly getUserByEmailRepository: GetUserByEmailRepository,
+    private readonly userRepository: UserRepository,
     private readonly validateDisposableEmailService: ValidateDisposableEmailService,
     private readonly ensureAccountCreationService: EnsureAccountCreationService,
   ) {}
@@ -32,7 +30,7 @@ export class CreateAccountWithEmailService {
     }
 
     await this.validateDisposableEmailService.execute(data.email);
-    const user = await this.getUserByEmailRepository.execute(data.email);
+    const user = await this.userRepository.getByEmail(data.email);
 
     if (user) {
       if (user.authProvider === 'EMAIL') {
@@ -49,7 +47,7 @@ export class CreateAccountWithEmailService {
     }
 
     await this.ensureAccountCreationService.execute(data.fingerprintId);
-    const newUser = await this.createUserRepository.execute({
+    const newUser = await this.userRepository.create({
       ...data,
       emailValidated: false,
       authProvider: 'EMAIL',

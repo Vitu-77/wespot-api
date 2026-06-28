@@ -9,5 +9,6 @@ export class SignoutService {
 
   async execute({ userId }: SignoutDto) {
     await this.redisService.del(`session:${userId}`);
+    return { success: true };
   }
 }

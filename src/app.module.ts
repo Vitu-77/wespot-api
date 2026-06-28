@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { envSchema, EnvType } from 'src/env';
 import { ArgonModule } from 'src/infra/argon/argon.module';
 import { EmailModule } from 'src/infra/email/email.module';
-import { PrismaModule } from 'src/infra/prisma/prisma.module';
+import { DatabaseModule } from 'src/infra/database/database.module';
 import { RedisModule } from 'src/infra/redis/redis.module';
 import { AccountsModule } from 'src/modules/accounts/accounts.module';
 import { AuthModule } from 'src/modules/auth/auth.module';
@@ -30,7 +30,7 @@ import { SpotsModule } from 'src/modules/spots/spots.module';
     }),
 
     // Infra-modules
-    PrismaModule,
+    DatabaseModule,
     RedisModule,
     EmailModule,
     ArgonModule,

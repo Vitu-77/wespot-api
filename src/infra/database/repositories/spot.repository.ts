@@ -1,24 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/infra/prisma/prisma.service';
+import { PrismaService } from 'src/infra/database/prisma.service';
 import { ListSpotsDto } from 'src/modules/spots/services/list-spots/list-spots.dto';
-import { paginate, contains, isIn } from 'src/shared/utils/query-helpers';
+import { contains, isIn, paginate } from 'src/shared/utils/query-helpers';
 
-type Params = Omit<ListSpotsDto, 'workspaceId'> & {
+type ListSpotsParams = Omit<ListSpotsDto, 'workspaceId'> & {
   workspaceId?: string;
   ids?: string[];
   includeTotal?: boolean;
 };
 
 @Injectable()
-export class ListSpotsRepository {
+export class SpotRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async execute({
+  async list({
     pageNumber,
     pageSize,
     includeTotal = true,
     ...filters
-  }: Params) {
+  }: ListSpotsParams) {
     const items = await this.prismaService.spot.findMany({
       ...paginate({ pageNumber, pageSize }),
 
@@ -47,5 +47,13 @@ export class ListSpotsRepository {
       totalItems,
       items,
     };
+  }
+
+  async deleteMany(ids: string[]) {
+    return this.prismaService.spot.deleteMany({
+      where: {
+        id: isIn(ids),
+      },
+    });
   }
 }

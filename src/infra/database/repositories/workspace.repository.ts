@@ -1,19 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { WorkspaceRole } from 'prisma-types/enums';
+import { WorkspaceCreateInput } from 'prisma-types/models';
 import { WorkspaceMemberEntity } from 'src/domain/entities/workspace-member.entity';
-import { PrismaService } from 'src/infra/prisma/prisma.service';
+import { WorkspaceEntity } from 'src/domain/entities/workspace.entity';
+import { PrismaService } from 'src/infra/database/prisma.service';
 
-type Data = {
+type CreateMembershipmentInput = {
   userId: string;
   workspaceId: string;
   role: WorkspaceRole;
 };
 
 @Injectable()
-export class CreateMembershipmentRepository {
+export class WorkspaceRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async execute(data: Data): Promise<WorkspaceMemberEntity> {
+  async create(data: WorkspaceCreateInput): Promise<WorkspaceEntity> {
+    const workspace = await this.prismaService.workspace.create({
+      data,
+    });
+
+    return workspace;
+  }
+
+  async createMembershipment(
+    data: CreateMembershipmentInput,
+  ): Promise<WorkspaceMemberEntity> {
     const membershipment = await this.prismaService.workspaceMember.create({
       data: {
         user: {

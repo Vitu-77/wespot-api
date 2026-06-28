@@ -14,7 +14,7 @@ async function bootstrap() {
   app.enableShutdownHooks(['SIGINT', 'SIGTERM', 'SIGUSR2']);
 
   app.setGlobalPrefix('api/v1', {
-    exclude: ['docs/*'],
+    exclude: ['docs/*path'],
   });
 
   app.useGlobalPipes(
