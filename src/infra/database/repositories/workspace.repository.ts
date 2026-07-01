@@ -28,6 +28,7 @@ export class WorkspaceRepository {
   ): Promise<WorkspaceMemberEntity> {
     const membershipment = await this.prismaService.workspaceMember.create({
       data: {
+        role: data.role,
         user: {
           connect: {
             id: data.userId,

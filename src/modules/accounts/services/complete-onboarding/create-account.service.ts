@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { WorkspaceRole } from 'prisma-types/enums';
 import { UserEntity } from 'src/domain/entities/user.entity';
 import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
@@ -23,6 +27,12 @@ export class CompleteOnboardingService {
     if (!user) {
       throw new NotFoundException('User not found', {
         description: ErrorCodes.USER_NOT_FOUND,
+      });
+    }
+
+    if (user.workspaces.length) {
+      throw new BadRequestException('Onboarding already done for this user', {
+        description: ErrorCodes.USER_HAS_ONBOARDING_COMPLETED,
       });
     }
 

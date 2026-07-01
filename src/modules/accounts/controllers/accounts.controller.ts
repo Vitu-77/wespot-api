@@ -1,4 +1,6 @@
 import { Body, Controller, Patch, Post } from '@nestjs/common';
+import { CompleteOnboardingDto } from 'src/modules/accounts/services/complete-onboarding/create-account.dto';
+import { CompleteOnboardingService } from 'src/modules/accounts/services/complete-onboarding/create-account.service';
 import { CreateAccountWithEmailDto } from 'src/modules/accounts/services/create-account-with-email/create-account-with-email.dto';
 import { CreateAccountWithEmailService } from 'src/modules/accounts/services/create-account-with-email/create-account-with-email.service';
 import { CreateAccountWithGoogleDto } from 'src/modules/accounts/services/create-account-with-google/create-account-with-google.dto';
@@ -12,6 +14,7 @@ export class AccountsController {
     private readonly createAccountWithEmailService: CreateAccountWithEmailService,
     private readonly createAccountWithGoogleService: CreateAccountWithGoogleService,
     private readonly validateVerificationCodeService: ValidateVerificationCodeService,
+    private readonly completeOnboardingService: CompleteOnboardingService,
   ) {}
 
   @Post('/signup/email')
@@ -27,5 +30,10 @@ export class AccountsController {
   @Patch('/validate-email')
   verifyEmail(@Body() body: ValidateVerificationCodeDto) {
     return this.validateVerificationCodeService.execute(body);
+  }
+
+  @Post('/onboarding')
+  completeOnboarding(@Body() body: CompleteOnboardingDto) {
+    return this.completeOnboardingService.execute(body);
   }
 }

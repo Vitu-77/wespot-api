@@ -9,6 +9,7 @@ import { SendVerificationCodeService } from 'src/modules/accounts/services/send-
 import { ValidateVerificationCodeService } from 'src/modules/accounts/services/validate-verification-code/validate-verification-code.service';
 import { EnsureAccountCreationService } from 'src/modules/accounts/services/ensure-account-creation/ensure-account-creation.service';
 import { ValidateDisposableEmailService } from 'src/modules/accounts/services/validate-disposable-email/validate-disposable-email.service';
+import { CompleteOnboardingService } from 'src/modules/accounts/services/complete-onboarding/create-account.service';
 
 @Module({
   imports: [AuthModule],
@@ -23,6 +24,7 @@ import { ValidateDisposableEmailService } from 'src/modules/accounts/services/va
     ValidateVerificationCodeService,
     EnsureAccountCreationService,
     ValidateDisposableEmailService,
+    CompleteOnboardingService,
   ],
 })
 export class AccountsModule {}
