@@ -4,8 +4,14 @@ import { PrismaService } from './prisma.service';
 import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
 import { WorkspaceRepository } from 'src/infra/database/repositories/workspace-repository/workspace.repository';
 import { SpotRepository } from 'src/infra/database/repositories/spot-repository/spot.repository';
+import { InviteRepository } from 'src/infra/database/repositories/invite-repository/invite.repository';
 
-const REPOSITORIES = [UserRepository, WorkspaceRepository, SpotRepository];
+const REPOSITORIES = [
+  UserRepository,
+  WorkspaceRepository,
+  SpotRepository,
+  InviteRepository,
+];
 
 @Global()
 @Module({

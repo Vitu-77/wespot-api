@@ -66,6 +66,14 @@ export const BrazilianState = {
 export type BrazilianState = (typeof BrazilianState)[keyof typeof BrazilianState]
 
 
+export const InviteStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED'
+} as const
+
+export type InviteStatus = (typeof InviteStatus)[keyof typeof InviteStatus]
+
+
 export const SpotStatus = {
   DRAFT: 'DRAFT',
   PROCESSING: 'PROCESSING',

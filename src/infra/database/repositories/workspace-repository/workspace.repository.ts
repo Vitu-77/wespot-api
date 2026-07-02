@@ -15,6 +15,16 @@ type CreateMembershipmentInput = {
 export class WorkspaceRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async getById(id: string): Promise<WorkspaceEntity | null> {
+    const workspace = await this.prismaService.workspace.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return workspace;
+  }
+
   async create(data: WorkspaceCreateInput): Promise<WorkspaceEntity> {
     const workspace = await this.prismaService.workspace.create({
       data,
@@ -39,6 +49,10 @@ export class WorkspaceRepository {
             id: data.workspaceId,
           },
         },
+      },
+
+      include: {
+        workspace: true,
       },
     });
 

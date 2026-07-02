@@ -3,9 +3,9 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class CreateAccountWithGoogleDto {
   @IsString()
   @IsNotEmpty()
-  fingerprintId!: string;
+  googleIdToken!: string;
 
   @IsString()
   @IsNotEmpty()
-  googleIdToken!: string;
+  fingerprintId!: string;
 }

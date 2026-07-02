@@ -10,7 +10,7 @@ import { AccountsModule } from 'src/modules/accounts/accounts.module';
 import { AuthModule } from 'src/modules/auth/auth.module';
 import { DatabaseDiagramModule } from 'src/modules/database-diagram/database-diagram.module';
 import { SpotsModule } from 'src/modules/spots/spots.module';
-import { UsersModule } from 'src/modules/users/users.module';
+import { WorkspacesModule } from 'src/modules/workspaces/workspaces.module';
 
 @Module({
   imports: [
@@ -42,7 +42,7 @@ import { UsersModule } from 'src/modules/users/users.module';
     AccountsModule,
     SpotsModule,
     DatabaseDiagramModule,
-    UsersModule,
+    WorkspacesModule,
   ],
   controllers: [],
   providers: [],

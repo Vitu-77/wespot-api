@@ -5,7 +5,7 @@ import { WorkspaceMemberEntity } from 'src/domain/entities/workspace-member.enti
 
 export type WorkspaceEntity = BaseEntity & {
   id: string;
-  name: string;
+  name: string | null;
   type: WorkspaceType;
 
   // brands?  Brand[]

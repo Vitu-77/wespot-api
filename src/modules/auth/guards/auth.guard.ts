@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
   CanActivate,
   ExecutionContext,
@@ -114,9 +113,20 @@ export class AuthGuard implements CanActivate {
       });
     }
 
+    const { workspaces, ...rest } = user;
+    const membershipment = workspaces.find(
+      (w) => w.workspace.id === workspaceId,
+    );
+
+    if (!membershipment) {
+      throw new ForbiddenException('User do not belongs to this workspace', {
+        description: ErrorCodes.USER_DO_NOT_BELONGS_TO_WORKSPACE,
+      });
+    }
+
     const workspaceUser: WorkspaceUserEntity = {
-      ..._.omit(user, ['workspaces']),
-      role: user.workspaces[0].role,
+      ...rest,
+      role: membershipment.role,
     };
 
     return {

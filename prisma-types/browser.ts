@@ -48,6 +48,11 @@ export type SpotCost = Prisma.SpotCostModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model Invite
+ * 
+ */
+export type Invite = Prisma.InviteModel
+/**
  * Model Workspace
  * 
  */

@@ -57,6 +57,7 @@ export const ModelName = {
   SpotInput: 'SpotInput',
   SpotCost: 'SpotCost',
   User: 'User',
+  Invite: 'Invite',
   Workspace: 'Workspace',
   WorkspaceMember: 'WorkspaceMember'
 } as const
@@ -169,6 +170,19 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const InviteScalarFieldEnum = {
+  id: 'id',
+  userEmail: 'userEmail',
+  userRole: 'userRole',
+  status: 'status',
+  workspaceId: 'workspaceId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InviteScalarFieldEnum = (typeof InviteScalarFieldEnum)[keyof typeof InviteScalarFieldEnum]
 
 
 export const WorkspaceScalarFieldEnum = {

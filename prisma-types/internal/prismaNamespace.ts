@@ -390,6 +390,7 @@ export const ModelName = {
   SpotInput: 'SpotInput',
   SpotCost: 'SpotCost',
   User: 'User',
+  Invite: 'Invite',
   Workspace: 'Workspace',
   WorkspaceMember: 'WorkspaceMember'
 } as const
@@ -407,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "brand" | "brandAddress" | "spot" | "spotInput" | "spotCost" | "user" | "workspace" | "workspaceMember"
+    modelProps: "brand" | "brandAddress" | "spot" | "spotInput" | "spotCost" | "user" | "invite" | "workspace" | "workspaceMember"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -855,6 +856,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Invite: {
+      payload: Prisma.$InvitePayload<ExtArgs>
+      fields: Prisma.InviteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InviteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InviteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>
+        }
+        findFirst: {
+          args: Prisma.InviteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InviteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>
+        }
+        findMany: {
+          args: Prisma.InviteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>[]
+        }
+        create: {
+          args: Prisma.InviteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>
+        }
+        createMany: {
+          args: Prisma.InviteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InviteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>[]
+        }
+        delete: {
+          args: Prisma.InviteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>
+        }
+        update: {
+          args: Prisma.InviteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>
+        }
+        deleteMany: {
+          args: Prisma.InviteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InviteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InviteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>[]
+        }
+        upsert: {
+          args: Prisma.InviteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>
+        }
+        aggregate: {
+          args: Prisma.InviteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInvite>
+        }
+        groupBy: {
+          args: Prisma.InviteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InviteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InviteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InviteCountAggregateOutputType> | number
+        }
+      }
+    }
     Workspace: {
       payload: Prisma.$WorkspacePayload<ExtArgs>
       fields: Prisma.WorkspaceFieldRefs
@@ -1136,6 +1211,19 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const InviteScalarFieldEnum = {
+  id: 'id',
+  userEmail: 'userEmail',
+  userRole: 'userRole',
+  status: 'status',
+  workspaceId: 'workspaceId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InviteScalarFieldEnum = (typeof InviteScalarFieldEnum)[keyof typeof InviteScalarFieldEnum]
+
+
 export const WorkspaceScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1360,20 +1448,6 @@ export type ListEnumAuthProviderFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
- * Reference to a field of type 'WorkspaceType'
- */
-export type EnumWorkspaceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WorkspaceType'>
-    
-
-
-/**
- * Reference to a field of type 'WorkspaceType[]'
- */
-export type ListEnumWorkspaceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WorkspaceType[]'>
-    
-
-
-/**
  * Reference to a field of type 'WorkspaceRole'
  */
 export type EnumWorkspaceRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WorkspaceRole'>
@@ -1384,6 +1458,34 @@ export type EnumWorkspaceRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'WorkspaceRole[]'
  */
 export type ListEnumWorkspaceRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WorkspaceRole[]'>
+    
+
+
+/**
+ * Reference to a field of type 'InviteStatus'
+ */
+export type EnumInviteStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InviteStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'InviteStatus[]'
+ */
+export type ListEnumInviteStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InviteStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'WorkspaceType'
+ */
+export type EnumWorkspaceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WorkspaceType'>
+    
+
+
+/**
+ * Reference to a field of type 'WorkspaceType[]'
+ */
+export type ListEnumWorkspaceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WorkspaceType[]'>
     
 
 
@@ -1516,6 +1618,7 @@ export type GlobalOmitConfig = {
   spotInput?: Prisma.SpotInputOmit
   spotCost?: Prisma.SpotCostOmit
   user?: Prisma.UserOmit
+  invite?: Prisma.InviteOmit
   workspace?: Prisma.WorkspaceOmit
   workspaceMember?: Prisma.WorkspaceMemberOmit
 }

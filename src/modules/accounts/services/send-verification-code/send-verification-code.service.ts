@@ -31,7 +31,7 @@ export class SendVerificationCodeService {
       title: 'Código de verificação',
       to: [email],
       fromMail: env.SUPPORT_EMAIL_SENDER,
-      fromName: 'Suporte WeSpot',
+      fromName: 'WeSpot',
       content: createVerificationCodeEmail({
         code,
         username: name,

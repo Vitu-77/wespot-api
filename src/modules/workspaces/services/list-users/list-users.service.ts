@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { WorkspaceRole } from 'prisma-types/enums';
 import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
 import {
   ListWorkspaceUsersParamsDto,
   ListWorkspaceUsersResponseDto,
-} from 'src/modules/users/services/list-workspace-users/list-workspace-users.dto';
+} from 'src/modules/workspaces/services/list-users/list-users.dto';
 import { PaginatedResponseDTO } from 'src/shared/dto/paginated-response.dto';
 
 type Params = ListWorkspaceUsersParamsDto & {
@@ -31,7 +32,8 @@ export class ListWorkspaceUsersService {
       totalItems: count,
       items: users.map(({ workspaces, ...user }) => ({
         ...user,
-        role: workspaces[0].role,
+        role: workspaces.find((w) => w.workspace.id === filters.workspaceId)
+          ?.role as WorkspaceRole,
       })),
     });
   }

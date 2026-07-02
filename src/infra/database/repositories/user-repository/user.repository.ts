@@ -1,16 +1,38 @@
 import { Injectable } from '@nestjs/common';
+import { WorkspaceMember } from 'prisma-types/client';
 import {
   UserCreateWithoutWorkspacesInput,
+  UserModel,
   UserUpdateWithoutWorkspacesInput,
+  WorkspaceModel,
 } from 'prisma-types/models';
 import { UserEntity } from 'src/domain/entities/user.entity';
 import { PrismaService } from 'src/infra/database/prisma.service';
 import { UserRepositoryListParams } from 'src/infra/database/repositories/user-repository/user.repository.types';
 import { contains, paginate } from 'src/shared/utils/query-helpers';
 
+type DbUser = UserModel & {
+  workspaces: (WorkspaceMember & { workspace: WorkspaceModel })[];
+};
+
 @Injectable()
 export class UserRepository {
   constructor(private readonly prismaService: PrismaService) {}
+
+  private mapUserToEntity(raw: DbUser | null) {
+    if (!raw) {
+      return null;
+    }
+
+    const membershipments: UserEntity['workspaces'] = raw.workspaces.map(
+      (m) => ({
+        role: m.role,
+        workspace: m.workspace,
+      }),
+    );
+
+    return { ...raw, workspaces: membershipments } as unknown as UserEntity;
+  }
 
   async list({
     pageNumber,
@@ -42,19 +64,12 @@ export class UserRepository {
       },
     });
 
-    return users.map((user) => {
-      const membershipments: UserEntity['workspaces'] = user.workspaces.map(
-        (m) => ({
-          role: m.role,
-          workspace: m.workspace,
-        }),
-      );
-
-      return { ...user, workspaces: membershipments };
-    });
+    return users.map((user) => this.mapUserToEntity(user)) as UserEntity[];
   }
 
   async listAndCount(params: UserRepositoryListParams) {
+    console.log(params);
+
     const users = await this.list(params);
     const count = await this.prismaService.user.count({
       where: {
@@ -90,18 +105,7 @@ export class UserRepository {
       },
     });
 
-    if (!user) {
-      return null;
-    }
-
-    const membershipments: UserEntity['workspaces'] = user.workspaces.map(
-      (m) => ({
-        role: m.role,
-        workspace: m.workspace,
-      }),
-    );
-
-    return { ...user, workspaces: membershipments } as unknown as UserEntity;
+    return this.mapUserToEntity(user);
   }
 
   async getByEmail(email: string) {
@@ -109,9 +113,17 @@ export class UserRepository {
       where: {
         email,
       },
+
+      include: {
+        workspaces: {
+          include: {
+            workspace: true,
+          },
+        },
+      },
     });
 
-    return user as unknown as UserEntity;
+    return this.mapUserToEntity(user);
   }
 
   async create(data: UserCreateWithoutWorkspacesInput): Promise<UserEntity> {

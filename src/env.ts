@@ -5,6 +5,7 @@ import z from 'zod';
 
 export const envSchema = z.object({
   PORT: z.coerce.number(),
+  FRONTEND_URL: z.url(),
   PRISMA_MODE: z.enum(PrismaMode),
   POSTGRES_DB: z.string(),
   APP_ENV: z.enum(['development', 'production']),
