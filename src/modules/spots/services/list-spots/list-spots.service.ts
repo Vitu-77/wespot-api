@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SpotRepository } from 'src/infra/database/repositories/spot.repository';
+import { SpotRepository } from 'src/infra/database/repositories/spot-repository/spot.repository';
 import { ListSpotsDto } from 'src/modules/spots/services/list-spots/list-spots.dto';
 import { PaginatedResponseDTO } from 'src/shared/dto/paginated-response.dto';
 
@@ -7,19 +7,24 @@ import { PaginatedResponseDTO } from 'src/shared/dto/paginated-response.dto';
 export class ListSpotsService {
   constructor(private readonly spotsRepository: SpotRepository) {}
 
-  async execute({ pageNumber, pageSize, ...filters }: ListSpotsDto) {
-    const { items, totalItems } = await this.spotsRepository.list({
-      includeTotal: true,
+  async execute({
+    pageNumber,
+    pageSize,
+    workspaceId,
+    ...filters
+  }: InjectWorkspaceId<ListSpotsDto>) {
+    const { spots, count } = await this.spotsRepository.listAndCount({
+      workspaceId,
       pageNumber,
       pageSize,
       ...filters,
     });
 
     return new PaginatedResponseDTO({
-      items,
+      items: spots,
       pageNumber,
       pageSize,
-      totalItems: totalItems ?? 0,
+      totalItems: count,
     });
   }
 }

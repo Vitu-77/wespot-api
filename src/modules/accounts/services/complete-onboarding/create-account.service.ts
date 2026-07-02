@@ -6,8 +6,8 @@ import {
 import { WorkspaceRole } from 'prisma-types/enums';
 import { UserEntity } from 'src/domain/entities/user.entity';
 import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
-import { UserRepository } from 'src/infra/database/repositories/user.repository';
-import { WorkspaceRepository } from 'src/infra/database/repositories/workspace.repository';
+import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
+import { WorkspaceRepository } from 'src/infra/database/repositories/workspace-repository/workspace.repository';
 import { CompleteOnboardingDto } from 'src/modules/accounts/services/complete-onboarding/create-account.dto';
 
 @Injectable()

@@ -6,20 +6,14 @@ import { contains, isIn, paginate } from 'src/shared/utils/query-helpers';
 type ListSpotsParams = Omit<ListSpotsDto, 'workspaceId'> & {
   workspaceId?: string;
   ids?: string[];
-  includeTotal?: boolean;
 };
 
 @Injectable()
 export class SpotRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async list({
-    pageNumber,
-    pageSize,
-    includeTotal = true,
-    ...filters
-  }: ListSpotsParams) {
-    const items = await this.prismaService.spot.findMany({
+  async list({ pageNumber, pageSize, ...filters }: ListSpotsParams) {
+    return this.prismaService.spot.findMany({
       ...paginate({ pageNumber, pageSize }),
 
       orderBy: {
@@ -32,20 +26,19 @@ export class SpotRepository {
         title: contains(filters.title, 'insensitive'),
       },
     });
+  }
 
-    if (!includeTotal) {
-      return { items };
-    }
-
-    const totalItems = await this.prismaService.spot.count({
+  async listAndCount({ pageNumber, pageSize, ...filters }: ListSpotsParams) {
+    const spots = await this.list({ pageNumber, pageSize, ...filters });
+    const count = await this.prismaService.spot.count({
       where: {
         ...filters,
       },
     });
 
     return {
-      totalItems,
-      items,
+      count,
+      spots,
     };
   }
 

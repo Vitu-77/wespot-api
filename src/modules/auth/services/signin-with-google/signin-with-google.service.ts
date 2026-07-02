@@ -7,7 +7,7 @@ import {
 import { OAuth2Client } from 'google-auth-library';
 import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 import { env } from 'src/env';
-import { UserRepository } from 'src/infra/database/repositories/user.repository';
+import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
 
 import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
 import { SigninWithGoogleDto } from 'src/modules/auth/services/signin-with-google/signin-with-google.dto';
@@ -60,6 +60,13 @@ export class SigninWithGoogleService {
       if (user.authProvider === 'EMAIL') {
         throw new NotFoundException('User has login with email', {
           description: ErrorCodes.USER_HAS_LOGIN_WITH_EMAIL,
+        });
+      }
+
+      if (payload.picture !== user.avatarUrl) {
+        user.avatarUrl = payload.picture ?? null;
+        await this.userRepository.updateById(user.id, {
+          avatarUrl: payload.picture,
         });
       }
 

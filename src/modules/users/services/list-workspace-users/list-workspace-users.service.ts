@@ -1,0 +1,38 @@
+import { Injectable } from '@nestjs/common';
+import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
+import {
+  ListWorkspaceUsersParamsDto,
+  ListWorkspaceUsersResponseDto,
+} from 'src/modules/users/services/list-workspace-users/list-workspace-users.dto';
+import { PaginatedResponseDTO } from 'src/shared/dto/paginated-response.dto';
+
+type Params = ListWorkspaceUsersParamsDto & {
+  workspaceId: string;
+};
+
+@Injectable()
+export class ListWorkspaceUsersService {
+  constructor(private readonly userRepository: UserRepository) {}
+
+  async execute({
+    pageNumber,
+    pageSize,
+    ...filters
+  }: Params): Promise<ListWorkspaceUsersResponseDto> {
+    const { count, users } = await this.userRepository.listAndCount({
+      pageNumber,
+      pageSize,
+      ...filters,
+    });
+
+    return new PaginatedResponseDTO({
+      pageNumber,
+      pageSize,
+      totalItems: count,
+      items: users.map(({ workspaces, ...user }) => ({
+        ...user,
+        role: workspaces[0].role,
+      })),
+    });
+  }
+}

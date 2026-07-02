@@ -5,18 +5,18 @@ type Input<T> = {
   pageSize: number;
 };
 
-type Pagination = {
+export interface IPagination {
   totalItems: number;
   pageNumber: number;
   pageSize: number;
   totalPages: number;
   hasPrevPage: boolean;
   hasNextPage: boolean;
-};
+}
 
 export class PaginatedResponseDTO<T> {
   items: T[];
-  pagination: Pagination;
+  pagination: IPagination;
 
   constructor(input: Input<T>) {
     const totalPages = Math.max(

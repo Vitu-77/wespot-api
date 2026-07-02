@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { UserEntity } from 'src/domain/entities/user.entity';
 import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
-import { UserRepository } from 'src/infra/database/repositories/user.repository';
+import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
 import { RedisService } from 'src/infra/redis/redis.service';
 import { ValidateVerificationCodeDto } from 'src/modules/accounts/services/validate-verification-code/validate-verification-code.dto';
 

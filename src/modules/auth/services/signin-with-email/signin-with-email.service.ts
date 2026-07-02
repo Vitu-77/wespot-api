@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 import { ArgonService } from 'src/infra/argon/argon.service';
-import { UserRepository } from 'src/infra/database/repositories/user.repository';
+import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
 
 import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
 import { SigninWithEmailDto } from 'src/modules/auth/services/signin-with-email/signin-with-email.dto';

@@ -12,7 +12,6 @@ export type UserEntity = BaseEntity & {
   email: string;
   password: string | null;
   avatarUrl: string | null;
-  role: WorkspaceRole;
   authProvider: AuthProvider;
   fingerprint: string;
 

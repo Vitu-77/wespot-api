@@ -13,7 +13,7 @@ import { SendVerificationCodeService } from 'src/modules/accounts/services/send-
 import { EnsureAccountCreationService } from 'src/modules/accounts/services/ensure-account-creation/ensure-account-creation.service';
 import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
 import { logger } from 'src/shared/utils/logger';
-import { UserRepository } from 'src/infra/database/repositories/user.repository';
+import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
 
 @Injectable()
 export class CreateAccountWithGoogleService {

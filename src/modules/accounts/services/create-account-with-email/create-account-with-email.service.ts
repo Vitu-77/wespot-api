@@ -10,7 +10,7 @@ import { EnsureAccountCreationService } from 'src/modules/accounts/services/ensu
 import { CreateSessionService } from 'src/modules/auth/services/create-session/create-session.service';
 import { ValidateDisposableEmailService } from 'src/modules/accounts/services/validate-disposable-email/validate-disposable-email.service';
 import { ArgonService } from 'src/infra/argon/argon.service';
-import { UserRepository } from 'src/infra/database/repositories/user.repository';
+import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
 
 @Injectable()
 export class CreateAccountWithEmailService {

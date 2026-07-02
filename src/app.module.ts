@@ -10,10 +10,12 @@ import { AccountsModule } from 'src/modules/accounts/accounts.module';
 import { AuthModule } from 'src/modules/auth/auth.module';
 import { DatabaseDiagramModule } from 'src/modules/database-diagram/database-diagram.module';
 import { SpotsModule } from 'src/modules/spots/spots.module';
+import { UsersModule } from 'src/modules/users/users.module';
 
 @Module({
   imports: [
     // Config-modules
+
     ConfigModule.forRoot<EnvType>({
       isGlobal: true,
       validate: (config) => {
@@ -40,6 +42,7 @@ import { SpotsModule } from 'src/modules/spots/spots.module';
     AccountsModule,
     SpotsModule,
     DatabaseDiagramModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
