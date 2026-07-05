@@ -1316,6 +1316,7 @@ export const WorkspaceScalarFieldEnum = {
   id: 'id',
   name: 'name',
   type: 'type',
+  slug: 'slug',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

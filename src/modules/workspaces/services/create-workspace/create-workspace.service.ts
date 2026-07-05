@@ -5,11 +5,6 @@ import { StorageService } from 'src/infra/storage/storage.service';
 import { CreateWorkspaceDto } from 'src/modules/workspaces/services/create-workspace/create-workspace.dto';
 import { S3_BUCKETS } from 'src/shared/constants/s3-buckets';
 
-type CreateDirnameParams = {
-  name: string | null;
-  id: string;
-};
-
 @Injectable()
 export class CreateWorkspaceService {
   constructor(
@@ -18,9 +13,11 @@ export class CreateWorkspaceService {
   ) {}
 
   async execute({ type, name }: CreateWorkspaceDto) {
+    const slug = this.createSlug(name);
     const workspace = await this.workspaceRepository.create({
       name,
       type,
+      slug,
     });
 
     const commonBuckets = [S3_BUCKETS.SOUNDTRACKS];
@@ -31,21 +28,19 @@ export class CreateWorkspaceService {
     for (const key of buckets) {
       await this.storageService.createDirectory({
         bucket: key as keyof typeof S3_BUCKETS,
-        directory: this.createDirname({ id: workspace.id, name }),
+        directory: `${slug}__${workspace.id}`,
       });
     }
 
     return workspace;
   }
 
-  private createDirname({ id, name }: CreateDirnameParams) {
-    const slug = name
+  private createSlug(name: string | null) {
+    return name
       ? removeAccents(name)
           .toLowerCase()
           .replace(/[^a-z0-9]+/g, '_')
           .replace(/^_+|_+$/g, '')
       : '';
-
-    return `${slug || 'personal_workspace'}__${id}`;
   }
 }
