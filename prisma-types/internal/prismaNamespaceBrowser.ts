@@ -53,11 +53,12 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Brand: 'Brand',
   BrandAddress: 'BrandAddress',
+  Invite: 'Invite',
+  Notification: 'Notification',
   Spot: 'Spot',
   SpotInput: 'SpotInput',
   SpotCost: 'SpotCost',
   User: 'User',
-  Invite: 'Invite',
   Workspace: 'Workspace',
   WorkspaceMember: 'WorkspaceMember'
 } as const
@@ -111,6 +112,32 @@ export const BrandAddressScalarFieldEnum = {
 } as const
 
 export type BrandAddressScalarFieldEnum = (typeof BrandAddressScalarFieldEnum)[keyof typeof BrandAddressScalarFieldEnum]
+
+
+export const InviteScalarFieldEnum = {
+  id: 'id',
+  userEmail: 'userEmail',
+  userRole: 'userRole',
+  status: 'status',
+  workspaceId: 'workspaceId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InviteScalarFieldEnum = (typeof InviteScalarFieldEnum)[keyof typeof InviteScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  readAt: 'readAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const SpotScalarFieldEnum = {
@@ -170,19 +197,6 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-export const InviteScalarFieldEnum = {
-  id: 'id',
-  userEmail: 'userEmail',
-  userRole: 'userRole',
-  status: 'status',
-  workspaceId: 'workspaceId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type InviteScalarFieldEnum = (typeof InviteScalarFieldEnum)[keyof typeof InviteScalarFieldEnum]
 
 
 export const WorkspaceScalarFieldEnum = {

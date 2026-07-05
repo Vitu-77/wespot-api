@@ -12,21 +12,9 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  workspaces WorkspaceMember[]
+  workspaces    WorkspaceMember[]
+  notifications Notification[]
 
   @@index([name, email])
   @@map("users")
-}
-
-model Invite {
-  id          String        @id @default(uuid())
-  userEmail   String
-  userRole    WorkspaceRole
-  status      InviteStatus
-  workspaceId String        @map("workspace_id")
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  @@map("invites")
 }

@@ -50,6 +50,16 @@ export type Brand = Prisma.BrandModel
  */
 export type BrandAddress = Prisma.BrandAddressModel
 /**
+ * Model Invite
+ * 
+ */
+export type Invite = Prisma.InviteModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
  * Model Spot
  * 
  */
@@ -69,11 +79,6 @@ export type SpotCost = Prisma.SpotCostModel
  * 
  */
 export type User = Prisma.UserModel
-/**
- * Model Invite
- * 
- */
-export type Invite = Prisma.InviteModel
 /**
  * Model Workspace
  * 

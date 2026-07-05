@@ -47,7 +47,7 @@ export class AddUserToWorkspaceWithInviteService {
       });
     }
 
-    const membershipment = await this.workspaceRepository.createMembershipment({
+    const membershipment = await this.workspaceRepository.createMember({
       userId: user.id,
       workspaceId: invite.workspaceId,
       role: invite.userRole,

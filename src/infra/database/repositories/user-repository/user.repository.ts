@@ -68,21 +68,21 @@ export class UserRepository {
   }
 
   async listAndCount(params: UserRepositoryListParams) {
-    console.log(params);
-
-    const users = await this.list(params);
-    const count = await this.prismaService.user.count({
-      where: {
-        email: contains(params.email, 'default'),
-        name: contains(params.email, 'default'),
-        workspaces: {
-          some: {
-            workspaceId: params.workspaceId,
-            role: params.role,
+    const [users, count] = await Promise.all([
+      this.list(params),
+      this.prismaService.user.count({
+        where: {
+          email: contains(params.email, 'default'),
+          name: contains(params.email, 'default'),
+          workspaces: {
+            some: {
+              workspaceId: params.workspaceId,
+              role: params.role,
+            },
           },
         },
-      },
-    });
+      }),
+    ]);
 
     return {
       users,

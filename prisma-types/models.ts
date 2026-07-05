@@ -10,11 +10,12 @@
  */
 export type * from './models/Brand.js'
 export type * from './models/BrandAddress.js'
+export type * from './models/Invite.js'
+export type * from './models/Notification.js'
 export type * from './models/Spot.js'
 export type * from './models/SpotInput.js'
 export type * from './models/SpotCost.js'
 export type * from './models/User.js'
-export type * from './models/Invite.js'
 export type * from './models/Workspace.js'
 export type * from './models/WorkspaceMember.js'
 export type * from './commonInputTypes.js'

@@ -41,7 +41,7 @@ export class CompleteOnboardingService {
       type: workspaceType,
     });
 
-    const membershipment = await this.workspaceRepository.createMembershipment({
+    const membershipment = await this.workspaceRepository.createMember({
       userId,
       workspaceId: workspace.id,
       role: WorkspaceRole.OWNER,

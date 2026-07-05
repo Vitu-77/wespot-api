@@ -59,8 +59,6 @@ export class AuthGuard implements CanActivate {
   private async validateAccessToken(request: Request) {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
 
-    console.log({ type, token });
-
     if (!token || type !== 'Bearer') {
       throw new UnauthorizedException('Auth token is missing', {
         description: ErrorCodes.AUTH_TOKEN_IS_MISSING,

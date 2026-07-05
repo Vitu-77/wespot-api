@@ -8,8 +8,6 @@ export class InviteRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getById(id: string): Promise<InviteEntity | null> {
-    console.log({ id });
-
     const invite = await this.prismaService.invite.findUnique({
       where: {
         id,

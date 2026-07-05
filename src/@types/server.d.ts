@@ -9,7 +9,8 @@ declare global {
   };
 
   type InjectWorkspaceId<T> = T & { workspaceId: string };
-  type InjectLoggedUser<T> = T & { user: WorkspaceUserEntity };
+  type InjectUserId<T> = T & { userId: string };
+  type InjectLoggedUser<T> = T & { loggedUser: WorkspaceUserEntity };
 
   namespace Express {
     interface Request {

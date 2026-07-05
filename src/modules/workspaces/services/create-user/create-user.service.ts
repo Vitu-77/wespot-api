@@ -56,7 +56,7 @@ export class CreateWorkspaceUserService {
       fingerprint: 'FROM_ADMIN',
     });
 
-    const membershipment = await this.workspaceRepository.createMembershipment({
+    const membershipment = await this.workspaceRepository.createMember({
       userId: newUser.id,
       workspaceId: payload.workspaceId,
       role: payload.role,

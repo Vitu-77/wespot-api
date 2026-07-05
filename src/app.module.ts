@@ -11,6 +11,7 @@ import { AuthModule } from 'src/modules/auth/auth.module';
 import { DatabaseDiagramModule } from 'src/modules/database-diagram/database-diagram.module';
 import { SpotsModule } from 'src/modules/spots/spots.module';
 import { WorkspacesModule } from 'src/modules/workspaces/workspaces.module';
+import { NotificationsModule } from 'src/modules/notifications/notifications.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { WorkspacesModule } from 'src/modules/workspaces/workspaces.module';
     SpotsModule,
     DatabaseDiagramModule,
     WorkspacesModule,
+    NotificationsModule,
   ],
   controllers: [],
   providers: [],

@@ -29,12 +29,14 @@ export class SpotRepository {
   }
 
   async listAndCount({ pageNumber, pageSize, ...filters }: ListSpotsParams) {
-    const spots = await this.list({ pageNumber, pageSize, ...filters });
-    const count = await this.prismaService.spot.count({
-      where: {
-        ...filters,
-      },
-    });
+    const [spots, count] = await Promise.all([
+      this.list({ pageNumber, pageSize, ...filters }),
+      this.prismaService.spot.count({
+        where: {
+          ...filters,
+        },
+      }),
+    ]);
 
     return {
       count,
