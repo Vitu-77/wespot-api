@@ -7,7 +7,7 @@ import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
 import { WorkspaceRepository } from 'src/infra/database/repositories/workspace-repository/workspace.repository';
 import { CreateNotificationService } from 'src/modules/notifications/services/create-notification/create-notification.service';
-import { RemoveUserFromWorkspaceDto } from 'src/modules/workspaces/services/remove-user/remove-user.dto';
+import { RemoveUserFromWorkspaceDto } from 'src/modules/users/services/remove-user/remove-user.dto';
 
 @Injectable()
 export class RemoveUserFromWorkspaceService {

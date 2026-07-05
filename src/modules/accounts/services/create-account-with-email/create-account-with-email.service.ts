@@ -11,6 +11,7 @@ import { CreateSessionService } from 'src/modules/auth/services/create-session/c
 import { ValidateDisposableEmailService } from 'src/modules/accounts/services/validate-disposable-email/validate-disposable-email.service';
 import { ArgonService } from 'src/infra/argon/argon.service';
 import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
+import { SendVerificationCodeService } from 'src/modules/accounts/services/send-verification-code/send-verification-code.service';
 
 @Injectable()
 export class CreateAccountWithEmailService {
@@ -20,6 +21,7 @@ export class CreateAccountWithEmailService {
     private readonly userRepository: UserRepository,
     private readonly validateDisposableEmailService: ValidateDisposableEmailService,
     private readonly ensureAccountCreationService: EnsureAccountCreationService,
+    private readonly sendVerificationCodeService: SendVerificationCodeService,
   ) {}
 
   async execute(data: CreateAccountWithEmailDto) {
@@ -47,6 +49,11 @@ export class CreateAccountWithEmailService {
     }
 
     await this.ensureAccountCreationService.execute(data.fingerprintId);
+    await this.sendVerificationCodeService.execute({
+      email: data.email,
+      name: data.name,
+    });
+
     const newUser = await this.userRepository.create({
       ...data,
       emailValidated: false,

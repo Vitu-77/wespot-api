@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "brand_addresses" ALTER COLUMN "state" DROP NOT NULL,
+ALTER COLUMN "neighborhood" DROP NOT NULL,
+ALTER COLUMN "street" DROP NOT NULL,
+ALTER COLUMN "number" DROP NOT NULL,
+ALTER COLUMN "complement" DROP NOT NULL;

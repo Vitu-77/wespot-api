@@ -8,7 +8,7 @@ import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 import { InviteRepository } from 'src/infra/database/repositories/invite-repository/invite.repository';
 import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
 import { WorkspaceRepository } from 'src/infra/database/repositories/workspace-repository/workspace.repository';
-import { AddUserToWorkspaceWithInviteDto } from 'src/modules/workspaces/services/add-user-with-invite/add-user-with-invite.dto';
+import { AddUserToWorkspaceWithInviteDto } from 'src/modules/users/services/add-user-with-invite/add-user-with-invite.dto';
 
 @Injectable()
 export class AddUserToWorkspaceWithInviteService {

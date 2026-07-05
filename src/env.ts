@@ -3,12 +3,11 @@ import { PrismaMode } from 'prisma.config';
 
 import z from 'zod';
 
-export const envSchema = z.object({
+const commonSchema = z.object({
   PORT: z.coerce.number(),
   FRONTEND_URL: z.url(),
   PRISMA_MODE: z.enum(PrismaMode),
   POSTGRES_DB: z.string(),
-  APP_ENV: z.enum(['development', 'production']),
   POSTGRES_USER: z.string(),
   POSTGRES_PASSWORD: z.string(),
   POSTGRES_PORT: z.coerce.number(),
@@ -21,7 +20,28 @@ export const envSchema = z.object({
   GOOGLE_OAUTH_CLIENT_ID: z.string(),
   RESEND_API_KEY: z.string(),
   SUPPORT_EMAIL_SENDER: z.email(),
+
+  AWS_REGION: z.string(),
+  AWS_ACCESS_KEY_ID: z.string(),
+  AWS_SECRET_ACCESS_KEY: z.string(),
+  AWS_S3_BUCKET: z.string(),
 });
+
+export const envSchema = z.discriminatedUnion('APP_ENV', [
+  commonSchema.extend({
+    APP_ENV: z.literal('development'),
+
+    AWS_S3_ENDPOINT: z.url(),
+    AWS_S3_FORCE_PATH_STYLE: z.coerce.boolean(),
+  }),
+
+  commonSchema.extend({
+    APP_ENV: z.literal('production'),
+
+    AWS_S3_ENDPOINT: z.url().optional(),
+    AWS_S3_FORCE_PATH_STYLE: z.coerce.boolean().default(false),
+  }),
+]);
 
 export type EnvType = z.infer<typeof envSchema>;
 

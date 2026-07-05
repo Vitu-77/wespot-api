@@ -6,7 +6,7 @@ import { UserRepository } from 'src/infra/database/repositories/user-repository/
 import { WorkspaceRepository } from 'src/infra/database/repositories/workspace-repository/workspace.repository';
 import { EmailService } from 'src/infra/email/email.service';
 import { createInviteEmail } from 'src/infra/email/templates/invite-template';
-import { InviteUserToWorkspaceDto } from 'src/modules/workspaces/services/invite-user/invite-user.dto';
+import { InviteUserToWorkspaceDto } from 'src/modules/users/services/invite-user/invite-user.dto';
 
 @Injectable()
 export class InviteUserToWorkspaceService {

@@ -6,8 +6,10 @@ import { WorkspaceRepository } from 'src/infra/database/repositories/workspace-r
 import { SpotRepository } from 'src/infra/database/repositories/spot-repository/spot.repository';
 import { InviteRepository } from 'src/infra/database/repositories/invite-repository/invite.repository';
 import { NotificationRepository } from 'src/infra/database/repositories/notification-repository/notification.repository';
+import { BrandRepository } from 'src/infra/database/repositories/brand-repository/brand.repository';
 
 const REPOSITORIES = [
+  BrandRepository,
   UserRepository,
   WorkspaceRepository,
   SpotRepository,

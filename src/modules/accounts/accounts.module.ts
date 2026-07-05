@@ -10,9 +10,10 @@ import { ValidateVerificationCodeService } from 'src/modules/accounts/services/v
 import { EnsureAccountCreationService } from 'src/modules/accounts/services/ensure-account-creation/ensure-account-creation.service';
 import { ValidateDisposableEmailService } from 'src/modules/accounts/services/validate-disposable-email/validate-disposable-email.service';
 import { CompleteOnboardingService } from 'src/modules/accounts/services/complete-onboarding/create-account.service';
+import { WorkspacesModule } from 'src/modules/workspaces/workspaces.module';
 
 @Module({
-  imports: [AuthModule],
+  imports: [AuthModule, WorkspacesModule],
   controllers: [AccountsController],
   providers: [
     JwtService,

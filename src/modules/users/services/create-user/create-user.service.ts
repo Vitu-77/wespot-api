@@ -8,7 +8,7 @@ import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 import { ArgonService } from 'src/infra/argon/argon.service';
 import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
 import { WorkspaceRepository } from 'src/infra/database/repositories/workspace-repository/workspace.repository';
-import { CreateWorkspaceUserDto } from 'src/modules/workspaces/services/create-user/create-user.dto';
+import { CreateWorkspaceUserDto } from 'src/modules/users/services/create-user/create-user.dto';
 
 @Injectable()
 export class CreateWorkspaceUserService {

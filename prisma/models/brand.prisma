@@ -26,13 +26,13 @@ model Brand {
 }
 
 model BrandAddress {
-  id           String         @id @default(uuid())
-  state        BrazilianState
+  id           String          @id @default(uuid())
+  state        BrazilianState?
   city         String
-  neighborhood String
-  street       String
-  number       String
-  complement   String
+  neighborhood String?
+  street       String?
+  number       String?
+  complement   String?
 
   brandId String @map("brand_id")
   brand   Brand  @relation(fields: [brandId], references: [id])

@@ -127,21 +127,21 @@ export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
-export type EnumBrazilianStateFilter<$PrismaModel = never> = {
-  equals?: $Enums.BrazilianState | Prisma.EnumBrazilianStateFieldRefInput<$PrismaModel>
-  in?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel>
-  notIn?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumBrazilianStateFilter<$PrismaModel> | $Enums.BrazilianState
+export type EnumBrazilianStateNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.BrazilianState | Prisma.EnumBrazilianStateFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBrazilianStateNullableFilter<$PrismaModel> | $Enums.BrazilianState | null
 }
 
-export type EnumBrazilianStateWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.BrazilianState | Prisma.EnumBrazilianStateFieldRefInput<$PrismaModel>
-  in?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel>
-  notIn?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumBrazilianStateWithAggregatesFilter<$PrismaModel> | $Enums.BrazilianState
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumBrazilianStateFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumBrazilianStateFilter<$PrismaModel>
+export type EnumBrazilianStateNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BrazilianState | Prisma.EnumBrazilianStateFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBrazilianStateNullableWithAggregatesFilter<$PrismaModel> | $Enums.BrazilianState | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBrazilianStateNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBrazilianStateNullableFilter<$PrismaModel>
 }
 
 export type EnumWorkspaceRoleFilter<$PrismaModel = never> = {
@@ -583,21 +583,21 @@ export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
-export type NestedEnumBrazilianStateFilter<$PrismaModel = never> = {
-  equals?: $Enums.BrazilianState | Prisma.EnumBrazilianStateFieldRefInput<$PrismaModel>
-  in?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel>
-  notIn?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumBrazilianStateFilter<$PrismaModel> | $Enums.BrazilianState
+export type NestedEnumBrazilianStateNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.BrazilianState | Prisma.EnumBrazilianStateFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBrazilianStateNullableFilter<$PrismaModel> | $Enums.BrazilianState | null
 }
 
-export type NestedEnumBrazilianStateWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.BrazilianState | Prisma.EnumBrazilianStateFieldRefInput<$PrismaModel>
-  in?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel>
-  notIn?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumBrazilianStateWithAggregatesFilter<$PrismaModel> | $Enums.BrazilianState
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumBrazilianStateFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumBrazilianStateFilter<$PrismaModel>
+export type NestedEnumBrazilianStateNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BrazilianState | Prisma.EnumBrazilianStateFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BrazilianState[] | Prisma.ListEnumBrazilianStateFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBrazilianStateNullableWithAggregatesFilter<$PrismaModel> | $Enums.BrazilianState | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBrazilianStateNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBrazilianStateNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumWorkspaceRoleFilter<$PrismaModel = never> = {

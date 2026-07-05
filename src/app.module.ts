@@ -10,13 +10,15 @@ import { AccountsModule } from 'src/modules/accounts/accounts.module';
 import { AuthModule } from 'src/modules/auth/auth.module';
 import { DatabaseDiagramModule } from 'src/modules/database-diagram/database-diagram.module';
 import { SpotsModule } from 'src/modules/spots/spots.module';
-import { WorkspacesModule } from 'src/modules/workspaces/workspaces.module';
+import { UsersModule } from 'src/modules/users/users.module';
 import { NotificationsModule } from 'src/modules/notifications/notifications.module';
+import { BrandsModule } from 'src/modules/brands/brands.module';
+import { StorageModule } from 'src/infra/storage/storage..module';
+import { WorkspacesModule } from 'src/modules/workspaces/workspaces.module';
 
 @Module({
   imports: [
     // Config-modules
-
     ConfigModule.forRoot<EnvType>({
       isGlobal: true,
       validate: (config) => {
@@ -37,14 +39,17 @@ import { NotificationsModule } from 'src/modules/notifications/notifications.mod
     RedisModule,
     EmailModule,
     ArgonModule,
+    StorageModule,
 
     // Application-modules
     AuthModule,
     AccountsModule,
-    SpotsModule,
+    BrandsModule,
     DatabaseDiagramModule,
-    WorkspacesModule,
     NotificationsModule,
+    SpotsModule,
+    UsersModule,
+    WorkspacesModule,
   ],
   controllers: [],
   providers: [],

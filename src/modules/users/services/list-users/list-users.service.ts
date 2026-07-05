@@ -4,7 +4,7 @@ import { UserRepository } from 'src/infra/database/repositories/user-repository/
 import {
   ListWorkspaceUsersParamsDto,
   ListWorkspaceUsersResponseDto,
-} from 'src/modules/workspaces/services/list-users/list-users.dto';
+} from 'src/modules/users/services/list-users/list-users.dto';
 import { PaginatedResponseDTO } from 'src/shared/dto/paginated-response.dto';
 
 type Params = ListWorkspaceUsersParamsDto & {

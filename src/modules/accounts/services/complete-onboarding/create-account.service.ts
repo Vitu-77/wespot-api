@@ -9,12 +9,14 @@ import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum';
 import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
 import { WorkspaceRepository } from 'src/infra/database/repositories/workspace-repository/workspace.repository';
 import { CompleteOnboardingDto } from 'src/modules/accounts/services/complete-onboarding/create-account.dto';
+import { CreateWorkspaceService } from 'src/modules/workspaces/services/create-workspace/create-workspace.service';
 
 @Injectable()
 export class CompleteOnboardingService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly workspaceRepository: WorkspaceRepository,
+    private readonly createWorkspaceService: CreateWorkspaceService,
   ) {}
 
   async execute({
@@ -36,7 +38,7 @@ export class CompleteOnboardingService {
       });
     }
 
-    const workspace = await this.workspaceRepository.create({
+    const workspace = await this.createWorkspaceService.execute({
       name: workspaceName,
       type: workspaceType,
     });
