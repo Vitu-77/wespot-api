@@ -1,8 +1,9 @@
 model Brand {
   id          String          @id @default(uuid())
   name        String
-  description String?
   segment     BusinessSegment
+  responsible String?
+  description String?
   logoUrl     String?         @map("logo_url")
   slogan      String?
   phoneNumber String?         @map("phone_number")
@@ -37,6 +38,20 @@ model BrandAddress {
   brandId String @map("brand_id")
   brand   Brand  @relation(fields: [brandId], references: [id])
 
+  responsibles BrandResponsible[]
+
   @@index([brandId])
   @@map("brand_addresses")
+}
+
+model BrandResponsible {
+  id   String  @id @default(uuid())
+  role String?
+  name String
+
+  brandAddressId String       @map("brand_address_id")
+  brandAddress   BrandAddress @relation(fields: [brandAddressId], references: [id])
+
+  @@index([brandAddressId])
+  @@map("brand_addresses_responsibles")
 }

@@ -5,8 +5,9 @@ import { WorkspaceEntity } from 'src/domain/entities/workspace.entity';
 
 export type BrandEntity = BaseEntity & {
   name: string;
-  description: string | null;
   segment: BusinessSegment;
+  responsible: string | null;
+  description: string | null;
   logoUrl: string | null;
   slogan: string | null;
   phoneNumber: string | null;
@@ -17,7 +18,7 @@ export type BrandEntity = BaseEntity & {
   website: string | null;
 
   spots?: SpotEntity[];
-  addresses: BrandAddressEntity[];
+  addresses?: BrandAddressEntity[];
 
   workspaceId: string;
   workspace?: WorkspaceEntity;
@@ -34,4 +35,15 @@ export type BrandAddressEntity = {
 
   brandId: string;
   brand?: BrandEntity;
+
+  responsibles?: BrandResponsibleEntity[];
+};
+
+export type BrandResponsibleEntity = {
+  id: string;
+  name: BrazilianState | null;
+  role?: string;
+
+  brandAddressId: string;
+  brandAddress?: BrandAddressEntity;
 };
