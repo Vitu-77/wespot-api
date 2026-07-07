@@ -18,11 +18,11 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "prisma:generate": "cross-env PRISMA_MODE=cli prisma generate cross-env PRISMA_MODE=server",
-    "prisma:migrate-dev": "cross-env PRISMA_MODE=cli POSTGRES_HOST=localhost prisma migrate dev cross-env PRISMA_MODE=server",
-    "prisma:migrate-prod": "prisma migrate deploy",
-    "prisma:migrate-reset": "cross-env PRISMA_MODE=cli POSTGRES_HOST=localhost prisma migrate reset cross-env PRISMA_MODE=server",
-    "prisma:migrate-clear": "rm -rf prisma/migration"
+    "db:generate": "cross-env PRISMA_MODE=cli prisma generate cross-env PRISMA_MODE=server",
+    "db:prune": "node ./scripts/db-prune.js",
+    "db:migrate-dev": "cross-env PRISMA_MODE=cli POSTGRES_HOST=localhost prisma migrate dev cross-env PRISMA_MODE=server",
+    "db:migrate-prod": "prisma migrate deploy",
+    "db:migrate-clear": "node ./scripts/db-clear-migrations.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1079.0",
