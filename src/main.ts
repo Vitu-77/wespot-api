@@ -1,21 +1,21 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { env } from 'src/env';
-import { ValidationPipe } from '@nestjs/common';
-import type { INestApplication } from '@nestjs/common';
+import type { INestApplication } from '@nestjs/common'
+import { ValidationPipe } from '@nestjs/common'
+import { NestFactory } from '@nestjs/core'
+import { env } from 'src/env'
+import { AppModule } from './app.module'
 
-let app: INestApplication | undefined;
+let app: INestApplication | undefined
 
 async function bootstrap() {
   app = await NestFactory.create(AppModule, {
     forceCloseConnections: true,
-  });
+  })
 
-  app.enableShutdownHooks(['SIGINT', 'SIGTERM', 'SIGUSR2']);
+  app.enableShutdownHooks(['SIGINT', 'SIGTERM', 'SIGUSR2'])
 
   app.setGlobalPrefix('api/v1', {
     exclude: ['docs/*path'],
-  });
+  })
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -23,9 +23,9 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
       transform: true,
     }),
-  );
+  )
 
-  await app.listen(Number(env.PORT), '0.0.0.0');
+  await app.listen(Number(env.PORT), '0.0.0.0')
 }
 
-void bootstrap();
+void bootstrap()

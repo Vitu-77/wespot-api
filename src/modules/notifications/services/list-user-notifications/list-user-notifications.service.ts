@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { NotificationRepository } from 'src/infra/database/repositories/notification-repository/notification.repository';
-import { PaginatedResponseDTO } from 'src/shared/dto/paginated-response.dto';
-import { PaginationDto } from 'src/shared/dto/pagination.dto';
+import { Injectable } from '@nestjs/common'
+import { NotificationRepository } from 'src/infra/database/repositories/notification-repository/notification.repository'
+import { PaginatedResponseDTO } from 'src/shared/dto/paginated-response.dto'
+import { PaginationDto } from 'src/shared/dto/pagination.dto'
 
 @Injectable()
 export class ListUserNotificationsService {
@@ -15,13 +15,13 @@ export class ListUserNotificationsService {
         pageNumber,
         pageSize,
         userId,
-      });
+      })
 
     return new PaginatedResponseDTO({
       items: notifications,
       pageNumber,
       pageSize,
       totalItems: count,
-    });
+    })
   }
 }

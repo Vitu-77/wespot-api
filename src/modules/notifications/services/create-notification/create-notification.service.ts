@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { NotificationRepository } from 'src/infra/database/repositories/notification-repository/notification.repository';
-import { CreateNotificationDto } from 'src/modules/notifications/services/create-notification/create-notification.dto';
+import { Injectable } from '@nestjs/common'
+import { NotificationRepository } from 'src/infra/database/repositories/notification-repository/notification.repository'
+import { CreateNotificationDto } from 'src/modules/notifications/services/create-notification/create-notification.dto'
 
 @Injectable()
 export class CreateNotificationService {
@@ -16,8 +16,8 @@ export class CreateNotificationService {
           ...data,
         }),
       ),
-    );
+    )
 
-    return notifications;
+    return notifications
   }
 }

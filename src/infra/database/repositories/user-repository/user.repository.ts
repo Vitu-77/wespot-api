@@ -1,19 +1,19 @@
-import { Injectable } from '@nestjs/common';
-import { WorkspaceMember } from 'prisma-types/client';
+import { Injectable } from '@nestjs/common'
+import { WorkspaceMember } from 'prisma-types/client'
 import {
   UserCreateWithoutWorkspacesInput,
   UserModel,
   UserUpdateWithoutWorkspacesInput,
   WorkspaceModel,
-} from 'prisma-types/models';
-import { UserEntity } from 'src/domain/entities/user.entity';
-import { PrismaService } from 'src/infra/database/prisma.service';
-import { UserRepositoryListParams } from 'src/infra/database/repositories/user-repository/user.repository.types';
-import { contains, paginate } from 'src/shared/utils/query-helpers';
+} from 'prisma-types/models'
+import { UserEntity } from 'src/domain/entities/user.entity'
+import { PrismaService } from 'src/infra/database/prisma.service'
+import { UserRepositoryListParams } from 'src/infra/database/repositories/user-repository/user.repository.types'
+import { contains, paginate } from 'src/shared/utils/query-helpers'
 
 type DbUser = UserModel & {
-  workspaces: (WorkspaceMember & { workspace: WorkspaceModel })[];
-};
+  workspaces: (WorkspaceMember & { workspace: WorkspaceModel })[]
+}
 
 @Injectable()
 export class UserRepository {
@@ -21,7 +21,7 @@ export class UserRepository {
 
   private mapUserToEntity(raw: DbUser | null) {
     if (!raw) {
-      return null;
+      return null
     }
 
     const membershipments: UserEntity['workspaces'] = raw.workspaces.map(
@@ -29,9 +29,9 @@ export class UserRepository {
         role: m.role,
         workspace: m.workspace,
       }),
-    );
+    )
 
-    return { ...raw, workspaces: membershipments } as unknown as UserEntity;
+    return { ...raw, workspaces: membershipments } as unknown as UserEntity
   }
 
   async list({
@@ -62,9 +62,9 @@ export class UserRepository {
           },
         },
       },
-    });
+    })
 
-    return users.map((user) => this.mapUserToEntity(user)) as UserEntity[];
+    return users.map((user) => this.mapUserToEntity(user)) as UserEntity[]
   }
 
   async listAndCount(params: UserRepositoryListParams) {
@@ -82,12 +82,12 @@ export class UserRepository {
           },
         },
       }),
-    ]);
+    ])
 
     return {
       users,
       count,
-    };
+    }
   }
 
   async getById(id: string) {
@@ -103,9 +103,9 @@ export class UserRepository {
           },
         },
       },
-    });
+    })
 
-    return this.mapUserToEntity(user);
+    return this.mapUserToEntity(user)
   }
 
   async getByEmail(email: string) {
@@ -121,9 +121,9 @@ export class UserRepository {
           },
         },
       },
-    });
+    })
 
-    return this.mapUserToEntity(user);
+    return this.mapUserToEntity(user)
   }
 
   async create(data: UserCreateWithoutWorkspacesInput): Promise<UserEntity> {
@@ -138,9 +138,9 @@ export class UserRepository {
         emailValidated: data.emailValidated,
         fingerprint: data.fingerprint,
       },
-    });
+    })
 
-    return user as unknown as UserEntity;
+    return user as unknown as UserEntity
   }
 
   async updateById(
@@ -161,8 +161,8 @@ export class UserRepository {
         avatarUrl: data.avatarUrl,
         emailValidated: data.emailValidated,
       },
-    });
+    })
 
-    return user as unknown as UserEntity;
+    return user as unknown as UserEntity
   }
 }

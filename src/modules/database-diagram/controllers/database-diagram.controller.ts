@@ -1,6 +1,6 @@
-import { Controller, Get, Res } from '@nestjs/common';
-import { type Response } from 'express';
-import { GetDbDiagramService } from 'src/modules/database-diagram/services/get-db-diagram/get-er-diagram.service';
+import { Controller, Get, Res } from '@nestjs/common'
+import { type Response } from 'express'
+import { GetDbDiagramService } from 'src/modules/database-diagram/services/get-db-diagram/get-er-diagram.service'
 
 @Controller('docs/db')
 export class DatabaseDiagramController {

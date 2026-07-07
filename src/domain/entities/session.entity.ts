@@ -1,5 +1,5 @@
 export type SessionEntity = {
-  userId: string;
-  refreshTokenHash: string;
-  createdAt: Date;
-};
+  userId: string
+  refreshTokenHash: string
+  createdAt: Date
+}

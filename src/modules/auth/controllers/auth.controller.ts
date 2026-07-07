@@ -1,10 +1,10 @@
-import { Body, Controller, Delete, Post } from '@nestjs/common';
-import { SigninWithEmailDto } from 'src/modules/auth/services/signin-with-email/signin-with-email.dto';
-import { SigninWithEmailService } from 'src/modules/auth/services/signin-with-email/signin-with-email.service';
-import { SigninWithGoogleDto } from 'src/modules/auth/services/signin-with-google/signin-with-google.dto';
-import { SigninWithGoogleService } from 'src/modules/auth/services/signin-with-google/signin-with-google.service';
-import { SignoutDto } from 'src/modules/auth/services/signout/signout.dto';
-import { SignoutService } from 'src/modules/auth/services/signout/signout.service';
+import { Body, Controller, Delete, Post } from '@nestjs/common'
+import { SigninWithEmailDto } from 'src/modules/auth/services/signin-with-email/signin-with-email.dto'
+import { SigninWithEmailService } from 'src/modules/auth/services/signin-with-email/signin-with-email.service'
+import { SigninWithGoogleDto } from 'src/modules/auth/services/signin-with-google/signin-with-google.dto'
+import { SigninWithGoogleService } from 'src/modules/auth/services/signin-with-google/signin-with-google.service'
+import { SignoutDto } from 'src/modules/auth/services/signout/signout.dto'
+import { SignoutService } from 'src/modules/auth/services/signout/signout.service'
 
 @Controller('auth')
 export class AuthController {

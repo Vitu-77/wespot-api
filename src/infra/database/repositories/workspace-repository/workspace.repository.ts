@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { WorkspaceCreateInput } from 'prisma-types/models';
-import { WorkspaceMemberEntity } from 'src/domain/entities/workspace-member.entity';
-import { WorkspaceEntity } from 'src/domain/entities/workspace.entity';
-import { PrismaService } from 'src/infra/database/prisma.service';
+import { Injectable } from '@nestjs/common'
+import { WorkspaceCreateInput } from 'prisma-types/models'
+import { WorkspaceEntity } from 'src/domain/entities/workspace.entity'
+import { WorkspaceMemberEntity } from 'src/domain/entities/workspace-member.entity'
+import { PrismaService } from 'src/infra/database/prisma.service'
 import {
   WorkspaceRepositoryCreateMemberParams,
   WorkspaceRepositoryDeleteMemberParams,
-} from 'src/infra/database/repositories/workspace-repository/workspace.repository.types';
+} from 'src/infra/database/repositories/workspace-repository/workspace.repository.types'
 
 @Injectable()
 export class WorkspaceRepository {
@@ -17,17 +17,17 @@ export class WorkspaceRepository {
       where: {
         id,
       },
-    });
+    })
 
-    return workspace;
+    return workspace
   }
 
   async create(data: WorkspaceCreateInput): Promise<WorkspaceEntity> {
     const workspace = await this.prismaService.workspace.create({
       data,
-    });
+    })
 
-    return workspace;
+    return workspace
   }
 
   async createMember(
@@ -51,9 +51,9 @@ export class WorkspaceRepository {
       include: {
         workspace: true,
       },
-    });
+    })
 
-    return membershipment;
+    return membershipment
   }
 
   async deleteMember({
@@ -67,6 +67,6 @@ export class WorkspaceRepository {
           workspaceId,
         },
       },
-    });
+    })
   }
 }

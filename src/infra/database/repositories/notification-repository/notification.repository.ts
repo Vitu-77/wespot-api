@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { NotificationUpdateInput } from 'prisma-types/models';
-import { NotificationEntity } from 'src/domain/entities/notification.entity';
-import { PrismaService } from 'src/infra/database/prisma.service';
+import { Injectable } from '@nestjs/common'
+import { NotificationUpdateInput } from 'prisma-types/models'
+import { NotificationEntity } from 'src/domain/entities/notification.entity'
+import { PrismaService } from 'src/infra/database/prisma.service'
 import {
   NotificationRepositoryCreateNotificationParams,
   NotificationRepositoryListNotificationsParams,
-} from 'src/infra/database/repositories/notification-repository/notification.repository.types';
-import { paginate } from 'src/shared/utils/query-helpers';
+} from 'src/infra/database/repositories/notification-repository/notification.repository.types'
+import { paginate } from 'src/shared/utils/query-helpers'
 
 @Injectable()
 export class NotificationRepository {
@@ -25,9 +25,9 @@ export class NotificationRepository {
       where: {
         userId,
       },
-    });
+    })
 
-    return notifications as NotificationEntity[];
+    return notifications as NotificationEntity[]
   }
 
   async listAndCount(params: NotificationRepositoryListNotificationsParams) {
@@ -38,12 +38,12 @@ export class NotificationRepository {
           userId: params.userId,
         },
       }),
-    ]);
+    ])
 
     return {
       notifications,
       count,
-    };
+    }
   }
 
   async create(
@@ -59,9 +59,9 @@ export class NotificationRepository {
           },
         },
       },
-    });
+    })
 
-    return notification as NotificationEntity;
+    return notification as NotificationEntity
   }
 
   async update(
@@ -74,8 +74,8 @@ export class NotificationRepository {
       },
 
       data,
-    });
+    })
 
-    return notification as NotificationEntity;
+    return notification as NotificationEntity
   }
 }

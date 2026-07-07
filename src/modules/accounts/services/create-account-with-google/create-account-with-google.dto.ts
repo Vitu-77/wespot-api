@@ -1,11 +1,11 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator'
 
 export class CreateAccountWithGoogleDto {
   @IsString()
   @IsNotEmpty()
-  googleIdToken!: string;
+  googleIdToken!: string
 
   @IsString()
   @IsNotEmpty()
-  fingerprintId!: string;
+  fingerprintId!: string
 }

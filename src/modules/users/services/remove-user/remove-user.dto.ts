@@ -1,9 +1,9 @@
-import { IsString } from 'class-validator';
+import { IsString } from 'class-validator'
 
 export class RemoveUserFromWorkspaceDto {
   @IsString()
-  userId!: string;
+  userId!: string
 
   @IsString()
-  workspaceId!: string;
+  workspaceId!: string
 }

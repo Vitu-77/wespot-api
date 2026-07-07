@@ -1,8 +1,8 @@
-import { Controller, Get, Param, Patch, Query } from '@nestjs/common';
-import { CreateNotificationService } from 'src/modules/notifications/services/create-notification/create-notification.service';
-import { ListUserNotificationsDto } from 'src/modules/notifications/services/list-user-notifications/list-user-notifications.dto';
-import { ListUserNotificationsService } from 'src/modules/notifications/services/list-user-notifications/list-user-notifications.service';
-import { MarkNotificationAsReadService } from 'src/modules/notifications/services/mark-as-read/mark-as-read.service';
+import { Controller, Get, Param, Patch, Query } from '@nestjs/common'
+import { CreateNotificationService } from 'src/modules/notifications/services/create-notification/create-notification.service'
+import { ListUserNotificationsDto } from 'src/modules/notifications/services/list-user-notifications/list-user-notifications.dto'
+import { ListUserNotificationsService } from 'src/modules/notifications/services/list-user-notifications/list-user-notifications.service'
+import { MarkNotificationAsReadService } from 'src/modules/notifications/services/mark-as-read/mark-as-read.service'
 
 @Controller('notifications')
 export class NotificationsController {
@@ -20,7 +20,7 @@ export class NotificationsController {
     return this.listUserNotificationsService.execute({
       ...queryParams,
       userId,
-    });
+    })
   }
 
   @Patch('/:notificationId')

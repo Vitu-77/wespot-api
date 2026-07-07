@@ -1,12 +1,12 @@
-import { Body, Controller, Patch, Post } from '@nestjs/common';
-import { CompleteOnboardingDto } from 'src/modules/accounts/services/complete-onboarding/create-account.dto';
-import { CompleteOnboardingService } from 'src/modules/accounts/services/complete-onboarding/create-account.service';
-import { CreateAccountWithEmailDto } from 'src/modules/accounts/services/create-account-with-email/create-account-with-email.dto';
-import { CreateAccountWithEmailService } from 'src/modules/accounts/services/create-account-with-email/create-account-with-email.service';
-import { CreateAccountWithGoogleDto } from 'src/modules/accounts/services/create-account-with-google/create-account-with-google.dto';
-import { CreateAccountWithGoogleService } from 'src/modules/accounts/services/create-account-with-google/create-account-with-google.service';
-import { ValidateVerificationCodeDto } from 'src/modules/accounts/services/validate-verification-code/validate-verification-code.dto';
-import { ValidateVerificationCodeService } from 'src/modules/accounts/services/validate-verification-code/validate-verification-code.service';
+import { Body, Controller, Patch, Post } from '@nestjs/common'
+import { CompleteOnboardingDto } from 'src/modules/accounts/services/complete-onboarding/create-account.dto'
+import { CompleteOnboardingService } from 'src/modules/accounts/services/complete-onboarding/create-account.service'
+import { CreateAccountWithEmailDto } from 'src/modules/accounts/services/create-account-with-email/create-account-with-email.dto'
+import { CreateAccountWithEmailService } from 'src/modules/accounts/services/create-account-with-email/create-account-with-email.service'
+import { CreateAccountWithGoogleDto } from 'src/modules/accounts/services/create-account-with-google/create-account-with-google.dto'
+import { CreateAccountWithGoogleService } from 'src/modules/accounts/services/create-account-with-google/create-account-with-google.service'
+import { ValidateVerificationCodeDto } from 'src/modules/accounts/services/validate-verification-code/validate-verification-code.dto'
+import { ValidateVerificationCodeService } from 'src/modules/accounts/services/validate-verification-code/validate-verification-code.service'
 
 @Controller('accounts')
 export class AccountsController {

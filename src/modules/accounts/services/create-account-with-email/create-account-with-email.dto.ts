@@ -1,22 +1,22 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator'
 
 export class CreateAccountWithEmailDto {
   @IsString()
   @IsNotEmpty()
-  fingerprintId!: string;
+  fingerprintId!: string
 
   @IsString()
   @IsNotEmpty()
-  name!: string;
+  name!: string
 
   @IsEmail()
-  email!: string;
+  email!: string
 
   @IsString()
   @MinLength(5)
-  password!: string;
+  password!: string
 
   @IsString()
   @MinLength(5)
-  passwordConfirmation!: string;
+  passwordConfirmation!: string
 }

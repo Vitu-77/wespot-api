@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { InviteCreateInput, InviteUpdateInput } from 'prisma-types/models';
-import { InviteEntity } from 'src/domain/entities/invite.entity';
-import { PrismaService } from 'src/infra/database/prisma.service';
+import { Injectable } from '@nestjs/common'
+import { InviteCreateInput, InviteUpdateInput } from 'prisma-types/models'
+import { InviteEntity } from 'src/domain/entities/invite.entity'
+import { PrismaService } from 'src/infra/database/prisma.service'
 
 @Injectable()
 export class InviteRepository {
@@ -12,17 +12,17 @@ export class InviteRepository {
       where: {
         id,
       },
-    });
+    })
 
-    return invite;
+    return invite
   }
 
   async create(data: InviteCreateInput): Promise<InviteEntity> {
     const invite = await this.prismaService.invite.create({
       data,
-    });
+    })
 
-    return invite;
+    return invite
   }
 
   async update(id: string, data: InviteUpdateInput): Promise<InviteEntity> {
@@ -32,9 +32,9 @@ export class InviteRepository {
       },
 
       data,
-    });
+    })
 
-    return invite;
+    return invite
   }
 
   async deleteByUserEmail(userEmail: string): Promise<void> {
@@ -42,6 +42,6 @@ export class InviteRepository {
       where: {
         userEmail,
       },
-    });
+    })
   }
 }

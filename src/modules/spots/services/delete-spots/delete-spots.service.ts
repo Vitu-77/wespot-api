@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { SpotRepository } from 'src/infra/database/repositories/spot-repository/spot.repository';
-import { DeleteSpotsDto } from 'src/modules/spots/services/delete-spots/delete-spots.dto';
+import { Injectable } from '@nestjs/common'
+import { SpotRepository } from 'src/infra/database/repositories/spot-repository/spot.repository'
+import { DeleteSpotsDto } from 'src/modules/spots/services/delete-spots/delete-spots.dto'
 
 type Params = DeleteSpotsDto & {
-  workspaceId: string;
-};
+  workspaceId: string
+}
 
 @Injectable()
 export class DeleteSpotsService {
@@ -16,8 +16,8 @@ export class DeleteSpotsService {
       pageNumber: 1,
       workspaceId,
       pageSize: ids.length,
-    });
+    })
 
-    return this.spotsRepository.deleteMany(spots.map((spot) => spot.id));
+    return this.spotsRepository.deleteMany(spots.map((spot) => spot.id))
   }
 }

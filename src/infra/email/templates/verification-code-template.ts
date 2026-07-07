@@ -1,10 +1,10 @@
 type Params = {
-  username: string;
-  code: number;
-  codeValidationInSeconds: number;
-};
+  username: string
+  code: number
+  codeValidationInSeconds: number
+}
 
-const logoUrl = 'https://ik.imagekit.io/wespot/Group%2043.svg';
+const logoUrl = 'https://ik.imagekit.io/wespot/Group%2043.svg'
 
 export const createVerificationCodeEmail = ({
   code,
@@ -81,5 +81,5 @@ export const createVerificationCodeEmail = ({
   </table>
 </body>
 </html>
-`;
-};
+`
+}

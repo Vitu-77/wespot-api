@@ -4,19 +4,19 @@ import {
   IsString,
   IsUUID,
   MinLength,
-} from 'class-validator';
+} from 'class-validator'
 
 export class CreateNotificationDto {
   @IsArray()
   @MinLength(1)
   @IsUUID()
-  userIds!: string[];
+  userIds!: string[]
 
   @IsString()
   @IsNotEmpty()
-  title!: string;
+  title!: string
 
   @IsString()
   @IsNotEmpty()
-  content!: string;
+  content!: string
 }

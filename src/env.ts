@@ -1,7 +1,7 @@
-import 'dotenv/config';
-import { PrismaMode } from 'prisma.config';
+import 'dotenv/config'
+import { PrismaMode } from 'prisma.config'
 
-import z from 'zod';
+import z from 'zod'
 
 const commonSchema = z.object({
   PORT: z.coerce.number(),
@@ -25,7 +25,7 @@ const commonSchema = z.object({
   AWS_ACCESS_KEY_ID: z.string(),
   AWS_SECRET_ACCESS_KEY: z.string(),
   AWS_S3_BUCKET: z.string(),
-});
+})
 
 export const envSchema = z.discriminatedUnion('APP_ENV', [
   commonSchema.extend({
@@ -41,8 +41,8 @@ export const envSchema = z.discriminatedUnion('APP_ENV', [
     AWS_S3_ENDPOINT: z.url().optional(),
     AWS_S3_FORCE_PATH_STYLE: z.coerce.boolean().default(false),
   }),
-]);
+])
 
-export type EnvType = z.infer<typeof envSchema>;
+export type EnvType = z.infer<typeof envSchema>
 
-export const env = envSchema.parse(process.env);
+export const env = envSchema.parse(process.env)

@@ -1,4 +1,4 @@
-import pino from 'pino';
+import pino from 'pino'
 
 export const logger = pino({
   transport: {
@@ -8,4 +8,4 @@ export const logger = pino({
       translateTime: 'yyyy-mm-dd HH:MM:ss',
     },
   },
-});
+})

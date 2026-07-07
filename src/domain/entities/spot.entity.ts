@@ -1,25 +1,25 @@
-import { SpotStatus } from 'prisma-types/enums';
-import { BaseEntity } from 'src/domain/entities/base.entity';
+import { SpotStatus } from 'prisma-types/enums'
+import { BaseEntity } from 'src/domain/entities/base.entity'
 
 export type SpotEntity = BaseEntity & {
-  title: string;
-  status: SpotStatus;
-  script: string;
-  audioUrl: string | null;
-  starred: boolean;
-  expectedDuration: number;
-  audioDuration: number | null;
+  title: string
+  status: SpotStatus
+  script: string
+  audioUrl: string | null
+  starred: boolean
+  expectedDuration: number
+  audioDuration: number | null
 
-  workspaceId: string;
+  workspaceId: string
   // workspace:
 
-  brandId: string | null;
+  brandId: string | null
   // brand
 
-  inputId: string | null;
+  inputId: string | null
   // input
 
-  costs: [];
+  costs: []
 
-  voiceId: string | null;
-};
+  voiceId: string | null
+}

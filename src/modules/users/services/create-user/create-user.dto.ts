@@ -1,21 +1,21 @@
-import { IsIn, IsString, MinLength } from 'class-validator';
-import { WorkspaceRole } from 'prisma-types/enums';
+import { IsIn, IsString, MinLength } from 'class-validator'
+import { WorkspaceRole } from 'prisma-types/enums'
 
 export class CreateWorkspaceUserDto {
   @IsString()
-  name!: string;
+  name!: string
 
   @IsString()
-  email!: string;
-
-  @IsString()
-  @MinLength(5)
-  password!: string;
+  email!: string
 
   @IsString()
   @MinLength(5)
-  passwordConfirmation!: string;
+  password!: string
+
+  @IsString()
+  @MinLength(5)
+  passwordConfirmation!: string
 
   @IsIn([WorkspaceRole.MEMBER, WorkspaceRole.ADMIN])
-  role!: 'MEMBER' | 'ADMIN';
+  role!: 'MEMBER' | 'ADMIN'
 }

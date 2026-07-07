@@ -1,17 +1,17 @@
-import { env } from 'src/env';
+import { env } from 'src/env'
 
 type Params = {
-  inviteId: string;
-  workspaceName: string | null;
-};
+  inviteId: string
+  workspaceName: string | null
+}
 
-const logoUrl = 'https://ik.imagekit.io/wespot/Group%2043.svg';
+const logoUrl = 'https://ik.imagekit.io/wespot/Group%2043.svg'
 
 export const createInviteEmail = ({ inviteId, workspaceName }: Params) => {
-  const link = `${env.FRONTEND_URL}/invite/${inviteId}`;
+  const link = `${env.FRONTEND_URL}/invite/${inviteId}`
   const message = workspaceName
     ? `<strong>${workspaceName}</strong> convidou você para fazer parte do seu workspace no <strong>WeSpot</strong>.`
-    : `Você foi convidado para fazer parte de um workspace no <strong>WeSpot</strong>.`;
+    : `Você foi convidado para fazer parte de um workspace no <strong>WeSpot</strong>.`
 
   return `
 <!DOCTYPE html>
@@ -92,5 +92,5 @@ export const createInviteEmail = ({ inviteId, workspaceName }: Params) => {
   </table>
 </body>
 </html>
-`;
-};
+`
+}

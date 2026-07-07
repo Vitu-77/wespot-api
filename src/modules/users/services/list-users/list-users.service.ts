@@ -1,15 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { WorkspaceRole } from 'prisma-types/enums';
-import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository';
+import { Injectable } from '@nestjs/common'
+import { WorkspaceRole } from 'prisma-types/enums'
+import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository'
 import {
   ListWorkspaceUsersParamsDto,
   ListWorkspaceUsersResponseDto,
-} from 'src/modules/users/services/list-users/list-users.dto';
-import { PaginatedResponseDTO } from 'src/shared/dto/paginated-response.dto';
+} from 'src/modules/users/services/list-users/list-users.dto'
+import { PaginatedResponseDTO } from 'src/shared/dto/paginated-response.dto'
 
 type Params = ListWorkspaceUsersParamsDto & {
-  workspaceId: string;
-};
+  workspaceId: string
+}
 
 @Injectable()
 export class ListWorkspaceUsersService {
@@ -24,7 +24,7 @@ export class ListWorkspaceUsersService {
       pageNumber,
       pageSize,
       ...filters,
-    });
+    })
 
     return new PaginatedResponseDTO({
       pageNumber,
@@ -35,6 +35,6 @@ export class ListWorkspaceUsersService {
         role: workspaces.find((w) => w.workspace.id === filters.workspaceId)
           ?.role as WorkspaceRole,
       })),
-    });
+    })
   }
 }

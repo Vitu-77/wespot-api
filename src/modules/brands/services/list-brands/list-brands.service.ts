@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { BrandRepository } from 'src/infra/database/repositories/brand-repository/brand.repository';
-import { ListWorkspaceBrandsParamsDto } from 'src/modules/brands/services/list-brands/list-brands.dto';
-import { PaginatedResponseDTO } from 'src/shared/dto/paginated-response.dto';
+import { Injectable } from '@nestjs/common'
+import { BrandRepository } from 'src/infra/database/repositories/brand-repository/brand.repository'
+import { ListWorkspaceBrandsParamsDto } from 'src/modules/brands/services/list-brands/list-brands.dto'
+import { PaginatedResponseDTO } from 'src/shared/dto/paginated-response.dto'
 
 @Injectable()
 export class ListWorkspaceBrandsService {
@@ -16,13 +16,13 @@ export class ListWorkspaceBrandsService {
       pageNumber,
       pageSize,
       ...filters,
-    });
+    })
 
     return new PaginatedResponseDTO({
       items: brands,
       totalItems: count,
       pageNumber,
       pageSize,
-    });
+    })
   }
 }

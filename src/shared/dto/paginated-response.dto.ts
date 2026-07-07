@@ -1,30 +1,27 @@
 type Input<T> = {
-  items: T[];
-  totalItems: number;
-  pageNumber: number;
-  pageSize: number;
-};
+  items: T[]
+  totalItems: number
+  pageNumber: number
+  pageSize: number
+}
 
 export interface IPagination {
-  totalItems: number;
-  pageNumber: number;
-  pageSize: number;
-  totalPages: number;
-  hasPrevPage: boolean;
-  hasNextPage: boolean;
+  totalItems: number
+  pageNumber: number
+  pageSize: number
+  totalPages: number
+  hasPrevPage: boolean
+  hasNextPage: boolean
 }
 
 export class PaginatedResponseDTO<T> {
-  items: T[];
-  pagination: IPagination;
+  items: T[]
+  pagination: IPagination
 
   constructor(input: Input<T>) {
-    const totalPages = Math.max(
-      1,
-      Math.ceil(input.totalItems / input.pageSize),
-    );
+    const totalPages = Math.max(1, Math.ceil(input.totalItems / input.pageSize))
 
-    this.items = input.items;
+    this.items = input.items
 
     this.pagination = {
       totalItems: input.totalItems,
@@ -33,6 +30,6 @@ export class PaginatedResponseDTO<T> {
       totalPages,
       hasPrevPage: input.pageNumber > 1,
       hasNextPage: input.pageNumber < totalPages,
-    };
+    }
   }
 }

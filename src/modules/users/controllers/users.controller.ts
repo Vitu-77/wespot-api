@@ -6,19 +6,19 @@ import {
   Param,
   Post,
   Query,
-} from '@nestjs/common';
-import { type WorkspaceUserEntity } from 'src/domain/entities/workspace-user.entity';
-import { AddUserToWorkspaceWithInviteService } from 'src/modules/users/services/add-user-with-invite/add-user-with-invite.service';
-import { CreateWorkspaceUserDto } from 'src/modules/users/services/create-user/create-user.dto';
-import { CreateWorkspaceUserService } from 'src/modules/users/services/create-user/create-user.service';
-import { InviteUserToWorkspaceDto } from 'src/modules/users/services/invite-user/invite-user.dto';
-import { InviteUserToWorkspaceService } from 'src/modules/users/services/invite-user/invite-user.service';
-import { ListWorkspaceUsersParamsDto } from 'src/modules/users/services/list-users/list-users.dto';
-import { ListWorkspaceUsersService } from 'src/modules/users/services/list-users/list-users.service';
-import { RemoveUserFromWorkspaceService } from 'src/modules/users/services/remove-user/remove-user.service';
-import { CurrentUser } from 'src/shared/decorators/current-user.decorator';
-import { CurrentWorkspaceId } from 'src/shared/decorators/current-workspace-id.decorator';
-import { ProtectedRoute } from 'src/shared/decorators/protected-route.decorator';
+} from '@nestjs/common'
+import { type WorkspaceUserEntity } from 'src/domain/entities/workspace-user.entity'
+import { AddUserToWorkspaceWithInviteService } from 'src/modules/users/services/add-user-with-invite/add-user-with-invite.service'
+import { CreateWorkspaceUserDto } from 'src/modules/users/services/create-user/create-user.dto'
+import { CreateWorkspaceUserService } from 'src/modules/users/services/create-user/create-user.service'
+import { InviteUserToWorkspaceDto } from 'src/modules/users/services/invite-user/invite-user.dto'
+import { InviteUserToWorkspaceService } from 'src/modules/users/services/invite-user/invite-user.service'
+import { ListWorkspaceUsersParamsDto } from 'src/modules/users/services/list-users/list-users.dto'
+import { ListWorkspaceUsersService } from 'src/modules/users/services/list-users/list-users.service'
+import { RemoveUserFromWorkspaceService } from 'src/modules/users/services/remove-user/remove-user.service'
+import { CurrentUser } from 'src/shared/decorators/current-user.decorator'
+import { CurrentWorkspaceId } from 'src/shared/decorators/current-workspace-id.decorator'
+import { ProtectedRoute } from 'src/shared/decorators/protected-route.decorator'
 
 @Controller('users')
 export class UsersController {
@@ -39,7 +39,7 @@ export class UsersController {
     return this.listWorkspaceUsersService.execute({
       ...queryParams,
       workspaceId,
-    });
+    })
   }
 
   @ProtectedRoute({ roles: ['ADMIN', 'OWNER'] })
@@ -51,7 +51,7 @@ export class UsersController {
     return this.createWorkspaceUserService.execute({
       ...body,
       workspaceId,
-    });
+    })
   }
 
   @ProtectedRoute({ roles: ['ADMIN', 'OWNER'] })
@@ -65,7 +65,7 @@ export class UsersController {
       loggedUser,
       userId,
       workspaceId,
-    });
+    })
   }
 
   @ProtectedRoute({ roles: ['ADMIN', 'OWNER'] })
@@ -77,7 +77,7 @@ export class UsersController {
     return this.inviteUserToWorkspaceService.execute({
       ...body,
       workspaceId,
-    });
+    })
   }
 
   @Post('/invite/:inviteId/join')
