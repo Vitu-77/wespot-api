@@ -4,5 +4,11 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports.biome": "explicit",
     "quickfix.biome": "explicit"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
   }
 }

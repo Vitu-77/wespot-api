@@ -7,8 +7,12 @@
   },
   "files": {
     "includes": [
-      "**",
-      "!!**/dist"
+      "src/**",
+      "test/**",
+      "!dist/**",
+      "!coverage/**",
+      "!.next/**",
+      "!node_modules/**"
     ]
   },
   "formatter": {

@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common'
-import { PrismaService } from 'src/infra/database/prisma.service'
-import { ListSpotsDto } from 'src/modules/spots/services/list-spots/list-spots.dto'
-import { contains, isIn, paginate } from 'src/shared/utils/query-helpers'
+import { Injectable } from "@nestjs/common";
+import { PrismaService } from "src/infra/database/prisma.service";
+import { ListSpotsDto } from "src/modules/workspaces/spots/services/list-spots/list-spots.dto";
+import { contains, isIn, paginate } from "src/shared/utils/query-helpers";
 
-type ListSpotsParams = Omit<ListSpotsDto, 'workspaceId'> & {
-  workspaceId?: string
-  ids?: string[]
-}
+type ListSpotsParams = Omit<ListSpotsDto, "workspaceId"> & {
+  workspaceId?: string;
+  ids?: string[];
+};
 
 @Injectable()
 export class SpotRepository {
@@ -17,15 +17,15 @@ export class SpotRepository {
       ...paginate({ pageNumber, pageSize }),
 
       orderBy: {
-        createdAt: 'desc',
+        createdAt: "desc",
       },
 
       where: {
         ...filters,
         id: isIn(filters.ids),
-        title: contains(filters.title, 'insensitive'),
+        title: contains(filters.title, "insensitive"),
       },
-    })
+    });
   }
 
   async listAndCount({ pageNumber, pageSize, ...filters }: ListSpotsParams) {
@@ -36,12 +36,12 @@ export class SpotRepository {
           ...filters,
         },
       }),
-    ])
+    ]);
 
     return {
       count,
       spots,
-    }
+    };
   }
 
   async deleteMany(ids: string[]) {
@@ -49,6 +49,6 @@ export class SpotRepository {
       where: {
         id: isIn(ids),
       },
-    })
+    });
   }
 }

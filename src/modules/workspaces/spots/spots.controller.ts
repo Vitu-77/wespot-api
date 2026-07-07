@@ -1,0 +1,30 @@
+import { Body, Controller, Delete, Get, Query } from "@nestjs/common";
+import { DeleteSpotsDto } from "src/modules/workspaces/spots/services/delete-spots/delete-spots.dto";
+import { DeleteSpotsService } from "src/modules/workspaces/spots/services/delete-spots/delete-spots.service";
+import { ListSpotsDto } from "src/modules/workspaces/spots/services/list-spots/list-spots.dto";
+import { ListSpotsService } from "src/modules/workspaces/spots/services/list-spots/list-spots.service";
+import { CurrentWorkspaceId } from "src/shared/decorators/current-workspace-id.decorator";
+
+@Controller("workspace/spots")
+export class SpotsController {
+  constructor(
+    private readonly listSpotsService: ListSpotsService,
+    private readonly deleteSpotsService: DeleteSpotsService,
+  ) {}
+
+  @Get("/")
+  listSpots(@Query() query: ListSpotsDto) {
+    return this.listSpotsService.execute(query);
+  }
+
+  @Delete("/")
+  deleteSpots(
+    @Body() body: DeleteSpotsDto,
+    @CurrentWorkspaceId() workspaceId: string,
+  ) {
+    return this.deleteSpotsService.execute({
+      ...body,
+      workspaceId,
+    });
+  }
+}

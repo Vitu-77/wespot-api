@@ -1,6 +1,6 @@
 import { applyDecorators, SetMetadata, UseGuards } from '@nestjs/common'
 import { WorkspaceRole } from 'prisma-types/enums'
-import { AuthGuard } from 'src/modules/auth/guards/auth.guard'
+import { AuthGuard } from 'src/modules/accounts/signin/guards/auth.guard'
 
 export const AUTH_OPTIONS = 'auth-options'
 
