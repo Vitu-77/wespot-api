@@ -6,7 +6,7 @@ import {
 import { ErrorCodes } from "src/domain/exceptions/error-codes.enum";
 import { ArgonService } from "src/infra/argon/argon.service";
 import { UserRepository } from "src/infra/database/repositories/user-repository/user.repository";
-import { CreateSessionService } from "src/modules/accounts/signin/services/create-session/create-session.service";
+import { CreateSessionUseCase } from "src/modules/accounts/signin/usecases/create-session/create-session.usecase";
 import { CreateAccountWithEmailDto } from "src/modules/accounts/signup/services/create-account-with-email/create-account-with-email.dto";
 import { EnsureAccountCreationUseCase } from "src/modules/accounts/signup/usecases/ensure-account-creation/ensure-account-creation.usecase";
 import { SendVerificationCodeUseCase } from "src/modules/accounts/signup/usecases/send-verification-code/send-verification-code.usecase";
@@ -16,7 +16,7 @@ import { ValidateDisposableEmailUseCase } from "src/modules/accounts/signup/usec
 export class CreateAccountWithEmailService {
   constructor(
     private readonly argonService: ArgonService,
-    private readonly createSessionService: CreateSessionService,
+    private readonly createSessionUseCase: CreateSessionUseCase,
     private readonly userRepository: UserRepository,
     private readonly validateDisposableEmailUseCase: ValidateDisposableEmailUseCase,
     private readonly ensureAccountCreationUseCase: EnsureAccountCreationUseCase,
@@ -61,6 +61,6 @@ export class CreateAccountWithEmailService {
       fingerprint: data.fingerprintId,
     });
 
-    return this.createSessionService.execute(newUser);
+    return this.createSessionUseCase.execute(newUser);
   }
 }

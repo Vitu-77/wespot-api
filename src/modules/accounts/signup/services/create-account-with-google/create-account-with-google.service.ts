@@ -9,7 +9,7 @@ import { OAuth2Client } from "google-auth-library";
 import { ErrorCodes } from "src/domain/exceptions/error-codes.enum";
 import { env } from "src/env";
 import { UserRepository } from "src/infra/database/repositories/user-repository/user.repository";
-import { CreateSessionService } from "src/modules/accounts/signin/services/create-session/create-session.service";
+import { CreateSessionUseCase } from "src/modules/accounts/signin/usecases/create-session/create-session.usecase";
 import { CreateAccountWithGoogleDto } from "src/modules/accounts/signup/services/create-account-with-google/create-account-with-google.dto";
 import { EnsureAccountCreationUseCase } from "src/modules/accounts/signup/usecases/ensure-account-creation/ensure-account-creation.usecase";
 import { SendVerificationCodeUseCase } from "src/modules/accounts/signup/usecases/send-verification-code/send-verification-code.usecase";
@@ -22,7 +22,7 @@ export class CreateAccountWithGoogleService {
   constructor(
     private readonly sendVerificationCodeUseCase: SendVerificationCodeUseCase,
     private readonly userRepository: UserRepository,
-    private readonly createSessionService: CreateSessionService,
+    private readonly createSessionUseCase: CreateSessionUseCase,
     private readonly ensureAccountCreationUseCase: EnsureAccountCreationUseCase,
   ) {}
 
@@ -57,7 +57,7 @@ export class CreateAccountWithGoogleService {
 
       if (user) {
         if (user.authProvider === "GOOGLE") {
-          return this.createSessionService.execute(user);
+          return this.createSessionUseCase.execute(user);
         }
 
         if (user.authProvider === "EMAIL") {
@@ -83,7 +83,7 @@ export class CreateAccountWithGoogleService {
         fingerprint: data.fingerprintId,
       });
 
-      return this.createSessionService.execute(newUser);
+      return this.createSessionUseCase.execute(newUser);
     } catch (error: any) {
       if (error?.response?.error in ErrorCodes) {
         throw error;

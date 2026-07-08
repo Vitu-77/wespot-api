@@ -1,21 +1,74 @@
-import type { INestApplication } from '@nestjs/common'
-import { ValidationPipe } from '@nestjs/common'
-import { NestFactory } from '@nestjs/core'
-import { env } from 'src/env'
-import { AppModule } from './app.module'
+import { writeFile } from "node:fs/promises";
+import type { INestApplication } from "@nestjs/common";
+import { ValidationPipe } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { apiReference } from "@scalar/nestjs-api-reference";
+import { env } from "src/env";
+import { AppModule } from "./app.module";
 
-let app: INestApplication | undefined
+async function setupSwagger(app: INestApplication) {
+  try {
+    const config = new DocumentBuilder()
+      .setTitle("WeSpot API")
+      .setDescription("Endpoints for WeSpot API")
+      .setVersion("1.0")
+      .addServer("/") // Não fixe localhost aqui
+      .build();
 
-async function bootstrap() {
-  app = await NestFactory.create(AppModule, {
+    const document = SwaggerModule.createDocument(app, config, {
+      operationIdFactory: (_, methodKey) => methodKey,
+    });
+
+    // SwaggerModule.setup("swagger", app, document);
+
+    app.use(
+      "/docs",
+      apiReference({
+        content: document,
+
+        theme: "purple",
+
+        layout: "modern",
+
+        darkMode: true,
+
+        defaultHttpClient: {
+          targetKey: "node",
+          clientKey: "fetch",
+        },
+
+        searchHotKey: "k",
+      }),
+    );
+
+    await writeFile("./openapi.json", JSON.stringify(document, null, 2));
+  } catch {
+    /** empty */
+  }
+}
+
+async function setupApp() {
+  const app = await NestFactory.create(AppModule, {
     forceCloseConnections: true,
-  })
+  });
 
-  app.enableShutdownHooks(['SIGINT', 'SIGTERM', 'SIGUSR2'])
+  app.enableShutdownHooks(["SIGINT", "SIGTERM", "SIGUSR2"]);
 
-  app.setGlobalPrefix('api/v1', {
-    exclude: ['docs/*path'],
-  })
+  app.enableCors({
+    origin: [
+      "http://localhost:3001", // Frontend Local
+      "https://app.wespot.com.br", // App Frontend Prod
+      "https://wespot.com.br", // Landpage Prod
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Workspace-Id"],
+  });
+
+  app.setGlobalPrefix("api/v1", {
+    exclude: ["docs/*path", "swagger/*path"],
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -23,9 +76,10 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
       transform: true,
     }),
-  )
+  );
 
-  await app.listen(Number(env.PORT), '0.0.0.0')
+  await setupSwagger(app);
+  await app.listen(Number(env.PORT), "0.0.0.0");
 }
 
-void bootstrap()
+void setupApp();

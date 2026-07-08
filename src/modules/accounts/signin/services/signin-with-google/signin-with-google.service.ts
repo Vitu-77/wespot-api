@@ -1,25 +1,25 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: error must be any */
 import {
-    BadRequestException,
-    Injectable,
-    NotFoundException,
-    UnauthorizedException,
-} from '@nestjs/common'
-import { OAuth2Client } from 'google-auth-library'
-import { ErrorCodes } from 'src/domain/exceptions/error-codes.enum'
-import { env } from 'src/env'
-import { UserRepository } from 'src/infra/database/repositories/user-repository/user.repository'
-
-import { CreateSessionService } from 'src/modules/accounts/signin/services/create-session/create-session.service'
-import { SigninWithGoogleDto } from 'src/modules/accounts/signin/services/signin-with-google/signin-with-google.dto'
-import { logger } from 'src/shared/utils/logger'
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from "@nestjs/common";
+import { OAuth2Client } from "google-auth-library";
+import { ErrorsMap } from "src/domain/exceptions/errors.map";
+import { env } from "src/env";
+import { UserRepository } from "src/infra/database/repositories/user-repository/user.repository";
+import { SigninWithGoogleDto } from "src/modules/accounts/signin/services/signin-with-google/signin-with-google.dto";
+import { CreateSessionUseCase } from "src/modules/accounts/signin/usecases/create-session/create-session.usecase";
+import { logger } from "src/shared/utils/logger";
 
 @Injectable()
 export class SigninWithGoogleService {
-  private googleOAuthClient = new OAuth2Client(env.GOOGLE_OAUTH_CLIENT_ID)
+  private googleOAuthClient = new OAuth2Client(env.GOOGLE_OAUTH_CLIENT_ID);
 
   constructor(
     private readonly userRepository: UserRepository,
-    private readonly createSessionService: CreateSessionService,
+    private readonly createSessionUseCase: CreateSessionUseCase,
   ) {}
 
   async execute({ googleIdToken }: SigninWithGoogleDto) {
@@ -27,60 +27,63 @@ export class SigninWithGoogleService {
       const ticket = await this.googleOAuthClient.verifyIdToken({
         idToken: googleIdToken,
         audience: env.GOOGLE_OAUTH_CLIENT_ID,
-      })
+      });
 
-      const payload = ticket.getPayload()
+      const payload = ticket.getPayload();
 
       if (!payload) {
         throw new UnauthorizedException(
-          'Google account was not found for this provided token',
-          {
-            description: ErrorCodes.GOOGLE_ACCOUNT_NOT_FOUND,
-          },
-        )
+          SigninWithGoogleService.errors.GOOGLE_ACCOUNT_NOT_FOUND,
+        );
       }
 
       if (!payload.email || !payload.name) {
         throw new UnauthorizedException(
-          'Google account has no name/email associated',
-          {
-            description: ErrorCodes.GOOGLE_ACCOUNT_INCOMPLETE,
-          },
-        )
+          SigninWithGoogleService.errors.GOOGLE_ACCOUNT_INCOMPLETE,
+        );
       }
 
-      const user = await this.userRepository.getByEmail(payload.email)
+      const user = await this.userRepository.getByEmail(payload.email);
 
       if (!user) {
-        throw new NotFoundException('User not found with this email', {
-          description: ErrorCodes.EMAIL_NOT_FOUND,
-        })
+        throw new NotFoundException(
+          SigninWithGoogleService.errors.EMAIL_NOT_FOUND,
+        );
       }
 
-      if (user.authProvider === 'EMAIL') {
-        throw new NotFoundException('User has login with email', {
-          description: ErrorCodes.USER_HAS_LOGIN_WITH_EMAIL,
-        })
+      if (user.authProvider === "EMAIL") {
+        throw new NotFoundException(
+          SigninWithGoogleService.errors.USER_HAS_LOGIN_WITH_EMAIL,
+        );
       }
 
       if (payload.picture !== user.avatarUrl) {
-        user.avatarUrl = payload.picture ?? null
+        user.avatarUrl = payload.picture ?? null;
+
         await this.userRepository.updateById(user.id, {
           avatarUrl: payload.picture,
-        })
+        });
       }
 
-      return this.createSessionService.execute(user)
+      return this.createSessionUseCase.execute(user);
     } catch (error: any) {
-      if (error?.response?.error in ErrorCodes) {
-        throw error
+      if (error?.response?.error) {
+        throw error;
       }
 
-      logger.error(error)
+      logger.error(error);
 
-      throw new BadRequestException('Invalid google token', {
-        description: ErrorCodes.INVALID_GOOGLE_TOKEN,
-      })
+      throw new BadRequestException(
+        SigninWithGoogleService.errors.INVALID_GOOGLE_TOKEN,
+      );
     }
   }
+
+  static errors = {
+    GOOGLE_ACCOUNT_NOT_FOUND: ErrorsMap.GOOGLE_ACCOUNT_NOT_FOUND,
+    GOOGLE_ACCOUNT_INCOMPLETE: ErrorsMap.GOOGLE_ACCOUNT_INCOMPLETE,
+    EMAIL_NOT_FOUND: ErrorsMap.EMAIL_NOT_FOUND,
+    USER_HAS_LOGIN_WITH_EMAIL: ErrorsMap.USER_HAS_LOGIN_WITH_EMAIL,
+    INVALID_GOOGLE_TOKEN: ErrorsMap.INVALID_GOOGLE_TOKEN,
+  };
 }

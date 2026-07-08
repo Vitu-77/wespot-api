@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { CreateSessionService } from "src/modules/accounts/signin/services/create-session/create-session.service";
 import { SigninModule } from "src/modules/accounts/signin/signin.module";
+import { CreateSessionUseCase } from "src/modules/accounts/signin/usecases/create-session/create-session.usecase";
 import { CompleteOnboardingService } from "src/modules/accounts/signup/services/complete-onboarding/create-account.service";
 import { CreateAccountWithEmailService } from "src/modules/accounts/signup/services/create-account-with-email/create-account-with-email.service";
 import { CreateAccountWithGoogleService } from "src/modules/accounts/signup/services/create-account-with-google/create-account-with-google.service";
@@ -20,7 +20,7 @@ import { WorkspacesModule } from "src/modules/workspaces/workspaces.module";
     JwtService,
 
     // Services
-    CreateSessionService,
+    CreateSessionUseCase,
     CreateAccountWithEmailService,
     CreateAccountWithGoogleService,
     ValidateVerificationCodeService,

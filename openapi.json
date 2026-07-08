@@ -1,0 +1,703 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/accounts/signin/email": {
+      "post": {
+        "description": "Authenticates a user using an email address and password.",
+        "operationId": "signInWithEmail",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SigninWithEmailDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SigninWithEmailResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Password does not match.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Password does not match.",
+                  "error": "PASSWORDS_DO_NOT_MATCH",
+                  "statusCode": 401
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found with this email.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User not found with this email.",
+                  "error": "EMAIL_NOT_FOUND",
+                  "statusCode": 404
+                }
+              }
+            }
+          }
+        },
+        "summary": "Sign in with email",
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/api/v1/accounts/signin/google": {
+      "post": {
+        "description": "Authenticates a user using a Google ID Token.",
+        "operationId": "signInWithGoogle",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SigninWithGoogleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SigninWithGoogleResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Google token is invalid.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Google token is invalid.",
+                  "error": "INVALID_GOOGLE_TOKEN",
+                  "statusCode": 401
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "GOOGLE_ACCOUNT_NOT_FOUND": {
+                    "summary": "Google account not found",
+                    "value": {
+                      "description": "Google account was not found.",
+                      "example": {
+                        "message": "Google account was not found.",
+                        "error": "GOOGLE_ACCOUNT_NOT_FOUND",
+                        "statusCode": 404
+                      }
+                    }
+                  },
+                  "GOOGLE_ACCOUNT_INCOMPLETE": {
+                    "summary": "Google account incomplete",
+                    "value": {
+                      "description": "Google account is incomplete.",
+                      "example": {
+                        "message": "Google account is incomplete.",
+                        "error": "GOOGLE_ACCOUNT_INCOMPLETE",
+                        "statusCode": 400
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested resource was not found.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "EMAIL_NOT_FOUND": {
+                    "summary": "Email not found",
+                    "value": {
+                      "description": "User not found with this email.",
+                      "example": {
+                        "message": "User not found with this email.",
+                        "error": "EMAIL_NOT_FOUND",
+                        "statusCode": 404
+                      }
+                    }
+                  },
+                  "USER_HAS_LOGIN_WITH_EMAIL": {
+                    "summary": "Account uses email authentication",
+                    "value": {
+                      "description": "This account uses email and password authentication.",
+                      "example": {
+                        "message": "This account uses email and password authentication.",
+                        "error": "USER_HAS_LOGIN_WITH_EMAIL",
+                        "statusCode": 400
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Sign in with Google",
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/api/v1/accounts/signin": {
+      "delete": {
+        "description": "Invalidates the current authenticated session.",
+        "operationId": "signout",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "User successfully signed out."
+          },
+          "401": {
+            "description": "Authentication token is missing.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Authentication token is missing.",
+                  "error": "AUTH_TOKEN_IS_MISSING",
+                  "statusCode": 401
+                }
+              }
+            }
+          }
+        },
+        "summary": "Sign out",
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/api/v1/accounts/signup/email": {
+      "post": {
+        "operationId": "signUpWithEmail",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountWithEmailDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Signup"
+        ]
+      }
+    },
+    "/api/v1/accounts/signup/google": {
+      "post": {
+        "operationId": "signUpWithGoogle",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountWithGoogleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Signup"
+        ]
+      }
+    },
+    "/api/v1/accounts/signup/validate-email": {
+      "patch": {
+        "operationId": "verifyEmail",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateVerificationCodeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Signup"
+        ]
+      }
+    },
+    "/api/v1/accounts/signup/onboarding": {
+      "post": {
+        "operationId": "completeOnboarding",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompleteOnboardingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Signup"
+        ]
+      }
+    },
+    "/api/v1/workspace/users": {
+      "get": {
+        "operationId": "listWorkspaceUsers",
+        "parameters": [
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Id do worksapace selecionado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "WorkspaceUsers"
+        ]
+      },
+      "post": {
+        "operationId": "createWorkspaceUser",
+        "parameters": [
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Id do worksapace selecionado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkspaceUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "WorkspaceUsers"
+        ]
+      }
+    },
+    "/api/v1/workspace/users/{userId}": {
+      "delete": {
+        "operationId": "removeUserFromWorkspace",
+        "parameters": [
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Id do worksapace selecionado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "WorkspaceUsers"
+        ]
+      }
+    },
+    "/api/v1/workspace/users/invite": {
+      "post": {
+        "operationId": "inviteUserToWorkspace",
+        "parameters": [
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Id do worksapace selecionado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InviteUserToWorkspaceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "WorkspaceUsers"
+        ]
+      }
+    },
+    "/api/v1/workspace/users/invite/{inviteId}/join": {
+      "post": {
+        "operationId": "addUserToWorkspaceWithInvite",
+        "parameters": [
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Id do worksapace selecionado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "inviteId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "WorkspaceUsers"
+        ]
+      }
+    },
+    "/api/v1/workspace/brands": {
+      "get": {
+        "operationId": "listBrands",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Brands"
+        ]
+      }
+    },
+    "/api/v1/workspace/spots": {
+      "get": {
+        "operationId": "listSpots",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Spots"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteSpots",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteSpotsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Spots"
+        ]
+      }
+    },
+    "/docs/db-diagram": {
+      "get": {
+        "operationId": "getDiagram",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "DatabaseDiagram"
+        ]
+      }
+    },
+    "/api/v1/notifications/{userId}": {
+      "get": {
+        "operationId": "listUserNotifications",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Notifications"
+        ]
+      }
+    },
+    "/api/v1/notifications/{notificationId}/read": {
+      "patch": {
+        "operationId": "markAsRead",
+        "parameters": [
+          {
+            "name": "notificationId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Notifications"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "WeSpot API",
+    "description": "Endpoints for WeSpot API",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "SigninWithEmailDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "SigninSessionResponseDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "refreshTokenHash": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "userId",
+          "refreshTokenHash",
+          "createdAt"
+        ]
+      },
+      "SigninWithEmailResponseDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "description": "JWT utilizado para autenticação."
+          },
+          "refreshToken": {
+            "type": "string",
+            "description": "Token utilizado para renovar a sessão."
+          },
+          "session": {
+            "description": "Sessão autenticada do usuário.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SigninSessionResponseDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "accessToken",
+          "refreshToken",
+          "session"
+        ]
+      },
+      "SigninWithGoogleDto": {
+        "type": "object",
+        "properties": {
+          "googleIdToken": {
+            "type": "string",
+            "description": "Token OAuth do Google."
+          }
+        },
+        "required": [
+          "googleIdToken"
+        ]
+      },
+      "SigninWithGoogleResponseDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "description": "JWT utilizado para autenticação."
+          },
+          "refreshToken": {
+            "type": "string",
+            "description": "Token utilizado para renovar a sessão."
+          },
+          "session": {
+            "description": "Sessão autenticada do usuário.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SigninSessionResponseDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "accessToken",
+          "refreshToken",
+          "session"
+        ]
+      },
+      "CreateAccountWithEmailDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateAccountWithGoogleDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "ValidateVerificationCodeDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CompleteOnboardingDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateWorkspaceUserDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "InviteUserToWorkspaceDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "DeleteSpotsDto": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}

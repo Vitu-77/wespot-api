@@ -1,9 +1,15 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
+import { WorkspaceType } from "prisma-types/enums";
 import { remove as removeAccents } from "remove-accents";
+import { ErrorCodes } from "src/domain/exceptions/error-codes.enum";
 import { WorkspaceRepository } from "src/infra/database/repositories/workspace-repository/workspace.repository";
 import { StorageService } from "src/infra/storage/storage.service";
-import { CreateWorkspaceDto } from "src/modules/accounts/signup/usecases/create-workspace/create-workspace.dto";
 import { S3_BUCKETS } from "src/shared/constants/s3-buckets";
+
+type CreateWorkspaceUseCaseParams = {
+  type: WorkspaceType;
+  name: string;
+};
 
 @Injectable()
 export class CreateWorkspaceUseCase {
@@ -12,7 +18,16 @@ export class CreateWorkspaceUseCase {
     private readonly storageService: StorageService,
   ) {}
 
-  async execute({ type, name }: CreateWorkspaceDto) {
+  async execute({ type, name }: CreateWorkspaceUseCaseParams) {
+    if (type !== "INDIVIDUAL" && !name) {
+      throw new BadRequestException(
+        "Not individual workspaces need valid names",
+        {
+          description: ErrorCodes.WORKSPACE_NAME_NOT_PROVIDED,
+        },
+      );
+    }
+
     const slug = this.createSlug(name);
     const workspace = await this.workspaceRepository.create({
       name,

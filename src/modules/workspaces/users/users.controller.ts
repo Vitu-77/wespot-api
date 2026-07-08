@@ -16,10 +16,12 @@ import { InviteUserToWorkspaceService } from "src/modules/workspaces/users/servi
 import { ListWorkspaceUsersParamsDto } from "src/modules/workspaces/users/services/list-users/list-users.dto";
 import { ListWorkspaceUsersService } from "src/modules/workspaces/users/services/list-users/list-users.service";
 import { RemoveUserFromWorkspaceService } from "src/modules/workspaces/users/services/remove-user/remove-user.service";
+import { ApiWorkspaceHeader } from "src/shared/decorators/api-workspace-header.decorator";
 import { CurrentUser } from "src/shared/decorators/current-user.decorator";
 import { CurrentWorkspaceId } from "src/shared/decorators/current-workspace-id.decorator";
 import { ProtectedRoute } from "src/shared/decorators/protected-route.decorator";
 
+@ApiWorkspaceHeader()
 @Controller("workspace/users")
 export class WorkspaceUsersController {
   constructor(
@@ -32,7 +34,7 @@ export class WorkspaceUsersController {
 
   @ProtectedRoute({ roles: ["ADMIN", "OWNER"] })
   @Get("/")
-  listUsers(
+  listWorkspaceUsers(
     @Query() queryParams: ListWorkspaceUsersParamsDto,
     @CurrentWorkspaceId() workspaceId: string,
   ) {
@@ -44,7 +46,7 @@ export class WorkspaceUsersController {
 
   @ProtectedRoute({ roles: ["ADMIN", "OWNER"] })
   @Post("/")
-  createUser(
+  createWorkspaceUser(
     @Body() body: CreateWorkspaceUserDto,
     @CurrentWorkspaceId() workspaceId: string,
   ) {
@@ -56,7 +58,7 @@ export class WorkspaceUsersController {
 
   @ProtectedRoute({ roles: ["ADMIN", "OWNER"] })
   @Delete("/:userId")
-  removeUser(
+  removeUserFromWorkspace(
     @Param("userId") userId: string,
     @CurrentWorkspaceId() workspaceId: string,
     @CurrentUser() loggedUser: WorkspaceUserEntity,
@@ -70,7 +72,7 @@ export class WorkspaceUsersController {
 
   @ProtectedRoute({ roles: ["ADMIN", "OWNER"] })
   @Post("/invite")
-  inviteUser(
+  inviteUserToWorkspace(
     @Body() body: InviteUserToWorkspaceDto,
     @CurrentWorkspaceId() workspaceId: string,
   ) {
@@ -80,6 +82,7 @@ export class WorkspaceUsersController {
     });
   }
 
+  // TODO: Mover esse método para um módulo de usuário
   @Post("/invite/:inviteId/join")
   addUserToWorkspaceWithInvite(@Param("inviteId") inviteId: string) {
     return this.addUserToWorkspaceWithInviteService.execute({
