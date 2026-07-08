@@ -5,10 +5,10 @@ import {
 } from "@nestjs/common";
 import { WorkspaceRole } from "prisma-types/enums";
 import { UserEntity } from "src/domain/entities/user.entity";
-import { ErrorCodes } from "src/domain/exceptions/error-codes.enum";
+import { ErrorsMap } from "src/domain/exceptions/errors.map";
 import { UserRepository } from "src/infra/database/repositories/user-repository/user.repository";
 import { WorkspaceRepository } from "src/infra/database/repositories/workspace-repository/workspace.repository";
-import { CompleteOnboardingDto } from "src/modules/accounts/signup/services/complete-onboarding/create-account.dto";
+import { CompleteOnboardingDto } from "src/modules/accounts/signup/services/complete-onboarding/complete-onboarding.dto";
 import { CreateWorkspaceUseCase } from "src/modules/accounts/signup/usecases/create-workspace/create-workspace.usecase";
 
 @Injectable()
@@ -27,15 +27,15 @@ export class CompleteOnboardingService {
     const user = await this.userRepository.getById(userId);
 
     if (!user) {
-      throw new NotFoundException("User not found", {
-        description: ErrorCodes.USER_NOT_FOUND,
-      });
+      throw new NotFoundException(
+        CompleteOnboardingService.errors.USER_NOT_FOUND,
+      );
     }
 
     if (user.workspaces.length) {
-      throw new BadRequestException("Onboarding already done for this user", {
-        description: ErrorCodes.USER_HAS_ONBOARDING_COMPLETED,
-      });
+      throw new BadRequestException(
+        CompleteOnboardingService.errors.USER_HAS_ONBOARDING_COMPLETED,
+      );
     }
 
     const workspace = await this.createWorkspaceUseCase.execute({
@@ -43,7 +43,7 @@ export class CompleteOnboardingService {
       type: workspaceType,
     });
 
-    const membershipment = await this.workspaceRepository.createMember({
+    const membership = await this.workspaceRepository.createMember({
       userId,
       workspaceId: workspace.id,
       role: WorkspaceRole.OWNER,
@@ -53,10 +53,15 @@ export class CompleteOnboardingService {
       ...user,
       workspaces: [
         {
-          role: membershipment.role,
+          role: membership.role,
           workspace,
         },
       ],
     };
   }
+
+  static errors = {
+    USER_NOT_FOUND: ErrorsMap.USER_NOT_FOUND,
+    USER_HAS_ONBOARDING_COMPLETED: ErrorsMap.USER_HAS_ONBOARDING_COMPLETED,
+  };
 }

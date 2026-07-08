@@ -20,12 +20,12 @@ async function setupSwagger(app: INestApplication) {
       operationIdFactory: (_, methodKey) => methodKey,
     });
 
-    // SwaggerModule.setup("swagger", app, document);
-
     app.use(
       "/docs",
       apiReference({
         content: document,
+
+        title: "WeSpot - API",
 
         theme: "purple",
 

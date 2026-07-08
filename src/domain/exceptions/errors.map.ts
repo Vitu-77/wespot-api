@@ -3,7 +3,7 @@ import { ErrorCodes } from "src/domain/exceptions/error-codes.enum";
 export type ErrorDiscrimination = {
   message: string;
   error: ErrorCodes;
-  statusCode: 400 | 401 | 403 | 404 | 429;
+  statusCode: 400 | 401 | 403 | 404 | 409;
 };
 
 export const ErrorsMap: Record<ErrorCodes, ErrorDiscrimination> = {
@@ -41,12 +41,12 @@ export const ErrorsMap: Record<ErrorCodes, ErrorDiscrimination> = {
   EMAIL_ALREADY_IN_USE: {
     message: "Email is already in use.",
     error: ErrorCodes.EMAIL_ALREADY_IN_USE,
-    statusCode: 400,
+    statusCode: 409,
   },
   INVALID_GOOGLE_TOKEN: {
     message: "Google token is invalid.",
     error: ErrorCodes.INVALID_GOOGLE_TOKEN,
-    statusCode: 401,
+    statusCode: 400,
   },
   GOOGLE_ACCOUNT_NOT_FOUND: {
     message: "Google account was not found.",
@@ -56,17 +56,17 @@ export const ErrorsMap: Record<ErrorCodes, ErrorDiscrimination> = {
   GOOGLE_ACCOUNT_INCOMPLETE: {
     message: "Google account is incomplete.",
     error: ErrorCodes.GOOGLE_ACCOUNT_INCOMPLETE,
-    statusCode: 400,
+    statusCode: 401,
   },
   EMAIL_ALREADY_REGISTERED_WITH_GOOGLE: {
     message: "This email is already registered with Google authentication.",
     error: ErrorCodes.EMAIL_ALREADY_REGISTERED_WITH_GOOGLE,
-    statusCode: 400,
+    statusCode: 409,
   },
   EMAIL_ALREADY_REGISTERED_WITH_PASSWORD: {
     message: "This email is already registered with password authentication.",
     error: ErrorCodes.EMAIL_ALREADY_REGISTERED_WITH_PASSWORD,
-    statusCode: 400,
+    statusCode: 409,
   },
   ACCOUNT_CREATION_FAILED: {
     message: "Failed to create account.",
@@ -86,7 +86,7 @@ export const ErrorsMap: Record<ErrorCodes, ErrorDiscrimination> = {
   FINGERPRINT_LOCKED: {
     message: "Too many accounts have been created from this device.",
     error: ErrorCodes.FINGERPRINT_LOCKED,
-    statusCode: 429,
+    statusCode: 409,
   },
   USER_HAS_LOGIN_WITH_GOOGLE: {
     message: "This account uses Google authentication.",
@@ -96,7 +96,7 @@ export const ErrorsMap: Record<ErrorCodes, ErrorDiscrimination> = {
   USER_HAS_LOGIN_WITH_EMAIL: {
     message: "This account uses email and password authentication.",
     error: ErrorCodes.USER_HAS_LOGIN_WITH_EMAIL,
-    statusCode: 400,
+    statusCode: 404,
   },
   USER_HAS_ONBOARDING_COMPLETED: {
     message: "User has already completed onboarding.",

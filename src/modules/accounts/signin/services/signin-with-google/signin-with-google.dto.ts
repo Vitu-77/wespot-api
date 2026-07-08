@@ -4,22 +4,19 @@ import { type SessionEntity } from "src/domain/entities/session.entity";
 import { SigninSessionResponseDto } from "src/shared/dto/signin-session.dto";
 
 export class SigninWithGoogleDto {
-  @ApiProperty({ description: "Token OAuth do Google." })
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   googleIdToken!: string;
 }
 
 export class SigninWithGoogleResponseDto {
-  @ApiProperty({ description: "JWT utilizado para autenticação." })
+  @ApiProperty()
   accessToken!: string;
 
-  @ApiProperty({ description: "Token utilizado para renovar a sessão." })
+  @ApiProperty()
   refreshToken!: string;
 
-  @ApiProperty({
-    type: () => SigninSessionResponseDto,
-    description: "Sessão autenticada do usuário.",
-  })
+  @ApiProperty({ type: () => SigninSessionResponseDto })
   session!: SessionEntity;
 }

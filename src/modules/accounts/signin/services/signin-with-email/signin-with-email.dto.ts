@@ -4,26 +4,23 @@ import { type SessionEntity } from "src/domain/entities/session.entity";
 import { SigninSessionResponseDto } from "src/shared/dto/signin-session.dto";
 
 export class SigninWithEmailDto {
-  @ApiProperty({ type: "string", format: "email" })
+  @ApiProperty()
   @IsEmail()
   email!: string;
 
-  @ApiProperty({ type: "string", format: "password", minLength: 1 })
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   password!: string;
 }
 
 export class SigninWithEmailResponseDto {
-  @ApiProperty({ description: "JWT utilizado para autenticação." })
+  @ApiProperty()
   accessToken!: string;
 
-  @ApiProperty({ description: "Token utilizado para renovar a sessão." })
+  @ApiProperty()
   refreshToken!: string;
 
-  @ApiProperty({
-    type: () => SigninSessionResponseDto,
-    description: "Sessão autenticada do usuário.",
-  })
+  @ApiProperty({ type: () => SigninSessionResponseDto })
   session!: SessionEntity;
 }

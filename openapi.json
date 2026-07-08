@@ -91,38 +91,19 @@
                 "example": {
                   "message": "Google token is invalid.",
                   "error": "INVALID_GOOGLE_TOKEN",
-                  "statusCode": 401
+                  "statusCode": 400
                 }
               }
             }
           },
           "401": {
-            "description": "Authentication failed.",
+            "description": "Google account is incomplete.",
             "content": {
               "application/json": {
-                "examples": {
-                  "GOOGLE_ACCOUNT_NOT_FOUND": {
-                    "summary": "Google account not found",
-                    "value": {
-                      "description": "Google account was not found.",
-                      "example": {
-                        "message": "Google account was not found.",
-                        "error": "GOOGLE_ACCOUNT_NOT_FOUND",
-                        "statusCode": 404
-                      }
-                    }
-                  },
-                  "GOOGLE_ACCOUNT_INCOMPLETE": {
-                    "summary": "Google account incomplete",
-                    "value": {
-                      "description": "Google account is incomplete.",
-                      "example": {
-                        "message": "Google account is incomplete.",
-                        "error": "GOOGLE_ACCOUNT_INCOMPLETE",
-                        "statusCode": 400
-                      }
-                    }
-                  }
+                "example": {
+                  "message": "Google account is incomplete.",
+                  "error": "GOOGLE_ACCOUNT_INCOMPLETE",
+                  "statusCode": 401
                 }
               }
             }
@@ -143,6 +124,17 @@
                       }
                     }
                   },
+                  "GOOGLE_ACCOUNT_NOT_FOUND": {
+                    "summary": "Google account not found",
+                    "value": {
+                      "description": "Google account was not found.",
+                      "example": {
+                        "message": "Google account was not found.",
+                        "error": "GOOGLE_ACCOUNT_NOT_FOUND",
+                        "statusCode": 404
+                      }
+                    }
+                  },
                   "USER_HAS_LOGIN_WITH_EMAIL": {
                     "summary": "Account uses email authentication",
                     "value": {
@@ -150,7 +142,7 @@
                       "example": {
                         "message": "This account uses email and password authentication.",
                         "error": "USER_HAS_LOGIN_WITH_EMAIL",
-                        "statusCode": 400
+                        "statusCode": 404
                       }
                     }
                   }
@@ -195,6 +187,7 @@
     },
     "/api/v1/accounts/signup/email": {
       "post": {
+        "description": "Creates a new account using an email address and password, sends a verification code to the user's email, and creates an authenticated session.",
         "operationId": "signUpWithEmail",
         "parameters": [],
         "requestBody": {
@@ -208,17 +201,69 @@
           }
         },
         "responses": {
-          "201": {
-            "description": ""
+          "200": {
+            "description": "Account successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAccountWithEmailResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Password does not match.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Password does not match.",
+                  "error": "PASSWORDS_DO_NOT_MATCH",
+                  "statusCode": 401
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The account could not be created.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "EMAIL_ALREADY_IN_USE": {
+                    "summary": "Email already in use",
+                    "value": {
+                      "description": "Email is already in use.",
+                      "example": {
+                        "message": "Email is already in use.",
+                        "error": "EMAIL_ALREADY_IN_USE",
+                        "statusCode": 409
+                      }
+                    }
+                  },
+                  "EMAIL_ALREADY_REGISTERED_WITH_GOOGLE": {
+                    "summary": "Email already registered with Google",
+                    "value": {
+                      "description": "This email is already registered with Google authentication.",
+                      "example": {
+                        "message": "This email is already registered with Google authentication.",
+                        "error": "EMAIL_ALREADY_REGISTERED_WITH_GOOGLE",
+                        "statusCode": 409
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
+        "summary": "Create account with email",
         "tags": [
-          "Signup"
+          "Accounts"
         ]
       }
     },
     "/api/v1/accounts/signup/google": {
       "post": {
+        "description": "Creates a new account using a Google account. If the user already exists with Google authentication, a new session is created instead.",
         "operationId": "signUpWithGoogle",
         "parameters": [],
         "requestBody": {
@@ -232,18 +277,75 @@
           }
         },
         "responses": {
-          "201": {
-            "description": ""
+          "200": {
+            "description": "Account successfully created or authenticated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAccountWithGoogleResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Google token is invalid.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Google token is invalid.",
+                  "error": "INVALID_GOOGLE_TOKEN",
+                  "statusCode": 400
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Google account is incomplete.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Google account is incomplete.",
+                  "error": "GOOGLE_ACCOUNT_INCOMPLETE",
+                  "statusCode": 401
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Google account was not found.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Google account was not found.",
+                  "error": "GOOGLE_ACCOUNT_NOT_FOUND",
+                  "statusCode": 404
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "This email is already registered with password authentication.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "This email is already registered with password authentication.",
+                  "error": "EMAIL_ALREADY_REGISTERED_WITH_PASSWORD",
+                  "statusCode": 409
+                }
+              }
+            }
           }
         },
+        "summary": "Create account with Google",
         "tags": [
-          "Signup"
+          "Accounts"
         ]
       }
     },
     "/api/v1/accounts/signup/validate-email": {
       "patch": {
-        "operationId": "verifyEmail",
+        "description": "Validates the verification code sent to the user's email address and marks the email as verified.",
+        "operationId": "validateEmailWithCode",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -257,16 +359,68 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "Email successfully verified.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateVerificationCodeResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The verification code is invalid.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "VERIFICATION_CODE_EXPIRED": {
+                    "summary": "Verification code expired",
+                    "value": {
+                      "description": "Verification code has expired.",
+                      "example": {
+                        "message": "Verification code has expired.",
+                        "error": "VERIFICATION_CODE_EXPIRED",
+                        "statusCode": 400
+                      }
+                    }
+                  },
+                  "VERIFICATION_CODE_INCORRECT": {
+                    "summary": "Verification code incorrect",
+                    "value": {
+                      "description": "Verification code is incorrect.",
+                      "example": {
+                        "message": "Verification code is incorrect.",
+                        "error": "VERIFICATION_CODE_INCORRECT",
+                        "statusCode": 400
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found with this email.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User not found with this email.",
+                  "error": "EMAIL_NOT_FOUND",
+                  "statusCode": 404
+                }
+              }
+            }
           }
         },
+        "summary": "Validate email verification code",
         "tags": [
-          "Signup"
+          "Accounts"
         ]
       }
     },
     "/api/v1/accounts/signup/onboarding": {
       "post": {
+        "description": "Completes the onboarding process and creates the user's first workspace.",
         "operationId": "completeOnboarding",
         "parameters": [],
         "requestBody": {
@@ -280,12 +434,44 @@
           }
         },
         "responses": {
-          "201": {
-            "description": ""
+          "200": {
+            "description": "Onboarding completed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompleteOnboardingResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User has already completed onboarding.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User has already completed onboarding.",
+                  "error": "USER_HAS_ONBOARDING_COMPLETED",
+                  "statusCode": 400
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "User not found.",
+                  "error": "USER_NOT_FOUND",
+                  "statusCode": 404
+                }
+              }
+            }
           }
         },
+        "summary": "Complete onboarding",
         "tags": [
-          "Signup"
+          "Accounts"
         ]
       }
     },
@@ -572,13 +758,10 @@
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "format": "email"
+            "type": "string"
           },
           "password": {
-            "type": "string",
-            "format": "password",
-            "minLength": 1
+            "type": "string"
           }
         },
         "required": [
@@ -610,20 +793,13 @@
         "type": "object",
         "properties": {
           "accessToken": {
-            "type": "string",
-            "description": "JWT utilizado para autenticação."
+            "type": "string"
           },
           "refreshToken": {
-            "type": "string",
-            "description": "Token utilizado para renovar a sessão."
+            "type": "string"
           },
           "session": {
-            "description": "Sessão autenticada do usuário.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SigninSessionResponseDto"
-              }
-            ]
+            "$ref": "#/components/schemas/SigninSessionResponseDto"
           }
         },
         "required": [
@@ -636,8 +812,7 @@
         "type": "object",
         "properties": {
           "googleIdToken": {
-            "type": "string",
-            "description": "Token OAuth do Google."
+            "type": "string"
           }
         },
         "required": [
@@ -648,20 +823,13 @@
         "type": "object",
         "properties": {
           "accessToken": {
-            "type": "string",
-            "description": "JWT utilizado para autenticação."
+            "type": "string"
           },
           "refreshToken": {
-            "type": "string",
-            "description": "Token utilizado para renovar a sessão."
+            "type": "string"
           },
           "session": {
-            "description": "Sessão autenticada do usuário.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SigninSessionResponseDto"
-              }
-            ]
+            "$ref": "#/components/schemas/SigninSessionResponseDto"
           }
         },
         "required": [
@@ -672,19 +840,613 @@
       },
       "CreateAccountWithEmailDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "fingerprintId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "passwordConfirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fingerprintId",
+          "name",
+          "email",
+          "password",
+          "passwordConfirmation"
+        ]
+      },
+      "CreateAccountWithEmailResponseDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "refreshTokenHash": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "userId",
+          "refreshTokenHash",
+          "createdAt"
+        ]
       },
       "CreateAccountWithGoogleDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "googleIdToken": {
+            "type": "string"
+          },
+          "fingerprintId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "googleIdToken",
+          "fingerprintId"
+        ]
+      },
+      "CreateAccountWithGoogleResponseDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "refreshTokenHash": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "userId",
+          "refreshTokenHash",
+          "createdAt"
+        ]
       },
       "ValidateVerificationCodeDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "code"
+        ]
+      },
+      "SpotEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "script": {
+            "type": "string"
+          },
+          "audioUrl": {
+            "type": "object"
+          },
+          "starred": {
+            "type": "boolean"
+          },
+          "expectedDuration": {
+            "type": "number"
+          },
+          "audioDuration": {
+            "type": "object"
+          },
+          "workspaceId": {
+            "type": "string"
+          },
+          "workspace": {
+            "type": "object"
+          },
+          "brandId": {
+            "type": "object"
+          },
+          "brand": {
+            "type": "object"
+          },
+          "inputId": {
+            "type": "object"
+          },
+          "voiceId": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "title",
+          "status",
+          "script",
+          "audioUrl",
+          "starred",
+          "expectedDuration",
+          "audioDuration",
+          "workspaceId",
+          "workspace",
+          "brandId",
+          "brand",
+          "inputId",
+          "voiceId"
+        ]
+      },
+      "BrandResponsibleEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "object"
+          },
+          "role": {
+            "type": "object"
+          },
+          "brandAddressId": {
+            "type": "string"
+          },
+          "brandAddress": {
+            "$ref": "#/components/schemas/BrandAddressEntityDto"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "role",
+          "brandAddressId",
+          "brandAddress"
+        ]
+      },
+      "BrandAddressEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "state": {
+            "type": "object"
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "neighborhood": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "string",
+            "nullable": true
+          },
+          "complement": {
+            "type": "string",
+            "nullable": true
+          },
+          "brandId": {
+            "type": "string"
+          },
+          "brand": {
+            "type": "object"
+          },
+          "responsibles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BrandResponsibleEntityDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "state",
+          "city",
+          "neighborhood",
+          "street",
+          "number",
+          "complement",
+          "brandId",
+          "brand",
+          "responsibles"
+        ]
+      },
+      "BrandEntityEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "segment": {
+            "type": "string"
+          },
+          "responsible": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "slogan": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "whatsapp": {
+            "type": "string",
+            "nullable": true
+          },
+          "instagram": {
+            "type": "string",
+            "nullable": true
+          },
+          "tiktok": {
+            "type": "string",
+            "nullable": true
+          },
+          "facebook": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "spots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpotEntityDto"
+            }
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BrandAddressEntityDto"
+            }
+          },
+          "workspaceId": {
+            "type": "string"
+          },
+          "workspace": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "segment",
+          "responsible",
+          "description",
+          "logoUrl",
+          "slogan",
+          "phoneNumber",
+          "whatsapp",
+          "instagram",
+          "tiktok",
+          "facebook",
+          "website",
+          "spots",
+          "addresses",
+          "workspaceId",
+          "workspace"
+        ]
+      },
+      "WorkspaceMemberEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "role": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "user": {
+            "type": "object"
+          },
+          "workspaceId": {
+            "type": "string"
+          },
+          "workspace": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "role",
+          "userId",
+          "user",
+          "workspaceId",
+          "workspace"
+        ]
+      },
+      "WorkspaceEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "brands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BrandEntityEntityDto"
+            }
+          },
+          "spots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpotEntityDto"
+            }
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceMemberEntityDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "type",
+          "slug",
+          "brands",
+          "spots",
+          "members"
+        ]
+      },
+      "MembershipmentDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "workspace": {
+            "$ref": "#/components/schemas/WorkspaceEntityDto"
+          }
+        },
+        "required": [
+          "role",
+          "workspace"
+        ]
+      },
+      "ValidateVerificationCodeResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "avatarUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "authProvider": {
+            "type": "string",
+            "enum": [
+              "GOOGLE",
+              "EMAIL"
+            ]
+          },
+          "fingerprint": {
+            "type": "string"
+          },
+          "workspaces": {
+            "$ref": "#/components/schemas/MembershipmentDto"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "email",
+          "password",
+          "avatarUrl",
+          "authProvider",
+          "fingerprint",
+          "workspaces"
+        ]
       },
       "CompleteOnboardingDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "workspaceType": {
+            "type": "string",
+            "enum": [
+              "INDIVIDUAL",
+              "COMPANY",
+              "AGENCY"
+            ]
+          },
+          "workspaceName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "userId",
+          "workspaceType",
+          "workspaceName"
+        ]
+      },
+      "CompleteOnboardingResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "avatarUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "authProvider": {
+            "type": "string",
+            "enum": [
+              "GOOGLE",
+              "EMAIL"
+            ]
+          },
+          "fingerprint": {
+            "type": "string"
+          },
+          "workspaces": {
+            "$ref": "#/components/schemas/MembershipmentDto"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "email",
+          "password",
+          "avatarUrl",
+          "authProvider",
+          "fingerprint",
+          "workspaces"
+        ]
       },
       "CreateWorkspaceUserDto": {
         "type": "object",

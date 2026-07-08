@@ -2,11 +2,13 @@
 import {
   BadRequestException,
   ConflictException,
+  HttpException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
 import { OAuth2Client } from "google-auth-library";
-import { ErrorCodes } from "src/domain/exceptions/error-codes.enum";
+import { ErrorsMap } from "src/domain/exceptions/errors.map";
 import { env } from "src/env";
 import { UserRepository } from "src/infra/database/repositories/user-repository/user.repository";
 import { CreateSessionUseCase } from "src/modules/accounts/signin/usecases/create-session/create-session.usecase";
@@ -36,20 +38,14 @@ export class CreateAccountWithGoogleService {
       const payload = ticket.getPayload();
 
       if (!payload) {
-        throw new UnauthorizedException(
-          "Google account was not found for this provided token",
-          {
-            description: ErrorCodes.GOOGLE_ACCOUNT_NOT_FOUND,
-          },
+        throw new NotFoundException(
+          CreateAccountWithGoogleService.errors.GOOGLE_ACCOUNT_NOT_FOUND,
         );
       }
 
       if (!payload.email || !payload.name) {
         throw new UnauthorizedException(
-          "Google account has no name/email associated",
-          {
-            description: ErrorCodes.GOOGLE_ACCOUNT_INCOMPLETE,
-          },
+          CreateAccountWithGoogleService.errors.GOOGLE_ACCOUNT_INCOMPLETE,
         );
       }
 
@@ -61,13 +57,15 @@ export class CreateAccountWithGoogleService {
         }
 
         if (user.authProvider === "EMAIL") {
-          throw new ConflictException("Provided email is taken", {
-            description: ErrorCodes.EMAIL_ALREADY_REGISTERED_WITH_PASSWORD,
-          });
+          throw new ConflictException(
+            CreateAccountWithGoogleService.errors
+              .EMAIL_ALREADY_REGISTERED_WITH_PASSWORD,
+          );
         }
       }
 
       await this.ensureAccountCreationUseCase.execute(data.fingerprintId);
+
       await this.sendVerificationCodeUseCase.execute({
         email: payload.email,
         name: payload.name,
@@ -85,15 +83,23 @@ export class CreateAccountWithGoogleService {
 
       return this.createSessionUseCase.execute(newUser);
     } catch (error: any) {
-      if (error?.response?.error in ErrorCodes) {
+      if (error instanceof HttpException) {
         throw error;
       }
 
       logger.error(error);
 
-      throw new BadRequestException("Invalid google token", {
-        description: ErrorCodes.INVALID_GOOGLE_TOKEN,
-      });
+      throw new BadRequestException(
+        CreateAccountWithGoogleService.errors.INVALID_GOOGLE_TOKEN,
+      );
     }
   }
+
+  static errors = {
+    GOOGLE_ACCOUNT_NOT_FOUND: ErrorsMap.GOOGLE_ACCOUNT_NOT_FOUND,
+    GOOGLE_ACCOUNT_INCOMPLETE: ErrorsMap.GOOGLE_ACCOUNT_INCOMPLETE,
+    EMAIL_ALREADY_REGISTERED_WITH_PASSWORD:
+      ErrorsMap.EMAIL_ALREADY_REGISTERED_WITH_PASSWORD,
+    INVALID_GOOGLE_TOKEN: ErrorsMap.INVALID_GOOGLE_TOKEN,
+  };
 }

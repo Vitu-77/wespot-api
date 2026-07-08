@@ -32,7 +32,7 @@ export class SigninWithGoogleService {
       const payload = ticket.getPayload();
 
       if (!payload) {
-        throw new UnauthorizedException(
+        throw new NotFoundException(
           SigninWithGoogleService.errors.GOOGLE_ACCOUNT_NOT_FOUND,
         );
       }

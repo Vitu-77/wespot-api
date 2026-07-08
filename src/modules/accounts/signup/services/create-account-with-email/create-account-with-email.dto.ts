@@ -1,22 +1,31 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator'
+import { ApiProperty } from "@nestjs/swagger";
+import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
+import { SessionEntityDto } from "src/domain/entities/session.entity";
 
 export class CreateAccountWithEmailDto {
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  fingerprintId!: string
+  fingerprintId!: string;
 
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  name!: string
+  name!: string;
 
+  @ApiProperty()
   @IsEmail()
-  email!: string
+  email!: string;
 
+  @ApiProperty()
   @IsString()
   @MinLength(5)
-  password!: string
+  password!: string;
 
+  @ApiProperty()
   @IsString()
   @MinLength(5)
-  passwordConfirmation!: string
+  passwordConfirmation!: string;
 }
+
+export class CreateAccountWithEmailResponseDto extends SessionEntityDto {}
