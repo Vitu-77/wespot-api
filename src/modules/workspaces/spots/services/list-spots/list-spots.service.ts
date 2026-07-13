@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { SpotRepository } from "src/infra/database/repositories/spot-repository/spot.repository";
 import { ListSpotsDto } from "src/modules/workspaces/spots/services/list-spots/list-spots.dto";
-import { PaginatedResponseDTO } from "src/shared/dto/paginated-response.dto";
+import { PaginatedResponseDto } from "src/shared/dto/paginated-response.dto";
 
 @Injectable()
 export class ListSpotsService {
@@ -20,7 +20,7 @@ export class ListSpotsService {
       ...filters,
     });
 
-    return new PaginatedResponseDTO({
+    return new PaginatedResponseDto({
       items: spots,
       pageNumber,
       pageSize,

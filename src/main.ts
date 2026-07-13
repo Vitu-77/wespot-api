@@ -24,15 +24,10 @@ async function setupSwagger(app: INestApplication) {
       "/docs",
       apiReference({
         content: document,
-
         title: "WeSpot - API",
-
         theme: "purple",
-
         layout: "modern",
-
         darkMode: true,
-
         defaultHttpClient: {
           targetKey: "node",
           clientKey: "fetch",

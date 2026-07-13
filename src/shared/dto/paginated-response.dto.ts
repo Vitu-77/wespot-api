@@ -1,27 +1,46 @@
+import { ApiProperty } from "@nestjs/swagger";
+
 type Input<T> = {
-  items: T[]
-  totalItems: number
-  pageNumber: number
-  pageSize: number
+  items: T[];
+  totalItems: number;
+  pageNumber: number;
+  pageSize: number;
+};
+
+export class PaginationResponseDto {
+  @ApiProperty()
+  totalItems!: number;
+
+  @ApiProperty()
+  pageNumber!: number;
+
+  @ApiProperty()
+  pageSize!: number;
+
+  @ApiProperty()
+  totalPages!: number;
+
+  @ApiProperty()
+  hasPrevPage!: boolean;
+
+  @ApiProperty()
+  hasNextPage!: boolean;
 }
 
-export interface IPagination {
-  totalItems: number
-  pageNumber: number
-  pageSize: number
-  totalPages: number
-  hasPrevPage: boolean
-  hasNextPage: boolean
-}
+export class PaginatedResponseDto<T> {
+  @ApiProperty({ isArray: true })
+  items!: T[];
 
-export class PaginatedResponseDTO<T> {
-  items: T[]
-  pagination: IPagination
+  @ApiProperty({ type: () => PaginationResponseDto })
+  pagination!: PaginationResponseDto;
 
   constructor(input: Input<T>) {
-    const totalPages = Math.max(1, Math.ceil(input.totalItems / input.pageSize))
+    const totalPages = Math.max(
+      1,
+      Math.ceil(input.totalItems / input.pageSize),
+    );
 
-    this.items = input.items
+    this.items = input.items;
 
     this.pagination = {
       totalItems: input.totalItems,
@@ -30,6 +49,6 @@ export class PaginatedResponseDTO<T> {
       totalPages,
       hasPrevPage: input.pageNumber > 1,
       hasNextPage: input.pageNumber < totalPages,
-    }
+    };
   }
 }

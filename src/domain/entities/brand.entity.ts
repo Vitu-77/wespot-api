@@ -56,8 +56,8 @@ export class BrandAddressEntityDto implements BrandAddressEntity {
 
 export type BrandResponsibleEntity = {
   id: string;
-  name: BrazilianState | null;
-  role?: string;
+  name: string;
+  role: string | null;
 
   brandAddressId: string;
   brandAddress?: BrandAddressEntity;
@@ -68,10 +68,10 @@ export class BrandResponsibleEntityDto implements BrandResponsibleEntity {
   id!: string;
 
   @ApiProperty()
-  name!: BrazilianState | null;
+  name!: string;
 
   @ApiProperty()
-  role?: string | undefined;
+  role!: string | null;
 
   @ApiProperty()
   brandAddressId!: string;
@@ -83,9 +83,8 @@ export class BrandResponsibleEntityDto implements BrandResponsibleEntity {
 export type BrandEntity = BaseEntity & {
   name: string;
   segment: BusinessSegment;
-  responsible: string | null;
   description: string | null;
-  logoUrl: string | null;
+  logoKey: string | null;
   slogan: string | null;
   phoneNumber: string | null;
   whatsapp: string | null;
@@ -115,7 +114,7 @@ export class BrandEntityEntityDto extends BaseEntityDto implements BrandEntity {
   description!: string | null;
 
   @ApiProperty({ nullable: true, type: "string" })
-  logoUrl!: string | null;
+  logoKey!: string | null;
 
   @ApiProperty({ nullable: true, type: "string" })
   slogan!: string | null;

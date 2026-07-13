@@ -1,16 +1,15 @@
-import { Injectable } from '@nestjs/common'
-import {
-  BrandAddressUpdateInput,
-  BrandCreateInput,
-  BrandUpdateInput,
-} from 'prisma-types/models'
+import { Injectable } from "@nestjs/common";
+import { BrandAddressUpdateInput, BrandUpdateInput } from "prisma-types/models";
 import {
   BrandAddressEntity,
   BrandEntity,
-} from 'src/domain/entities/brand.entity'
-import { PrismaService } from 'src/infra/database/prisma.service'
-import { BrandRepositoryListParams } from 'src/infra/database/repositories/brand-repository/brand.repository.types'
-import { contains, paginate } from 'src/shared/utils/query-helpers'
+} from "src/domain/entities/brand.entity";
+import { PrismaService } from "src/infra/database/prisma.service";
+import {
+  BrandRepositoryCreateParams,
+  BrandRepositoryListParams,
+} from "src/infra/database/repositories/brand-repository/brand.repository.types";
+import { contains, paginate } from "src/shared/utils/query-helpers";
 
 @Injectable()
 export class BrandRepository {
@@ -25,17 +24,21 @@ export class BrandRepository {
       ...paginate({ pageNumber, pageSize }),
 
       where: {
-        name: contains(filters.name, 'insensitive'),
+        name: contains(filters.name, "insensitive"),
         segment: filters.segment,
         workspaceId: filters.workspaceId,
       },
 
-      select: {
-        addresses: true,
+      include: {
+        addresses: {
+          include: {
+            responsibles: true,
+          },
+        },
       },
-    })
+    });
 
-    return brands as BrandEntity[]
+    return brands as BrandEntity[];
   }
 
   async listAndCount(params: BrandRepositoryListParams) {
@@ -43,27 +46,58 @@ export class BrandRepository {
       this.list(params),
       this.prismaService.brand.count({
         where: {
-          name: contains(params.name, 'default'),
+          name: contains(params.name, "default"),
           segment: params.segment,
         },
       }),
-    ])
+    ]);
 
     return {
       brands,
       count,
-    }
+    };
   }
 
-  async create(data: BrandCreateInput): Promise<BrandEntity> {
-    const brand = await this.prismaService.brand.create({
-      data,
-      include: {
-        addresses: true,
-      },
-    })
+  async create({
+    workspaceId,
+    ...data
+  }: BrandRepositoryCreateParams): Promise<BrandEntity> {
+    const brand = (await this.prismaService.brand.create({
+      data: {
+        ...data,
 
-    return brand
+        workspace: {
+          connect: {
+            id: workspaceId,
+          },
+        },
+
+        addresses: {},
+      },
+    })) as BrandEntity;
+
+    const addressData = data.addresses[0];
+    const address = (await this.prismaService.brandAddress.create({
+      data: {
+        ...addressData,
+        brandId: brand.id,
+        responsibles: {
+          createMany: {
+            data: addressData.responsibles,
+          },
+        },
+      },
+    })) as BrandAddressEntity;
+
+    address.responsibles = await this.prismaService.brandResponsible.findMany({
+      where: {
+        brandAddressId: address.id,
+      },
+    });
+
+    brand.addresses = [address];
+
+    return brand;
   }
 
   async updateBrand(id: string, data: BrandUpdateInput): Promise<BrandEntity> {
@@ -77,9 +111,9 @@ export class BrandRepository {
       include: {
         addresses: true,
       },
-    })
+    });
 
-    return brand
+    return brand;
   }
 
   async updateAddress(
@@ -92,9 +126,9 @@ export class BrandRepository {
       },
 
       data,
-    })
+    });
 
-    return brandAddress
+    return brandAddress;
   }
 
   async deleteBrand(id: string): Promise<void> {
@@ -102,7 +136,7 @@ export class BrandRepository {
       where: {
         id,
       },
-    })
+    });
   }
 
   async deleteAddress(id: string): Promise<void> {
@@ -110,6 +144,6 @@ export class BrandRepository {
       where: {
         id,
       },
-    })
+    });
   }
 }

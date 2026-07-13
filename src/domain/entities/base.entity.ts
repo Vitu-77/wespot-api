@@ -11,8 +11,8 @@ export class BaseEntityDto implements BaseEntity {
   id!: string;
 
   @ApiProperty({ type: "string", format: "date-time" })
-  createdAt!: string;
+  createdAt!: string | Date;
 
   @ApiProperty({ type: "string", format: "date-time", nullable: true })
-  updatedAt!: string | null;
+  updatedAt!: string | Date | null;
 }

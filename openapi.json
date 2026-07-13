@@ -641,6 +641,28 @@
         "tags": [
           "Brands"
         ]
+      },
+      "post": {
+        "operationId": "upload",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBrandDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Brands"
+        ]
       }
     },
     "/api/v1/workspace/spots": {
@@ -679,22 +701,32 @@
         ]
       }
     },
-    "/docs/db-diagram": {
+    "/api/v1/db-diagram": {
       "get": {
+        "description": "Returns ER-Diagram for PostgreSQL database in SVG format.",
         "operationId": "getDiagram",
         "parameters": [],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/File"
+                }
+              }
+            }
           }
         },
+        "summary": "Get diagram",
         "tags": [
-          "DatabaseDiagram"
+          "Database Diagram"
         ]
       }
     },
     "/api/v1/notifications/{userId}": {
       "get": {
+        "description": "Returns all notifications associated with the authenticated user.",
         "operationId": "listUserNotifications",
         "parameters": [
           {
@@ -708,9 +740,17 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "User notifications successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListUserNotificationsResponseDto"
+                }
+              }
+            }
           }
         },
+        "summary": "List user notifications",
         "tags": [
           "Notifications"
         ]
@@ -718,7 +758,8 @@
     },
     "/api/v1/notifications/{notificationId}/read": {
       "patch": {
-        "operationId": "markAsRead",
+        "description": "Marks a notification as read for the authenticated user.",
+        "operationId": "markNotificationAsRead",
         "parameters": [
           {
             "name": "notificationId",
@@ -731,9 +772,17 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Notification successfully marked as read.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarkNotificationAsReadResponseDto"
+                }
+              }
+            }
           }
         },
+        "summary": "Mark notification as read",
         "tags": [
           "Notifications"
         ]
@@ -865,7 +914,7 @@
           "passwordConfirmation"
         ]
       },
-      "CreateAccountWithEmailResponseDto": {
+      "SessionEntityDto": {
         "type": "object",
         "properties": {
           "userId": {
@@ -883,6 +932,25 @@
           "userId",
           "refreshTokenHash",
           "createdAt"
+        ]
+      },
+      "CreateAccountWithEmailResponseDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          },
+          "session": {
+            "$ref": "#/components/schemas/SessionEntityDto"
+          }
+        },
+        "required": [
+          "accessToken",
+          "refreshToken",
+          "session"
         ]
       },
       "CreateAccountWithGoogleDto": {
@@ -1017,7 +1085,7 @@
             "type": "string"
           },
           "name": {
-            "type": "object"
+            "type": "string"
           },
           "role": {
             "type": "object"
@@ -1122,7 +1190,7 @@
             "type": "string",
             "nullable": true
           },
-          "logoUrl": {
+          "logoKey": {
             "type": "string",
             "nullable": true
           },
@@ -1181,7 +1249,7 @@
           "segment",
           "responsible",
           "description",
-          "logoUrl",
+          "logoKey",
           "slogan",
           "phoneNumber",
           "whatsapp",
@@ -1332,10 +1400,6 @@
           "email": {
             "type": "string"
           },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
           "avatarUrl": {
             "type": "string",
             "nullable": true
@@ -1360,7 +1424,6 @@
           "updatedAt",
           "name",
           "email",
-          "password",
           "avatarUrl",
           "authProvider",
           "fingerprint",
@@ -1413,9 +1476,77 @@
           "email": {
             "type": "string"
           },
-          "password": {
+          "avatarUrl": {
             "type": "string",
             "nullable": true
+          },
+          "authProvider": {
+            "type": "string",
+            "enum": [
+              "GOOGLE",
+              "EMAIL"
+            ]
+          },
+          "fingerprint": {
+            "type": "string"
+          },
+          "workspaces": {
+            "$ref": "#/components/schemas/MembershipmentDto"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "email",
+          "avatarUrl",
+          "authProvider",
+          "fingerprint",
+          "workspaces"
+        ]
+      },
+      "CreateWorkspaceUserDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "InviteUserToWorkspaceDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateBrandDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "DeleteSpotsDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "File": {
+        "type": "object",
+        "properties": {}
+      },
+      "UserEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
           },
           "avatarUrl": {
             "type": "string",
@@ -1441,24 +1572,148 @@
           "updatedAt",
           "name",
           "email",
-          "password",
           "avatarUrl",
           "authProvider",
           "fingerprint",
           "workspaces"
         ]
       },
-      "CreateWorkspaceUserDto": {
+      "NotificationEntityDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "readAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserEntityDto"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "title",
+          "content",
+          "readAt",
+          "userId",
+          "user"
+        ]
       },
-      "InviteUserToWorkspaceDto": {
+      "PaginationResponseDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "totalItems": {
+            "type": "number"
+          },
+          "pageNumber": {
+            "type": "number"
+          },
+          "pageSize": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "hasPrevPage": {
+            "type": "boolean"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "totalItems",
+          "pageNumber",
+          "pageSize",
+          "totalPages",
+          "hasPrevPage",
+          "hasNextPage"
+        ]
       },
-      "DeleteSpotsDto": {
+      "ListUserNotificationsResponseDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NotificationEntityDto"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationResponseDto"
+          }
+        },
+        "required": [
+          "items",
+          "pagination"
+        ]
+      },
+      "MarkNotificationAsReadResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "readAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserEntityDto"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "title",
+          "content",
+          "readAt",
+          "userId",
+          "user"
+        ]
       }
     }
   }

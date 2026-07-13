@@ -1,32 +1,32 @@
-import { Type } from 'class-transformer'
+import { Type } from "class-transformer";
 import {
   IsBoolean,
   IsEnum,
   IsOptional,
   IsString,
   IsUUID,
-} from 'class-validator'
-import { SpotStatus } from 'prisma-types/enums'
-import { PaginationDto } from 'src/shared/dto/pagination.dto'
+} from "class-validator";
+import { SpotStatus } from "prisma-types/enums";
+import { PaginationParamsDto } from "src/shared/dto/pagination.dto";
 
-export class ListSpotsDto extends PaginationDto {
+export class ListSpotsDto extends PaginationParamsDto {
   @IsUUID()
-  workspaceId!: string
+  workspaceId!: string;
 
   @IsOptional()
   @IsString()
-  title?: string
+  title?: string;
 
   @IsOptional()
   @IsEnum(SpotStatus)
-  status?: SpotStatus
+  status?: SpotStatus;
 
   @IsOptional()
   @Type(() => Boolean)
   @IsBoolean()
-  starred?: boolean
+  starred?: boolean;
 
   @IsOptional()
   @IsUUID()
-  brandId?: string
+  brandId?: string;
 }

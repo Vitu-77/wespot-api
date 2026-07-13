@@ -22,7 +22,7 @@ class MembershipmentDto implements MembershipmentEntity {
 export type UserEntity = BaseEntity & {
   name: string;
   email: string;
-  password: string | null;
+  password?: string | null;
   avatarUrl: string | null;
   authProvider: AuthProvider;
   fingerprint: string;
@@ -36,9 +36,6 @@ export class UserEntityDto extends BaseEntityDto implements UserEntity {
 
   @ApiProperty()
   email!: string;
-
-  @ApiProperty({ nullable: true, type: "string" })
-  password!: string | null;
 
   @ApiProperty({ nullable: true, type: "string" })
   avatarUrl!: string | null;

@@ -2,9 +2,8 @@ model Brand {
   id          String          @id @default(uuid())
   name        String
   segment     BusinessSegment
-  responsible String?
   description String?
-  logoUrl     String?         @map("logo_url")
+  logoKey     String?         @map("logo_key")
   slogan      String?
   phoneNumber String?         @map("phone_number")
   whatsapp    String?
@@ -29,7 +28,7 @@ model Brand {
 model BrandAddress {
   id           String          @id @default(uuid())
   state        BrazilianState?
-  city         String
+  city         String?
   neighborhood String?
   street       String?
   number       String?

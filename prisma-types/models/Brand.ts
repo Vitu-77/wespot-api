@@ -28,9 +28,8 @@ export type BrandMinAggregateOutputType = {
   id: string | null
   name: string | null
   segment: $Enums.BusinessSegment | null
-  responsible: string | null
   description: string | null
-  logoUrl: string | null
+  logoKey: string | null
   slogan: string | null
   phoneNumber: string | null
   whatsapp: string | null
@@ -47,9 +46,8 @@ export type BrandMaxAggregateOutputType = {
   id: string | null
   name: string | null
   segment: $Enums.BusinessSegment | null
-  responsible: string | null
   description: string | null
-  logoUrl: string | null
+  logoKey: string | null
   slogan: string | null
   phoneNumber: string | null
   whatsapp: string | null
@@ -66,9 +64,8 @@ export type BrandCountAggregateOutputType = {
   id: number
   name: number
   segment: number
-  responsible: number
   description: number
-  logoUrl: number
+  logoKey: number
   slogan: number
   phoneNumber: number
   whatsapp: number
@@ -87,9 +84,8 @@ export type BrandMinAggregateInputType = {
   id?: true
   name?: true
   segment?: true
-  responsible?: true
   description?: true
-  logoUrl?: true
+  logoKey?: true
   slogan?: true
   phoneNumber?: true
   whatsapp?: true
@@ -106,9 +102,8 @@ export type BrandMaxAggregateInputType = {
   id?: true
   name?: true
   segment?: true
-  responsible?: true
   description?: true
-  logoUrl?: true
+  logoKey?: true
   slogan?: true
   phoneNumber?: true
   whatsapp?: true
@@ -125,9 +120,8 @@ export type BrandCountAggregateInputType = {
   id?: true
   name?: true
   segment?: true
-  responsible?: true
   description?: true
-  logoUrl?: true
+  logoKey?: true
   slogan?: true
   phoneNumber?: true
   whatsapp?: true
@@ -217,9 +211,8 @@ export type BrandGroupByOutputType = {
   id: string
   name: string
   segment: $Enums.BusinessSegment
-  responsible: string | null
   description: string | null
-  logoUrl: string | null
+  logoKey: string | null
   slogan: string | null
   phoneNumber: string | null
   whatsapp: string | null
@@ -257,9 +250,8 @@ export type BrandWhereInput = {
   id?: Prisma.StringFilter<"Brand"> | string
   name?: Prisma.StringFilter<"Brand"> | string
   segment?: Prisma.EnumBusinessSegmentFilter<"Brand"> | $Enums.BusinessSegment
-  responsible?: Prisma.StringNullableFilter<"Brand"> | string | null
   description?: Prisma.StringNullableFilter<"Brand"> | string | null
-  logoUrl?: Prisma.StringNullableFilter<"Brand"> | string | null
+  logoKey?: Prisma.StringNullableFilter<"Brand"> | string | null
   slogan?: Prisma.StringNullableFilter<"Brand"> | string | null
   phoneNumber?: Prisma.StringNullableFilter<"Brand"> | string | null
   whatsapp?: Prisma.StringNullableFilter<"Brand"> | string | null
@@ -279,9 +271,8 @@ export type BrandOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   segment?: Prisma.SortOrder
-  responsible?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  logoKey?: Prisma.SortOrderInput | Prisma.SortOrder
   slogan?: Prisma.SortOrderInput | Prisma.SortOrder
   phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   whatsapp?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -304,9 +295,8 @@ export type BrandWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BrandWhereInput | Prisma.BrandWhereInput[]
   name?: Prisma.StringFilter<"Brand"> | string
   segment?: Prisma.EnumBusinessSegmentFilter<"Brand"> | $Enums.BusinessSegment
-  responsible?: Prisma.StringNullableFilter<"Brand"> | string | null
   description?: Prisma.StringNullableFilter<"Brand"> | string | null
-  logoUrl?: Prisma.StringNullableFilter<"Brand"> | string | null
+  logoKey?: Prisma.StringNullableFilter<"Brand"> | string | null
   slogan?: Prisma.StringNullableFilter<"Brand"> | string | null
   phoneNumber?: Prisma.StringNullableFilter<"Brand"> | string | null
   whatsapp?: Prisma.StringNullableFilter<"Brand"> | string | null
@@ -326,9 +316,8 @@ export type BrandOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   segment?: Prisma.SortOrder
-  responsible?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  logoKey?: Prisma.SortOrderInput | Prisma.SortOrder
   slogan?: Prisma.SortOrderInput | Prisma.SortOrder
   phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   whatsapp?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -351,9 +340,8 @@ export type BrandScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Brand"> | string
   name?: Prisma.StringWithAggregatesFilter<"Brand"> | string
   segment?: Prisma.EnumBusinessSegmentWithAggregatesFilter<"Brand"> | $Enums.BusinessSegment
-  responsible?: Prisma.StringNullableWithAggregatesFilter<"Brand"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Brand"> | string | null
-  logoUrl?: Prisma.StringNullableWithAggregatesFilter<"Brand"> | string | null
+  logoKey?: Prisma.StringNullableWithAggregatesFilter<"Brand"> | string | null
   slogan?: Prisma.StringNullableWithAggregatesFilter<"Brand"> | string | null
   phoneNumber?: Prisma.StringNullableWithAggregatesFilter<"Brand"> | string | null
   whatsapp?: Prisma.StringNullableWithAggregatesFilter<"Brand"> | string | null
@@ -370,9 +358,8 @@ export type BrandCreateInput = {
   id?: string
   name: string
   segment: $Enums.BusinessSegment
-  responsible?: string | null
   description?: string | null
-  logoUrl?: string | null
+  logoKey?: string | null
   slogan?: string | null
   phoneNumber?: string | null
   whatsapp?: string | null
@@ -391,9 +378,8 @@ export type BrandUncheckedCreateInput = {
   id?: string
   name: string
   segment: $Enums.BusinessSegment
-  responsible?: string | null
   description?: string | null
-  logoUrl?: string | null
+  logoKey?: string | null
   slogan?: string | null
   phoneNumber?: string | null
   whatsapp?: string | null
@@ -412,9 +398,8 @@ export type BrandUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   segment?: Prisma.EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
-  responsible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -433,9 +418,8 @@ export type BrandUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   segment?: Prisma.EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
-  responsible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -454,9 +438,8 @@ export type BrandCreateManyInput = {
   id?: string
   name: string
   segment: $Enums.BusinessSegment
-  responsible?: string | null
   description?: string | null
-  logoUrl?: string | null
+  logoKey?: string | null
   slogan?: string | null
   phoneNumber?: string | null
   whatsapp?: string | null
@@ -473,9 +456,8 @@ export type BrandUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   segment?: Prisma.EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
-  responsible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -491,9 +473,8 @@ export type BrandUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   segment?: Prisma.EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
-  responsible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -510,9 +491,8 @@ export type BrandCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   segment?: Prisma.SortOrder
-  responsible?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  logoUrl?: Prisma.SortOrder
+  logoKey?: Prisma.SortOrder
   slogan?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   whatsapp?: Prisma.SortOrder
@@ -529,9 +509,8 @@ export type BrandMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   segment?: Prisma.SortOrder
-  responsible?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  logoUrl?: Prisma.SortOrder
+  logoKey?: Prisma.SortOrder
   slogan?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   whatsapp?: Prisma.SortOrder
@@ -548,9 +527,8 @@ export type BrandMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   segment?: Prisma.SortOrder
-  responsible?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  logoUrl?: Prisma.SortOrder
+  logoKey?: Prisma.SortOrder
   slogan?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   whatsapp?: Prisma.SortOrder
@@ -675,9 +653,8 @@ export type BrandCreateWithoutAddressesInput = {
   id?: string
   name: string
   segment: $Enums.BusinessSegment
-  responsible?: string | null
   description?: string | null
-  logoUrl?: string | null
+  logoKey?: string | null
   slogan?: string | null
   phoneNumber?: string | null
   whatsapp?: string | null
@@ -695,9 +672,8 @@ export type BrandUncheckedCreateWithoutAddressesInput = {
   id?: string
   name: string
   segment: $Enums.BusinessSegment
-  responsible?: string | null
   description?: string | null
-  logoUrl?: string | null
+  logoKey?: string | null
   slogan?: string | null
   phoneNumber?: string | null
   whatsapp?: string | null
@@ -731,9 +707,8 @@ export type BrandUpdateWithoutAddressesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   segment?: Prisma.EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
-  responsible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -751,9 +726,8 @@ export type BrandUncheckedUpdateWithoutAddressesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   segment?: Prisma.EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
-  responsible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -771,9 +745,8 @@ export type BrandCreateWithoutSpotsInput = {
   id?: string
   name: string
   segment: $Enums.BusinessSegment
-  responsible?: string | null
   description?: string | null
-  logoUrl?: string | null
+  logoKey?: string | null
   slogan?: string | null
   phoneNumber?: string | null
   whatsapp?: string | null
@@ -791,9 +764,8 @@ export type BrandUncheckedCreateWithoutSpotsInput = {
   id?: string
   name: string
   segment: $Enums.BusinessSegment
-  responsible?: string | null
   description?: string | null
-  logoUrl?: string | null
+  logoKey?: string | null
   slogan?: string | null
   phoneNumber?: string | null
   whatsapp?: string | null
@@ -827,9 +799,8 @@ export type BrandUpdateWithoutSpotsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   segment?: Prisma.EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
-  responsible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -847,9 +818,8 @@ export type BrandUncheckedUpdateWithoutSpotsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   segment?: Prisma.EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
-  responsible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -867,9 +837,8 @@ export type BrandCreateWithoutWorkspaceInput = {
   id?: string
   name: string
   segment: $Enums.BusinessSegment
-  responsible?: string | null
   description?: string | null
-  logoUrl?: string | null
+  logoKey?: string | null
   slogan?: string | null
   phoneNumber?: string | null
   whatsapp?: string | null
@@ -887,9 +856,8 @@ export type BrandUncheckedCreateWithoutWorkspaceInput = {
   id?: string
   name: string
   segment: $Enums.BusinessSegment
-  responsible?: string | null
   description?: string | null
-  logoUrl?: string | null
+  logoKey?: string | null
   slogan?: string | null
   phoneNumber?: string | null
   whatsapp?: string | null
@@ -936,9 +904,8 @@ export type BrandScalarWhereInput = {
   id?: Prisma.StringFilter<"Brand"> | string
   name?: Prisma.StringFilter<"Brand"> | string
   segment?: Prisma.EnumBusinessSegmentFilter<"Brand"> | $Enums.BusinessSegment
-  responsible?: Prisma.StringNullableFilter<"Brand"> | string | null
   description?: Prisma.StringNullableFilter<"Brand"> | string | null
-  logoUrl?: Prisma.StringNullableFilter<"Brand"> | string | null
+  logoKey?: Prisma.StringNullableFilter<"Brand"> | string | null
   slogan?: Prisma.StringNullableFilter<"Brand"> | string | null
   phoneNumber?: Prisma.StringNullableFilter<"Brand"> | string | null
   whatsapp?: Prisma.StringNullableFilter<"Brand"> | string | null
@@ -955,9 +922,8 @@ export type BrandCreateManyWorkspaceInput = {
   id?: string
   name: string
   segment: $Enums.BusinessSegment
-  responsible?: string | null
   description?: string | null
-  logoUrl?: string | null
+  logoKey?: string | null
   slogan?: string | null
   phoneNumber?: string | null
   whatsapp?: string | null
@@ -973,9 +939,8 @@ export type BrandUpdateWithoutWorkspaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   segment?: Prisma.EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
-  responsible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -993,9 +958,8 @@ export type BrandUncheckedUpdateWithoutWorkspaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   segment?: Prisma.EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
-  responsible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1013,9 +977,8 @@ export type BrandUncheckedUpdateManyWithoutWorkspaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   segment?: Prisma.EnumBusinessSegmentFieldUpdateOperationsInput | $Enums.BusinessSegment
-  responsible?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slogan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1071,9 +1034,8 @@ export type BrandSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   name?: boolean
   segment?: boolean
-  responsible?: boolean
   description?: boolean
-  logoUrl?: boolean
+  logoKey?: boolean
   slogan?: boolean
   phoneNumber?: boolean
   whatsapp?: boolean
@@ -1094,9 +1056,8 @@ export type BrandSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   name?: boolean
   segment?: boolean
-  responsible?: boolean
   description?: boolean
-  logoUrl?: boolean
+  logoKey?: boolean
   slogan?: boolean
   phoneNumber?: boolean
   whatsapp?: boolean
@@ -1114,9 +1075,8 @@ export type BrandSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   name?: boolean
   segment?: boolean
-  responsible?: boolean
   description?: boolean
-  logoUrl?: boolean
+  logoKey?: boolean
   slogan?: boolean
   phoneNumber?: boolean
   whatsapp?: boolean
@@ -1134,9 +1094,8 @@ export type BrandSelectScalar = {
   id?: boolean
   name?: boolean
   segment?: boolean
-  responsible?: boolean
   description?: boolean
-  logoUrl?: boolean
+  logoKey?: boolean
   slogan?: boolean
   phoneNumber?: boolean
   whatsapp?: boolean
@@ -1149,7 +1108,7 @@ export type BrandSelectScalar = {
   workspaceId?: boolean
 }
 
-export type BrandOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "segment" | "responsible" | "description" | "logoUrl" | "slogan" | "phoneNumber" | "whatsapp" | "instagram" | "tiktok" | "facebook" | "website" | "createdAt" | "updatedAt" | "workspaceId", ExtArgs["result"]["brand"]>
+export type BrandOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "segment" | "description" | "logoKey" | "slogan" | "phoneNumber" | "whatsapp" | "instagram" | "tiktok" | "facebook" | "website" | "createdAt" | "updatedAt" | "workspaceId", ExtArgs["result"]["brand"]>
 export type BrandInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
   spots?: boolean | Prisma.Brand$spotsArgs<ExtArgs>
@@ -1174,9 +1133,8 @@ export type $BrandPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: string
     name: string
     segment: $Enums.BusinessSegment
-    responsible: string | null
     description: string | null
-    logoUrl: string | null
+    logoKey: string | null
     slogan: string | null
     phoneNumber: string | null
     whatsapp: string | null
@@ -1616,9 +1574,8 @@ export interface BrandFieldRefs {
   readonly id: Prisma.FieldRef<"Brand", 'String'>
   readonly name: Prisma.FieldRef<"Brand", 'String'>
   readonly segment: Prisma.FieldRef<"Brand", 'BusinessSegment'>
-  readonly responsible: Prisma.FieldRef<"Brand", 'String'>
   readonly description: Prisma.FieldRef<"Brand", 'String'>
-  readonly logoUrl: Prisma.FieldRef<"Brand", 'String'>
+  readonly logoKey: Prisma.FieldRef<"Brand", 'String'>
   readonly slogan: Prisma.FieldRef<"Brand", 'String'>
   readonly phoneNumber: Prisma.FieldRef<"Brand", 'String'>
   readonly whatsapp: Prisma.FieldRef<"Brand", 'String'>

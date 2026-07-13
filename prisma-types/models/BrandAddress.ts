@@ -168,7 +168,7 @@ export type BrandAddressGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 export type BrandAddressGroupByOutputType = {
   id: string
   state: $Enums.BrazilianState | null
-  city: string
+  city: string | null
   neighborhood: string | null
   street: string | null
   number: string | null
@@ -200,7 +200,7 @@ export type BrandAddressWhereInput = {
   NOT?: Prisma.BrandAddressWhereInput | Prisma.BrandAddressWhereInput[]
   id?: Prisma.StringFilter<"BrandAddress"> | string
   state?: Prisma.EnumBrazilianStateNullableFilter<"BrandAddress"> | $Enums.BrazilianState | null
-  city?: Prisma.StringFilter<"BrandAddress"> | string
+  city?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   neighborhood?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   street?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   number?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
@@ -213,7 +213,7 @@ export type BrandAddressWhereInput = {
 export type BrandAddressOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   state?: Prisma.SortOrderInput | Prisma.SortOrder
-  city?: Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
   neighborhood?: Prisma.SortOrderInput | Prisma.SortOrder
   street?: Prisma.SortOrderInput | Prisma.SortOrder
   number?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -229,7 +229,7 @@ export type BrandAddressWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.BrandAddressWhereInput[]
   NOT?: Prisma.BrandAddressWhereInput | Prisma.BrandAddressWhereInput[]
   state?: Prisma.EnumBrazilianStateNullableFilter<"BrandAddress"> | $Enums.BrazilianState | null
-  city?: Prisma.StringFilter<"BrandAddress"> | string
+  city?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   neighborhood?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   street?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   number?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
@@ -242,7 +242,7 @@ export type BrandAddressWhereUniqueInput = Prisma.AtLeast<{
 export type BrandAddressOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   state?: Prisma.SortOrderInput | Prisma.SortOrder
-  city?: Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
   neighborhood?: Prisma.SortOrderInput | Prisma.SortOrder
   street?: Prisma.SortOrderInput | Prisma.SortOrder
   number?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -259,7 +259,7 @@ export type BrandAddressScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BrandAddressScalarWhereWithAggregatesInput | Prisma.BrandAddressScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"BrandAddress"> | string
   state?: Prisma.EnumBrazilianStateNullableWithAggregatesFilter<"BrandAddress"> | $Enums.BrazilianState | null
-  city?: Prisma.StringWithAggregatesFilter<"BrandAddress"> | string
+  city?: Prisma.StringNullableWithAggregatesFilter<"BrandAddress"> | string | null
   neighborhood?: Prisma.StringNullableWithAggregatesFilter<"BrandAddress"> | string | null
   street?: Prisma.StringNullableWithAggregatesFilter<"BrandAddress"> | string | null
   number?: Prisma.StringNullableWithAggregatesFilter<"BrandAddress"> | string | null
@@ -270,7 +270,7 @@ export type BrandAddressScalarWhereWithAggregatesInput = {
 export type BrandAddressCreateInput = {
   id?: string
   state?: $Enums.BrazilianState | null
-  city: string
+  city?: string | null
   neighborhood?: string | null
   street?: string | null
   number?: string | null
@@ -282,7 +282,7 @@ export type BrandAddressCreateInput = {
 export type BrandAddressUncheckedCreateInput = {
   id?: string
   state?: $Enums.BrazilianState | null
-  city: string
+  city?: string | null
   neighborhood?: string | null
   street?: string | null
   number?: string | null
@@ -294,7 +294,7 @@ export type BrandAddressUncheckedCreateInput = {
 export type BrandAddressUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.NullableEnumBrazilianStateFieldUpdateOperationsInput | $Enums.BrazilianState | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   neighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -306,7 +306,7 @@ export type BrandAddressUpdateInput = {
 export type BrandAddressUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.NullableEnumBrazilianStateFieldUpdateOperationsInput | $Enums.BrazilianState | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   neighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -318,7 +318,7 @@ export type BrandAddressUncheckedUpdateInput = {
 export type BrandAddressCreateManyInput = {
   id?: string
   state?: $Enums.BrazilianState | null
-  city: string
+  city?: string | null
   neighborhood?: string | null
   street?: string | null
   number?: string | null
@@ -329,7 +329,7 @@ export type BrandAddressCreateManyInput = {
 export type BrandAddressUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.NullableEnumBrazilianStateFieldUpdateOperationsInput | $Enums.BrazilianState | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   neighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -339,7 +339,7 @@ export type BrandAddressUpdateManyMutationInput = {
 export type BrandAddressUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.NullableEnumBrazilianStateFieldUpdateOperationsInput | $Enums.BrazilianState | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   neighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -458,7 +458,7 @@ export type BrandAddressUpdateOneRequiredWithoutResponsiblesNestedInput = {
 export type BrandAddressCreateWithoutBrandInput = {
   id?: string
   state?: $Enums.BrazilianState | null
-  city: string
+  city?: string | null
   neighborhood?: string | null
   street?: string | null
   number?: string | null
@@ -469,7 +469,7 @@ export type BrandAddressCreateWithoutBrandInput = {
 export type BrandAddressUncheckedCreateWithoutBrandInput = {
   id?: string
   state?: $Enums.BrazilianState | null
-  city: string
+  city?: string | null
   neighborhood?: string | null
   street?: string | null
   number?: string | null
@@ -509,7 +509,7 @@ export type BrandAddressScalarWhereInput = {
   NOT?: Prisma.BrandAddressScalarWhereInput | Prisma.BrandAddressScalarWhereInput[]
   id?: Prisma.StringFilter<"BrandAddress"> | string
   state?: Prisma.EnumBrazilianStateNullableFilter<"BrandAddress"> | $Enums.BrazilianState | null
-  city?: Prisma.StringFilter<"BrandAddress"> | string
+  city?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   neighborhood?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   street?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   number?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
@@ -520,7 +520,7 @@ export type BrandAddressScalarWhereInput = {
 export type BrandAddressCreateWithoutResponsiblesInput = {
   id?: string
   state?: $Enums.BrazilianState | null
-  city: string
+  city?: string | null
   neighborhood?: string | null
   street?: string | null
   number?: string | null
@@ -531,7 +531,7 @@ export type BrandAddressCreateWithoutResponsiblesInput = {
 export type BrandAddressUncheckedCreateWithoutResponsiblesInput = {
   id?: string
   state?: $Enums.BrazilianState | null
-  city: string
+  city?: string | null
   neighborhood?: string | null
   street?: string | null
   number?: string | null
@@ -558,7 +558,7 @@ export type BrandAddressUpdateToOneWithWhereWithoutResponsiblesInput = {
 export type BrandAddressUpdateWithoutResponsiblesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.NullableEnumBrazilianStateFieldUpdateOperationsInput | $Enums.BrazilianState | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   neighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -569,7 +569,7 @@ export type BrandAddressUpdateWithoutResponsiblesInput = {
 export type BrandAddressUncheckedUpdateWithoutResponsiblesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.NullableEnumBrazilianStateFieldUpdateOperationsInput | $Enums.BrazilianState | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   neighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -580,7 +580,7 @@ export type BrandAddressUncheckedUpdateWithoutResponsiblesInput = {
 export type BrandAddressCreateManyBrandInput = {
   id?: string
   state?: $Enums.BrazilianState | null
-  city: string
+  city?: string | null
   neighborhood?: string | null
   street?: string | null
   number?: string | null
@@ -590,7 +590,7 @@ export type BrandAddressCreateManyBrandInput = {
 export type BrandAddressUpdateWithoutBrandInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.NullableEnumBrazilianStateFieldUpdateOperationsInput | $Enums.BrazilianState | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   neighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -601,7 +601,7 @@ export type BrandAddressUpdateWithoutBrandInput = {
 export type BrandAddressUncheckedUpdateWithoutBrandInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.NullableEnumBrazilianStateFieldUpdateOperationsInput | $Enums.BrazilianState | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   neighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -612,7 +612,7 @@ export type BrandAddressUncheckedUpdateWithoutBrandInput = {
 export type BrandAddressUncheckedUpdateManyWithoutBrandInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.NullableEnumBrazilianStateFieldUpdateOperationsInput | $Enums.BrazilianState | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   neighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -721,7 +721,7 @@ export type $BrandAddressPayload<ExtArgs extends runtime.Types.Extensions.Intern
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     state: $Enums.BrazilianState | null
-    city: string
+    city: string | null
     neighborhood: string | null
     street: string | null
     number: string | null

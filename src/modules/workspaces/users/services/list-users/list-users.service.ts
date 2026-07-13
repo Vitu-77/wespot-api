@@ -5,7 +5,7 @@ import {
   ListWorkspaceUsersParamsDto,
   ListWorkspaceUsersResponseDto,
 } from "src/modules/workspaces/users/services/list-users/list-users.dto";
-import { PaginatedResponseDTO } from "src/shared/dto/paginated-response.dto";
+import { PaginatedResponseDto } from "src/shared/dto/paginated-response.dto";
 
 type Params = ListWorkspaceUsersParamsDto & {
   workspaceId: string;
@@ -26,7 +26,7 @@ export class ListWorkspaceUsersService {
       ...filters,
     });
 
-    return new PaginatedResponseDTO({
+    return new PaginatedResponseDto({
       pageNumber,
       pageSize,
       totalItems: count,

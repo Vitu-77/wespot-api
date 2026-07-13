@@ -28,4 +28,13 @@ export class CreateAccountWithEmailDto {
   passwordConfirmation!: string;
 }
 
-export class CreateAccountWithEmailResponseDto extends SessionEntityDto {}
+export class CreateAccountWithEmailResponseDto {
+  @ApiProperty()
+  accessToken!: string;
+
+  @ApiProperty()
+  refreshToken!: string;
+
+  @ApiProperty({ type: () => SessionEntityDto })
+  session!: SessionEntityDto;
+}

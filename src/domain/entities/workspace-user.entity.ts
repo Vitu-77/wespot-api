@@ -18,9 +18,6 @@ export class WorkspaceUserEntityDto
   email!: string;
 
   @ApiProperty()
-  password!: string | null;
-
-  @ApiProperty()
   avatarUrl!: string | null;
 
   @ApiProperty()

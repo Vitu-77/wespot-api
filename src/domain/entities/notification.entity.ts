@@ -21,7 +21,7 @@ export class NotificationEntityDto
   @ApiProperty()
   content!: string;
 
-  @ApiProperty()
+  @ApiProperty({ type: "string", format: "date-time" })
   readAt!: string | Date | null;
 
   @ApiProperty()
