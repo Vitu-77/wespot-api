@@ -28,6 +28,8 @@ export type BrandResponsibleMinAggregateOutputType = {
   id: string | null
   role: string | null
   name: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
   brandAddressId: string | null
 }
 
@@ -35,6 +37,8 @@ export type BrandResponsibleMaxAggregateOutputType = {
   id: string | null
   role: string | null
   name: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
   brandAddressId: string | null
 }
 
@@ -42,6 +46,8 @@ export type BrandResponsibleCountAggregateOutputType = {
   id: number
   role: number
   name: number
+  createdAt: number
+  updatedAt: number
   brandAddressId: number
   _all: number
 }
@@ -51,6 +57,8 @@ export type BrandResponsibleMinAggregateInputType = {
   id?: true
   role?: true
   name?: true
+  createdAt?: true
+  updatedAt?: true
   brandAddressId?: true
 }
 
@@ -58,6 +66,8 @@ export type BrandResponsibleMaxAggregateInputType = {
   id?: true
   role?: true
   name?: true
+  createdAt?: true
+  updatedAt?: true
   brandAddressId?: true
 }
 
@@ -65,6 +75,8 @@ export type BrandResponsibleCountAggregateInputType = {
   id?: true
   role?: true
   name?: true
+  createdAt?: true
+  updatedAt?: true
   brandAddressId?: true
   _all?: true
 }
@@ -145,6 +157,8 @@ export type BrandResponsibleGroupByOutputType = {
   id: string
   role: string | null
   name: string
+  createdAt: Date
+  updatedAt: Date
   brandAddressId: string
   _count: BrandResponsibleCountAggregateOutputType | null
   _min: BrandResponsibleMinAggregateOutputType | null
@@ -173,6 +187,8 @@ export type BrandResponsibleWhereInput = {
   id?: Prisma.StringFilter<"BrandResponsible"> | string
   role?: Prisma.StringNullableFilter<"BrandResponsible"> | string | null
   name?: Prisma.StringFilter<"BrandResponsible"> | string
+  createdAt?: Prisma.DateTimeFilter<"BrandResponsible"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"BrandResponsible"> | Date | string
   brandAddressId?: Prisma.StringFilter<"BrandResponsible"> | string
   brandAddress?: Prisma.XOR<Prisma.BrandAddressScalarRelationFilter, Prisma.BrandAddressWhereInput>
 }
@@ -181,6 +197,8 @@ export type BrandResponsibleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   role?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   brandAddressId?: Prisma.SortOrder
   brandAddress?: Prisma.BrandAddressOrderByWithRelationInput
 }
@@ -192,6 +210,8 @@ export type BrandResponsibleWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BrandResponsibleWhereInput | Prisma.BrandResponsibleWhereInput[]
   role?: Prisma.StringNullableFilter<"BrandResponsible"> | string | null
   name?: Prisma.StringFilter<"BrandResponsible"> | string
+  createdAt?: Prisma.DateTimeFilter<"BrandResponsible"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"BrandResponsible"> | Date | string
   brandAddressId?: Prisma.StringFilter<"BrandResponsible"> | string
   brandAddress?: Prisma.XOR<Prisma.BrandAddressScalarRelationFilter, Prisma.BrandAddressWhereInput>
 }, "id">
@@ -200,6 +220,8 @@ export type BrandResponsibleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   role?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   brandAddressId?: Prisma.SortOrder
   _count?: Prisma.BrandResponsibleCountOrderByAggregateInput
   _max?: Prisma.BrandResponsibleMaxOrderByAggregateInput
@@ -213,6 +235,8 @@ export type BrandResponsibleScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"BrandResponsible"> | string
   role?: Prisma.StringNullableWithAggregatesFilter<"BrandResponsible"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"BrandResponsible"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"BrandResponsible"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"BrandResponsible"> | Date | string
   brandAddressId?: Prisma.StringWithAggregatesFilter<"BrandResponsible"> | string
 }
 
@@ -220,6 +244,8 @@ export type BrandResponsibleCreateInput = {
   id?: string
   role?: string | null
   name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   brandAddress: Prisma.BrandAddressCreateNestedOneWithoutResponsiblesInput
 }
 
@@ -227,6 +253,8 @@ export type BrandResponsibleUncheckedCreateInput = {
   id?: string
   role?: string | null
   name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   brandAddressId: string
 }
 
@@ -234,6 +262,8 @@ export type BrandResponsibleUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brandAddress?: Prisma.BrandAddressUpdateOneRequiredWithoutResponsiblesNestedInput
 }
 
@@ -241,6 +271,8 @@ export type BrandResponsibleUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brandAddressId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -248,6 +280,8 @@ export type BrandResponsibleCreateManyInput = {
   id?: string
   role?: string | null
   name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   brandAddressId: string
 }
 
@@ -255,12 +289,16 @@ export type BrandResponsibleUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BrandResponsibleUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brandAddressId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -278,6 +316,8 @@ export type BrandResponsibleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   role?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   brandAddressId?: Prisma.SortOrder
 }
 
@@ -285,6 +325,8 @@ export type BrandResponsibleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   role?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   brandAddressId?: Prisma.SortOrder
 }
 
@@ -292,6 +334,8 @@ export type BrandResponsibleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   role?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   brandAddressId?: Prisma.SortOrder
 }
 
@@ -341,12 +385,16 @@ export type BrandResponsibleCreateWithoutBrandAddressInput = {
   id?: string
   role?: string | null
   name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type BrandResponsibleUncheckedCreateWithoutBrandAddressInput = {
   id?: string
   role?: string | null
   name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type BrandResponsibleCreateOrConnectWithoutBrandAddressInput = {
@@ -382,6 +430,8 @@ export type BrandResponsibleScalarWhereInput = {
   id?: Prisma.StringFilter<"BrandResponsible"> | string
   role?: Prisma.StringNullableFilter<"BrandResponsible"> | string | null
   name?: Prisma.StringFilter<"BrandResponsible"> | string
+  createdAt?: Prisma.DateTimeFilter<"BrandResponsible"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"BrandResponsible"> | Date | string
   brandAddressId?: Prisma.StringFilter<"BrandResponsible"> | string
 }
 
@@ -389,24 +439,32 @@ export type BrandResponsibleCreateManyBrandAddressInput = {
   id?: string
   role?: string | null
   name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type BrandResponsibleUpdateWithoutBrandAddressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BrandResponsibleUncheckedUpdateWithoutBrandAddressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BrandResponsibleUncheckedUpdateManyWithoutBrandAddressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -415,6 +473,8 @@ export type BrandResponsibleSelect<ExtArgs extends runtime.Types.Extensions.Inte
   id?: boolean
   role?: boolean
   name?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   brandAddressId?: boolean
   brandAddress?: boolean | Prisma.BrandAddressDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["brandResponsible"]>
@@ -423,6 +483,8 @@ export type BrandResponsibleSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   role?: boolean
   name?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   brandAddressId?: boolean
   brandAddress?: boolean | Prisma.BrandAddressDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["brandResponsible"]>
@@ -431,6 +493,8 @@ export type BrandResponsibleSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   role?: boolean
   name?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   brandAddressId?: boolean
   brandAddress?: boolean | Prisma.BrandAddressDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["brandResponsible"]>
@@ -439,10 +503,12 @@ export type BrandResponsibleSelectScalar = {
   id?: boolean
   role?: boolean
   name?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   brandAddressId?: boolean
 }
 
-export type BrandResponsibleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "role" | "name" | "brandAddressId", ExtArgs["result"]["brandResponsible"]>
+export type BrandResponsibleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "role" | "name" | "createdAt" | "updatedAt" | "brandAddressId", ExtArgs["result"]["brandResponsible"]>
 export type BrandResponsibleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   brandAddress?: boolean | Prisma.BrandAddressDefaultArgs<ExtArgs>
 }
@@ -462,6 +528,8 @@ export type $BrandResponsiblePayload<ExtArgs extends runtime.Types.Extensions.In
     id: string
     role: string | null
     name: string
+    createdAt: Date
+    updatedAt: Date
     brandAddressId: string
   }, ExtArgs["result"]["brandResponsible"]>
   composites: {}
@@ -890,6 +958,8 @@ export interface BrandResponsibleFieldRefs {
   readonly id: Prisma.FieldRef<"BrandResponsible", 'String'>
   readonly role: Prisma.FieldRef<"BrandResponsible", 'String'>
   readonly name: Prisma.FieldRef<"BrandResponsible", 'String'>
+  readonly createdAt: Prisma.FieldRef<"BrandResponsible", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"BrandResponsible", 'DateTime'>
   readonly brandAddressId: Prisma.FieldRef<"BrandResponsible", 'String'>
 }
     

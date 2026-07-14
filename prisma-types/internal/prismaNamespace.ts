@@ -1296,6 +1296,8 @@ export const BrandAddressScalarFieldEnum = {
   street: 'street',
   number: 'number',
   complement: 'complement',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   brandId: 'brandId'
 } as const
 
@@ -1306,6 +1308,8 @@ export const BrandResponsibleScalarFieldEnum = {
   id: 'id',
   role: 'role',
   name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   brandAddressId: 'brandAddressId'
 } as const
 

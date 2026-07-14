@@ -6,6 +6,7 @@ import {
 } from "src/domain/entities/brand.entity";
 import { PrismaService } from "src/infra/database/prisma.service";
 import {
+  BrandRepositoryCreateAddressParams,
   BrandRepositoryCreateParams,
   BrandRepositoryListParams,
 } from "src/infra/database/repositories/brand-repository/brand.repository.types";
@@ -24,6 +25,7 @@ export class BrandRepository {
       ...paginate({ pageNumber, pageSize }),
 
       where: {
+        id: filters.id,
         name: contains(filters.name, "insensitive"),
         segment: filters.segment,
         workspaceId: filters.workspaceId,
@@ -58,7 +60,7 @@ export class BrandRepository {
     };
   }
 
-  async create({
+  async createBrand({
     workspaceId,
     ...data
   }: BrandRepositoryCreateParams): Promise<BrandEntity> {
@@ -77,17 +79,10 @@ export class BrandRepository {
     })) as BrandEntity;
 
     const addressData = data.addresses[0];
-    const address = (await this.prismaService.brandAddress.create({
-      data: {
-        ...addressData,
-        brandId: brand.id,
-        responsibles: {
-          createMany: {
-            data: addressData.responsibles,
-          },
-        },
-      },
-    })) as BrandAddressEntity;
+    const address = await this.createAddress({
+      ...addressData,
+      brandId: brand.id,
+    });
 
     address.responsibles = await this.prismaService.brandResponsible.findMany({
       where: {
@@ -114,6 +109,24 @@ export class BrandRepository {
     });
 
     return brand;
+  }
+
+  async createAddress({
+    responsibles,
+    ...data
+  }: BrandRepositoryCreateAddressParams): Promise<BrandAddressEntity> {
+    const address = await this.prismaService.brandAddress.create({
+      data: {
+        ...data,
+        responsibles: {
+          createMany: {
+            data: responsibles,
+          },
+        },
+      },
+    });
+
+    return address;
   }
 
   async updateAddress(

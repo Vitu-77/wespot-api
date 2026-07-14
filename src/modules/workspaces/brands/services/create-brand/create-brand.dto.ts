@@ -6,53 +6,8 @@ import {
   IsString,
   ValidateNested,
 } from "class-validator";
-import { BrazilianState, BusinessSegment } from "prisma-types/enums";
-
-export class UpsertBrandAddressResponsibleDto {
-  @IsOptional()
-  name!: string;
-
-  @IsOptional()
-  @IsString()
-  @Transform(({ value }) => value ?? null)
-  role!: string | null;
-}
-
-export class UpsertBrandAddressDto {
-  @IsOptional()
-  @IsEnum(BrazilianState)
-  state!: BrazilianState | null;
-
-  @IsOptional()
-  @IsString()
-  @Transform(({ value }) => value ?? null)
-  city!: string | null;
-
-  @IsOptional()
-  @IsString()
-  @Transform(({ value }) => value ?? null)
-  neighborhood!: string | null;
-
-  @IsOptional()
-  @IsString()
-  @Transform(({ value }) => value ?? null)
-  street!: string | null;
-
-  @IsOptional()
-  @IsString()
-  @Transform(({ value }) => value ?? null)
-  number!: string | null;
-
-  @IsOptional()
-  @IsString()
-  @Transform(({ value }) => value ?? null)
-  complement!: string | null;
-
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => UpsertBrandAddressResponsibleDto)
-  responsibles!: UpsertBrandAddressResponsibleDto[];
-}
+import { BusinessSegment } from "prisma-types/enums";
+import { CreateBrandAddressDto } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.dto";
 
 export class CreateBrandDto {
   @IsString()
@@ -103,6 +58,6 @@ export class CreateBrandDto {
 
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => UpsertBrandAddressDto)
-  addresses!: UpsertBrandAddressDto[];
+  @Type(() => CreateBrandAddressDto)
+  addresses!: CreateBrandAddressDto[];
 }

@@ -34,6 +34,9 @@ model BrandAddress {
   number       String?
   complement   String?
 
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
   brandId String @map("brand_id")
   brand   Brand  @relation(fields: [brandId], references: [id])
 
@@ -47,6 +50,9 @@ model BrandResponsible {
   id   String  @id @default(uuid())
   role String?
   name String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   brandAddressId String       @map("brand_address_id")
   brandAddress   BrandAddress @relation(fields: [brandAddressId], references: [id])

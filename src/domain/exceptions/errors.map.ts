@@ -169,4 +169,11 @@ export const ErrorsMap: Record<ErrorCodes, ErrorDiscrimination> = {
     error: ErrorCodes.WORKSPACE_NAME_NOT_PROVIDED,
     statusCode: 400,
   },
+
+  // Brands
+  BRAND_NOT_FOUND: {
+    message: "Brand not found.",
+    error: ErrorCodes.BRAND_NOT_FOUND,
+    statusCode: 404,
+  },
 };

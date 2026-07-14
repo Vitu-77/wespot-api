@@ -1,76 +1,30 @@
 import {
-  BadRequestException,
   Body,
-  CallHandler,
   Controller,
-  ExecutionContext,
   FileTypeValidator,
   Get,
-  Injectable,
   MaxFileSizeValidator,
-  mixin,
-  NestInterceptor,
+  Param,
   ParseFilePipe,
   Post,
   Query,
-  Type,
   UploadedFile,
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { Observable } from "rxjs";
+import { ApiTags } from "@nestjs/swagger";
+import { ApiCreateBrandAddressDocs } from "src/modules/workspaces/brands/brands.docs";
 import { CreateBrandDto } from "src/modules/workspaces/brands/services/create-brand/create-brand.dto";
 import { CreateBrandsService } from "src/modules/workspaces/brands/services/create-brand/create-brand.service";
+import { CreateBrandAddressDto } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.dto";
+import { CreateBrandAddressService } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.service";
 import { ListWorkspaceBrandsParamsDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
 import { ListWorkspaceBrandsService } from "src/modules/workspaces/brands/services/list-brands/list-brands.service";
 import { CurrentWorkspaceId } from "src/shared/decorators/current-workspace-id.decorator";
 import { ProtectedRoute } from "src/shared/decorators/protected-route.decorator";
+import { JsonParserInterceptor } from "src/shared/interceptors/json-parser.interceptor";
 
-export function MultipartJsonInterceptor(
-  field = "payload",
-): Type<NestInterceptor> {
-  @Injectable()
-  class MultipartJsonInterceptorMixin implements NestInterceptor {
-    intercept(
-      context: ExecutionContext,
-      next: CallHandler,
-    ): Observable<unknown> {
-      const request = context.switchToHttp().getRequest();
-
-      const value = request.body?.[field];
-
-      if (value == null) {
-        return next.handle();
-      }
-
-      if (typeof value === "object") {
-        request.body = value;
-
-        return next.handle();
-      }
-
-      if (typeof value !== "string") {
-        throw new BadRequestException(
-          `Multipart field "${field}" must be a JSON string.`,
-        );
-      }
-
-      try {
-        request.body = JSON.parse(value);
-      } catch {
-        throw new BadRequestException(
-          `Multipart field "${field}" contains invalid JSON.`,
-        );
-      }
-
-      return next.handle();
-    }
-  }
-
-  return mixin(MultipartJsonInterceptorMixin);
-}
-
-const _logoFileValidation = new ParseFilePipe({
+const logoFileValidation = new ParseFilePipe({
   validators: [
     new MaxFileSizeValidator({
       maxSize: 10 * 1024 * 1024, // 10MB
@@ -81,11 +35,13 @@ const _logoFileValidation = new ParseFilePipe({
   ],
 });
 
+@ApiTags("Workspace / Brands")
 @Controller("workspace/brands")
 export class BrandsController {
   constructor(
     private readonly listWorkspaceBrands: ListWorkspaceBrandsService,
     private readonly createBrandsService: CreateBrandsService,
+    private readonly createBrandAddressService: CreateBrandAddressService,
   ) {}
 
   @ProtectedRoute({ roles: ["ADMIN", "OWNER"] })
@@ -104,11 +60,11 @@ export class BrandsController {
   @Post("/")
   @UseInterceptors(
     FileInterceptor("logo_image"),
-    MultipartJsonInterceptor("payload"),
+    JsonParserInterceptor("payload"),
   )
-  upload(
+  createBrand(
     @CurrentWorkspaceId() workspaceId: string,
-    @UploadedFile() logoFile: MulterFile,
+    @UploadedFile(logoFileValidation) logoFile: MulterFile,
     @Body() body: CreateBrandDto,
   ) {
     return this.createBrandsService.execute({
@@ -116,5 +72,15 @@ export class BrandsController {
       workspaceId,
       logoFile,
     });
+  }
+
+  @ProtectedRoute()
+  @Post("/:brandId/address")
+  @ApiCreateBrandAddressDocs()
+  createBrandAddress(
+    @Param("brandId") brandId: string,
+    @Body() body: CreateBrandAddressDto,
+  ) {
+    return this.createBrandAddressService.execute({ ...body, brandId });
   }
 }

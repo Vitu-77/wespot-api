@@ -32,6 +32,8 @@ export type BrandAddressMinAggregateOutputType = {
   street: string | null
   number: string | null
   complement: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
   brandId: string | null
 }
 
@@ -43,6 +45,8 @@ export type BrandAddressMaxAggregateOutputType = {
   street: string | null
   number: string | null
   complement: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
   brandId: string | null
 }
 
@@ -54,6 +58,8 @@ export type BrandAddressCountAggregateOutputType = {
   street: number
   number: number
   complement: number
+  createdAt: number
+  updatedAt: number
   brandId: number
   _all: number
 }
@@ -67,6 +73,8 @@ export type BrandAddressMinAggregateInputType = {
   street?: true
   number?: true
   complement?: true
+  createdAt?: true
+  updatedAt?: true
   brandId?: true
 }
 
@@ -78,6 +86,8 @@ export type BrandAddressMaxAggregateInputType = {
   street?: true
   number?: true
   complement?: true
+  createdAt?: true
+  updatedAt?: true
   brandId?: true
 }
 
@@ -89,6 +99,8 @@ export type BrandAddressCountAggregateInputType = {
   street?: true
   number?: true
   complement?: true
+  createdAt?: true
+  updatedAt?: true
   brandId?: true
   _all?: true
 }
@@ -173,6 +185,8 @@ export type BrandAddressGroupByOutputType = {
   street: string | null
   number: string | null
   complement: string | null
+  createdAt: Date
+  updatedAt: Date
   brandId: string
   _count: BrandAddressCountAggregateOutputType | null
   _min: BrandAddressMinAggregateOutputType | null
@@ -205,6 +219,8 @@ export type BrandAddressWhereInput = {
   street?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   number?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   complement?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"BrandAddress"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"BrandAddress"> | Date | string
   brandId?: Prisma.StringFilter<"BrandAddress"> | string
   brand?: Prisma.XOR<Prisma.BrandScalarRelationFilter, Prisma.BrandWhereInput>
   responsibles?: Prisma.BrandResponsibleListRelationFilter
@@ -218,6 +234,8 @@ export type BrandAddressOrderByWithRelationInput = {
   street?: Prisma.SortOrderInput | Prisma.SortOrder
   number?: Prisma.SortOrderInput | Prisma.SortOrder
   complement?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
   brand?: Prisma.BrandOrderByWithRelationInput
   responsibles?: Prisma.BrandResponsibleOrderByRelationAggregateInput
@@ -234,6 +252,8 @@ export type BrandAddressWhereUniqueInput = Prisma.AtLeast<{
   street?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   number?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   complement?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"BrandAddress"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"BrandAddress"> | Date | string
   brandId?: Prisma.StringFilter<"BrandAddress"> | string
   brand?: Prisma.XOR<Prisma.BrandScalarRelationFilter, Prisma.BrandWhereInput>
   responsibles?: Prisma.BrandResponsibleListRelationFilter
@@ -247,6 +267,8 @@ export type BrandAddressOrderByWithAggregationInput = {
   street?: Prisma.SortOrderInput | Prisma.SortOrder
   number?: Prisma.SortOrderInput | Prisma.SortOrder
   complement?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
   _count?: Prisma.BrandAddressCountOrderByAggregateInput
   _max?: Prisma.BrandAddressMaxOrderByAggregateInput
@@ -264,6 +286,8 @@ export type BrandAddressScalarWhereWithAggregatesInput = {
   street?: Prisma.StringNullableWithAggregatesFilter<"BrandAddress"> | string | null
   number?: Prisma.StringNullableWithAggregatesFilter<"BrandAddress"> | string | null
   complement?: Prisma.StringNullableWithAggregatesFilter<"BrandAddress"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"BrandAddress"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"BrandAddress"> | Date | string
   brandId?: Prisma.StringWithAggregatesFilter<"BrandAddress"> | string
 }
 
@@ -275,6 +299,8 @@ export type BrandAddressCreateInput = {
   street?: string | null
   number?: string | null
   complement?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   brand: Prisma.BrandCreateNestedOneWithoutAddressesInput
   responsibles?: Prisma.BrandResponsibleCreateNestedManyWithoutBrandAddressInput
 }
@@ -287,6 +313,8 @@ export type BrandAddressUncheckedCreateInput = {
   street?: string | null
   number?: string | null
   complement?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   brandId: string
   responsibles?: Prisma.BrandResponsibleUncheckedCreateNestedManyWithoutBrandAddressInput
 }
@@ -299,6 +327,8 @@ export type BrandAddressUpdateInput = {
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   complement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand?: Prisma.BrandUpdateOneRequiredWithoutAddressesNestedInput
   responsibles?: Prisma.BrandResponsibleUpdateManyWithoutBrandAddressNestedInput
 }
@@ -311,6 +341,8 @@ export type BrandAddressUncheckedUpdateInput = {
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   complement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brandId?: Prisma.StringFieldUpdateOperationsInput | string
   responsibles?: Prisma.BrandResponsibleUncheckedUpdateManyWithoutBrandAddressNestedInput
 }
@@ -323,6 +355,8 @@ export type BrandAddressCreateManyInput = {
   street?: string | null
   number?: string | null
   complement?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   brandId: string
 }
 
@@ -334,6 +368,8 @@ export type BrandAddressUpdateManyMutationInput = {
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   complement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BrandAddressUncheckedUpdateManyInput = {
@@ -344,6 +380,8 @@ export type BrandAddressUncheckedUpdateManyInput = {
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   complement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brandId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -365,6 +403,8 @@ export type BrandAddressCountOrderByAggregateInput = {
   street?: Prisma.SortOrder
   number?: Prisma.SortOrder
   complement?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
 }
 
@@ -376,6 +416,8 @@ export type BrandAddressMaxOrderByAggregateInput = {
   street?: Prisma.SortOrder
   number?: Prisma.SortOrder
   complement?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
 }
 
@@ -387,6 +429,8 @@ export type BrandAddressMinOrderByAggregateInput = {
   street?: Prisma.SortOrder
   number?: Prisma.SortOrder
   complement?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
 }
 
@@ -463,6 +507,8 @@ export type BrandAddressCreateWithoutBrandInput = {
   street?: string | null
   number?: string | null
   complement?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   responsibles?: Prisma.BrandResponsibleCreateNestedManyWithoutBrandAddressInput
 }
 
@@ -474,6 +520,8 @@ export type BrandAddressUncheckedCreateWithoutBrandInput = {
   street?: string | null
   number?: string | null
   complement?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   responsibles?: Prisma.BrandResponsibleUncheckedCreateNestedManyWithoutBrandAddressInput
 }
 
@@ -514,6 +562,8 @@ export type BrandAddressScalarWhereInput = {
   street?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   number?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
   complement?: Prisma.StringNullableFilter<"BrandAddress"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"BrandAddress"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"BrandAddress"> | Date | string
   brandId?: Prisma.StringFilter<"BrandAddress"> | string
 }
 
@@ -525,6 +575,8 @@ export type BrandAddressCreateWithoutResponsiblesInput = {
   street?: string | null
   number?: string | null
   complement?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   brand: Prisma.BrandCreateNestedOneWithoutAddressesInput
 }
 
@@ -536,6 +588,8 @@ export type BrandAddressUncheckedCreateWithoutResponsiblesInput = {
   street?: string | null
   number?: string | null
   complement?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   brandId: string
 }
 
@@ -563,6 +617,8 @@ export type BrandAddressUpdateWithoutResponsiblesInput = {
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   complement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand?: Prisma.BrandUpdateOneRequiredWithoutAddressesNestedInput
 }
 
@@ -574,6 +630,8 @@ export type BrandAddressUncheckedUpdateWithoutResponsiblesInput = {
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   complement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brandId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -585,6 +643,8 @@ export type BrandAddressCreateManyBrandInput = {
   street?: string | null
   number?: string | null
   complement?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type BrandAddressUpdateWithoutBrandInput = {
@@ -595,6 +655,8 @@ export type BrandAddressUpdateWithoutBrandInput = {
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   complement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   responsibles?: Prisma.BrandResponsibleUpdateManyWithoutBrandAddressNestedInput
 }
 
@@ -606,6 +668,8 @@ export type BrandAddressUncheckedUpdateWithoutBrandInput = {
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   complement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   responsibles?: Prisma.BrandResponsibleUncheckedUpdateManyWithoutBrandAddressNestedInput
 }
 
@@ -617,6 +681,8 @@ export type BrandAddressUncheckedUpdateManyWithoutBrandInput = {
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   complement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -658,6 +724,8 @@ export type BrandAddressSelect<ExtArgs extends runtime.Types.Extensions.Internal
   street?: boolean
   number?: boolean
   complement?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   brandId?: boolean
   brand?: boolean | Prisma.BrandDefaultArgs<ExtArgs>
   responsibles?: boolean | Prisma.BrandAddress$responsiblesArgs<ExtArgs>
@@ -672,6 +740,8 @@ export type BrandAddressSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   street?: boolean
   number?: boolean
   complement?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   brandId?: boolean
   brand?: boolean | Prisma.BrandDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["brandAddress"]>
@@ -684,6 +754,8 @@ export type BrandAddressSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   street?: boolean
   number?: boolean
   complement?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   brandId?: boolean
   brand?: boolean | Prisma.BrandDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["brandAddress"]>
@@ -696,10 +768,12 @@ export type BrandAddressSelectScalar = {
   street?: boolean
   number?: boolean
   complement?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   brandId?: boolean
 }
 
-export type BrandAddressOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "state" | "city" | "neighborhood" | "street" | "number" | "complement" | "brandId", ExtArgs["result"]["brandAddress"]>
+export type BrandAddressOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "state" | "city" | "neighborhood" | "street" | "number" | "complement" | "createdAt" | "updatedAt" | "brandId", ExtArgs["result"]["brandAddress"]>
 export type BrandAddressInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   brand?: boolean | Prisma.BrandDefaultArgs<ExtArgs>
   responsibles?: boolean | Prisma.BrandAddress$responsiblesArgs<ExtArgs>
@@ -726,6 +800,8 @@ export type $BrandAddressPayload<ExtArgs extends runtime.Types.Extensions.Intern
     street: string | null
     number: string | null
     complement: string | null
+    createdAt: Date
+    updatedAt: Date
     brandId: string
   }, ExtArgs["result"]["brandAddress"]>
   composites: {}
@@ -1159,6 +1235,8 @@ export interface BrandAddressFieldRefs {
   readonly street: Prisma.FieldRef<"BrandAddress", 'String'>
   readonly number: Prisma.FieldRef<"BrandAddress", 'String'>
   readonly complement: Prisma.FieldRef<"BrandAddress", 'String'>
+  readonly createdAt: Prisma.FieldRef<"BrandAddress", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"BrandAddress", 'DateTime'>
   readonly brandId: Prisma.FieldRef<"BrandAddress", 'String'>
 }
     

@@ -4,6 +4,7 @@ import { StorageService } from "src/infra/storage/storage.service";
 import { AuthGuard } from "src/modules/accounts/signin/guards/auth.guard";
 import { BrandsController } from "src/modules/workspaces/brands/brands.controller";
 import { CreateBrandsService } from "src/modules/workspaces/brands/services/create-brand/create-brand.service";
+import { CreateBrandAddressService } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.service";
 import { ListWorkspaceBrandsService } from "src/modules/workspaces/brands/services/list-brands/list-brands.service";
 
 @Module({
@@ -11,9 +12,11 @@ import { ListWorkspaceBrandsService } from "src/modules/workspaces/brands/servic
   controllers: [BrandsController],
   providers: [
     AuthGuard,
+    StorageService,
+
     ListWorkspaceBrandsService,
     CreateBrandsService,
-    StorageService,
+    CreateBrandAddressService,
   ],
 })
 export class BrandsModule {}

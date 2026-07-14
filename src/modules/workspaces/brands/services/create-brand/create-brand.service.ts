@@ -38,7 +38,7 @@ export class CreateBrandsService {
       prefix: createSlug(`${data.name}-logo`),
     });
 
-    const brand = await this.brandRepository.create({
+    const brand = await this.brandRepository.createBrand({
       ...data,
       workspaceId,
       logoKey: uploadedFile.key,

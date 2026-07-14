@@ -1,8 +1,9 @@
 import { BrandCreateInput } from "prisma-types/models";
-import { UpsertBrandAddressDto } from "src/modules/workspaces/brands/services/create-brand/create-brand.dto";
+import { CreateBrandAddressDto } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.dto";
 import { ListWorkspaceBrandsParamsDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
 
 export type BrandRepositoryListParams = ListWorkspaceBrandsParamsDto & {
+  id?: string;
   workspaceId?: string;
 };
 
@@ -11,5 +12,9 @@ export type BrandRepositoryCreateParams = Omit<
   "workspace" | "addresses"
 > & {
   workspaceId: string;
-  addresses: UpsertBrandAddressDto[];
+  addresses: CreateBrandAddressDto[];
+};
+
+export type BrandRepositoryCreateAddressParams = CreateBrandAddressDto & {
+  brandId: string;
 };
