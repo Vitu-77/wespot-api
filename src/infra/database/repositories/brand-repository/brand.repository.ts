@@ -10,7 +10,7 @@ import {
   BrandRepositoryCreateParams,
   BrandRepositoryListParams,
 } from "src/infra/database/repositories/brand-repository/brand.repository.types";
-import { contains, paginate } from "src/shared/utils/query-helpers";
+import { contains, isIn, paginate } from "src/shared/utils/query-helpers";
 
 @Injectable()
 export class BrandRepository {
@@ -152,10 +152,10 @@ export class BrandRepository {
     });
   }
 
-  async deleteAddress(id: string): Promise<void> {
-    await this.prismaService.brandAddress.delete({
+  async deleteAddressesByIds(ids: string[]): Promise<void> {
+    await this.prismaService.brandAddress.deleteMany({
       where: {
-        id,
+        id: isIn(ids),
       },
     });
   }

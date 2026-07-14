@@ -1,7 +1,9 @@
 import { writeFile } from "node:fs/promises";
+import path from "node:path";
 import type { INestApplication } from "@nestjs/common";
 import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
+import { NestExpressApplication } from "@nestjs/platform-express";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { apiReference } from "@scalar/nestjs-api-reference";
 import { env } from "src/env";
@@ -24,8 +26,10 @@ async function setupSwagger(app: INestApplication) {
       "/docs",
       apiReference({
         content: document,
+        pageTitle: "WeSpot - API",
+        favicon: "/",
         title: "WeSpot - API",
-        theme: "purple",
+        theme: "kepler",
         layout: "modern",
         darkMode: true,
         defaultHttpClient: {
@@ -44,9 +48,11 @@ async function setupSwagger(app: INestApplication) {
 }
 
 async function setupApp() {
-  const app = await NestFactory.create(AppModule, {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     forceCloseConnections: true,
   });
+
+  app.useStaticAssets(path.join(process.cwd(), "public"));
 
   app.enableShutdownHooks(["SIGINT", "SIGTERM", "SIGUSR2"]);
 
@@ -62,7 +68,7 @@ async function setupApp() {
   });
 
   app.setGlobalPrefix("api/v1", {
-    exclude: ["docs/*path", "swagger/*path"],
+    exclude: ["docs/*path", "swagger/*path", "public/*path"],
   });
 
   app.useGlobalPipes(

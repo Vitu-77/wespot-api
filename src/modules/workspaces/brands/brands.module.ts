@@ -5,7 +5,8 @@ import { AuthGuard } from "src/modules/accounts/signin/guards/auth.guard";
 import { BrandsController } from "src/modules/workspaces/brands/brands.controller";
 import { CreateBrandsService } from "src/modules/workspaces/brands/services/create-brand/create-brand.service";
 import { CreateBrandAddressService } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.service";
-import { ListWorkspaceBrandsService } from "src/modules/workspaces/brands/services/list-brands/list-brands.service";
+import { DeleteBrandAddressesService } from "src/modules/workspaces/brands/services/delete-brand-addresses/delete-brand-addresses.service";
+import { ListBrandsService } from "src/modules/workspaces/brands/services/list-brands/list-brands.service";
 
 @Module({
   imports: [JwtModule],
@@ -14,9 +15,10 @@ import { ListWorkspaceBrandsService } from "src/modules/workspaces/brands/servic
     AuthGuard,
     StorageService,
 
-    ListWorkspaceBrandsService,
     CreateBrandsService,
     CreateBrandAddressService,
+    DeleteBrandAddressesService,
+    ListBrandsService,
   ],
 })
 export class BrandsModule {}

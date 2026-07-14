@@ -7,6 +7,7 @@ import {
   Post,
   Query,
 } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { type WorkspaceUserEntity } from "src/domain/entities/workspace-user.entity";
 import { AddUserToWorkspaceWithInviteService } from "src/modules/workspaces/users/services/add-user-with-invite/add-user-with-invite.service";
 import { CreateWorkspaceUserDto } from "src/modules/workspaces/users/services/create-user/create-user.dto";
@@ -21,6 +22,7 @@ import { CurrentUser } from "src/shared/decorators/current-user.decorator";
 import { CurrentWorkspaceId } from "src/shared/decorators/current-workspace-id.decorator";
 import { ProtectedRoute } from "src/shared/decorators/protected-route.decorator";
 
+@ApiTags("Workspace / Users")
 @ApiWorkspaceHeader()
 @Controller("workspace/users")
 export class WorkspaceUsersController {

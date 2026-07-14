@@ -15,6 +15,10 @@ import {
   CreateBrandAddressResponseDto,
 } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.dto";
 import { CreateBrandAddressService } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.service";
+import {
+  DeleteBrandAddressesDto,
+  DeleteBrandAddressesResponseDto,
+} from "src/modules/workspaces/brands/services/delete-brand-addresses/delete-brand-addresses.dto";
 import { ListBrandsResponseDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
 import { ApiError } from "src/shared/dto/api-error.dto";
 
@@ -68,5 +72,21 @@ export function ApiCreateBrandAddressDocs() {
     ApiNotFoundResponse(
       ApiError(CreateBrandAddressService.errors.BRAND_NOT_FOUND),
     ),
+  );
+}
+
+export function ApiDeleteBrandAddressesDocs() {
+  return applyDecorators(
+    ApiOperation({
+      summary: "Delete address",
+      description: "Delete brand addresses for given ids.",
+    }),
+    ApiBody({
+      type: DeleteBrandAddressesDto,
+    }),
+    ApiOkResponse({
+      description: "Addresses deleted successfully.",
+      type: DeleteBrandAddressesResponseDto,
+    }),
   );
 }

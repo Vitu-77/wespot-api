@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   FileTypeValidator,
   Get,
   MaxFileSizeValidator,
@@ -16,14 +17,17 @@ import { ApiTags } from "@nestjs/swagger";
 import {
   ApiCreateBrandAddressDocs,
   ApiCreateBrandDocs,
+  ApiDeleteBrandAddressesDocs,
   ApiListBrandsDocs,
 } from "src/modules/workspaces/brands/brands.docs";
 import { CreateBrandDto } from "src/modules/workspaces/brands/services/create-brand/create-brand.dto";
 import { CreateBrandsService } from "src/modules/workspaces/brands/services/create-brand/create-brand.service";
 import { CreateBrandAddressDto } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.dto";
 import { CreateBrandAddressService } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.service";
+import { DeleteBrandAddressesDto } from "src/modules/workspaces/brands/services/delete-brand-addresses/delete-brand-addresses.dto";
+import { DeleteBrandAddressesService } from "src/modules/workspaces/brands/services/delete-brand-addresses/delete-brand-addresses.service";
 import { ListBrandsParamsDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
-import { ListWorkspaceBrandsService } from "src/modules/workspaces/brands/services/list-brands/list-brands.service";
+import { ListBrandsService } from "src/modules/workspaces/brands/services/list-brands/list-brands.service";
 import { ApiWorkspaceHeader } from "src/shared/decorators/api-workspace-header.decorator";
 import { CurrentWorkspaceId } from "src/shared/decorators/current-workspace-id.decorator";
 import { ProtectedRoute } from "src/shared/decorators/protected-route.decorator";
@@ -45,15 +49,16 @@ const logoFileValidation = new ParseFilePipe({
 @Controller("workspace/brands")
 export class BrandsController {
   constructor(
-    private readonly listWorkspaceBrands: ListWorkspaceBrandsService,
+    private readonly listWorkspaceBrands: ListBrandsService,
     private readonly createBrandsService: CreateBrandsService,
     private readonly createBrandAddressService: CreateBrandAddressService,
+    private readonly deleteBrandAddressesService: DeleteBrandAddressesService,
   ) {}
 
-  @ProtectedRoute({ roles: ["ADMIN", "OWNER"] })
+  @ProtectedRoute()
   @Get("/")
   @ApiListBrandsDocs()
-  listBrands(
+  public listBrands(
     @Query() queryParams: ListBrandsParamsDto,
     @CurrentWorkspaceId() workspaceId: string,
   ) {
@@ -70,7 +75,7 @@ export class BrandsController {
     FileInterceptor("logo_image"),
     JsonParserInterceptor("payload"),
   )
-  createBrand(
+  public createBrand(
     @CurrentWorkspaceId() workspaceId: string,
     @UploadedFile(logoFileValidation) logoFile: MulterFile,
     @Body() body: CreateBrandDto,
@@ -85,10 +90,17 @@ export class BrandsController {
   @ProtectedRoute()
   @Post("/:brandId/address")
   @ApiCreateBrandAddressDocs()
-  createBrandAddress(
+  public createBrandAddress(
     @Param("brandId") brandId: string,
     @Body() body: CreateBrandAddressDto,
   ) {
     return this.createBrandAddressService.execute({ ...body, brandId });
+  }
+
+  @ProtectedRoute({ roles: ["ADMIN", "OWNER"] })
+  @Delete("/:brandId/address")
+  @ApiDeleteBrandAddressesDocs()
+  public deleteBrandAddresses(@Body() body: DeleteBrandAddressesDto) {
+    return this.deleteBrandAddressesService.execute(body);
   }
 }

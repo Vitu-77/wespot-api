@@ -4,7 +4,7 @@ import { ListBrandsParamsDto } from "src/modules/workspaces/brands/services/list
 import { PaginatedResponseDto } from "src/shared/dto/paginated-response.dto";
 
 @Injectable()
-export class ListWorkspaceBrandsService {
+export class ListBrandsService {
   constructor(private readonly brandRepository: BrandRepository) {}
 
   async execute({
