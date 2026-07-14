@@ -631,18 +631,73 @@
     },
     "/api/v1/workspace/brands": {
       "get": {
+        "description": "List all brands from a given workspace.",
         "operationId": "listBrands",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "name",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "segment",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "SUPERMARKET",
+                "EVENTS",
+                "STORE",
+                "PHARMACY",
+                "CLINIC",
+                "RESTAURANT",
+                "REAL_ESTATE",
+                "AUTOMOTIVE",
+                "RADIO",
+                "OTHER"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "segment",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Brands listed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListBrandsResponseDto"
+                }
+              }
+            }
           }
         },
+        "summary": "List brands",
         "tags": [
           "Workspace / Brands"
         ]
       },
       "post": {
+        "description": "Create a new brand.",
         "operationId": "createBrand",
         "parameters": [],
         "requestBody": {
@@ -656,10 +711,30 @@
           }
         },
         "responses": {
-          "201": {
-            "description": ""
+          "200": {
+            "description": "Brand created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateBrandResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Workspace not found.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Workspace not found.",
+                  "error": "WORKSPACE_NOT_FOUND",
+                  "statusCode": 404
+                }
+              }
+            }
           }
         },
+        "summary": "Create brand",
         "tags": [
           "Workspace / Brands"
         ]
@@ -1214,7 +1289,7 @@
           "responsibles"
         ]
       },
-      "BrandEntityEntityDto": {
+      "BrandEntityDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -1235,10 +1310,6 @@
           },
           "segment": {
             "type": "string"
-          },
-          "responsible": {
-            "type": "string",
-            "nullable": true
           },
           "description": {
             "type": "string",
@@ -1301,7 +1372,6 @@
           "updatedAt",
           "name",
           "segment",
-          "responsible",
           "description",
           "logoKey",
           "slogan",
@@ -1389,7 +1459,7 @@
           "brands": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/BrandEntityEntityDto"
+              "$ref": "#/components/schemas/BrandEntityDto"
             }
           },
           "spots": {
@@ -1568,9 +1638,156 @@
         "type": "object",
         "properties": {}
       },
+      "PaginationResponseDto": {
+        "type": "object",
+        "properties": {
+          "totalItems": {
+            "type": "number"
+          },
+          "pageNumber": {
+            "type": "number"
+          },
+          "pageSize": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "hasPrevPage": {
+            "type": "boolean"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "totalItems",
+          "pageNumber",
+          "pageSize",
+          "totalPages",
+          "hasPrevPage",
+          "hasNextPage"
+        ]
+      },
+      "ListBrandsResponseDto": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BrandEntityDto"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationResponseDto"
+          }
+        },
+        "required": [
+          "items",
+          "pagination"
+        ]
+      },
       "CreateBrandDto": {
         "type": "object",
         "properties": {}
+      },
+      "CreateBrandResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "segment": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "slogan": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "whatsapp": {
+            "type": "string",
+            "nullable": true
+          },
+          "instagram": {
+            "type": "string",
+            "nullable": true
+          },
+          "tiktok": {
+            "type": "string",
+            "nullable": true
+          },
+          "facebook": {
+            "type": "string",
+            "nullable": true
+          },
+          "website": {
+            "type": "string",
+            "nullable": true
+          },
+          "spots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpotEntityDto"
+            }
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BrandAddressEntityDto"
+            }
+          },
+          "workspaceId": {
+            "type": "string"
+          },
+          "workspace": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "segment",
+          "description",
+          "logoKey",
+          "slogan",
+          "phoneNumber",
+          "whatsapp",
+          "instagram",
+          "tiktok",
+          "facebook",
+          "website",
+          "spots",
+          "addresses",
+          "workspaceId",
+          "workspace"
+        ]
       },
       "CreateBrandAddressDto": {
         "type": "object",
@@ -1733,37 +1950,6 @@
           "readAt",
           "userId",
           "user"
-        ]
-      },
-      "PaginationResponseDto": {
-        "type": "object",
-        "properties": {
-          "totalItems": {
-            "type": "number"
-          },
-          "pageNumber": {
-            "type": "number"
-          },
-          "pageSize": {
-            "type": "number"
-          },
-          "totalPages": {
-            "type": "number"
-          },
-          "hasPrevPage": {
-            "type": "boolean"
-          },
-          "hasNextPage": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "totalItems",
-          "pageNumber",
-          "pageSize",
-          "totalPages",
-          "hasPrevPage",
-          "hasNextPage"
         ]
       },
       "ListUserNotificationsResponseDto": {

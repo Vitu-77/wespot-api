@@ -1,8 +1,8 @@
 import { BrandCreateInput } from "prisma-types/models";
 import { CreateBrandAddressDto } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.dto";
-import { ListWorkspaceBrandsParamsDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
+import { ListBrandsParamsDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
 
-export type BrandRepositoryListParams = ListWorkspaceBrandsParamsDto & {
+export type BrandRepositoryListParams = ListBrandsParamsDto & {
   id?: string;
   workspaceId?: string;
 };

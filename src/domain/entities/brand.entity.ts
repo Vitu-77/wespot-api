@@ -100,15 +100,12 @@ export type BrandEntity = BaseEntity & {
   workspace?: WorkspaceEntity;
 };
 
-export class BrandEntityEntityDto extends BaseEntityDto implements BrandEntity {
+export class BrandEntityDto extends BaseEntityDto implements BrandEntity {
   @ApiProperty()
   name!: string;
 
   @ApiProperty()
   segment!: BusinessSegment;
-
-  @ApiProperty({ nullable: true, type: "string" })
-  responsible!: string | null;
 
   @ApiProperty({ nullable: true, type: "string" })
   description!: string | null;

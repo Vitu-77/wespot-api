@@ -1,10 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { WorkspaceType } from "prisma-types/enums";
 import { BaseEntity, BaseEntityDto } from "src/domain/entities/base.entity";
-import {
-  BrandEntity,
-  BrandEntityEntityDto,
-} from "src/domain/entities/brand.entity";
+import { BrandEntity, BrandEntityDto } from "src/domain/entities/brand.entity";
 import { SpotEntity, SpotEntityDto } from "src/domain/entities/spot.entity";
 import {
   WorkspaceMemberEntity,
@@ -35,7 +32,7 @@ export class WorkspaceEntityDto
   @ApiProperty()
   slug!: string;
 
-  @ApiProperty({ type: () => BrandEntityEntityDto, isArray: true })
+  @ApiProperty({ type: () => BrandEntityDto, isArray: true })
   brands?: BrandEntity[] | undefined;
 
   @ApiProperty({ type: () => SpotEntityDto, isArray: true })

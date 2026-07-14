@@ -13,12 +13,16 @@ import {
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiTags } from "@nestjs/swagger";
-import { ApiCreateBrandAddressDocs } from "src/modules/workspaces/brands/brands.docs";
+import {
+  ApiCreateBrandAddressDocs,
+  ApiCreateBrandDocs,
+  ApiListBrandsDocs,
+} from "src/modules/workspaces/brands/brands.docs";
 import { CreateBrandDto } from "src/modules/workspaces/brands/services/create-brand/create-brand.dto";
 import { CreateBrandsService } from "src/modules/workspaces/brands/services/create-brand/create-brand.service";
 import { CreateBrandAddressDto } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.dto";
 import { CreateBrandAddressService } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.service";
-import { ListWorkspaceBrandsParamsDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
+import { ListBrandsParamsDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
 import { ListWorkspaceBrandsService } from "src/modules/workspaces/brands/services/list-brands/list-brands.service";
 import { CurrentWorkspaceId } from "src/shared/decorators/current-workspace-id.decorator";
 import { ProtectedRoute } from "src/shared/decorators/protected-route.decorator";
@@ -46,8 +50,9 @@ export class BrandsController {
 
   @ProtectedRoute({ roles: ["ADMIN", "OWNER"] })
   @Get("/")
+  @ApiListBrandsDocs()
   listBrands(
-    @Query() queryParams: ListWorkspaceBrandsParamsDto,
+    @Query() queryParams: ListBrandsParamsDto,
     @CurrentWorkspaceId() workspaceId: string,
   ) {
     return this.listWorkspaceBrands.execute({
@@ -58,6 +63,7 @@ export class BrandsController {
 
   @ProtectedRoute()
   @Post("/")
+  @ApiCreateBrandDocs()
   @UseInterceptors(
     FileInterceptor("logo_image"),
     JsonParserInterceptor("payload"),

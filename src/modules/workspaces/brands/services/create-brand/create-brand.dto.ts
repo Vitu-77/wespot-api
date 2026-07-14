@@ -7,6 +7,7 @@ import {
   ValidateNested,
 } from "class-validator";
 import { BusinessSegment } from "prisma-types/enums";
+import { BrandEntityDto } from "src/domain/entities/brand.entity";
 import { CreateBrandAddressDto } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.dto";
 
 export class CreateBrandDto {
@@ -61,3 +62,5 @@ export class CreateBrandDto {
   @Type(() => CreateBrandAddressDto)
   addresses!: CreateBrandAddressDto[];
 }
+
+export class CreateBrandResponseDto extends BrandEntityDto {}

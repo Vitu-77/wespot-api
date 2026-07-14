@@ -3,7 +3,10 @@ import { ErrorsMap } from "src/domain/exceptions/errors.map";
 import { BrandRepository } from "src/infra/database/repositories/brand-repository/brand.repository";
 import { WorkspaceRepository } from "src/infra/database/repositories/workspace-repository/workspace.repository";
 import { StorageService } from "src/infra/storage/storage.service";
-import { CreateBrandDto } from "src/modules/workspaces/brands/services/create-brand/create-brand.dto";
+import {
+  CreateBrandDto,
+  CreateBrandResponseDto,
+} from "src/modules/workspaces/brands/services/create-brand/create-brand.dto";
 import { createSlug } from "src/shared/utils/create-slug";
 
 type CreateBrandsServicePayload = InjectWorkspaceId<CreateBrandDto> & {
@@ -22,7 +25,7 @@ export class CreateBrandsService {
     workspaceId,
     logoFile,
     ...data
-  }: CreateBrandsServicePayload) {
+  }: CreateBrandsServicePayload): Promise<CreateBrandResponseDto> {
     const workspace = await this.workspaceRepository.getById(workspaceId);
 
     if (!workspace) {

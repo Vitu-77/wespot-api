@@ -21,7 +21,7 @@ export class CreateBrandAddressService {
 
     if (!brand) {
       throw new NotFoundException(
-        CreateBrandAddressService.errors.WORKSPACE_NOT_FOUND,
+        CreateBrandAddressService.errors.BRAND_NOT_FOUND,
       );
     }
 
@@ -31,6 +31,6 @@ export class CreateBrandAddressService {
   }
 
   static errors = {
-    WORKSPACE_NOT_FOUND: ErrorsMap.BRAND_NOT_FOUND,
+    BRAND_NOT_FOUND: ErrorsMap.BRAND_NOT_FOUND,
   };
 }
