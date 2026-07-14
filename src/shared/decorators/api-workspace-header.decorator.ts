@@ -6,7 +6,7 @@ export function ApiWorkspaceHeader() {
     ApiHeader({
       name: "X-Workspace-Id",
       required: true,
-      description: "Id do worksapace selecionado",
+      description: "Id from selected workspace",
     }),
   );
 }

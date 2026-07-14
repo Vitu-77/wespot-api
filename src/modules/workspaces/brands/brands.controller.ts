@@ -24,6 +24,7 @@ import { CreateBrandAddressDto } from "src/modules/workspaces/brands/services/cr
 import { CreateBrandAddressService } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.service";
 import { ListBrandsParamsDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
 import { ListWorkspaceBrandsService } from "src/modules/workspaces/brands/services/list-brands/list-brands.service";
+import { ApiWorkspaceHeader } from "src/shared/decorators/api-workspace-header.decorator";
 import { CurrentWorkspaceId } from "src/shared/decorators/current-workspace-id.decorator";
 import { ProtectedRoute } from "src/shared/decorators/protected-route.decorator";
 import { JsonParserInterceptor } from "src/shared/interceptors/json-parser.interceptor";
@@ -40,6 +41,7 @@ const logoFileValidation = new ParseFilePipe({
 });
 
 @ApiTags("Workspace / Brands")
+@ApiWorkspaceHeader()
 @Controller("workspace/brands")
 export class BrandsController {
   constructor(

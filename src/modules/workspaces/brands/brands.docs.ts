@@ -4,7 +4,6 @@ import {
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
-  ApiQuery,
 } from "@nestjs/swagger";
 import {
   CreateBrandDto,
@@ -16,10 +15,7 @@ import {
   CreateBrandAddressResponseDto,
 } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.dto";
 import { CreateBrandAddressService } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.service";
-import {
-  ListBrandsParamsDto,
-  ListBrandsResponseDto,
-} from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
+import { ListBrandsResponseDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
 import { ApiError } from "src/shared/dto/api-error.dto";
 
 export function ApiListBrandsDocs() {
@@ -27,9 +23,6 @@ export function ApiListBrandsDocs() {
     ApiOperation({
       summary: "List brands",
       description: "List all brands from a given workspace.",
-    }),
-    ApiQuery({
-      type: ListBrandsParamsDto,
     }),
     ApiOkResponse({
       description: "Brands listed.",

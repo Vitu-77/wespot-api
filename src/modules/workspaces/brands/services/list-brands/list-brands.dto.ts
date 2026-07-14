@@ -6,14 +6,14 @@ import { PaginationResponseDto } from "src/shared/dto/paginated-response.dto";
 import { PaginationParamsDto } from "src/shared/dto/pagination.dto";
 
 export class ListBrandsParamsDto extends PaginationParamsDto {
-  @ApiProperty()
   @IsString()
   @IsOptional()
+  @ApiProperty({ required: false })
   name?: string;
 
-  @ApiProperty({ enum: BusinessSegment })
   @IsOptional()
   @IsEnum(BusinessSegment)
+  @ApiProperty({ enum: BusinessSegment, required: false })
   segment?: BusinessSegment;
 }
 

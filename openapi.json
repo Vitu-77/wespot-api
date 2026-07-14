@@ -482,7 +482,7 @@
           {
             "name": "X-Workspace-Id",
             "in": "header",
-            "description": "Id do worksapace selecionado",
+            "description": "Id from selected workspace",
             "required": true,
             "schema": {
               "type": "string"
@@ -504,7 +504,7 @@
           {
             "name": "X-Workspace-Id",
             "in": "header",
-            "description": "Id do worksapace selecionado",
+            "description": "Id from selected workspace",
             "required": true,
             "schema": {
               "type": "string"
@@ -538,7 +538,7 @@
           {
             "name": "X-Workspace-Id",
             "in": "header",
-            "description": "Id do worksapace selecionado",
+            "description": "Id from selected workspace",
             "required": true,
             "schema": {
               "type": "string"
@@ -570,7 +570,7 @@
           {
             "name": "X-Workspace-Id",
             "in": "header",
-            "description": "Id do worksapace selecionado",
+            "description": "Id from selected workspace",
             "required": true,
             "schema": {
               "type": "string"
@@ -604,7 +604,7 @@
           {
             "name": "X-Workspace-Id",
             "in": "header",
-            "description": "Id do worksapace selecionado",
+            "description": "Id from selected workspace",
             "required": true,
             "schema": {
               "type": "string"
@@ -635,8 +635,33 @@
         "operationId": "listBrands",
         "parameters": [
           {
-            "name": "name",
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Id from selected workspace",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
             "in": "query",
             "schema": {
               "type": "string"
@@ -644,7 +669,7 @@
           },
           {
             "name": "segment",
-            "required": true,
+            "required": false,
             "in": "query",
             "schema": {
               "type": "string",
@@ -660,22 +685,6 @@
                 "RADIO",
                 "OTHER"
               ]
-            }
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "segment",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
             }
           }
         ],
@@ -699,7 +708,17 @@
       "post": {
         "description": "Create a new brand.",
         "operationId": "createBrand",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Id from selected workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -745,6 +764,15 @@
         "description": "Add a new addresss to a brand.",
         "operationId": "createBrandAddress",
         "parameters": [
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Id from selected workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "brandId",
             "required": true,
@@ -797,7 +825,24 @@
     "/api/v1/workspace/spots": {
       "get": {
         "operationId": "listSpots",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": ""
@@ -858,6 +903,22 @@
         "description": "Returns all notifications associated with the authenticated user.",
         "operationId": "listUserNotifications",
         "parameters": [
+          {
+            "name": "pageNumber",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
           {
             "name": "userId",
             "required": true,
@@ -1687,9 +1748,150 @@
           "pagination"
         ]
       },
+      "UpsertBrandAddressResponsibleDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "object",
+            "nullable": true
+          }
+        }
+      },
+      "CreateBrandAddressDto": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "AC",
+              "AL",
+              "AP",
+              "AM",
+              "BA",
+              "CE",
+              "DF",
+              "ES",
+              "GO",
+              "MA",
+              "MT",
+              "MS",
+              "MG",
+              "PA",
+              "PB",
+              "PR",
+              "PE",
+              "PI",
+              "RJ",
+              "RN",
+              "RS",
+              "RO",
+              "RR",
+              "SC",
+              "SP",
+              "SE",
+              "TO"
+            ],
+            "nullable": true
+          },
+          "city": {
+            "type": "object",
+            "nullable": true
+          },
+          "neighborhood": {
+            "type": "object",
+            "nullable": true
+          },
+          "street": {
+            "type": "object",
+            "nullable": true
+          },
+          "number": {
+            "type": "object",
+            "nullable": true
+          },
+          "complement": {
+            "type": "object",
+            "nullable": true
+          },
+          "responsibles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpsertBrandAddressResponsibleDto"
+            }
+          }
+        },
+        "required": [
+          "responsibles"
+        ]
+      },
       "CreateBrandDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "segment": {
+            "type": "string",
+            "enum": [
+              "SUPERMARKET",
+              "EVENTS",
+              "STORE",
+              "PHARMACY",
+              "CLINIC",
+              "RESTAURANT",
+              "REAL_ESTATE",
+              "AUTOMOTIVE",
+              "RADIO",
+              "OTHER"
+            ]
+          },
+          "description": {
+            "type": "object",
+            "nullable": true
+          },
+          "slogan": {
+            "type": "object",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "object",
+            "nullable": true
+          },
+          "whatsapp": {
+            "type": "object",
+            "nullable": true
+          },
+          "instagram": {
+            "type": "object",
+            "nullable": true
+          },
+          "tiktok": {
+            "type": "object",
+            "nullable": true
+          },
+          "facebook": {
+            "type": "object",
+            "nullable": true
+          },
+          "website": {
+            "type": "object",
+            "nullable": true
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateBrandAddressDto"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "segment",
+          "addresses"
+        ]
       },
       "CreateBrandResponseDto": {
         "type": "object",
@@ -1788,10 +1990,6 @@
           "workspaceId",
           "workspace"
         ]
-      },
-      "CreateBrandAddressDto": {
-        "type": "object",
-        "properties": {}
       },
       "CreateBrandAddressResponseDto": {
         "type": "object",
