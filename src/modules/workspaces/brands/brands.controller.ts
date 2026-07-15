@@ -20,6 +20,7 @@ import {
   ApiCreateBrandDocs,
   ApiDeleteBrandAddressesDocs,
   ApiListBrandsDocs,
+  ApiUpdateBrandAddressDocs,
   ApiUpdateBrandDocs,
 } from "src/modules/workspaces/brands/brands.docs";
 import { CreateBrandDto } from "src/modules/workspaces/brands/services/create-brand/create-brand.dto";
@@ -32,6 +33,8 @@ import { ListBrandsParamsDto } from "src/modules/workspaces/brands/services/list
 import { ListBrandsService } from "src/modules/workspaces/brands/services/list-brands/list-brands.service";
 import { UpdateBrandDto } from "src/modules/workspaces/brands/services/update-brand/update-brand.dto";
 import { UpdateBrandsService } from "src/modules/workspaces/brands/services/update-brand/update-brand.service";
+import { UpdateBrandAddressDto } from "src/modules/workspaces/brands/services/update-brand-address/update-brand-address.dto";
+import { UpdateBrandAddressService } from "src/modules/workspaces/brands/services/update-brand-address/update-brand-address.service";
 import { ApiWorkspaceHeader } from "src/shared/decorators/api-workspace-header.decorator";
 import { CurrentWorkspaceId } from "src/shared/decorators/current-workspace-id.decorator";
 import { ProtectedRoute } from "src/shared/decorators/protected-route.decorator";
@@ -48,7 +51,7 @@ const logoFileValidation = new ParseFilePipe({
   ],
 });
 
-@ApiTags("Workspace / Brands")
+@ApiTags("Workspace ⌁ Brands")
 @ApiWorkspaceHeader()
 @Controller("workspace/brands")
 export class BrandsController {
@@ -57,6 +60,7 @@ export class BrandsController {
     private readonly createBrandsService: CreateBrandsService,
     private readonly updateBrandsService: UpdateBrandsService,
     private readonly createBrandAddressService: CreateBrandAddressService,
+    private readonly updateBrandAddressService: UpdateBrandAddressService,
     private readonly deleteBrandAddressesService: DeleteBrandAddressesService,
   ) {}
 
@@ -115,6 +119,19 @@ export class BrandsController {
     @Body() body: CreateBrandAddressDto,
   ) {
     return this.createBrandAddressService.execute({ ...body, brandId });
+  }
+
+  @ProtectedRoute()
+  @Put("/:brandId/address/:addressId")
+  @ApiUpdateBrandAddressDocs()
+  public updateBrandAddress(
+    @Param("addressId") addressId: string,
+    @Body() body: UpdateBrandAddressDto,
+  ) {
+    return this.updateBrandAddressService.execute({
+      data: body,
+      addressId,
+    });
   }
 
   @ProtectedRoute({ roles: ["ADMIN", "OWNER"] })

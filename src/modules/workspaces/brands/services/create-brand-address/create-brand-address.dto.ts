@@ -10,7 +10,7 @@ import {
 import { BrazilianState } from "prisma-types/enums";
 import { BrandAddressEntityDto } from "src/domain/entities/brand.entity";
 
-export class UpsertBrandAddressResponsibleDto {
+export class CreateBrandAddressResponsibleDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
@@ -60,13 +60,13 @@ export class CreateBrandAddressDto {
   complement!: string | null;
 
   @ApiProperty({
-    type: UpsertBrandAddressResponsibleDto,
+    type: CreateBrandAddressResponsibleDto,
     isArray: true,
   })
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => UpsertBrandAddressResponsibleDto)
-  responsibles!: UpsertBrandAddressResponsibleDto[];
+  @Type(() => CreateBrandAddressResponsibleDto)
+  responsibles!: CreateBrandAddressResponsibleDto[];
 }
 
 export class CreateBrandAddressResponseDto extends BrandAddressEntityDto {}

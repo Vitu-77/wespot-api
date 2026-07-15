@@ -1,4 +1,7 @@
-import { BrandCreateInput } from "prisma-types/models";
+import {
+  BrandCreateInput,
+  BrandResponsibleCreateInput,
+} from "prisma-types/models";
 import { CreateBrandAddressDto } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.dto";
 import { ListBrandsParamsDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
 
@@ -17,4 +20,11 @@ export type BrandRepositoryCreateParams = Omit<
 
 export type BrandRepositoryCreateAddressParams = CreateBrandAddressDto & {
   brandId: string;
+};
+
+export type UpsertBrandResponsiblesDataItem = Pick<
+  BrandResponsibleCreateInput,
+  "name" | "role"
+> & {
+  id?: string;
 };

@@ -25,9 +25,7 @@ export class CreateBrandAddressService {
       );
     }
 
-    const address = await this.brandRepository.createAddress(payload);
-
-    return address;
+    return this.brandRepository.createAddress(payload);
   }
 
   static errors = {

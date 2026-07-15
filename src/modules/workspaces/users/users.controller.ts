@@ -22,7 +22,7 @@ import { CurrentUser } from "src/shared/decorators/current-user.decorator";
 import { CurrentWorkspaceId } from "src/shared/decorators/current-workspace-id.decorator";
 import { ProtectedRoute } from "src/shared/decorators/protected-route.decorator";
 
-@ApiTags("Workspace / Users")
+@ApiTags("Workspace ⌁ Users")
 @ApiWorkspaceHeader()
 @Controller("workspace/users")
 export class WorkspaceUsersController {

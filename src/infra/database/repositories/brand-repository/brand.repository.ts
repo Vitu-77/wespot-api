@@ -1,5 +1,6 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: not-infer-type */
 import { Injectable } from "@nestjs/common";
-import { BrandAddressUpdateInput, BrandUpdateInput } from "prisma-types/models";
+import { BrandUpdateInput } from "prisma-types/models";
 import {
   BrandAddressEntity,
   BrandEntity,
@@ -9,7 +10,9 @@ import {
   BrandRepositoryCreateAddressParams,
   BrandRepositoryCreateParams,
   BrandRepositoryListParams,
+  UpsertBrandResponsiblesDataItem,
 } from "src/infra/database/repositories/brand-repository/brand.repository.types";
+import { UpdateBrandAddressDto } from "src/modules/workspaces/brands/services/update-brand-address/update-brand-address.dto";
 import { contains, isIn, paginate } from "src/shared/utils/query-helpers";
 
 @Injectable()
@@ -131,7 +134,7 @@ export class BrandRepository {
 
   async updateAddress(
     id: string,
-    data: BrandAddressUpdateInput,
+    data: Omit<UpdateBrandAddressDto, "responsibles">,
   ): Promise<BrandAddressEntity> {
     const brandAddress = await this.prismaService.brandAddress.update({
       where: {
@@ -156,6 +159,46 @@ export class BrandRepository {
     await this.prismaService.brandAddress.deleteMany({
       where: {
         id: isIn(ids),
+      },
+    });
+  }
+
+  async upsertAddressResponsibles(
+    brandAddressId: string,
+    data: UpsertBrandResponsiblesDataItem[],
+  ) {
+    const createData: UpsertBrandResponsiblesDataItem[] = [];
+    const updateData: (UpsertBrandResponsiblesDataItem & { id: string })[] = [];
+
+    data.forEach((item) => {
+      if (item.id) {
+        updateData.push(item as any);
+      } else {
+        createData.push(item);
+      }
+    });
+
+    await this.prismaService.brandResponsible.createMany({
+      data: createData.map((item) => ({ ...item, brandAddressId })),
+    });
+
+    await Promise.all(
+      updateData.map((item) =>
+        this.prismaService.brandResponsible.update({
+          where: {
+            id: item.id,
+          },
+          data: {
+            name: item.name,
+            role: item.role,
+          },
+        }),
+      ),
+    );
+
+    return this.prismaService.brandResponsible.findMany({
+      where: {
+        brandAddressId,
       },
     });
   }

@@ -46,13 +46,11 @@ export class CreateBrandsService {
       workspace,
     });
 
-    const brand = await this.brandRepository.createBrand({
+    return this.brandRepository.createBrand({
       ...data,
       workspaceId,
       logoKey: uploadedFile.key,
     });
-
-    return brand;
   }
 
   static errors = {

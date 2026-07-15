@@ -15,7 +15,7 @@ import {
   ApiValidateVerificationCodeDocs,
 } from "src/modules/accounts/signup/signup.docs";
 
-@ApiTags("Accounts / SignUp")
+@ApiTags("Accounts ⌁ SignUp")
 @Controller("accounts/signup")
 export class SignupController {
   constructor(

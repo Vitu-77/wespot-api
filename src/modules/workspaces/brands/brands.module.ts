@@ -8,6 +8,7 @@ import { CreateBrandAddressService } from "src/modules/workspaces/brands/service
 import { DeleteBrandAddressesService } from "src/modules/workspaces/brands/services/delete-brand-addresses/delete-brand-addresses.service";
 import { ListBrandsService } from "src/modules/workspaces/brands/services/list-brands/list-brands.service";
 import { UpdateBrandsService } from "src/modules/workspaces/brands/services/update-brand/update-brand.service";
+import { UpdateBrandAddressService } from "src/modules/workspaces/brands/services/update-brand-address/update-brand-address.service";
 import { ValidateBrandNameUseCase } from "src/modules/workspaces/brands/usecases/validate-brand-name/validate-brand-name.usecase";
 
 @Module({
@@ -20,6 +21,7 @@ import { ValidateBrandNameUseCase } from "src/modules/workspaces/brands/usecases
     CreateBrandsService,
     UpdateBrandsService,
     CreateBrandAddressService,
+    UpdateBrandAddressService,
     DeleteBrandAddressesService,
     ListBrandsService,
 

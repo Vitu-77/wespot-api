@@ -25,6 +25,10 @@ import {
   UpdateBrandDto,
   UpdateBrandResponseDto,
 } from "src/modules/workspaces/brands/services/update-brand/update-brand.dto";
+import {
+  UpdateBrandAddressDto,
+  UpdateBrandAddressResponseDto,
+} from "src/modules/workspaces/brands/services/update-brand-address/update-brand-address.dto";
 import { ValidateBrandNameUseCase } from "src/modules/workspaces/brands/usecases/validate-brand-name/validate-brand-name.usecase";
 import { ApiError } from "src/shared/dto/api-error.dto";
 
@@ -99,6 +103,22 @@ export function ApiCreateBrandAddressDocs() {
     ApiNotFoundResponse(
       ApiError(CreateBrandAddressService.errors.BRAND_NOT_FOUND),
     ),
+  );
+}
+
+export function ApiUpdateBrandAddressDocs() {
+  return applyDecorators(
+    ApiOperation({
+      summary: "Update address",
+      description: "Add a new addresss to a brand.",
+    }),
+    ApiBody({
+      type: UpdateBrandAddressDto,
+    }),
+    ApiOkResponse({
+      description: "Address updated successfully.",
+      type: UpdateBrandAddressResponseDto,
+    }),
   );
 }
 

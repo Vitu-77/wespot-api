@@ -16,7 +16,7 @@ import { CurrentUser } from "src/shared/decorators/current-user.decorator";
 import { ProtectedRoute } from "src/shared/decorators/protected-route.decorator";
 import { ApiError } from "src/shared/dto/api-error.dto";
 
-@ApiTags("Accounts / SignIn")
+@ApiTags("Accounts ⌁ SignIn")
 @Controller("accounts/signin")
 export class SigninController {
   constructor(
