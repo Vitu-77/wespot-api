@@ -16,7 +16,7 @@ model Brand {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   workspaceId String    @map("workspace_id")
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
   spots     Spot[]
   addresses BrandAddress[]
@@ -38,7 +38,7 @@ model BrandAddress {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   brandId String @map("brand_id")
-  brand   Brand  @relation(fields: [brandId], references: [id])
+  brand   Brand  @relation(fields: [brandId], references: [id], onDelete: Cascade)
 
   responsibles BrandResponsible[]
 
@@ -55,7 +55,7 @@ model BrandResponsible {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   brandAddressId String       @map("brand_address_id")
-  brandAddress   BrandAddress @relation(fields: [brandAddressId], references: [id])
+  brandAddress   BrandAddress @relation(fields: [brandAddressId], references: [id], onDelete: Cascade)
 
   @@index([brandAddressId])
   @@map("brand_addresses_responsibles")

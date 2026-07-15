@@ -7,7 +7,7 @@ import {
   CreateBrandDto,
   CreateBrandResponseDto,
 } from "src/modules/workspaces/brands/services/create-brand/create-brand.dto";
-import { createSlug } from "src/shared/utils/create-slug";
+import { ValidateBrandNameUseCase } from "src/modules/workspaces/brands/usecases/validate-brand-name/validate-brand-name.usecase";
 
 type CreateBrandsServicePayload = InjectWorkspaceId<CreateBrandDto> & {
   logoFile: MulterFile;
@@ -19,6 +19,7 @@ export class CreateBrandsService {
     private readonly brandRepository: BrandRepository,
     private readonly workspaceRepository: WorkspaceRepository,
     private readonly storageService: StorageService,
+    private readonly validateBrandNameUseCase: ValidateBrandNameUseCase,
   ) {}
 
   async execute({
@@ -26,6 +27,11 @@ export class CreateBrandsService {
     logoFile,
     ...data
   }: CreateBrandsServicePayload): Promise<CreateBrandResponseDto> {
+    await this.validateBrandNameUseCase.execute({
+      name: data.name,
+      workspaceId,
+    });
+
     const workspace = await this.workspaceRepository.getById(workspaceId);
 
     if (!workspace) {
@@ -38,7 +44,6 @@ export class CreateBrandsService {
       file: logoFile,
       bucket: "BRAND_LOGOS",
       workspace,
-      prefix: createSlug(`${data.name}-logo`),
     });
 
     const brand = await this.brandRepository.createBrand({

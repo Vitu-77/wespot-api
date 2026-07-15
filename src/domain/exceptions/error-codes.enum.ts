@@ -40,4 +40,5 @@ export enum ErrorCodes {
 
   // Brands
   BRAND_NOT_FOUND = "BRAND_NOT_FOUND",
+  BRAND_NAME_IS_TAKEN = "BRAND_NAME_IS_TAKEN",
 }

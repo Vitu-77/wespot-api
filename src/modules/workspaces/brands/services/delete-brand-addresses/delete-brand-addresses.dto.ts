@@ -3,9 +3,9 @@ import { IsArray, IsString } from "class-validator";
 import { DefaultSuccessResponseDto } from "src/shared/dto/default-success-response.dto";
 
 export class DeleteBrandAddressesDto {
-  @IsArray({ each: true })
-  @IsString()
-  @ApiProperty({ isArray: true })
+  @ApiProperty({ type: "string", isArray: true })
+  @IsArray()
+  @IsString({ each: true })
   ids!: string[];
 }
 

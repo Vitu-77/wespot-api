@@ -8,6 +8,7 @@ import {
   Param,
   ParseFilePipe,
   Post,
+  Put,
   Query,
   UploadedFile,
   UseInterceptors,
@@ -19,6 +20,7 @@ import {
   ApiCreateBrandDocs,
   ApiDeleteBrandAddressesDocs,
   ApiListBrandsDocs,
+  ApiUpdateBrandDocs,
 } from "src/modules/workspaces/brands/brands.docs";
 import { CreateBrandDto } from "src/modules/workspaces/brands/services/create-brand/create-brand.dto";
 import { CreateBrandsService } from "src/modules/workspaces/brands/services/create-brand/create-brand.service";
@@ -28,6 +30,8 @@ import { DeleteBrandAddressesDto } from "src/modules/workspaces/brands/services/
 import { DeleteBrandAddressesService } from "src/modules/workspaces/brands/services/delete-brand-addresses/delete-brand-addresses.service";
 import { ListBrandsParamsDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
 import { ListBrandsService } from "src/modules/workspaces/brands/services/list-brands/list-brands.service";
+import { UpdateBrandDto } from "src/modules/workspaces/brands/services/update-brand/update-brand.dto";
+import { UpdateBrandsService } from "src/modules/workspaces/brands/services/update-brand/update-brand.service";
 import { ApiWorkspaceHeader } from "src/shared/decorators/api-workspace-header.decorator";
 import { CurrentWorkspaceId } from "src/shared/decorators/current-workspace-id.decorator";
 import { ProtectedRoute } from "src/shared/decorators/protected-route.decorator";
@@ -51,6 +55,7 @@ export class BrandsController {
   constructor(
     private readonly listWorkspaceBrands: ListBrandsService,
     private readonly createBrandsService: CreateBrandsService,
+    private readonly updateBrandsService: UpdateBrandsService,
     private readonly createBrandAddressService: CreateBrandAddressService,
     private readonly deleteBrandAddressesService: DeleteBrandAddressesService,
   ) {}
@@ -84,6 +89,21 @@ export class BrandsController {
       ...body,
       workspaceId,
       logoFile,
+    });
+  }
+
+  @ProtectedRoute()
+  @Put("/:brandId")
+  @ApiUpdateBrandDocs()
+  public updateBrand(
+    @CurrentWorkspaceId() workspaceId: string,
+    @Param("brandId") brandId: string,
+    @Body() body: UpdateBrandDto,
+  ) {
+    return this.updateBrandsService.execute({
+      brandId,
+      workspaceId,
+      data: body,
     });
   }
 

@@ -1,5 +1,6 @@
 import { applyDecorators } from "@nestjs/common";
 import {
+  ApiBadRequestResponse,
   ApiBody,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -20,6 +21,11 @@ import {
   DeleteBrandAddressesResponseDto,
 } from "src/modules/workspaces/brands/services/delete-brand-addresses/delete-brand-addresses.dto";
 import { ListBrandsResponseDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
+import {
+  UpdateBrandDto,
+  UpdateBrandResponseDto,
+} from "src/modules/workspaces/brands/services/update-brand/update-brand.dto";
+import { ValidateBrandNameUseCase } from "src/modules/workspaces/brands/usecases/validate-brand-name/validate-brand-name.usecase";
 import { ApiError } from "src/shared/dto/api-error.dto";
 
 export function ApiListBrandsDocs() {
@@ -48,9 +54,30 @@ export function ApiCreateBrandDocs() {
       description: "Brand created successfully.",
       type: CreateBrandResponseDto,
     }),
-
     ApiNotFoundResponse(
       ApiError(CreateBrandsService.errors.WORKSPACE_NOT_FOUND),
+    ),
+    ApiBadRequestResponse(
+      ApiError(ValidateBrandNameUseCase.errors.BRAND_NAME_IS_TAKEN),
+    ),
+  );
+}
+
+export function ApiUpdateBrandDocs() {
+  return applyDecorators(
+    ApiOperation({
+      summary: "Update brand",
+      description: "Update a brand (Do not include addresses infos).",
+    }),
+    ApiBody({
+      type: UpdateBrandDto,
+    }),
+    ApiOkResponse({
+      description: "Brand updated successfully.",
+      type: UpdateBrandResponseDto,
+    }),
+    ApiBadRequestResponse(
+      ApiError(ValidateBrandNameUseCase.errors.BRAND_NAME_IS_TAKEN),
     ),
   );
 }
