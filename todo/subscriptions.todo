@@ -1,13 +1,13 @@
 🌍 API
   🗄️ Banco de Dados
     ☐ Criar repositorio
-    ☐ Criar modelos Prisma
-      ☐ Subscription
-      ☐ InvoiceSummary
-      ☐ Charge
+    ✔ Criar modelos Prisma @started(26-07-16 13:28) @done(26-07-16 14:26) @lasted(58m26s)
+      ✔ Subscription @done(26-07-16 14:26)
+      ✔ InvoiceSummary @done(26-07-16 14:26)
+      ✔ Charge @done(26-07-16 14:26)
   
   🏗️ Domínio
-    ☐ Criar entities/dtos
+    ✔ Criar entities/dtos @started(26-07-16 14:28) @done(26-07-16 14:29) @lasted(1m59s)
   
   🌐 Endpoints
     ☐ Criação da subscription
@@ -15,7 +15,8 @@
     ☐ Cancelamento de subscription
     ☐ Alteração de plano
     ☐ Busca de resumo mensal atual (Plano + Spots Restantes + Gerações Excedentes ao Plano)
-    
+    ☐ Atualizar cartão de crédito
+
   ⚙️ Usecases
     ☐ Atualizar spots disponíveis no InvoiceSummary ao mudar de plano
 

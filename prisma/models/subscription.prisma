@@ -1,0 +1,51 @@
+model Subscription {
+  id              String             @id @default(uuid())
+  overdueAt       DateTime?          @map("overdue_at")
+  status          SubscriptionStatus
+  creditCardToken String             @map("credit_card_token")
+  creditCardMask  String             @map("credit_card_mask")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  workspaceId String           @unique @map("workspace_id")
+  workspace   Workspace        @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  invoices    InvoiceSummary[]
+
+  @@index([workspaceId])
+  @@map("subscriptions")
+}
+
+model InvoiceSummary {
+  id             String   @id @default(uuid())
+  fromAt         DateTime @map("from_at")
+  toAt           DateTime @map("to_at")
+  availableSpots Int      @map("available_spots")
+  generatedSpots Int      @map("generated_spots")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  subscriptionId String       @map("subscription_id")
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id])
+  charges        Charge[]
+
+  @@index([subscriptionId])
+  @@map("invoices_summaries")
+}
+
+model Charge {
+  id          String       @id @default(uuid())
+  status      ChargeStatus
+  value       BigInt
+  description String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  invoiceSummaryId String         @map("invoice_summary_id")
+  invoiceSummary   InvoiceSummary @relation(fields: [invoiceSummaryId], references: [id])
+
+  @@index([invoiceSummaryId])
+  @@map("charges")
+}

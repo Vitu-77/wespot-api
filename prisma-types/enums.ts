@@ -137,6 +137,24 @@ export const CostProvider = {
 export type CostProvider = (typeof CostProvider)[keyof typeof CostProvider]
 
 
+export const SubscriptionStatus = {
+  TRIAL: 'TRIAL',
+  ACTIVE: 'ACTIVE',
+  DELINQUENT: 'DELINQUENT',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
+
+
+export const ChargeStatus = {
+  PAID: 'PAID',
+  DELINQUENT: 'DELINQUENT'
+} as const
+
+export type ChargeStatus = (typeof ChargeStatus)[keyof typeof ChargeStatus]
+
+
 export const WorkspaceType = {
   INDIVIDUAL: 'INDIVIDUAL',
   COMPANY: 'COMPANY',

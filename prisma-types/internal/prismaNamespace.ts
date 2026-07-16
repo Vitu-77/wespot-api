@@ -392,6 +392,9 @@ export const ModelName = {
   Spot: 'Spot',
   SpotInput: 'SpotInput',
   SpotCost: 'SpotCost',
+  Subscription: 'Subscription',
+  InvoiceSummary: 'InvoiceSummary',
+  Charge: 'Charge',
   User: 'User',
   Workspace: 'Workspace',
   WorkspaceMember: 'WorkspaceMember'
@@ -410,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "brand" | "brandAddress" | "brandResponsible" | "invite" | "notification" | "spot" | "spotInput" | "spotCost" | "user" | "workspace" | "workspaceMember"
+    modelProps: "brand" | "brandAddress" | "brandResponsible" | "invite" | "notification" | "spot" | "spotInput" | "spotCost" | "subscription" | "invoiceSummary" | "charge" | "user" | "workspace" | "workspaceMember"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1006,6 +1009,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Subscription: {
+      payload: Prisma.$SubscriptionPayload<ExtArgs>
+      fields: Prisma.SubscriptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SubscriptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SubscriptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+        }
+        findFirst: {
+          args: Prisma.SubscriptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SubscriptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+        }
+        findMany: {
+          args: Prisma.SubscriptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
+        }
+        create: {
+          args: Prisma.SubscriptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+        }
+        createMany: {
+          args: Prisma.SubscriptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SubscriptionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
+        }
+        delete: {
+          args: Prisma.SubscriptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+        }
+        update: {
+          args: Prisma.SubscriptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.SubscriptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SubscriptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SubscriptionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
+        }
+        upsert: {
+          args: Prisma.SubscriptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>
+        }
+        aggregate: {
+          args: Prisma.SubscriptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSubscription>
+        }
+        groupBy: {
+          args: Prisma.SubscriptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubscriptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SubscriptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubscriptionCountAggregateOutputType> | number
+        }
+      }
+    }
+    InvoiceSummary: {
+      payload: Prisma.$InvoiceSummaryPayload<ExtArgs>
+      fields: Prisma.InvoiceSummaryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InvoiceSummaryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSummaryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InvoiceSummaryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSummaryPayload>
+        }
+        findFirst: {
+          args: Prisma.InvoiceSummaryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSummaryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InvoiceSummaryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSummaryPayload>
+        }
+        findMany: {
+          args: Prisma.InvoiceSummaryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSummaryPayload>[]
+        }
+        create: {
+          args: Prisma.InvoiceSummaryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSummaryPayload>
+        }
+        createMany: {
+          args: Prisma.InvoiceSummaryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InvoiceSummaryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSummaryPayload>[]
+        }
+        delete: {
+          args: Prisma.InvoiceSummaryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSummaryPayload>
+        }
+        update: {
+          args: Prisma.InvoiceSummaryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSummaryPayload>
+        }
+        deleteMany: {
+          args: Prisma.InvoiceSummaryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InvoiceSummaryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InvoiceSummaryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSummaryPayload>[]
+        }
+        upsert: {
+          args: Prisma.InvoiceSummaryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvoiceSummaryPayload>
+        }
+        aggregate: {
+          args: Prisma.InvoiceSummaryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInvoiceSummary>
+        }
+        groupBy: {
+          args: Prisma.InvoiceSummaryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InvoiceSummaryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InvoiceSummaryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InvoiceSummaryCountAggregateOutputType> | number
+        }
+      }
+    }
+    Charge: {
+      payload: Prisma.$ChargePayload<ExtArgs>
+      fields: Prisma.ChargeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChargeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChargePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChargeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChargePayload>
+        }
+        findFirst: {
+          args: Prisma.ChargeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChargePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChargeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChargePayload>
+        }
+        findMany: {
+          args: Prisma.ChargeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChargePayload>[]
+        }
+        create: {
+          args: Prisma.ChargeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChargePayload>
+        }
+        createMany: {
+          args: Prisma.ChargeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChargeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChargePayload>[]
+        }
+        delete: {
+          args: Prisma.ChargeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChargePayload>
+        }
+        update: {
+          args: Prisma.ChargeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChargePayload>
+        }
+        deleteMany: {
+          args: Prisma.ChargeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChargeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChargeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChargePayload>[]
+        }
+        upsert: {
+          args: Prisma.ChargeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChargePayload>
+        }
+        aggregate: {
+          args: Prisma.ChargeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCharge>
+        }
+        groupBy: {
+          args: Prisma.ChargeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChargeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChargeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChargeCountAggregateOutputType> | number
+        }
+      }
+    }
     User: {
       payload: Prisma.$UserPayload<ExtArgs>
       fields: Prisma.UserFieldRefs
@@ -1384,6 +1609,47 @@ export const SpotCostScalarFieldEnum = {
 export type SpotCostScalarFieldEnum = (typeof SpotCostScalarFieldEnum)[keyof typeof SpotCostScalarFieldEnum]
 
 
+export const SubscriptionScalarFieldEnum = {
+  id: 'id',
+  overdueAt: 'overdueAt',
+  status: 'status',
+  creditCardToken: 'creditCardToken',
+  creditCardMask: 'creditCardMask',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  workspaceId: 'workspaceId'
+} as const
+
+export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
+export const InvoiceSummaryScalarFieldEnum = {
+  id: 'id',
+  fromAt: 'fromAt',
+  toAt: 'toAt',
+  availableSpots: 'availableSpots',
+  generatedSpots: 'generatedSpots',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  subscriptionId: 'subscriptionId'
+} as const
+
+export type InvoiceSummaryScalarFieldEnum = (typeof InvoiceSummaryScalarFieldEnum)[keyof typeof InvoiceSummaryScalarFieldEnum]
+
+
+export const ChargeScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  value: 'value',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  invoiceSummaryId: 'invoiceSummaryId'
+} as const
+
+export type ChargeScalarFieldEnum = (typeof ChargeScalarFieldEnum)[keyof typeof ChargeScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1640,6 +1906,48 @@ export type ListEnumCostServiceFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'SubscriptionStatus'
+ */
+export type EnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SubscriptionStatus[]'
+ */
+export type ListEnumSubscriptionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubscriptionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ChargeStatus'
+ */
+export type EnumChargeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChargeStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ChargeStatus[]'
+ */
+export type ListEnumChargeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChargeStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt[]'
+ */
+export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+/**
  * Reference to a field of type 'AuthProvider'
  */
 export type EnumAuthProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthProvider'>
@@ -1798,6 +2106,9 @@ export type GlobalOmitConfig = {
   spot?: Prisma.SpotOmit
   spotInput?: Prisma.SpotInputOmit
   spotCost?: Prisma.SpotCostOmit
+  subscription?: Prisma.SubscriptionOmit
+  invoiceSummary?: Prisma.InvoiceSummaryOmit
+  charge?: Prisma.ChargeOmit
   user?: Prisma.UserOmit
   workspace?: Prisma.WorkspaceOmit
   workspaceMember?: Prisma.WorkspaceMemberOmit

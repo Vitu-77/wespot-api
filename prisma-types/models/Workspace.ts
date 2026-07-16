@@ -193,6 +193,7 @@ export type WorkspaceWhereInput = {
   brands?: Prisma.BrandListRelationFilter
   spots?: Prisma.SpotListRelationFilter
   members?: Prisma.WorkspaceMemberListRelationFilter
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
 }
 
 export type WorkspaceOrderByWithRelationInput = {
@@ -205,6 +206,7 @@ export type WorkspaceOrderByWithRelationInput = {
   brands?: Prisma.BrandOrderByRelationAggregateInput
   spots?: Prisma.SpotOrderByRelationAggregateInput
   members?: Prisma.WorkspaceMemberOrderByRelationAggregateInput
+  subscription?: Prisma.SubscriptionOrderByWithRelationInput
 }
 
 export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
@@ -220,6 +222,7 @@ export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
   brands?: Prisma.BrandListRelationFilter
   spots?: Prisma.SpotListRelationFilter
   members?: Prisma.WorkspaceMemberListRelationFilter
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
 }, "id">
 
 export type WorkspaceOrderByWithAggregationInput = {
@@ -256,6 +259,7 @@ export type WorkspaceCreateInput = {
   brands?: Prisma.BrandCreateNestedManyWithoutWorkspaceInput
   spots?: Prisma.SpotCreateNestedManyWithoutWorkspaceInput
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateInput = {
@@ -268,6 +272,7 @@ export type WorkspaceUncheckedCreateInput = {
   brands?: Prisma.BrandUncheckedCreateNestedManyWithoutWorkspaceInput
   spots?: Prisma.SpotUncheckedCreateNestedManyWithoutWorkspaceInput
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutWorkspaceInput
 }
 
 export type WorkspaceUpdateInput = {
@@ -280,6 +285,7 @@ export type WorkspaceUpdateInput = {
   brands?: Prisma.BrandUpdateManyWithoutWorkspaceNestedInput
   spots?: Prisma.SpotUpdateManyWithoutWorkspaceNestedInput
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateInput = {
@@ -292,6 +298,7 @@ export type WorkspaceUncheckedUpdateInput = {
   brands?: Prisma.BrandUncheckedUpdateManyWithoutWorkspaceNestedInput
   spots?: Prisma.SpotUncheckedUpdateManyWithoutWorkspaceNestedInput
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateManyInput = {
@@ -381,6 +388,20 @@ export type WorkspaceUpdateOneRequiredWithoutSpotsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.WorkspaceUpdateToOneWithWhereWithoutSpotsInput, Prisma.WorkspaceUpdateWithoutSpotsInput>, Prisma.WorkspaceUncheckedUpdateWithoutSpotsInput>
 }
 
+export type WorkspaceCreateNestedOneWithoutSubscriptionInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutSubscriptionInput, Prisma.WorkspaceUncheckedCreateWithoutSubscriptionInput>
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutSubscriptionInput
+  connect?: Prisma.WorkspaceWhereUniqueInput
+}
+
+export type WorkspaceUpdateOneRequiredWithoutSubscriptionNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutSubscriptionInput, Prisma.WorkspaceUncheckedCreateWithoutSubscriptionInput>
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutSubscriptionInput
+  upsert?: Prisma.WorkspaceUpsertWithoutSubscriptionInput
+  connect?: Prisma.WorkspaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorkspaceUpdateToOneWithWhereWithoutSubscriptionInput, Prisma.WorkspaceUpdateWithoutSubscriptionInput>, Prisma.WorkspaceUncheckedUpdateWithoutSubscriptionInput>
+}
+
 export type EnumWorkspaceTypeFieldUpdateOperationsInput = {
   set?: $Enums.WorkspaceType
 }
@@ -408,6 +429,7 @@ export type WorkspaceCreateWithoutBrandsInput = {
   updatedAt?: Date | string
   spots?: Prisma.SpotCreateNestedManyWithoutWorkspaceInput
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutBrandsInput = {
@@ -419,6 +441,7 @@ export type WorkspaceUncheckedCreateWithoutBrandsInput = {
   updatedAt?: Date | string
   spots?: Prisma.SpotUncheckedCreateNestedManyWithoutWorkspaceInput
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutBrandsInput = {
@@ -446,6 +469,7 @@ export type WorkspaceUpdateWithoutBrandsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   spots?: Prisma.SpotUpdateManyWithoutWorkspaceNestedInput
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutBrandsInput = {
@@ -457,6 +481,7 @@ export type WorkspaceUncheckedUpdateWithoutBrandsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   spots?: Prisma.SpotUncheckedUpdateManyWithoutWorkspaceNestedInput
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutSpotsInput = {
@@ -468,6 +493,7 @@ export type WorkspaceCreateWithoutSpotsInput = {
   updatedAt?: Date | string
   brands?: Prisma.BrandCreateNestedManyWithoutWorkspaceInput
   members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutSpotsInput = {
@@ -479,6 +505,7 @@ export type WorkspaceUncheckedCreateWithoutSpotsInput = {
   updatedAt?: Date | string
   brands?: Prisma.BrandUncheckedCreateNestedManyWithoutWorkspaceInput
   members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutSpotsInput = {
@@ -506,6 +533,7 @@ export type WorkspaceUpdateWithoutSpotsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brands?: Prisma.BrandUpdateManyWithoutWorkspaceNestedInput
   members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutSpotsInput = {
@@ -516,6 +544,71 @@ export type WorkspaceUncheckedUpdateWithoutSpotsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brands?: Prisma.BrandUncheckedUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceCreateWithoutSubscriptionInput = {
+  id?: string
+  name?: string | null
+  type: $Enums.WorkspaceType
+  slug: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  brands?: Prisma.BrandCreateNestedManyWithoutWorkspaceInput
+  spots?: Prisma.SpotCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceUncheckedCreateWithoutSubscriptionInput = {
+  id?: string
+  name?: string | null
+  type: $Enums.WorkspaceType
+  slug: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutWorkspaceInput
+  spots?: Prisma.SpotUncheckedCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceCreateOrConnectWithoutSubscriptionInput = {
+  where: Prisma.WorkspaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutSubscriptionInput, Prisma.WorkspaceUncheckedCreateWithoutSubscriptionInput>
+}
+
+export type WorkspaceUpsertWithoutSubscriptionInput = {
+  update: Prisma.XOR<Prisma.WorkspaceUpdateWithoutSubscriptionInput, Prisma.WorkspaceUncheckedUpdateWithoutSubscriptionInput>
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutSubscriptionInput, Prisma.WorkspaceUncheckedCreateWithoutSubscriptionInput>
+  where?: Prisma.WorkspaceWhereInput
+}
+
+export type WorkspaceUpdateToOneWithWhereWithoutSubscriptionInput = {
+  where?: Prisma.WorkspaceWhereInput
+  data: Prisma.XOR<Prisma.WorkspaceUpdateWithoutSubscriptionInput, Prisma.WorkspaceUncheckedUpdateWithoutSubscriptionInput>
+}
+
+export type WorkspaceUpdateWithoutSubscriptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumWorkspaceTypeFieldUpdateOperationsInput | $Enums.WorkspaceType
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  brands?: Prisma.BrandUpdateManyWithoutWorkspaceNestedInput
+  spots?: Prisma.SpotUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceUncheckedUpdateWithoutSubscriptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.EnumWorkspaceTypeFieldUpdateOperationsInput | $Enums.WorkspaceType
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutWorkspaceNestedInput
+  spots?: Prisma.SpotUncheckedUpdateManyWithoutWorkspaceNestedInput
   members?: Prisma.WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
@@ -528,6 +621,7 @@ export type WorkspaceCreateWithoutMembersInput = {
   updatedAt?: Date | string
   brands?: Prisma.BrandCreateNestedManyWithoutWorkspaceInput
   spots?: Prisma.SpotCreateNestedManyWithoutWorkspaceInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutMembersInput = {
@@ -539,6 +633,7 @@ export type WorkspaceUncheckedCreateWithoutMembersInput = {
   updatedAt?: Date | string
   brands?: Prisma.BrandUncheckedCreateNestedManyWithoutWorkspaceInput
   spots?: Prisma.SpotUncheckedCreateNestedManyWithoutWorkspaceInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutMembersInput = {
@@ -566,6 +661,7 @@ export type WorkspaceUpdateWithoutMembersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brands?: Prisma.BrandUpdateManyWithoutWorkspaceNestedInput
   spots?: Prisma.SpotUpdateManyWithoutWorkspaceNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutMembersInput = {
@@ -577,6 +673,7 @@ export type WorkspaceUncheckedUpdateWithoutMembersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brands?: Prisma.BrandUncheckedUpdateManyWithoutWorkspaceNestedInput
   spots?: Prisma.SpotUncheckedUpdateManyWithoutWorkspaceNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutWorkspaceNestedInput
 }
 
 
@@ -638,6 +735,7 @@ export type WorkspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   brands?: boolean | Prisma.Workspace$brandsArgs<ExtArgs>
   spots?: boolean | Prisma.Workspace$spotsArgs<ExtArgs>
   members?: boolean | Prisma.Workspace$membersArgs<ExtArgs>
+  subscription?: boolean | Prisma.Workspace$subscriptionArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["workspace"]>
 
@@ -673,6 +771,7 @@ export type WorkspaceInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   brands?: boolean | Prisma.Workspace$brandsArgs<ExtArgs>
   spots?: boolean | Prisma.Workspace$spotsArgs<ExtArgs>
   members?: boolean | Prisma.Workspace$membersArgs<ExtArgs>
+  subscription?: boolean | Prisma.Workspace$subscriptionArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WorkspaceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -684,6 +783,7 @@ export type $WorkspacePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     brands: Prisma.$BrandPayload<ExtArgs>[]
     spots: Prisma.$SpotPayload<ExtArgs>[]
     members: Prisma.$WorkspaceMemberPayload<ExtArgs>[]
+    subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1089,6 +1189,7 @@ export interface Prisma__WorkspaceClient<T, Null = never, ExtArgs extends runtim
   brands<T extends Prisma.Workspace$brandsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$brandsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   spots<T extends Prisma.Workspace$spotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$spotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   members<T extends Prisma.Workspace$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkspaceMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subscription<T extends Prisma.Workspace$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1586,6 +1687,25 @@ export type Workspace$membersArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.WorkspaceMemberScalarFieldEnum | Prisma.WorkspaceMemberScalarFieldEnum[]
+}
+
+/**
+ * Workspace.subscription
+ */
+export type Workspace$subscriptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subscription
+   */
+  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subscription
+   */
+  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionWhereInput
 }
 
 /**

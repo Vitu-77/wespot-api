@@ -59,6 +59,9 @@ export const ModelName = {
   Spot: 'Spot',
   SpotInput: 'SpotInput',
   SpotCost: 'SpotCost',
+  Subscription: 'Subscription',
+  InvoiceSummary: 'InvoiceSummary',
+  Charge: 'Charge',
   User: 'User',
   Workspace: 'Workspace',
   WorkspaceMember: 'WorkspaceMember'
@@ -195,6 +198,47 @@ export const SpotCostScalarFieldEnum = {
 } as const
 
 export type SpotCostScalarFieldEnum = (typeof SpotCostScalarFieldEnum)[keyof typeof SpotCostScalarFieldEnum]
+
+
+export const SubscriptionScalarFieldEnum = {
+  id: 'id',
+  overdueAt: 'overdueAt',
+  status: 'status',
+  creditCardToken: 'creditCardToken',
+  creditCardMask: 'creditCardMask',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  workspaceId: 'workspaceId'
+} as const
+
+export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
+export const InvoiceSummaryScalarFieldEnum = {
+  id: 'id',
+  fromAt: 'fromAt',
+  toAt: 'toAt',
+  availableSpots: 'availableSpots',
+  generatedSpots: 'generatedSpots',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  subscriptionId: 'subscriptionId'
+} as const
+
+export type InvoiceSummaryScalarFieldEnum = (typeof InvoiceSummaryScalarFieldEnum)[keyof typeof InvoiceSummaryScalarFieldEnum]
+
+
+export const ChargeScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  value: 'value',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  invoiceSummaryId: 'invoiceSummaryId'
+} as const
+
+export type ChargeScalarFieldEnum = (typeof ChargeScalarFieldEnum)[keyof typeof ChargeScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

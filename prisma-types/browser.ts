@@ -58,6 +58,21 @@ export type SpotInput = Prisma.SpotInputModel
  */
 export type SpotCost = Prisma.SpotCostModel
 /**
+ * Model Subscription
+ * 
+ */
+export type Subscription = Prisma.SubscriptionModel
+/**
+ * Model InvoiceSummary
+ * 
+ */
+export type InvoiceSummary = Prisma.InvoiceSummaryModel
+/**
+ * Model Charge
+ * 
+ */
+export type Charge = Prisma.ChargeModel
+/**
  * Model User
  * 
  */

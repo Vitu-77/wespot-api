@@ -1,0 +1,11 @@
+enum SubscriptionStatus {
+  TRIAL
+  ACTIVE
+  DELINQUENT
+  INACTIVE
+}
+
+enum ChargeStatus {
+  PAID
+  DELINQUENT
+}
