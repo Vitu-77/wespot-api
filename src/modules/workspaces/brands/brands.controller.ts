@@ -27,6 +27,8 @@ import { CreateBrandDto } from "src/modules/workspaces/brands/services/create-br
 import { CreateBrandsService } from "src/modules/workspaces/brands/services/create-brand/create-brand.service";
 import { CreateBrandAddressDto } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.dto";
 import { CreateBrandAddressService } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.service";
+import { CreateBrandResponsibleDto } from "src/modules/workspaces/brands/services/create-responsible/create-responsible.dto";
+import { CreateBrandResponsibleService } from "src/modules/workspaces/brands/services/create-responsible/create-responsible.service";
 import { DeleteBrandAddressesDto } from "src/modules/workspaces/brands/services/delete-brand-addresses/delete-brand-addresses.dto";
 import { DeleteBrandAddressesService } from "src/modules/workspaces/brands/services/delete-brand-addresses/delete-brand-addresses.service";
 import { ListBrandsParamsDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
@@ -62,6 +64,7 @@ export class BrandsController {
     private readonly createBrandAddressService: CreateBrandAddressService,
     private readonly updateBrandAddressService: UpdateBrandAddressService,
     private readonly deleteBrandAddressesService: DeleteBrandAddressesService,
+    private readonly createBrandResponsibleService: CreateBrandResponsibleService,
   ) {}
 
   @ProtectedRoute()
@@ -139,5 +142,20 @@ export class BrandsController {
   @ApiDeleteBrandAddressesDocs()
   public deleteBrandAddresses(@Body() body: DeleteBrandAddressesDto) {
     return this.deleteBrandAddressesService.execute(body);
+  }
+
+  @ProtectedRoute()
+  @Post("/:brandId/address/:addressId/responsible")
+  @ApiDeleteBrandAddressesDocs()
+  public createAddressResponsible(
+    @Param("brandId") brandId: string,
+    @Param("addressId") addressId: string,
+    @Body() body: CreateBrandResponsibleDto,
+  ) {
+    return this.createBrandResponsibleService.execute({
+      brandId,
+      addressId,
+      data: body,
+    });
   }
 }

@@ -10,6 +10,7 @@ import {
   BrandRepositoryCreateAddressParams,
   BrandRepositoryCreateParams,
   BrandRepositoryListParams,
+  BrandRepositoryListResponse,
   UpsertBrandResponsiblesDataItem,
 } from "src/infra/database/repositories/brand-repository/brand.repository.types";
 import { UpdateBrandAddressDto } from "src/modules/workspaces/brands/services/update-brand-address/update-brand-address.dto";
@@ -23,7 +24,7 @@ export class BrandRepository {
     pageNumber,
     pageSize,
     ...filters
-  }: BrandRepositoryListParams): Promise<BrandEntity[]> {
+  }: BrandRepositoryListParams): Promise<BrandRepositoryListResponse> {
     const brands = await this.prismaService.brand.findMany({
       ...paginate({ pageNumber, pageSize }),
 
@@ -43,7 +44,7 @@ export class BrandRepository {
       },
     });
 
-    return brands as BrandEntity[];
+    return brands;
   }
 
   async listAndCount(params: BrandRepositoryListParams) {

@@ -989,6 +989,65 @@
         ]
       }
     },
+    "/api/v1/workspace/brands/{brandId}/address/{addressId}/responsible": {
+      "post": {
+        "description": "Delete brand addresses for given ids.",
+        "operationId": "createAddressResponsible",
+        "parameters": [
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Id from selected workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "brandId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "addressId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteBrandAddressesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Addresses deleted successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteBrandAddressesResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete address",
+        "tags": [
+          "Workspace ⌁ Brands"
+        ]
+      }
+    },
     "/api/v1/workspace/spots": {
       "get": {
         "operationId": "listSpots",

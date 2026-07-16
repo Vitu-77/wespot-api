@@ -176,9 +176,19 @@ export const ErrorsMap: Record<ErrorCodes, ErrorDiscrimination> = {
     error: ErrorCodes.BRAND_NOT_FOUND,
     statusCode: 404,
   },
+  BRAND_ADDRESS_NOT_FOUND: {
+    message: "Brand address not found.",
+    error: ErrorCodes.BRAND_ADDRESS_NOT_FOUND,
+    statusCode: 404,
+  },
   BRAND_NAME_IS_TAKEN: {
     message: "Brand name is taken.",
     error: ErrorCodes.BRAND_NAME_IS_TAKEN,
+    statusCode: 400,
+  },
+  BRAND_RESPONSIBLE_NAME_IS_TAKEN: {
+    message: "Brand responsible name is taken.",
+    error: ErrorCodes.BRAND_RESPONSIBLE_NAME_IS_TAKEN,
     statusCode: 400,
   },
 };

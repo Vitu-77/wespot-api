@@ -52,4 +52,7 @@ declare global {
     /** Caminho completo (diskStorage) */
     path?: string;
   }
+
+  // Utils
+  type RequireFields<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
 }
