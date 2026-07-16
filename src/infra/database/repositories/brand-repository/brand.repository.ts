@@ -148,7 +148,7 @@ export class BrandRepository {
     return brandAddress;
   }
 
-  async deleteBrand(id: string): Promise<void> {
+  async deleteBrandById(id: string): Promise<void> {
     await this.prismaService.brand.delete({
       where: {
         id,
@@ -158,6 +158,14 @@ export class BrandRepository {
 
   async deleteAddressesByIds(ids: string[]): Promise<void> {
     await this.prismaService.brandAddress.deleteMany({
+      where: {
+        id: isIn(ids),
+      },
+    });
+  }
+
+  async deleteResponsiblesByIds(ids: string[]): Promise<void> {
+    await this.prismaService.brandResponsible.deleteMany({
       where: {
         id: isIn(ids),
       },

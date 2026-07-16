@@ -4,7 +4,7 @@ import { BrandRepository } from "src/infra/database/repositories/brand-repositor
 import {
   CreateBrandResponsibleDto,
   CreateBrandResponsibleResponseDto,
-} from "src/modules/workspaces/brands/services/create-responsible/create-responsible.dto";
+} from "src/modules/workspaces/brands/services/create-brand-address-responsible/create-brand-address-responsible.dto";
 import { ValidateBrandResponsibleNameUseCase } from "src/modules/workspaces/brands/usecases/validate-responsible-name/validate-responsible-name.usecase";
 import { isEqualString } from "src/shared/utils/is-equal-strings.util";
 
