@@ -1,0 +1,36 @@
+🌍 API
+  🗄️ Banco de Dados
+    ☐ Criar repositorio
+    ☐ Criar modelos Prisma
+      ☐ SpotInput
+      ☐ SpotScript
+      ☐ SpotCost
+      ☐ Spot
+  
+  🏗️ Domínio
+    ☐ Criar entities/dtos
+  
+  🌐 Endpoints
+    ☐ Listagem
+    ☐ Exclusão
+    ☐ Criação de roteiro
+    ☐ Update de roteiro
+    ☐ Geração de áudio do spot
+    ☐ Finalização do spot (Inserção de trilha, efeitos, masterização e etc...)
+  
+  ⚙️ Usecases
+    ☐ Verificar spots disponíveis dentro da fatura atual com base no plano do workspace
+    ☐ Recalcular spots criados/disponíveis dentro da fatura autal após gerar um spot
+    
+  🔌 Serviços
+    ☐ Open-Ai  (Geração de roteiros)
+    ☐ BullMQ   (Comunicação Api <- -> Worker)
+
+⚙️ Worker-Studio
+  🔌 Serviços
+    ☐ Fish.Audio
+    ☐ ElevenLabs
+  
+  ⚡ Handlers
+    ☐ Geração de áudio TTS
+    ☐ Criação/Salvamento do spot

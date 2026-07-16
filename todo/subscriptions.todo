@@ -1,0 +1,31 @@
+🌍 API
+  🗄️ Banco de Dados
+    ☐ Criar repositorio
+    ☐ Criar modelos Prisma
+      ☐ Subscription
+      ☐ InvoiceSummary
+      ☐ Charge
+  
+  🏗️ Domínio
+    ☐ Criar entities/dtos
+  
+  🌐 Endpoints
+    ☐ Criação da subscription
+    ☐ Listagem de resumos mensais (InvoiceSummary)
+    ☐ Cancelamento de subscription
+    ☐ Alteração de plano
+    ☐ Busca de resumo mensal atual (Plano + Spots Restantes + Gerações Excedentes ao Plano)
+    
+  ⚙️ Usecases
+    ☐ Atualizar spots disponíveis no InvoiceSummary ao mudar de plano
+
+  🔌 Serviços
+    ☐ Efí-Payments
+
+⚙️ Worker-Subscriptions (Cron com execuções diárias)
+  🔌 Serviços
+    ☐ Efí-Payments
+  
+  ⚡ Handlers
+    ☐ Verificação de subscriptions com cobrança a ser disparada no dia
+    ☐ Envio do resumo da fatura por email
