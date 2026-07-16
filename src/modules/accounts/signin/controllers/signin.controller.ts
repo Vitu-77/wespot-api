@@ -37,7 +37,7 @@ export class SigninController {
     return this.signinWithGoogleDto.execute(body);
   }
 
-  @Delete()
+  @Delete("/")
   @ProtectedRoute()
   @ApiSignoutDocs()
   @ApiUnauthorizedResponse(ApiError(ErrorsMap.AUTH_TOKEN_IS_MISSING))

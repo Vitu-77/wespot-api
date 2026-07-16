@@ -2,7 +2,9 @@ import { Module } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
 import { StorageService } from "src/infra/storage/storage.service";
 import { AuthGuard } from "src/modules/accounts/signin/guards/auth.guard";
-import { BrandsController } from "src/modules/workspaces/brands/brands.controller";
+import { BrandsController } from "src/modules/workspaces/brands/controllers/brands.controller";
+import { BrandAddressesController } from "src/modules/workspaces/brands/controllers/brands-addresses.controller";
+import { BrandResponsiblesController } from "src/modules/workspaces/brands/controllers/brands-responsibles.controller";
 import { CreateBrandsService } from "src/modules/workspaces/brands/services/create-brand/create-brand.service";
 import { CreateBrandAddressService } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.service";
 import { CreateBrandResponsibleService } from "src/modules/workspaces/brands/services/create-brand-address-responsible/create-brand-address-responsible.service";
@@ -17,7 +19,11 @@ import { ValidateBrandResponsibleNameUseCase } from "src/modules/workspaces/bran
 
 @Module({
   imports: [JwtModule],
-  controllers: [BrandsController],
+  controllers: [
+    BrandsController,
+    BrandAddressesController,
+    BrandResponsiblesController,
+  ],
   providers: [
     AuthGuard,
     StorageService,

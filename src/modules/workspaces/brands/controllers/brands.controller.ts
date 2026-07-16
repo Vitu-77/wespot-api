@@ -16,32 +16,18 @@ import {
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiTags } from "@nestjs/swagger";
 import {
-  ApiCreateBrandAddressDocs,
-  ApiCreateBrandAddressResponsibleDocs,
   ApiCreateBrandDocs,
-  ApiDeleteBrandAddressesDocs,
-  ApiDeleteBrandAddressResponsiblesDocs,
   ApiDeleteBrandDocs,
   ApiListBrandsDocs,
-  ApiUpdateBrandAddressDocs,
   ApiUpdateBrandDocs,
 } from "src/modules/workspaces/brands/brands.docs";
 import { CreateBrandDto } from "src/modules/workspaces/brands/services/create-brand/create-brand.dto";
 import { CreateBrandsService } from "src/modules/workspaces/brands/services/create-brand/create-brand.service";
-import { CreateBrandAddressDto } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.dto";
-import { CreateBrandAddressService } from "src/modules/workspaces/brands/services/create-brand-address/create-brand-address.service";
-import { CreateBrandResponsibleDto } from "src/modules/workspaces/brands/services/create-brand-address-responsible/create-brand-address-responsible.dto";
-import { CreateBrandResponsibleService } from "src/modules/workspaces/brands/services/create-brand-address-responsible/create-brand-address-responsible.service";
 import { DeleteBrandService } from "src/modules/workspaces/brands/services/delete-brand/delete-brand.service";
-import { DeleteBrandAddressResponsiblesService } from "src/modules/workspaces/brands/services/delete-brand-address-responsibles/delete-brand-address-responsibles.service";
-import { DeleteBrandAddressesDto } from "src/modules/workspaces/brands/services/delete-brand-addresses/delete-brand-addresses.dto";
-import { DeleteBrandAddressesService } from "src/modules/workspaces/brands/services/delete-brand-addresses/delete-brand-addresses.service";
 import { ListBrandsParamsDto } from "src/modules/workspaces/brands/services/list-brands/list-brands.dto";
 import { ListBrandsService } from "src/modules/workspaces/brands/services/list-brands/list-brands.service";
 import { UpdateBrandDto } from "src/modules/workspaces/brands/services/update-brand/update-brand.dto";
 import { UpdateBrandsService } from "src/modules/workspaces/brands/services/update-brand/update-brand.service";
-import { UpdateBrandAddressDto } from "src/modules/workspaces/brands/services/update-brand-address/update-brand-address.dto";
-import { UpdateBrandAddressService } from "src/modules/workspaces/brands/services/update-brand-address/update-brand-address.service";
 import { ApiWorkspaceHeader } from "src/shared/decorators/api-workspace-header.decorator";
 import { CurrentWorkspaceId } from "src/shared/decorators/current-workspace-id.decorator";
 import { ProtectedRoute } from "src/shared/decorators/protected-route.decorator";
@@ -66,12 +52,7 @@ export class BrandsController {
     private readonly listWorkspaceBrands: ListBrandsService,
     private readonly createBrandsService: CreateBrandsService,
     private readonly updateBrandsService: UpdateBrandsService,
-    private readonly createBrandAddressService: CreateBrandAddressService,
-    private readonly updateBrandAddressService: UpdateBrandAddressService,
     private readonly deleteBrandService: DeleteBrandService,
-    private readonly deleteBrandAddressesService: DeleteBrandAddressesService,
-    private readonly createBrandResponsibleService: CreateBrandResponsibleService,
-    private readonly deleteBrandAddressResponsiblesService: DeleteBrandAddressResponsiblesService,
   ) {}
 
   @ProtectedRoute()
@@ -126,57 +107,5 @@ export class BrandsController {
   @ApiDeleteBrandDocs()
   public deleteBrand(@Param("brandId") brandId: string) {
     return this.deleteBrandService.execute({ brandId });
-  }
-
-  @ProtectedRoute()
-  @Post("/:brandId/address")
-  @ApiCreateBrandAddressDocs()
-  public createBrandAddress(
-    @Param("brandId") brandId: string,
-    @Body() body: CreateBrandAddressDto,
-  ) {
-    return this.createBrandAddressService.execute({ ...body, brandId });
-  }
-
-  @ProtectedRoute()
-  @Put("/:brandId/address/:addressId")
-  @ApiUpdateBrandAddressDocs()
-  public updateBrandAddress(
-    @Param("addressId") addressId: string,
-    @Body() body: UpdateBrandAddressDto,
-  ) {
-    return this.updateBrandAddressService.execute({
-      data: body,
-      addressId,
-    });
-  }
-
-  @ProtectedRoute({ roles: ["ADMIN", "OWNER"] })
-  @Delete("/:brandId/address")
-  @ApiDeleteBrandAddressesDocs()
-  public deleteBrandAddresses(@Body() body: DeleteBrandAddressesDto) {
-    return this.deleteBrandAddressesService.execute(body);
-  }
-
-  @ProtectedRoute()
-  @Post("/:brandId/address/:addressId/responsible")
-  @ApiCreateBrandAddressResponsibleDocs()
-  public createAddressResponsible(
-    @Param("brandId") brandId: string,
-    @Param("addressId") addressId: string,
-    @Body() body: CreateBrandResponsibleDto,
-  ) {
-    return this.createBrandResponsibleService.execute({
-      brandId,
-      addressId,
-      data: body,
-    });
-  }
-
-  @ProtectedRoute({ roles: ["ADMIN", "OWNER"] })
-  @Delete("/:brandId/address/:addressId/responsibles")
-  @ApiDeleteBrandAddressResponsiblesDocs()
-  public deleteBrandAddressResponsibles(@Body() body: DeleteBrandAddressesDto) {
-    return this.deleteBrandAddressResponsiblesService.execute(body);
   }
 }
