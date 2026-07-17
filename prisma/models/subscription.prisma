@@ -8,9 +8,13 @@ model Subscription {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  workspaceId String           @unique @map("workspace_id")
-  workspace   Workspace        @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  invoices    InvoiceSummary[]
+  workspaceId String    @unique @map("workspace_id")
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  planId String @unique @map("plan_id")
+  plan   Plan   @relation(fields: [planId], references: [id])
+
+  invoices InvoiceSummary[]
 
   @@index([workspaceId])
   @@map("subscriptions")
