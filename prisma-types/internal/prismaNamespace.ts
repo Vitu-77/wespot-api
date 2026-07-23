@@ -392,6 +392,8 @@ export const ModelName = {
   Plan: 'Plan',
   Spot: 'Spot',
   SpotInput: 'SpotInput',
+  SpotVersion: 'SpotVersion',
+  SpotScript: 'SpotScript',
   SpotCost: 'SpotCost',
   Subscription: 'Subscription',
   InvoiceSummary: 'InvoiceSummary',
@@ -414,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "brand" | "brandAddress" | "brandResponsible" | "invite" | "notification" | "plan" | "spot" | "spotInput" | "spotCost" | "subscription" | "invoiceSummary" | "charge" | "user" | "workspace" | "workspaceMember"
+    modelProps: "brand" | "brandAddress" | "brandResponsible" | "invite" | "notification" | "plan" | "spot" | "spotInput" | "spotVersion" | "spotScript" | "spotCost" | "subscription" | "invoiceSummary" | "charge" | "user" | "workspace" | "workspaceMember"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1007,6 +1009,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.SpotInputCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.SpotInputCountAggregateOutputType> | number
+        }
+      }
+    }
+    SpotVersion: {
+      payload: Prisma.$SpotVersionPayload<ExtArgs>
+      fields: Prisma.SpotVersionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SpotVersionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotVersionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SpotVersionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotVersionPayload>
+        }
+        findFirst: {
+          args: Prisma.SpotVersionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotVersionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SpotVersionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotVersionPayload>
+        }
+        findMany: {
+          args: Prisma.SpotVersionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotVersionPayload>[]
+        }
+        create: {
+          args: Prisma.SpotVersionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotVersionPayload>
+        }
+        createMany: {
+          args: Prisma.SpotVersionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SpotVersionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotVersionPayload>[]
+        }
+        delete: {
+          args: Prisma.SpotVersionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotVersionPayload>
+        }
+        update: {
+          args: Prisma.SpotVersionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotVersionPayload>
+        }
+        deleteMany: {
+          args: Prisma.SpotVersionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SpotVersionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SpotVersionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotVersionPayload>[]
+        }
+        upsert: {
+          args: Prisma.SpotVersionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotVersionPayload>
+        }
+        aggregate: {
+          args: Prisma.SpotVersionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSpotVersion>
+        }
+        groupBy: {
+          args: Prisma.SpotVersionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SpotVersionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SpotVersionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SpotVersionCountAggregateOutputType> | number
+        }
+      }
+    }
+    SpotScript: {
+      payload: Prisma.$SpotScriptPayload<ExtArgs>
+      fields: Prisma.SpotScriptFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SpotScriptFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotScriptPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SpotScriptFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotScriptPayload>
+        }
+        findFirst: {
+          args: Prisma.SpotScriptFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotScriptPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SpotScriptFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotScriptPayload>
+        }
+        findMany: {
+          args: Prisma.SpotScriptFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotScriptPayload>[]
+        }
+        create: {
+          args: Prisma.SpotScriptCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotScriptPayload>
+        }
+        createMany: {
+          args: Prisma.SpotScriptCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SpotScriptCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotScriptPayload>[]
+        }
+        delete: {
+          args: Prisma.SpotScriptDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotScriptPayload>
+        }
+        update: {
+          args: Prisma.SpotScriptUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotScriptPayload>
+        }
+        deleteMany: {
+          args: Prisma.SpotScriptDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SpotScriptUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SpotScriptUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotScriptPayload>[]
+        }
+        upsert: {
+          args: Prisma.SpotScriptUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpotScriptPayload>
+        }
+        aggregate: {
+          args: Prisma.SpotScriptAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSpotScript>
+        }
+        groupBy: {
+          args: Prisma.SpotScriptGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SpotScriptGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SpotScriptCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SpotScriptCountAggregateOutputType> | number
         }
       }
     }
@@ -1658,18 +1808,15 @@ export type PlanScalarFieldEnum = (typeof PlanScalarFieldEnum)[keyof typeof Plan
 export const SpotScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  status: 'status',
-  script: 'script',
-  voiceId: 'voiceId',
-  audioUrl: 'audioUrl',
+  isDraft: 'isDraft',
   starred: 'starred',
   expectedDuration: 'expectedDuration',
-  audioDuration: 'audioDuration',
+  type: 'type',
+  voiceTone: 'voiceTone',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   workspaceId: 'workspaceId',
-  brandId: 'brandId',
-  inputId: 'inputId'
+  brandId: 'brandId'
 } as const
 
 export type SpotScalarFieldEnum = (typeof SpotScalarFieldEnum)[keyof typeof SpotScalarFieldEnum]
@@ -1683,6 +1830,32 @@ export const SpotInputScalarFieldEnum = {
 } as const
 
 export type SpotInputScalarFieldEnum = (typeof SpotInputScalarFieldEnum)[keyof typeof SpotInputScalarFieldEnum]
+
+
+export const SpotVersionScalarFieldEnum = {
+  id: 'id',
+  filename: 'filename',
+  starred: 'starred',
+  audioDuration: 'audioDuration',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  voiceId: 'voiceId',
+  spotId: 'spotId'
+} as const
+
+export type SpotVersionScalarFieldEnum = (typeof SpotVersionScalarFieldEnum)[keyof typeof SpotVersionScalarFieldEnum]
+
+
+export const SpotScriptScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  spotVersionId: 'spotVersionId'
+} as const
+
+export type SpotScriptScalarFieldEnum = (typeof SpotScriptScalarFieldEnum)[keyof typeof SpotScriptScalarFieldEnum]
 
 
 export const SpotCostScalarFieldEnum = {
@@ -1933,20 +2106,6 @@ export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
- * Reference to a field of type 'SpotStatus'
- */
-export type EnumSpotStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SpotStatus'>
-    
-
-
-/**
- * Reference to a field of type 'SpotStatus[]'
- */
-export type ListEnumSpotStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SpotStatus[]'>
-    
-
-
-/**
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -1968,6 +2127,34 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
+ * Reference to a field of type 'SpotType'
+ */
+export type EnumSpotTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SpotType'>
+    
+
+
+/**
+ * Reference to a field of type 'SpotType[]'
+ */
+export type ListEnumSpotTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SpotType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SpotTone'
+ */
+export type EnumSpotToneFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SpotTone'>
+    
+
+
+/**
+ * Reference to a field of type 'SpotTone[]'
+ */
+export type ListEnumSpotToneFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SpotTone[]'>
+    
+
+
+/**
  * Reference to a field of type 'Json'
  */
 export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -1982,16 +2169,30 @@ export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
 
 
 /**
- * Reference to a field of type 'CostProvider'
+ * Reference to a field of type 'SpotStatus'
  */
-export type EnumCostProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CostProvider'>
+export type EnumSpotStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SpotStatus'>
     
 
 
 /**
- * Reference to a field of type 'CostProvider[]'
+ * Reference to a field of type 'SpotStatus[]'
  */
-export type ListEnumCostProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CostProvider[]'>
+export type ListEnumSpotStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SpotStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TTSProvider'
+ */
+export type EnumTTSProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TTSProvider'>
+    
+
+
+/**
+ * Reference to a field of type 'TTSProvider[]'
+ */
+export type ListEnumTTSProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TTSProvider[]'>
     
 
 
@@ -2196,6 +2397,8 @@ export type GlobalOmitConfig = {
   plan?: Prisma.PlanOmit
   spot?: Prisma.SpotOmit
   spotInput?: Prisma.SpotInputOmit
+  spotVersion?: Prisma.SpotVersionOmit
+  spotScript?: Prisma.SpotScriptOmit
   spotCost?: Prisma.SpotCostOmit
   subscription?: Prisma.SubscriptionOmit
   invoiceSummary?: Prisma.InvoiceSummaryOmit

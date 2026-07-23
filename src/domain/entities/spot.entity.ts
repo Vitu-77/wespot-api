@@ -1,17 +1,27 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { SpotStatus } from "prisma-types/enums";
+import { SpotTone, SpotType } from "prisma-types/enums";
 import { BaseEntity, BaseEntityDto } from "src/domain/entities/base.entity";
-import { BrandEntity } from "src/domain/entities/brand.entity";
-import { WorkspaceEntity } from "src/domain/entities/workspace.entity";
+import { BrandEntity, BrandEntityDto } from "src/domain/entities/brand.entity";
+import { SpotCostEntityDto } from "src/domain/entities/spot-cost.entity";
+import {
+  SpotInputEntity,
+  SpotInputEntityDto,
+} from "src/domain/entities/spot-input.entity";
+import {
+  SpotVersionEntity,
+  SpotVersionEntityDto,
+} from "src/domain/entities/spot-version.entity";
+import {
+  WorkspaceEntity,
+  WorkspaceEntityDto,
+} from "src/domain/entities/workspace.entity";
 
 export type SpotEntity = BaseEntity & {
   title: string;
-  status: SpotStatus;
-  script: string;
-  audioUrl: string | null;
+  isDraft: boolean;
   starred: boolean;
-  expectedDuration: number;
-  audioDuration: number | null;
+  type: SpotType;
+  voiceTone: SpotTone;
 
   workspaceId: string;
   workspace?: WorkspaceEntity;
@@ -20,13 +30,11 @@ export type SpotEntity = BaseEntity & {
   brand?: BrandEntity;
 
   inputId: string | null;
-  // input
+  input?: SpotInputEntity;
 
-  costs: [];
-  // TODO: incluir costs
+  versions: SpotVersionEntity[];
 
-  voiceId: string | null;
-  // TODO: incluir voices
+  // costs: SpotCostEN
 };
 
 export class SpotEntityDto extends BaseEntityDto implements SpotEntity {
@@ -34,41 +42,38 @@ export class SpotEntityDto extends BaseEntityDto implements SpotEntity {
   title!: string;
 
   @ApiProperty()
-  status!: SpotStatus;
-
-  @ApiProperty()
-  script!: string;
-
-  @ApiProperty()
-  audioUrl!: string | null;
+  isDraft!: boolean;
 
   @ApiProperty()
   starred!: boolean;
 
   @ApiProperty()
-  expectedDuration!: number;
+  type!: SpotType;
 
-  @ApiProperty()
-  audioDuration!: number | null;
+  @ApiProperty({ enum: SpotTone })
+  voiceTone!: SpotTone;
 
   @ApiProperty()
   workspaceId!: string;
 
-  @ApiProperty()
-  workspace?: WorkspaceEntity | undefined;
+  @ApiProperty({ type: () => WorkspaceEntityDto, required: false })
+  workspace?: WorkspaceEntityDto;
 
   @ApiProperty()
   brandId!: string | null;
 
-  @ApiProperty()
-  brand?: BrandEntity | undefined;
+  @ApiProperty({ type: () => BrandEntityDto, required: false })
+  brand?: BrandEntityDto;
 
   @ApiProperty()
   inputId!: string | null;
 
-  @ApiProperty()
-  voiceId!: string | null;
+  @ApiProperty({ type: SpotInputEntityDto, required: false })
+  input?: SpotInputEntityDto;
 
-  costs!: [];
-  // TODO: Incluir costs
+  @ApiProperty({ isArray: true, type: () => SpotVersionEntityDto })
+  versions!: SpotVersionEntityDto[];
+
+  @ApiProperty({ isArray: true, type: () => SpotCostEntityDto })
+  costs!: SpotCostEntityDto;
 }

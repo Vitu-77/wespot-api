@@ -1,13 +1,11 @@
 model Spot {
-  id               String     @id @default(uuid())
+  id               String   @id @default(uuid())
   title            String
-  status           SpotStatus
-  script           String
-  voiceId          String?    @map("voice_id")
-  audioUrl         String?    @map("audio_url")
+  isDraft          Boolean  @map("is_draft")
   starred          Boolean
-  expectedDuration Int        @map("expected_duration")
-  audioDuration    Int?       @map("audio_duration")
+  expectedDuration Int      @map("expected_duration")
+  type             SpotType
+  voiceTone        SpotTone @map("voice_tone")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -18,12 +16,13 @@ model Spot {
   brandId String? @map("brand_id")
   brand   Brand?  @relation(fields: [brandId], references: [id], onDelete: SetNull)
 
-  inputId String?    @unique @map("input_id")
-  input   SpotInput?
+  input SpotInput?
+
+  versions SpotVersion[]
 
   costs SpotCost[]
 
-  @@index([brandId, status, title])
+  @@index([brandId, title])
   @@map("spots")
 }
 
@@ -33,18 +32,52 @@ model SpotInput {
 
   createdAt DateTime @default(now()) @map("created_at")
 
-  spotId String @unique @map("spot_id")
-  spot   Spot   @relation(fields: [spotId], references: [id], onDelete: Cascade)
+  spotId String? @unique @map("spot_id")
+  spot   Spot?   @relation(fields: [spotId], references: [id], onDelete: Cascade)
 
   @@map("spot_inputs")
+}
+
+model SpotVersion {
+  id            String     @id @default(uuid())
+  filename      String?
+  starred       Boolean    @default(dbgenerated("false"))
+  audioDuration Int?       @map("audio_duration")
+  status        SpotStatus
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  voiceId String @map("voice_id")
+  // voice @relation(fields: [voiceId], references: [id], onDelete: SetNull)
+
+  spotId String? @unique @map("spot_id")
+  spot   Spot?   @relation(fields: [spotId], references: [id], onDelete: Cascade)
+
+  scriptId String
+  script   SpotScript @relation(fields: [scriptId], references: [id])
+
+  @@map("spot_versions")
+}
+
+model SpotScript {
+  id      String @id @default(uuid())
+  content String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  spotVersions SpotVersion[]
+
+  @@map("spot_scripts")
 }
 
 model SpotCost {
   id String @id @default(cuid())
 
-  provider  CostProvider
+  provider  TTSProvider
   service   CostService
-  costCents Int          @map("cost_cents")
+  costCents Int         @map("cost_cents")
   metadata  Json?
 
   spotId String @unique @map("spot_id")

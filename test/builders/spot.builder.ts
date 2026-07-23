@@ -1,74 +1,29 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { SpotStatus } from "prisma-types/enums";
-import { BaseEntity, BaseEntityDto } from "src/domain/entities/base.entity";
-import { BrandEntity } from "src/domain/entities/brand.entity";
-import { WorkspaceEntity } from "src/domain/entities/workspace.entity";
+import { faker } from "@faker-js/faker";
+import { Factory } from "fishery";
+import { SpotTone, SpotType } from "prisma-types/enums";
+import { SpotEntity } from "src/domain/entities/spot.entity";
+import { baseEntityBuilder } from "./base-entity.builder";
 
-export type SpotEntity = BaseEntity & {
-  title: string;
-  status: SpotStatus;
-  script: string;
-  audioUrl: string | null;
-  starred: boolean;
-  expectedDuration: number;
-  audioDuration: number | null;
+export const spotEntityBuilder = Factory.define<SpotEntity>(({ params }) => ({
+  ...baseEntityBuilder.build(),
 
-  workspaceId: string;
-  workspace?: WorkspaceEntity;
+  title: faker.company.name(),
+  isDraft: faker.datatype.boolean(),
+  starred: faker.datatype.boolean(),
 
-  brandId: string | null;
-  brand?: BrandEntity;
+  type: faker.helpers.arrayElement(Object.values(SpotType)),
+  voiceTone: faker.helpers.arrayElement(Object.values(SpotTone)),
 
-  inputId: string | null;
-  // input
+  workspaceId: faker.string.uuid(),
+  workspace: undefined as any,
 
-  costs: [];
-  // TODO: incluir costs
+  brandId: faker.datatype.boolean() ? faker.string.uuid() : null,
+  brand: undefined as any,
 
-  voiceId: string | null;
-  // TODO: incluir voices
-};
+  inputId: faker.datatype.boolean() ? faker.string.uuid() : null,
+  input: undefined as any,
 
-export class SpotEntityDto extends BaseEntityDto implements SpotEntity {
-  @ApiProperty()
-  title!: string;
+  versions: [],
 
-  @ApiProperty()
-  status!: SpotStatus;
-
-  @ApiProperty()
-  script!: string;
-
-  @ApiProperty()
-  audioUrl!: string | null;
-
-  @ApiProperty()
-  starred!: boolean;
-
-  @ApiProperty()
-  expectedDuration!: number;
-
-  @ApiProperty()
-  audioDuration!: number | null;
-
-  @ApiProperty()
-  workspaceId!: string;
-
-  @ApiProperty()
-  workspace?: WorkspaceEntity | undefined;
-
-  @ApiProperty()
-  brandId!: string | null;
-
-  @ApiProperty()
-  brand?: BrandEntity | undefined;
-
-  @ApiProperty()
-  inputId!: string | null;
-
-  @ApiProperty()
-  voiceId!: string | null;
-
-  costs!: [];
-  // TODO: Incluir costs
-}
+  ...params,
+}));

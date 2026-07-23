@@ -28,126 +28,104 @@ export type AggregateSpot = {
 
 export type SpotAvgAggregateOutputType = {
   expectedDuration: number | null
-  audioDuration: number | null
 }
 
 export type SpotSumAggregateOutputType = {
   expectedDuration: number | null
-  audioDuration: number | null
 }
 
 export type SpotMinAggregateOutputType = {
   id: string | null
   title: string | null
-  status: $Enums.SpotStatus | null
-  script: string | null
-  voiceId: string | null
-  audioUrl: string | null
+  isDraft: boolean | null
   starred: boolean | null
   expectedDuration: number | null
-  audioDuration: number | null
+  type: $Enums.SpotType | null
+  voiceTone: $Enums.SpotTone | null
   createdAt: Date | null
   updatedAt: Date | null
   workspaceId: string | null
   brandId: string | null
-  inputId: string | null
 }
 
 export type SpotMaxAggregateOutputType = {
   id: string | null
   title: string | null
-  status: $Enums.SpotStatus | null
-  script: string | null
-  voiceId: string | null
-  audioUrl: string | null
+  isDraft: boolean | null
   starred: boolean | null
   expectedDuration: number | null
-  audioDuration: number | null
+  type: $Enums.SpotType | null
+  voiceTone: $Enums.SpotTone | null
   createdAt: Date | null
   updatedAt: Date | null
   workspaceId: string | null
   brandId: string | null
-  inputId: string | null
 }
 
 export type SpotCountAggregateOutputType = {
   id: number
   title: number
-  status: number
-  script: number
-  voiceId: number
-  audioUrl: number
+  isDraft: number
   starred: number
   expectedDuration: number
-  audioDuration: number
+  type: number
+  voiceTone: number
   createdAt: number
   updatedAt: number
   workspaceId: number
   brandId: number
-  inputId: number
   _all: number
 }
 
 
 export type SpotAvgAggregateInputType = {
   expectedDuration?: true
-  audioDuration?: true
 }
 
 export type SpotSumAggregateInputType = {
   expectedDuration?: true
-  audioDuration?: true
 }
 
 export type SpotMinAggregateInputType = {
   id?: true
   title?: true
-  status?: true
-  script?: true
-  voiceId?: true
-  audioUrl?: true
+  isDraft?: true
   starred?: true
   expectedDuration?: true
-  audioDuration?: true
+  type?: true
+  voiceTone?: true
   createdAt?: true
   updatedAt?: true
   workspaceId?: true
   brandId?: true
-  inputId?: true
 }
 
 export type SpotMaxAggregateInputType = {
   id?: true
   title?: true
-  status?: true
-  script?: true
-  voiceId?: true
-  audioUrl?: true
+  isDraft?: true
   starred?: true
   expectedDuration?: true
-  audioDuration?: true
+  type?: true
+  voiceTone?: true
   createdAt?: true
   updatedAt?: true
   workspaceId?: true
   brandId?: true
-  inputId?: true
 }
 
 export type SpotCountAggregateInputType = {
   id?: true
   title?: true
-  status?: true
-  script?: true
-  voiceId?: true
-  audioUrl?: true
+  isDraft?: true
   starred?: true
   expectedDuration?: true
-  audioDuration?: true
+  type?: true
+  voiceTone?: true
   createdAt?: true
   updatedAt?: true
   workspaceId?: true
   brandId?: true
-  inputId?: true
   _all?: true
 }
 
@@ -240,18 +218,15 @@ export type SpotGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type SpotGroupByOutputType = {
   id: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId: string | null
-  audioUrl: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt: Date
   updatedAt: Date
   workspaceId: string
   brandId: string | null
-  inputId: string | null
   _count: SpotCountAggregateOutputType | null
   _avg: SpotAvgAggregateOutputType | null
   _sum: SpotSumAggregateOutputType | null
@@ -280,59 +255,52 @@ export type SpotWhereInput = {
   NOT?: Prisma.SpotWhereInput | Prisma.SpotWhereInput[]
   id?: Prisma.StringFilter<"Spot"> | string
   title?: Prisma.StringFilter<"Spot"> | string
-  status?: Prisma.EnumSpotStatusFilter<"Spot"> | $Enums.SpotStatus
-  script?: Prisma.StringFilter<"Spot"> | string
-  voiceId?: Prisma.StringNullableFilter<"Spot"> | string | null
-  audioUrl?: Prisma.StringNullableFilter<"Spot"> | string | null
+  isDraft?: Prisma.BoolFilter<"Spot"> | boolean
   starred?: Prisma.BoolFilter<"Spot"> | boolean
   expectedDuration?: Prisma.IntFilter<"Spot"> | number
-  audioDuration?: Prisma.IntNullableFilter<"Spot"> | number | null
+  type?: Prisma.EnumSpotTypeFilter<"Spot"> | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFilter<"Spot"> | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFilter<"Spot"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Spot"> | Date | string
   workspaceId?: Prisma.StringFilter<"Spot"> | string
   brandId?: Prisma.StringNullableFilter<"Spot"> | string | null
-  inputId?: Prisma.StringNullableFilter<"Spot"> | string | null
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.WorkspaceWhereInput>
   brand?: Prisma.XOR<Prisma.BrandNullableScalarRelationFilter, Prisma.BrandWhereInput> | null
   input?: Prisma.XOR<Prisma.SpotInputNullableScalarRelationFilter, Prisma.SpotInputWhereInput> | null
+  versions?: Prisma.SpotVersionListRelationFilter
   costs?: Prisma.SpotCostListRelationFilter
 }
 
 export type SpotOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  script?: Prisma.SortOrder
-  voiceId?: Prisma.SortOrderInput | Prisma.SortOrder
-  audioUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDraft?: Prisma.SortOrder
   starred?: Prisma.SortOrder
   expectedDuration?: Prisma.SortOrder
-  audioDuration?: Prisma.SortOrderInput | Prisma.SortOrder
+  type?: Prisma.SortOrder
+  voiceTone?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   brandId?: Prisma.SortOrderInput | Prisma.SortOrder
-  inputId?: Prisma.SortOrderInput | Prisma.SortOrder
   workspace?: Prisma.WorkspaceOrderByWithRelationInput
   brand?: Prisma.BrandOrderByWithRelationInput
   input?: Prisma.SpotInputOrderByWithRelationInput
+  versions?: Prisma.SpotVersionOrderByRelationAggregateInput
   costs?: Prisma.SpotCostOrderByRelationAggregateInput
 }
 
 export type SpotWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  inputId?: string
   AND?: Prisma.SpotWhereInput | Prisma.SpotWhereInput[]
   OR?: Prisma.SpotWhereInput[]
   NOT?: Prisma.SpotWhereInput | Prisma.SpotWhereInput[]
   title?: Prisma.StringFilter<"Spot"> | string
-  status?: Prisma.EnumSpotStatusFilter<"Spot"> | $Enums.SpotStatus
-  script?: Prisma.StringFilter<"Spot"> | string
-  voiceId?: Prisma.StringNullableFilter<"Spot"> | string | null
-  audioUrl?: Prisma.StringNullableFilter<"Spot"> | string | null
+  isDraft?: Prisma.BoolFilter<"Spot"> | boolean
   starred?: Prisma.BoolFilter<"Spot"> | boolean
   expectedDuration?: Prisma.IntFilter<"Spot"> | number
-  audioDuration?: Prisma.IntNullableFilter<"Spot"> | number | null
+  type?: Prisma.EnumSpotTypeFilter<"Spot"> | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFilter<"Spot"> | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFilter<"Spot"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Spot"> | Date | string
   workspaceId?: Prisma.StringFilter<"Spot"> | string
@@ -340,24 +308,22 @@ export type SpotWhereUniqueInput = Prisma.AtLeast<{
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.WorkspaceWhereInput>
   brand?: Prisma.XOR<Prisma.BrandNullableScalarRelationFilter, Prisma.BrandWhereInput> | null
   input?: Prisma.XOR<Prisma.SpotInputNullableScalarRelationFilter, Prisma.SpotInputWhereInput> | null
+  versions?: Prisma.SpotVersionListRelationFilter
   costs?: Prisma.SpotCostListRelationFilter
-}, "id" | "inputId">
+}, "id">
 
 export type SpotOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  script?: Prisma.SortOrder
-  voiceId?: Prisma.SortOrderInput | Prisma.SortOrder
-  audioUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  isDraft?: Prisma.SortOrder
   starred?: Prisma.SortOrder
   expectedDuration?: Prisma.SortOrder
-  audioDuration?: Prisma.SortOrderInput | Prisma.SortOrder
+  type?: Prisma.SortOrder
+  voiceTone?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   brandId?: Prisma.SortOrderInput | Prisma.SortOrder
-  inputId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SpotCountOrderByAggregateInput
   _avg?: Prisma.SpotAvgOrderByAggregateInput
   _max?: Prisma.SpotMaxOrderByAggregateInput
@@ -371,143 +337,123 @@ export type SpotScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SpotScalarWhereWithAggregatesInput | Prisma.SpotScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Spot"> | string
   title?: Prisma.StringWithAggregatesFilter<"Spot"> | string
-  status?: Prisma.EnumSpotStatusWithAggregatesFilter<"Spot"> | $Enums.SpotStatus
-  script?: Prisma.StringWithAggregatesFilter<"Spot"> | string
-  voiceId?: Prisma.StringNullableWithAggregatesFilter<"Spot"> | string | null
-  audioUrl?: Prisma.StringNullableWithAggregatesFilter<"Spot"> | string | null
+  isDraft?: Prisma.BoolWithAggregatesFilter<"Spot"> | boolean
   starred?: Prisma.BoolWithAggregatesFilter<"Spot"> | boolean
   expectedDuration?: Prisma.IntWithAggregatesFilter<"Spot"> | number
-  audioDuration?: Prisma.IntNullableWithAggregatesFilter<"Spot"> | number | null
+  type?: Prisma.EnumSpotTypeWithAggregatesFilter<"Spot"> | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneWithAggregatesFilter<"Spot"> | $Enums.SpotTone
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Spot"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Spot"> | Date | string
   workspaceId?: Prisma.StringWithAggregatesFilter<"Spot"> | string
   brandId?: Prisma.StringNullableWithAggregatesFilter<"Spot"> | string | null
-  inputId?: Prisma.StringNullableWithAggregatesFilter<"Spot"> | string | null
 }
 
 export type SpotCreateInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
-  inputId?: string | null
   workspace: Prisma.WorkspaceCreateNestedOneWithoutSpotsInput
   brand?: Prisma.BrandCreateNestedOneWithoutSpotsInput
   input?: Prisma.SpotInputCreateNestedOneWithoutSpotInput
+  versions?: Prisma.SpotVersionCreateNestedManyWithoutSpotInput
   costs?: Prisma.SpotCostCreateNestedManyWithoutSpotInput
 }
 
 export type SpotUncheckedCreateInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
   workspaceId: string
   brandId?: string | null
-  inputId?: string | null
   input?: Prisma.SpotInputUncheckedCreateNestedOneWithoutSpotInput
+  versions?: Prisma.SpotVersionUncheckedCreateNestedManyWithoutSpotInput
   costs?: Prisma.SpotCostUncheckedCreateNestedManyWithoutSpotInput
 }
 
 export type SpotUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutSpotsNestedInput
   brand?: Prisma.BrandUpdateOneWithoutSpotsNestedInput
   input?: Prisma.SpotInputUpdateOneWithoutSpotNestedInput
+  versions?: Prisma.SpotVersionUpdateManyWithoutSpotNestedInput
   costs?: Prisma.SpotCostUpdateManyWithoutSpotNestedInput
 }
 
 export type SpotUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
   brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   input?: Prisma.SpotInputUncheckedUpdateOneWithoutSpotNestedInput
+  versions?: Prisma.SpotVersionUncheckedUpdateManyWithoutSpotNestedInput
   costs?: Prisma.SpotCostUncheckedUpdateManyWithoutSpotNestedInput
 }
 
 export type SpotCreateManyInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
   workspaceId: string
   brandId?: string | null
-  inputId?: string | null
 }
 
 export type SpotUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SpotUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
   brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SpotListRelationFilter = {
@@ -523,62 +469,56 @@ export type SpotOrderByRelationAggregateInput = {
 export type SpotCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  script?: Prisma.SortOrder
-  voiceId?: Prisma.SortOrder
-  audioUrl?: Prisma.SortOrder
+  isDraft?: Prisma.SortOrder
   starred?: Prisma.SortOrder
   expectedDuration?: Prisma.SortOrder
-  audioDuration?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  voiceTone?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
-  inputId?: Prisma.SortOrder
 }
 
 export type SpotAvgOrderByAggregateInput = {
   expectedDuration?: Prisma.SortOrder
-  audioDuration?: Prisma.SortOrder
 }
 
 export type SpotMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  script?: Prisma.SortOrder
-  voiceId?: Prisma.SortOrder
-  audioUrl?: Prisma.SortOrder
+  isDraft?: Prisma.SortOrder
   starred?: Prisma.SortOrder
   expectedDuration?: Prisma.SortOrder
-  audioDuration?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  voiceTone?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
-  inputId?: Prisma.SortOrder
 }
 
 export type SpotMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  script?: Prisma.SortOrder
-  voiceId?: Prisma.SortOrder
-  audioUrl?: Prisma.SortOrder
+  isDraft?: Prisma.SortOrder
   starred?: Prisma.SortOrder
   expectedDuration?: Prisma.SortOrder
-  audioDuration?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  voiceTone?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   brandId?: Prisma.SortOrder
-  inputId?: Prisma.SortOrder
 }
 
 export type SpotSumOrderByAggregateInput = {
   expectedDuration?: Prisma.SortOrder
-  audioDuration?: Prisma.SortOrder
+}
+
+export type SpotNullableScalarRelationFilter = {
+  is?: Prisma.SpotWhereInput | null
+  isNot?: Prisma.SpotWhereInput | null
 }
 
 export type SpotScalarRelationFilter = {
@@ -628,10 +568,6 @@ export type SpotUncheckedUpdateManyWithoutBrandNestedInput = {
   deleteMany?: Prisma.SpotScalarWhereInput | Prisma.SpotScalarWhereInput[]
 }
 
-export type EnumSpotStatusFieldUpdateOperationsInput = {
-  set?: $Enums.SpotStatus
-}
-
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
@@ -644,12 +580,12 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type EnumSpotTypeFieldUpdateOperationsInput = {
+  set?: $Enums.SpotType
+}
+
+export type EnumSpotToneFieldUpdateOperationsInput = {
+  set?: $Enums.SpotTone
 }
 
 export type SpotCreateNestedOneWithoutInputInput = {
@@ -658,12 +594,30 @@ export type SpotCreateNestedOneWithoutInputInput = {
   connect?: Prisma.SpotWhereUniqueInput
 }
 
-export type SpotUpdateOneRequiredWithoutInputNestedInput = {
+export type SpotUpdateOneWithoutInputNestedInput = {
   create?: Prisma.XOR<Prisma.SpotCreateWithoutInputInput, Prisma.SpotUncheckedCreateWithoutInputInput>
   connectOrCreate?: Prisma.SpotCreateOrConnectWithoutInputInput
   upsert?: Prisma.SpotUpsertWithoutInputInput
+  disconnect?: Prisma.SpotWhereInput | boolean
+  delete?: Prisma.SpotWhereInput | boolean
   connect?: Prisma.SpotWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.SpotUpdateToOneWithWhereWithoutInputInput, Prisma.SpotUpdateWithoutInputInput>, Prisma.SpotUncheckedUpdateWithoutInputInput>
+}
+
+export type SpotCreateNestedOneWithoutVersionsInput = {
+  create?: Prisma.XOR<Prisma.SpotCreateWithoutVersionsInput, Prisma.SpotUncheckedCreateWithoutVersionsInput>
+  connectOrCreate?: Prisma.SpotCreateOrConnectWithoutVersionsInput
+  connect?: Prisma.SpotWhereUniqueInput
+}
+
+export type SpotUpdateOneWithoutVersionsNestedInput = {
+  create?: Prisma.XOR<Prisma.SpotCreateWithoutVersionsInput, Prisma.SpotUncheckedCreateWithoutVersionsInput>
+  connectOrCreate?: Prisma.SpotCreateOrConnectWithoutVersionsInput
+  upsert?: Prisma.SpotUpsertWithoutVersionsInput
+  disconnect?: Prisma.SpotWhereInput | boolean
+  delete?: Prisma.SpotWhereInput | boolean
+  connect?: Prisma.SpotWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SpotUpdateToOneWithWhereWithoutVersionsInput, Prisma.SpotUpdateWithoutVersionsInput>, Prisma.SpotUncheckedUpdateWithoutVersionsInput>
 }
 
 export type SpotCreateNestedOneWithoutCostsInput = {
@@ -725,36 +679,32 @@ export type SpotUncheckedUpdateManyWithoutWorkspaceNestedInput = {
 export type SpotCreateWithoutBrandInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
-  inputId?: string | null
   workspace: Prisma.WorkspaceCreateNestedOneWithoutSpotsInput
   input?: Prisma.SpotInputCreateNestedOneWithoutSpotInput
+  versions?: Prisma.SpotVersionCreateNestedManyWithoutSpotInput
   costs?: Prisma.SpotCostCreateNestedManyWithoutSpotInput
 }
 
 export type SpotUncheckedCreateWithoutBrandInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
   workspaceId: string
-  inputId?: string | null
   input?: Prisma.SpotInputUncheckedCreateNestedOneWithoutSpotInput
+  versions?: Prisma.SpotVersionUncheckedCreateNestedManyWithoutSpotInput
   costs?: Prisma.SpotCostUncheckedCreateNestedManyWithoutSpotInput
 }
 
@@ -790,53 +740,46 @@ export type SpotScalarWhereInput = {
   NOT?: Prisma.SpotScalarWhereInput | Prisma.SpotScalarWhereInput[]
   id?: Prisma.StringFilter<"Spot"> | string
   title?: Prisma.StringFilter<"Spot"> | string
-  status?: Prisma.EnumSpotStatusFilter<"Spot"> | $Enums.SpotStatus
-  script?: Prisma.StringFilter<"Spot"> | string
-  voiceId?: Prisma.StringNullableFilter<"Spot"> | string | null
-  audioUrl?: Prisma.StringNullableFilter<"Spot"> | string | null
+  isDraft?: Prisma.BoolFilter<"Spot"> | boolean
   starred?: Prisma.BoolFilter<"Spot"> | boolean
   expectedDuration?: Prisma.IntFilter<"Spot"> | number
-  audioDuration?: Prisma.IntNullableFilter<"Spot"> | number | null
+  type?: Prisma.EnumSpotTypeFilter<"Spot"> | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFilter<"Spot"> | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFilter<"Spot"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Spot"> | Date | string
   workspaceId?: Prisma.StringFilter<"Spot"> | string
   brandId?: Prisma.StringNullableFilter<"Spot"> | string | null
-  inputId?: Prisma.StringNullableFilter<"Spot"> | string | null
 }
 
 export type SpotCreateWithoutInputInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
-  inputId?: string | null
   workspace: Prisma.WorkspaceCreateNestedOneWithoutSpotsInput
   brand?: Prisma.BrandCreateNestedOneWithoutSpotsInput
+  versions?: Prisma.SpotVersionCreateNestedManyWithoutSpotInput
   costs?: Prisma.SpotCostCreateNestedManyWithoutSpotInput
 }
 
 export type SpotUncheckedCreateWithoutInputInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
   workspaceId: string
   brandId?: string | null
-  inputId?: string | null
+  versions?: Prisma.SpotVersionUncheckedCreateNestedManyWithoutSpotInput
   costs?: Prisma.SpotCostUncheckedCreateNestedManyWithoutSpotInput
 }
 
@@ -859,73 +802,145 @@ export type SpotUpdateToOneWithWhereWithoutInputInput = {
 export type SpotUpdateWithoutInputInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutSpotsNestedInput
   brand?: Prisma.BrandUpdateOneWithoutSpotsNestedInput
+  versions?: Prisma.SpotVersionUpdateManyWithoutSpotNestedInput
   costs?: Prisma.SpotCostUpdateManyWithoutSpotNestedInput
 }
 
 export type SpotUncheckedUpdateWithoutInputInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
   brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  versions?: Prisma.SpotVersionUncheckedUpdateManyWithoutSpotNestedInput
+  costs?: Prisma.SpotCostUncheckedUpdateManyWithoutSpotNestedInput
+}
+
+export type SpotCreateWithoutVersionsInput = {
+  id?: string
+  title: string
+  isDraft: boolean
+  starred: boolean
+  expectedDuration: number
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutSpotsInput
+  brand?: Prisma.BrandCreateNestedOneWithoutSpotsInput
+  input?: Prisma.SpotInputCreateNestedOneWithoutSpotInput
+  costs?: Prisma.SpotCostCreateNestedManyWithoutSpotInput
+}
+
+export type SpotUncheckedCreateWithoutVersionsInput = {
+  id?: string
+  title: string
+  isDraft: boolean
+  starred: boolean
+  expectedDuration: number
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspaceId: string
+  brandId?: string | null
+  input?: Prisma.SpotInputUncheckedCreateNestedOneWithoutSpotInput
+  costs?: Prisma.SpotCostUncheckedCreateNestedManyWithoutSpotInput
+}
+
+export type SpotCreateOrConnectWithoutVersionsInput = {
+  where: Prisma.SpotWhereUniqueInput
+  create: Prisma.XOR<Prisma.SpotCreateWithoutVersionsInput, Prisma.SpotUncheckedCreateWithoutVersionsInput>
+}
+
+export type SpotUpsertWithoutVersionsInput = {
+  update: Prisma.XOR<Prisma.SpotUpdateWithoutVersionsInput, Prisma.SpotUncheckedUpdateWithoutVersionsInput>
+  create: Prisma.XOR<Prisma.SpotCreateWithoutVersionsInput, Prisma.SpotUncheckedCreateWithoutVersionsInput>
+  where?: Prisma.SpotWhereInput
+}
+
+export type SpotUpdateToOneWithWhereWithoutVersionsInput = {
+  where?: Prisma.SpotWhereInput
+  data: Prisma.XOR<Prisma.SpotUpdateWithoutVersionsInput, Prisma.SpotUncheckedUpdateWithoutVersionsInput>
+}
+
+export type SpotUpdateWithoutVersionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutSpotsNestedInput
+  brand?: Prisma.BrandUpdateOneWithoutSpotsNestedInput
+  input?: Prisma.SpotInputUpdateOneWithoutSpotNestedInput
+  costs?: Prisma.SpotCostUpdateManyWithoutSpotNestedInput
+}
+
+export type SpotUncheckedUpdateWithoutVersionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  input?: Prisma.SpotInputUncheckedUpdateOneWithoutSpotNestedInput
   costs?: Prisma.SpotCostUncheckedUpdateManyWithoutSpotNestedInput
 }
 
 export type SpotCreateWithoutCostsInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
-  inputId?: string | null
   workspace: Prisma.WorkspaceCreateNestedOneWithoutSpotsInput
   brand?: Prisma.BrandCreateNestedOneWithoutSpotsInput
   input?: Prisma.SpotInputCreateNestedOneWithoutSpotInput
+  versions?: Prisma.SpotVersionCreateNestedManyWithoutSpotInput
 }
 
 export type SpotUncheckedCreateWithoutCostsInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
   workspaceId: string
   brandId?: string | null
-  inputId?: string | null
   input?: Prisma.SpotInputUncheckedCreateNestedOneWithoutSpotInput
+  versions?: Prisma.SpotVersionUncheckedCreateNestedManyWithoutSpotInput
 }
 
 export type SpotCreateOrConnectWithoutCostsInput = {
@@ -947,72 +962,64 @@ export type SpotUpdateToOneWithWhereWithoutCostsInput = {
 export type SpotUpdateWithoutCostsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutSpotsNestedInput
   brand?: Prisma.BrandUpdateOneWithoutSpotsNestedInput
   input?: Prisma.SpotInputUpdateOneWithoutSpotNestedInput
+  versions?: Prisma.SpotVersionUpdateManyWithoutSpotNestedInput
 }
 
 export type SpotUncheckedUpdateWithoutCostsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
   brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   input?: Prisma.SpotInputUncheckedUpdateOneWithoutSpotNestedInput
+  versions?: Prisma.SpotVersionUncheckedUpdateManyWithoutSpotNestedInput
 }
 
 export type SpotCreateWithoutWorkspaceInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
-  inputId?: string | null
   brand?: Prisma.BrandCreateNestedOneWithoutSpotsInput
   input?: Prisma.SpotInputCreateNestedOneWithoutSpotInput
+  versions?: Prisma.SpotVersionCreateNestedManyWithoutSpotInput
   costs?: Prisma.SpotCostCreateNestedManyWithoutSpotInput
 }
 
 export type SpotUncheckedCreateWithoutWorkspaceInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
   brandId?: string | null
-  inputId?: string | null
   input?: Prisma.SpotInputUncheckedCreateNestedOneWithoutSpotInput
+  versions?: Prisma.SpotVersionUncheckedCreateNestedManyWithoutSpotInput
   costs?: Prisma.SpotCostUncheckedCreateNestedManyWithoutSpotInput
 }
 
@@ -1045,137 +1052,117 @@ export type SpotUpdateManyWithWhereWithoutWorkspaceInput = {
 export type SpotCreateManyBrandInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
   workspaceId: string
-  inputId?: string | null
 }
 
 export type SpotUpdateWithoutBrandInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutSpotsNestedInput
   input?: Prisma.SpotInputUpdateOneWithoutSpotNestedInput
+  versions?: Prisma.SpotVersionUpdateManyWithoutSpotNestedInput
   costs?: Prisma.SpotCostUpdateManyWithoutSpotNestedInput
 }
 
 export type SpotUncheckedUpdateWithoutBrandInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   input?: Prisma.SpotInputUncheckedUpdateOneWithoutSpotNestedInput
+  versions?: Prisma.SpotVersionUncheckedUpdateManyWithoutSpotNestedInput
   costs?: Prisma.SpotCostUncheckedUpdateManyWithoutSpotNestedInput
 }
 
 export type SpotUncheckedUpdateManyWithoutBrandInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SpotCreateManyWorkspaceInput = {
   id?: string
   title: string
-  status: $Enums.SpotStatus
-  script: string
-  voiceId?: string | null
-  audioUrl?: string | null
+  isDraft: boolean
   starred: boolean
   expectedDuration: number
-  audioDuration?: number | null
+  type: $Enums.SpotType
+  voiceTone: $Enums.SpotTone
   createdAt?: Date | string
   updatedAt?: Date | string
   brandId?: string | null
-  inputId?: string | null
 }
 
 export type SpotUpdateWithoutWorkspaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand?: Prisma.BrandUpdateOneWithoutSpotsNestedInput
   input?: Prisma.SpotInputUpdateOneWithoutSpotNestedInput
+  versions?: Prisma.SpotVersionUpdateManyWithoutSpotNestedInput
   costs?: Prisma.SpotCostUpdateManyWithoutSpotNestedInput
 }
 
 export type SpotUncheckedUpdateWithoutWorkspaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   input?: Prisma.SpotInputUncheckedUpdateOneWithoutSpotNestedInput
+  versions?: Prisma.SpotVersionUncheckedUpdateManyWithoutSpotNestedInput
   costs?: Prisma.SpotCostUncheckedUpdateManyWithoutSpotNestedInput
 }
 
 export type SpotUncheckedUpdateManyWithoutWorkspaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumSpotStatusFieldUpdateOperationsInput | $Enums.SpotStatus
-  script?: Prisma.StringFieldUpdateOperationsInput | string
-  voiceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  audioUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDraft?: Prisma.BoolFieldUpdateOperationsInput | boolean
   starred?: Prisma.BoolFieldUpdateOperationsInput | boolean
   expectedDuration?: Prisma.IntFieldUpdateOperationsInput | number
-  audioDuration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  type?: Prisma.EnumSpotTypeFieldUpdateOperationsInput | $Enums.SpotType
+  voiceTone?: Prisma.EnumSpotToneFieldUpdateOperationsInput | $Enums.SpotTone
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brandId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  inputId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1184,10 +1171,12 @@ export type SpotUncheckedUpdateManyWithoutWorkspaceInput = {
  */
 
 export type SpotCountOutputType = {
+  versions: number
   costs: number
 }
 
 export type SpotCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  versions?: boolean | SpotCountOutputTypeCountVersionsArgs
   costs?: boolean | SpotCountOutputTypeCountCostsArgs
 }
 
@@ -1204,6 +1193,13 @@ export type SpotCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * SpotCountOutputType without action
  */
+export type SpotCountOutputTypeCountVersionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SpotVersionWhereInput
+}
+
+/**
+ * SpotCountOutputType without action
+ */
 export type SpotCountOutputTypeCountCostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SpotCostWhereInput
 }
@@ -1212,21 +1208,19 @@ export type SpotCountOutputTypeCountCostsArgs<ExtArgs extends runtime.Types.Exte
 export type SpotSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  status?: boolean
-  script?: boolean
-  voiceId?: boolean
-  audioUrl?: boolean
+  isDraft?: boolean
   starred?: boolean
   expectedDuration?: boolean
-  audioDuration?: boolean
+  type?: boolean
+  voiceTone?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   workspaceId?: boolean
   brandId?: boolean
-  inputId?: boolean
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
   brand?: boolean | Prisma.Spot$brandArgs<ExtArgs>
   input?: boolean | Prisma.Spot$inputArgs<ExtArgs>
+  versions?: boolean | Prisma.Spot$versionsArgs<ExtArgs>
   costs?: boolean | Prisma.Spot$costsArgs<ExtArgs>
   _count?: boolean | Prisma.SpotCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["spot"]>
@@ -1234,18 +1228,15 @@ export type SpotSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type SpotSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  status?: boolean
-  script?: boolean
-  voiceId?: boolean
-  audioUrl?: boolean
+  isDraft?: boolean
   starred?: boolean
   expectedDuration?: boolean
-  audioDuration?: boolean
+  type?: boolean
+  voiceTone?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   workspaceId?: boolean
   brandId?: boolean
-  inputId?: boolean
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
   brand?: boolean | Prisma.Spot$brandArgs<ExtArgs>
 }, ExtArgs["result"]["spot"]>
@@ -1253,18 +1244,15 @@ export type SpotSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type SpotSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  status?: boolean
-  script?: boolean
-  voiceId?: boolean
-  audioUrl?: boolean
+  isDraft?: boolean
   starred?: boolean
   expectedDuration?: boolean
-  audioDuration?: boolean
+  type?: boolean
+  voiceTone?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   workspaceId?: boolean
   brandId?: boolean
-  inputId?: boolean
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
   brand?: boolean | Prisma.Spot$brandArgs<ExtArgs>
 }, ExtArgs["result"]["spot"]>
@@ -1272,25 +1260,23 @@ export type SpotSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type SpotSelectScalar = {
   id?: boolean
   title?: boolean
-  status?: boolean
-  script?: boolean
-  voiceId?: boolean
-  audioUrl?: boolean
+  isDraft?: boolean
   starred?: boolean
   expectedDuration?: boolean
-  audioDuration?: boolean
+  type?: boolean
+  voiceTone?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   workspaceId?: boolean
   brandId?: boolean
-  inputId?: boolean
 }
 
-export type SpotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "status" | "script" | "voiceId" | "audioUrl" | "starred" | "expectedDuration" | "audioDuration" | "createdAt" | "updatedAt" | "workspaceId" | "brandId" | "inputId", ExtArgs["result"]["spot"]>
+export type SpotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "isDraft" | "starred" | "expectedDuration" | "type" | "voiceTone" | "createdAt" | "updatedAt" | "workspaceId" | "brandId", ExtArgs["result"]["spot"]>
 export type SpotInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
   brand?: boolean | Prisma.Spot$brandArgs<ExtArgs>
   input?: boolean | Prisma.Spot$inputArgs<ExtArgs>
+  versions?: boolean | Prisma.Spot$versionsArgs<ExtArgs>
   costs?: boolean | Prisma.Spot$costsArgs<ExtArgs>
   _count?: boolean | Prisma.SpotCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1309,23 +1295,21 @@ export type $SpotPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     workspace: Prisma.$WorkspacePayload<ExtArgs>
     brand: Prisma.$BrandPayload<ExtArgs> | null
     input: Prisma.$SpotInputPayload<ExtArgs> | null
+    versions: Prisma.$SpotVersionPayload<ExtArgs>[]
     costs: Prisma.$SpotCostPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
-    status: $Enums.SpotStatus
-    script: string
-    voiceId: string | null
-    audioUrl: string | null
+    isDraft: boolean
     starred: boolean
     expectedDuration: number
-    audioDuration: number | null
+    type: $Enums.SpotType
+    voiceTone: $Enums.SpotTone
     createdAt: Date
     updatedAt: Date
     workspaceId: string
     brandId: string | null
-    inputId: string | null
   }, ExtArgs["result"]["spot"]>
   composites: {}
 }
@@ -1723,6 +1707,7 @@ export interface Prisma__SpotClient<T, Null = never, ExtArgs extends runtime.Typ
   workspace<T extends Prisma.WorkspaceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WorkspaceDefaultArgs<ExtArgs>>): Prisma.Prisma__WorkspaceClient<runtime.Types.Result.GetResult<Prisma.$WorkspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   brand<T extends Prisma.Spot$brandArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Spot$brandArgs<ExtArgs>>): Prisma.Prisma__BrandClient<runtime.Types.Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   input<T extends Prisma.Spot$inputArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Spot$inputArgs<ExtArgs>>): Prisma.Prisma__SpotInputClient<runtime.Types.Result.GetResult<Prisma.$SpotInputPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  versions<T extends Prisma.Spot$versionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Spot$versionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpotVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   costs<T extends Prisma.Spot$costsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Spot$costsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpotCostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1755,18 +1740,15 @@ export interface Prisma__SpotClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface SpotFieldRefs {
   readonly id: Prisma.FieldRef<"Spot", 'String'>
   readonly title: Prisma.FieldRef<"Spot", 'String'>
-  readonly status: Prisma.FieldRef<"Spot", 'SpotStatus'>
-  readonly script: Prisma.FieldRef<"Spot", 'String'>
-  readonly voiceId: Prisma.FieldRef<"Spot", 'String'>
-  readonly audioUrl: Prisma.FieldRef<"Spot", 'String'>
+  readonly isDraft: Prisma.FieldRef<"Spot", 'Boolean'>
   readonly starred: Prisma.FieldRef<"Spot", 'Boolean'>
   readonly expectedDuration: Prisma.FieldRef<"Spot", 'Int'>
-  readonly audioDuration: Prisma.FieldRef<"Spot", 'Int'>
+  readonly type: Prisma.FieldRef<"Spot", 'SpotType'>
+  readonly voiceTone: Prisma.FieldRef<"Spot", 'SpotTone'>
   readonly createdAt: Prisma.FieldRef<"Spot", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Spot", 'DateTime'>
   readonly workspaceId: Prisma.FieldRef<"Spot", 'String'>
   readonly brandId: Prisma.FieldRef<"Spot", 'String'>
-  readonly inputId: Prisma.FieldRef<"Spot", 'String'>
 }
     
 
@@ -2203,6 +2185,30 @@ export type Spot$inputArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   include?: Prisma.SpotInputInclude<ExtArgs> | null
   where?: Prisma.SpotInputWhereInput
+}
+
+/**
+ * Spot.versions
+ */
+export type Spot$versionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SpotVersion
+   */
+  select?: Prisma.SpotVersionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SpotVersion
+   */
+  omit?: Prisma.SpotVersionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SpotVersionInclude<ExtArgs> | null
+  where?: Prisma.SpotVersionWhereInput
+  orderBy?: Prisma.SpotVersionOrderByWithRelationInput | Prisma.SpotVersionOrderByWithRelationInput[]
+  cursor?: Prisma.SpotVersionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SpotVersionScalarFieldEnum | Prisma.SpotVersionScalarFieldEnum[]
 }
 
 /**

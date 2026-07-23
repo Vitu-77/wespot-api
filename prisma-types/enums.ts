@@ -129,12 +129,12 @@ export const CostService = {
 export type CostService = (typeof CostService)[keyof typeof CostService]
 
 
-export const CostProvider = {
+export const TTSProvider = {
   ELEVEN_LABS: 'ELEVEN_LABS',
   OPEN_AI: 'OPEN_AI'
 } as const
 
-export type CostProvider = (typeof CostProvider)[keyof typeof CostProvider]
+export type TTSProvider = (typeof TTSProvider)[keyof typeof TTSProvider]
 
 
 export const SubscriptionStatus = {

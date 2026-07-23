@@ -80,6 +80,16 @@ export type Spot = Prisma.SpotModel
  */
 export type SpotInput = Prisma.SpotInputModel
 /**
+ * Model SpotVersion
+ * 
+ */
+export type SpotVersion = Prisma.SpotVersionModel
+/**
+ * Model SpotScript
+ * 
+ */
+export type SpotScript = Prisma.SpotScriptModel
+/**
  * Model SpotCost
  * 
  */

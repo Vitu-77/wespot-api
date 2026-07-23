@@ -141,7 +141,7 @@ export type SpotInputGroupByOutputType = {
   id: string
   data: runtime.JsonValue
   createdAt: Date
-  spotId: string
+  spotId: string | null
   _count: SpotInputCountAggregateOutputType | null
   _min: SpotInputMinAggregateOutputType | null
   _max: SpotInputMaxAggregateOutputType | null
@@ -169,15 +169,15 @@ export type SpotInputWhereInput = {
   id?: Prisma.StringFilter<"SpotInput"> | string
   data?: Prisma.JsonFilter<"SpotInput">
   createdAt?: Prisma.DateTimeFilter<"SpotInput"> | Date | string
-  spotId?: Prisma.StringFilter<"SpotInput"> | string
-  spot?: Prisma.XOR<Prisma.SpotScalarRelationFilter, Prisma.SpotWhereInput>
+  spotId?: Prisma.StringNullableFilter<"SpotInput"> | string | null
+  spot?: Prisma.XOR<Prisma.SpotNullableScalarRelationFilter, Prisma.SpotWhereInput> | null
 }
 
 export type SpotInputOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   data?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  spotId?: Prisma.SortOrder
+  spotId?: Prisma.SortOrderInput | Prisma.SortOrder
   spot?: Prisma.SpotOrderByWithRelationInput
 }
 
@@ -189,14 +189,14 @@ export type SpotInputWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SpotInputWhereInput | Prisma.SpotInputWhereInput[]
   data?: Prisma.JsonFilter<"SpotInput">
   createdAt?: Prisma.DateTimeFilter<"SpotInput"> | Date | string
-  spot?: Prisma.XOR<Prisma.SpotScalarRelationFilter, Prisma.SpotWhereInput>
+  spot?: Prisma.XOR<Prisma.SpotNullableScalarRelationFilter, Prisma.SpotWhereInput> | null
 }, "id" | "spotId">
 
 export type SpotInputOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   data?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  spotId?: Prisma.SortOrder
+  spotId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SpotInputCountOrderByAggregateInput
   _max?: Prisma.SpotInputMaxOrderByAggregateInput
   _min?: Prisma.SpotInputMinOrderByAggregateInput
@@ -209,42 +209,42 @@ export type SpotInputScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"SpotInput"> | string
   data?: Prisma.JsonWithAggregatesFilter<"SpotInput">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SpotInput"> | Date | string
-  spotId?: Prisma.StringWithAggregatesFilter<"SpotInput"> | string
+  spotId?: Prisma.StringNullableWithAggregatesFilter<"SpotInput"> | string | null
 }
 
 export type SpotInputCreateInput = {
   id?: string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
-  spot: Prisma.SpotCreateNestedOneWithoutInputInput
+  spot?: Prisma.SpotCreateNestedOneWithoutInputInput
 }
 
 export type SpotInputUncheckedCreateInput = {
   id?: string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
-  spotId: string
+  spotId?: string | null
 }
 
 export type SpotInputUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  spot?: Prisma.SpotUpdateOneRequiredWithoutInputNestedInput
+  spot?: Prisma.SpotUpdateOneWithoutInputNestedInput
 }
 
 export type SpotInputUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  spotId?: Prisma.StringFieldUpdateOperationsInput | string
+  spotId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SpotInputCreateManyInput = {
   id?: string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
-  spotId: string
+  spotId?: string | null
 }
 
 export type SpotInputUpdateManyMutationInput = {
@@ -257,7 +257,7 @@ export type SpotInputUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  spotId?: Prisma.StringFieldUpdateOperationsInput | string
+  spotId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SpotInputNullableScalarRelationFilter = {
@@ -363,7 +363,7 @@ export type SpotInputSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   data?: boolean
   createdAt?: boolean
   spotId?: boolean
-  spot?: boolean | Prisma.SpotDefaultArgs<ExtArgs>
+  spot?: boolean | Prisma.SpotInput$spotArgs<ExtArgs>
 }, ExtArgs["result"]["spotInput"]>
 
 export type SpotInputSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -371,7 +371,7 @@ export type SpotInputSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   data?: boolean
   createdAt?: boolean
   spotId?: boolean
-  spot?: boolean | Prisma.SpotDefaultArgs<ExtArgs>
+  spot?: boolean | Prisma.SpotInput$spotArgs<ExtArgs>
 }, ExtArgs["result"]["spotInput"]>
 
 export type SpotInputSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -379,7 +379,7 @@ export type SpotInputSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   data?: boolean
   createdAt?: boolean
   spotId?: boolean
-  spot?: boolean | Prisma.SpotDefaultArgs<ExtArgs>
+  spot?: boolean | Prisma.SpotInput$spotArgs<ExtArgs>
 }, ExtArgs["result"]["spotInput"]>
 
 export type SpotInputSelectScalar = {
@@ -391,25 +391,25 @@ export type SpotInputSelectScalar = {
 
 export type SpotInputOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "data" | "createdAt" | "spotId", ExtArgs["result"]["spotInput"]>
 export type SpotInputInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  spot?: boolean | Prisma.SpotDefaultArgs<ExtArgs>
+  spot?: boolean | Prisma.SpotInput$spotArgs<ExtArgs>
 }
 export type SpotInputIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  spot?: boolean | Prisma.SpotDefaultArgs<ExtArgs>
+  spot?: boolean | Prisma.SpotInput$spotArgs<ExtArgs>
 }
 export type SpotInputIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  spot?: boolean | Prisma.SpotDefaultArgs<ExtArgs>
+  spot?: boolean | Prisma.SpotInput$spotArgs<ExtArgs>
 }
 
 export type $SpotInputPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SpotInput"
   objects: {
-    spot: Prisma.$SpotPayload<ExtArgs>
+    spot: Prisma.$SpotPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     data: runtime.JsonValue
     createdAt: Date
-    spotId: string
+    spotId: string | null
   }, ExtArgs["result"]["spotInput"]>
   composites: {}
 }
@@ -804,7 +804,7 @@ readonly fields: SpotInputFieldRefs;
  */
 export interface Prisma__SpotInputClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  spot<T extends Prisma.SpotDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SpotDefaultArgs<ExtArgs>>): Prisma.Prisma__SpotClient<runtime.Types.Result.GetResult<Prisma.$SpotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  spot<T extends Prisma.SpotInput$spotArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SpotInput$spotArgs<ExtArgs>>): Prisma.Prisma__SpotClient<runtime.Types.Result.GetResult<Prisma.$SpotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1236,6 +1236,25 @@ export type SpotInputDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Limit how many SpotInputs to delete.
    */
   limit?: number
+}
+
+/**
+ * SpotInput.spot
+ */
+export type SpotInput$spotArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Spot
+   */
+  select?: Prisma.SpotSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Spot
+   */
+  omit?: Prisma.SpotOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SpotInclude<ExtArgs> | null
+  where?: Prisma.SpotWhereInput
 }
 
 /**

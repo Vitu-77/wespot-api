@@ -41,7 +41,7 @@ enum CostService {
   PROCESSING
 }
 
-enum CostProvider {
+enum TTSProvider {
   ELEVEN_LABS
   OPEN_AI
 }

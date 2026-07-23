@@ -59,6 +59,8 @@ export const ModelName = {
   Plan: 'Plan',
   Spot: 'Spot',
   SpotInput: 'SpotInput',
+  SpotVersion: 'SpotVersion',
+  SpotScript: 'SpotScript',
   SpotCost: 'SpotCost',
   Subscription: 'Subscription',
   InvoiceSummary: 'InvoiceSummary',
@@ -175,18 +177,15 @@ export type PlanScalarFieldEnum = (typeof PlanScalarFieldEnum)[keyof typeof Plan
 export const SpotScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  status: 'status',
-  script: 'script',
-  voiceId: 'voiceId',
-  audioUrl: 'audioUrl',
+  isDraft: 'isDraft',
   starred: 'starred',
   expectedDuration: 'expectedDuration',
-  audioDuration: 'audioDuration',
+  type: 'type',
+  voiceTone: 'voiceTone',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   workspaceId: 'workspaceId',
-  brandId: 'brandId',
-  inputId: 'inputId'
+  brandId: 'brandId'
 } as const
 
 export type SpotScalarFieldEnum = (typeof SpotScalarFieldEnum)[keyof typeof SpotScalarFieldEnum]
@@ -200,6 +199,32 @@ export const SpotInputScalarFieldEnum = {
 } as const
 
 export type SpotInputScalarFieldEnum = (typeof SpotInputScalarFieldEnum)[keyof typeof SpotInputScalarFieldEnum]
+
+
+export const SpotVersionScalarFieldEnum = {
+  id: 'id',
+  filename: 'filename',
+  starred: 'starred',
+  audioDuration: 'audioDuration',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  voiceId: 'voiceId',
+  spotId: 'spotId'
+} as const
+
+export type SpotVersionScalarFieldEnum = (typeof SpotVersionScalarFieldEnum)[keyof typeof SpotVersionScalarFieldEnum]
+
+
+export const SpotScriptScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  spotVersionId: 'spotVersionId'
+} as const
+
+export type SpotScriptScalarFieldEnum = (typeof SpotScriptScalarFieldEnum)[keyof typeof SpotScriptScalarFieldEnum]
 
 
 export const SpotCostScalarFieldEnum = {

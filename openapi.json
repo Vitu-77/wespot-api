@@ -1574,6 +1574,221 @@
           "code"
         ]
       },
+      "SpotInputEntityDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "oneOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "spotId": {
+            "type": "string"
+          },
+          "spot": {
+            "$ref": "#/components/schemas/SpotEntityDto"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "data",
+          "spotId",
+          "createdAt"
+        ]
+      },
+      "VoiceProfileEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "name",
+          "provider"
+        ]
+      },
+      "SpotScriptEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "content": {
+            "type": "string"
+          },
+          "spotVersions": {
+            "type": "array",
+            "items": {
+              "type": "array"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "content",
+          "spotVersions"
+        ]
+      },
+      "SpotVersionEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          },
+          "filename": {
+            "type": "object"
+          },
+          "audioDuration": {
+            "type": "object"
+          },
+          "starred": {
+            "type": "boolean"
+          },
+          "voiceId": {
+            "type": "string"
+          },
+          "voice": {
+            "$ref": "#/components/schemas/VoiceProfileEntityDto"
+          },
+          "spotId": {
+            "type": "string"
+          },
+          "spot": {
+            "$ref": "#/components/schemas/SpotEntityDto"
+          },
+          "scriptId": {
+            "type": "string"
+          },
+          "script": {
+            "$ref": "#/components/schemas/SpotScriptEntityDto"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "status",
+          "filename",
+          "audioDuration",
+          "starred",
+          "voiceId",
+          "voice",
+          "spotId",
+          "scriptId",
+          "script"
+        ]
+      },
+      "SpotCostEntityDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "provider": {
+            "type": "string",
+            "enum": [
+              "ELEVEN_LABS",
+              "OPEN_AI"
+            ]
+          },
+          "service": {
+            "type": "string",
+            "enum": [
+              "LLM",
+              "TTS",
+              "STORAGE",
+              "MUSIC",
+              "PROCESSING"
+            ]
+          },
+          "costCents": {
+            "type": "number"
+          },
+          "metadata": {
+            "type": "object",
+            "nullable": true
+          },
+          "spotId": {
+            "type": "string"
+          },
+          "spot": {
+            "$ref": "#/components/schemas/SpotEntityDto"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "provider",
+          "service",
+          "costCents",
+          "metadata",
+          "spotId"
+        ]
+      },
       "SpotEntityDto": {
         "type": "object",
         "properties": {
@@ -1593,41 +1808,55 @@
           "title": {
             "type": "string"
           },
-          "status": {
-            "type": "string"
-          },
-          "script": {
-            "type": "string"
-          },
-          "audioUrl": {
-            "type": "object"
+          "isDraft": {
+            "type": "boolean"
           },
           "starred": {
             "type": "boolean"
           },
-          "expectedDuration": {
-            "type": "number"
+          "type": {
+            "type": "string"
           },
-          "audioDuration": {
-            "type": "object"
+          "voiceTone": {
+            "type": "string",
+            "enum": [
+              "ENERGETIC",
+              "URGENT",
+              "PROFESSIONAL",
+              "EMOTIONAL",
+              "CASUAL",
+              "PREMIUM"
+            ]
           },
           "workspaceId": {
             "type": "string"
           },
           "workspace": {
-            "type": "object"
+            "$ref": "#/components/schemas/WorkspaceEntityDto"
           },
           "brandId": {
             "type": "object"
           },
           "brand": {
-            "type": "object"
+            "$ref": "#/components/schemas/BrandEntityDto"
           },
           "inputId": {
             "type": "object"
           },
-          "voiceId": {
-            "type": "object"
+          "input": {
+            "$ref": "#/components/schemas/SpotInputEntityDto"
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpotVersionEntityDto"
+            }
+          },
+          "costs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpotCostEntityDto"
+            }
           }
         },
         "required": [
@@ -1635,18 +1864,15 @@
           "createdAt",
           "updatedAt",
           "title",
-          "status",
-          "script",
-          "audioUrl",
+          "isDraft",
           "starred",
-          "expectedDuration",
-          "audioDuration",
+          "type",
+          "voiceTone",
           "workspaceId",
-          "workspace",
           "brandId",
-          "brand",
           "inputId",
-          "voiceId"
+          "versions",
+          "costs"
         ]
       },
       "BrandResponsibleEntityDto": {

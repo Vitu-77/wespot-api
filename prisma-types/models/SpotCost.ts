@@ -36,7 +36,7 @@ export type SpotCostSumAggregateOutputType = {
 
 export type SpotCostMinAggregateOutputType = {
   id: string | null
-  provider: $Enums.CostProvider | null
+  provider: $Enums.TTSProvider | null
   service: $Enums.CostService | null
   costCents: number | null
   spotId: string | null
@@ -44,7 +44,7 @@ export type SpotCostMinAggregateOutputType = {
 
 export type SpotCostMaxAggregateOutputType = {
   id: string | null
-  provider: $Enums.CostProvider | null
+  provider: $Enums.TTSProvider | null
   service: $Enums.CostService | null
   costCents: number | null
   spotId: string | null
@@ -183,7 +183,7 @@ export type SpotCostGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type SpotCostGroupByOutputType = {
   id: string
-  provider: $Enums.CostProvider
+  provider: $Enums.TTSProvider
   service: $Enums.CostService
   costCents: number
   metadata: runtime.JsonValue | null
@@ -215,7 +215,7 @@ export type SpotCostWhereInput = {
   OR?: Prisma.SpotCostWhereInput[]
   NOT?: Prisma.SpotCostWhereInput | Prisma.SpotCostWhereInput[]
   id?: Prisma.StringFilter<"SpotCost"> | string
-  provider?: Prisma.EnumCostProviderFilter<"SpotCost"> | $Enums.CostProvider
+  provider?: Prisma.EnumTTSProviderFilter<"SpotCost"> | $Enums.TTSProvider
   service?: Prisma.EnumCostServiceFilter<"SpotCost"> | $Enums.CostService
   costCents?: Prisma.IntFilter<"SpotCost"> | number
   metadata?: Prisma.JsonNullableFilter<"SpotCost">
@@ -239,7 +239,7 @@ export type SpotCostWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SpotCostWhereInput | Prisma.SpotCostWhereInput[]
   OR?: Prisma.SpotCostWhereInput[]
   NOT?: Prisma.SpotCostWhereInput | Prisma.SpotCostWhereInput[]
-  provider?: Prisma.EnumCostProviderFilter<"SpotCost"> | $Enums.CostProvider
+  provider?: Prisma.EnumTTSProviderFilter<"SpotCost"> | $Enums.TTSProvider
   service?: Prisma.EnumCostServiceFilter<"SpotCost"> | $Enums.CostService
   costCents?: Prisma.IntFilter<"SpotCost"> | number
   metadata?: Prisma.JsonNullableFilter<"SpotCost">
@@ -265,7 +265,7 @@ export type SpotCostScalarWhereWithAggregatesInput = {
   OR?: Prisma.SpotCostScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SpotCostScalarWhereWithAggregatesInput | Prisma.SpotCostScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"SpotCost"> | string
-  provider?: Prisma.EnumCostProviderWithAggregatesFilter<"SpotCost"> | $Enums.CostProvider
+  provider?: Prisma.EnumTTSProviderWithAggregatesFilter<"SpotCost"> | $Enums.TTSProvider
   service?: Prisma.EnumCostServiceWithAggregatesFilter<"SpotCost"> | $Enums.CostService
   costCents?: Prisma.IntWithAggregatesFilter<"SpotCost"> | number
   metadata?: Prisma.JsonNullableWithAggregatesFilter<"SpotCost">
@@ -274,7 +274,7 @@ export type SpotCostScalarWhereWithAggregatesInput = {
 
 export type SpotCostCreateInput = {
   id?: string
-  provider: $Enums.CostProvider
+  provider: $Enums.TTSProvider
   service: $Enums.CostService
   costCents: number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -283,7 +283,7 @@ export type SpotCostCreateInput = {
 
 export type SpotCostUncheckedCreateInput = {
   id?: string
-  provider: $Enums.CostProvider
+  provider: $Enums.TTSProvider
   service: $Enums.CostService
   costCents: number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -292,7 +292,7 @@ export type SpotCostUncheckedCreateInput = {
 
 export type SpotCostUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  provider?: Prisma.EnumCostProviderFieldUpdateOperationsInput | $Enums.CostProvider
+  provider?: Prisma.EnumTTSProviderFieldUpdateOperationsInput | $Enums.TTSProvider
   service?: Prisma.EnumCostServiceFieldUpdateOperationsInput | $Enums.CostService
   costCents?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -301,7 +301,7 @@ export type SpotCostUpdateInput = {
 
 export type SpotCostUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  provider?: Prisma.EnumCostProviderFieldUpdateOperationsInput | $Enums.CostProvider
+  provider?: Prisma.EnumTTSProviderFieldUpdateOperationsInput | $Enums.TTSProvider
   service?: Prisma.EnumCostServiceFieldUpdateOperationsInput | $Enums.CostService
   costCents?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -310,7 +310,7 @@ export type SpotCostUncheckedUpdateInput = {
 
 export type SpotCostCreateManyInput = {
   id?: string
-  provider: $Enums.CostProvider
+  provider: $Enums.TTSProvider
   service: $Enums.CostService
   costCents: number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -319,7 +319,7 @@ export type SpotCostCreateManyInput = {
 
 export type SpotCostUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  provider?: Prisma.EnumCostProviderFieldUpdateOperationsInput | $Enums.CostProvider
+  provider?: Prisma.EnumTTSProviderFieldUpdateOperationsInput | $Enums.TTSProvider
   service?: Prisma.EnumCostServiceFieldUpdateOperationsInput | $Enums.CostService
   costCents?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -327,7 +327,7 @@ export type SpotCostUpdateManyMutationInput = {
 
 export type SpotCostUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  provider?: Prisma.EnumCostProviderFieldUpdateOperationsInput | $Enums.CostProvider
+  provider?: Prisma.EnumTTSProviderFieldUpdateOperationsInput | $Enums.TTSProvider
   service?: Prisma.EnumCostServiceFieldUpdateOperationsInput | $Enums.CostService
   costCents?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -419,8 +419,8 @@ export type SpotCostUncheckedUpdateManyWithoutSpotNestedInput = {
   deleteMany?: Prisma.SpotCostScalarWhereInput | Prisma.SpotCostScalarWhereInput[]
 }
 
-export type EnumCostProviderFieldUpdateOperationsInput = {
-  set?: $Enums.CostProvider
+export type EnumTTSProviderFieldUpdateOperationsInput = {
+  set?: $Enums.TTSProvider
 }
 
 export type EnumCostServiceFieldUpdateOperationsInput = {
@@ -429,7 +429,7 @@ export type EnumCostServiceFieldUpdateOperationsInput = {
 
 export type SpotCostCreateWithoutSpotInput = {
   id?: string
-  provider: $Enums.CostProvider
+  provider: $Enums.TTSProvider
   service: $Enums.CostService
   costCents: number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -437,7 +437,7 @@ export type SpotCostCreateWithoutSpotInput = {
 
 export type SpotCostUncheckedCreateWithoutSpotInput = {
   id?: string
-  provider: $Enums.CostProvider
+  provider: $Enums.TTSProvider
   service: $Enums.CostService
   costCents: number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -474,7 +474,7 @@ export type SpotCostScalarWhereInput = {
   OR?: Prisma.SpotCostScalarWhereInput[]
   NOT?: Prisma.SpotCostScalarWhereInput | Prisma.SpotCostScalarWhereInput[]
   id?: Prisma.StringFilter<"SpotCost"> | string
-  provider?: Prisma.EnumCostProviderFilter<"SpotCost"> | $Enums.CostProvider
+  provider?: Prisma.EnumTTSProviderFilter<"SpotCost"> | $Enums.TTSProvider
   service?: Prisma.EnumCostServiceFilter<"SpotCost"> | $Enums.CostService
   costCents?: Prisma.IntFilter<"SpotCost"> | number
   metadata?: Prisma.JsonNullableFilter<"SpotCost">
@@ -483,7 +483,7 @@ export type SpotCostScalarWhereInput = {
 
 export type SpotCostCreateManySpotInput = {
   id?: string
-  provider: $Enums.CostProvider
+  provider: $Enums.TTSProvider
   service: $Enums.CostService
   costCents: number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -491,7 +491,7 @@ export type SpotCostCreateManySpotInput = {
 
 export type SpotCostUpdateWithoutSpotInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  provider?: Prisma.EnumCostProviderFieldUpdateOperationsInput | $Enums.CostProvider
+  provider?: Prisma.EnumTTSProviderFieldUpdateOperationsInput | $Enums.TTSProvider
   service?: Prisma.EnumCostServiceFieldUpdateOperationsInput | $Enums.CostService
   costCents?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -499,7 +499,7 @@ export type SpotCostUpdateWithoutSpotInput = {
 
 export type SpotCostUncheckedUpdateWithoutSpotInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  provider?: Prisma.EnumCostProviderFieldUpdateOperationsInput | $Enums.CostProvider
+  provider?: Prisma.EnumTTSProviderFieldUpdateOperationsInput | $Enums.TTSProvider
   service?: Prisma.EnumCostServiceFieldUpdateOperationsInput | $Enums.CostService
   costCents?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -507,7 +507,7 @@ export type SpotCostUncheckedUpdateWithoutSpotInput = {
 
 export type SpotCostUncheckedUpdateManyWithoutSpotInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  provider?: Prisma.EnumCostProviderFieldUpdateOperationsInput | $Enums.CostProvider
+  provider?: Prisma.EnumTTSProviderFieldUpdateOperationsInput | $Enums.TTSProvider
   service?: Prisma.EnumCostServiceFieldUpdateOperationsInput | $Enums.CostService
   costCents?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -572,7 +572,7 @@ export type $SpotCostPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    provider: $Enums.CostProvider
+    provider: $Enums.TTSProvider
     service: $Enums.CostService
     costCents: number
     metadata: runtime.JsonValue | null
@@ -1002,7 +1002,7 @@ export interface Prisma__SpotCostClient<T, Null = never, ExtArgs extends runtime
  */
 export interface SpotCostFieldRefs {
   readonly id: Prisma.FieldRef<"SpotCost", 'String'>
-  readonly provider: Prisma.FieldRef<"SpotCost", 'CostProvider'>
+  readonly provider: Prisma.FieldRef<"SpotCost", 'TTSProvider'>
   readonly service: Prisma.FieldRef<"SpotCost", 'CostService'>
   readonly costCents: Prisma.FieldRef<"SpotCost", 'Int'>
   readonly metadata: Prisma.FieldRef<"SpotCost", 'Json'>
