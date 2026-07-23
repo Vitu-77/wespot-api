@@ -9,7 +9,6 @@ import {
 } from "src/domain/entities/workspace-member.entity";
 
 export type WorkspaceEntity = BaseEntity & {
-  id: string;
   name: string | null;
   type: WorkspaceType;
   slug: string;

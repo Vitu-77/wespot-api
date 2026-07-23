@@ -3,7 +3,7 @@ import { WorkspaceType } from "prisma-types/enums";
 import { ErrorCodes } from "src/domain/exceptions/error-codes.enum";
 import { WorkspaceRepository } from "src/infra/database/repositories/workspace-repository/workspace.repository";
 import { StorageService } from "src/infra/storage/storage.service";
-import { S3_BUCKETS } from "src/shared/constants/s3-buckets";
+import { S3_WORKSPACE_FOLDERS } from "src/shared/constants/s3-workspace-folders";
 import { createSlug } from "src/shared/utils/create-slug";
 import { createWorkspaceDirname } from "src/shared/utils/create-workspace-dirname";
 
@@ -34,17 +34,18 @@ export class CreateWorkspaceUseCase {
       name,
       type,
       slug,
+      isTrial: true,
     });
 
-    const commonBuckets = [S3_BUCKETS.SOUNDTRACKS];
-    const buckets = Object.values(S3_BUCKETS).filter(
-      (bucket) => !commonBuckets.includes(bucket),
-    );
+    const folders = Object.values(S3_WORKSPACE_FOLDERS);
 
-    for (const key of buckets) {
+    for (const key of folders) {
       await this.storageService.createDirectory({
-        bucket: key as keyof typeof S3_BUCKETS,
-        directory: createWorkspaceDirname(workspace),
+        bucket: "WORKSPACE_ASSETS",
+        directory: createWorkspaceDirname(
+          workspace,
+          key as keyof typeof S3_WORKSPACE_FOLDERS,
+        ),
       });
     }
 

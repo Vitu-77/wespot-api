@@ -6,12 +6,12 @@ import {
   WorkspaceEntityDto,
 } from "src/domain/entities/workspace.entity";
 
-type MembershipmentEntity = {
+export type MembershipmentEntity = {
   role: WorkspaceRole;
   workspace: WorkspaceEntity;
 };
 
-class MembershipmentDto implements MembershipmentEntity {
+export class MembershipmentDto implements MembershipmentEntity {
   @ApiProperty()
   role!: WorkspaceRole;
 

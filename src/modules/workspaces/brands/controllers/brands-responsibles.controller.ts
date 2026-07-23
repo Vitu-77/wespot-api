@@ -13,7 +13,7 @@ import { ProtectedRoute } from "src/shared/decorators/protected-route.decorator"
 
 @ApiTags("Workspace ⌁ Brands")
 @ApiWorkspaceHeader()
-@Controller("workspace/brands")
+@Controller("workspace/brands/:brandId/address/:addressId/responsibles")
 export class BrandResponsiblesController {
   constructor(
     private readonly createBrandResponsibleService: CreateBrandResponsibleService,
@@ -21,7 +21,7 @@ export class BrandResponsiblesController {
   ) {}
 
   @ProtectedRoute()
-  @Post("/:brandId/address/:addressId/responsible")
+  @Post("/")
   @ApiCreateBrandAddressResponsibleDocs()
   public createAddressResponsible(
     @Param("brandId") brandId: string,
@@ -36,7 +36,7 @@ export class BrandResponsiblesController {
   }
 
   @ProtectedRoute({ roles: ["ADMIN", "OWNER"] })
-  @Delete("/:brandId/address/:addressId/responsibles")
+  @Delete("/")
   @ApiDeleteBrandAddressResponsiblesDocs()
   public deleteBrandAddressResponsibles(@Body() body: DeleteBrandAddressesDto) {
     return this.deleteBrandAddressResponsiblesService.execute(body);

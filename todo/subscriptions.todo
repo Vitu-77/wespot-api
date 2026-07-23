@@ -17,9 +17,11 @@
     ☐ Alteração de plano
     ☐ Busca de resumo mensal atual (Plano + Spots Restantes + Gerações Excedentes ao Plano)
     ☐ Atualizar cartão de crédito
+    ☐ Endpoint para verificar se workspace precisa de subscrição para criar spots
 
   ⚙️ Usecases
     ☐ Atualizar spots disponíveis no InvoiceSummary ao mudar de plano
+    ☐ Bloquear geração/criação de spots em workspaces trial com 3 spots gerados
 
   🔌 Serviços
     ☐ Efí-Payments

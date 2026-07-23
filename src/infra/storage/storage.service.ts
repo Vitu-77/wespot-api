@@ -5,6 +5,7 @@ import { Injectable } from "@nestjs/common";
 import { WorkspaceEntity } from "src/domain/entities/workspace.entity";
 import { env } from "src/env";
 import { S3_BUCKETS } from "src/shared/constants/s3-buckets";
+import { S3_WORKSPACE_FOLDERS } from "src/shared/constants/s3-workspace-folders";
 import { createWorkspaceDirname } from "src/shared/utils/create-workspace-dirname";
 
 type CreateDirParams = {
@@ -12,11 +13,11 @@ type CreateDirParams = {
   directory: string;
 };
 
-type UploadFileParams = {
-  bucket: keyof typeof S3_BUCKETS;
+type UploadFileToWorkspaceParams = {
+  prefix?: string;
   file: MulterFile;
   workspace: WorkspaceEntity;
-  prefix?: string;
+  folder: keyof typeof S3_WORKSPACE_FOLDERS;
 };
 
 @Injectable()
@@ -38,6 +39,12 @@ export class StorageService {
 
   async createDirectory({ bucket, directory }: CreateDirParams): Promise<void> {
     const key = directory.endsWith("/") ? directory : `${directory}/`;
+    console.log({
+      bucket: S3_BUCKETS[bucket],
+      directory,
+      key,
+    });
+
     await this.s3.send(
       new PutObjectCommand({
         Bucket: S3_BUCKETS[bucket],
@@ -47,20 +54,25 @@ export class StorageService {
     );
   }
 
-  async upload({ bucket, file, workspace, prefix }: UploadFileParams) {
+  async uploadToWorkspace({
+    file,
+    workspace,
+    prefix,
+    folder,
+  }: UploadFileToWorkspaceParams) {
     const extension = extname(file.originalname);
     const filename = prefix
       ? `${prefix}__${crypto.randomUUID()}`
       : crypto.randomUUID();
 
     const key = [
-      createWorkspaceDirname(workspace),
+      createWorkspaceDirname(workspace, folder),
       `${filename}${extension}`,
     ].join("/");
 
     await this.s3.send(
       new PutObjectCommand({
-        Bucket: S3_BUCKETS[bucket],
+        Bucket: S3_BUCKETS.WORKSPACE_ASSETS,
         Key: key,
         Body: file.buffer,
         ContentType: file.mimetype,
@@ -69,7 +81,7 @@ export class StorageService {
 
     return {
       key,
-      bucket: bucket,
+      bucket: S3_BUCKETS.WORKSPACE_ASSETS,
     };
   }
 }

@@ -32,6 +32,8 @@ export class CompleteOnboardingService {
       );
     }
 
+    console.log(user);
+
     if (user.workspaces.length) {
       throw new BadRequestException(
         CompleteOnboardingService.errors.USER_HAS_ONBOARDING_COMPLETED,

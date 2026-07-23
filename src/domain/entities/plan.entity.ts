@@ -23,9 +23,6 @@ export class PlanEntityDto extends BaseEntityDto implements PlanEntity {
   @ApiProperty()
   price!: bigint;
 
-  @ApiProperty()
-  value!: bigint;
-
   @ApiProperty({ type: "string", isArray: true })
   resources!: string[];
 

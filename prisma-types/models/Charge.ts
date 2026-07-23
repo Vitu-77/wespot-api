@@ -451,14 +451,6 @@ export type EnumChargeStatusFieldUpdateOperationsInput = {
   set?: $Enums.ChargeStatus
 }
 
-export type BigIntFieldUpdateOperationsInput = {
-  set?: bigint | number
-  increment?: bigint | number
-  decrement?: bigint | number
-  multiply?: bigint | number
-  divide?: bigint | number
-}
-
 export type ChargeCreateWithoutInvoiceSummaryInput = {
   id?: string
   status: $Enums.ChargeStatus

@@ -1,19 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/infra/database/prisma.service";
-import { ListSpotsDto } from "src/modules/workspaces/spots/services/list-spots/list-spots.dto";
+import { SpotRepositoryListParams } from "src/infra/database/repositories/spot-repository/spot.repository.types";
 import { contains, isIn, paginate } from "src/shared/utils/query-helpers";
-
-type ListSpotsParams = Omit<ListSpotsDto, "workspaceId"> & {
-  workspaceId?: string;
-  ids?: string[];
-};
 
 @Injectable()
 export class SpotRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async list({ pageNumber, pageSize, ...filters }: ListSpotsParams) {
-    return this.prismaService.spot.findMany({
+  async list({ pageNumber, pageSize, ...filters }: SpotRepositoryListParams) {
+    return await this.prismaService.spot.findMany({
       ...paginate({ pageNumber, pageSize }),
 
       orderBy: {
@@ -28,7 +23,11 @@ export class SpotRepository {
     });
   }
 
-  async listAndCount({ pageNumber, pageSize, ...filters }: ListSpotsParams) {
+  async listAndCount({
+    pageNumber,
+    pageSize,
+    ...filters
+  }: SpotRepositoryListParams) {
     const [spots, count] = await Promise.all([
       this.list({ pageNumber, pageSize, ...filters }),
       this.prismaService.spot.count({
@@ -45,7 +44,7 @@ export class SpotRepository {
   }
 
   async deleteMany(ids: string[]) {
-    return this.prismaService.spot.deleteMany({
+    return await this.prismaService.spot.deleteMany({
       where: {
         id: isIn(ids),
       },

@@ -1,8 +1,9 @@
 model Workspace {
-  id   String        @id @default(uuid())
-  name String?
-  type WorkspaceType
-  slug String
+  id      String        @id @default(uuid())
+  name    String?
+  type    WorkspaceType
+  slug    String
+  isTrial Boolean       @default(dbgenerated("true")) @map("is_trial")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

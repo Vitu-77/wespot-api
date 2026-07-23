@@ -1044,7 +1044,7 @@
         ]
       }
     },
-    "/api/v1/workspace/brands/{brandId}/address/{addressId}/responsible": {
+    "/api/v1/workspace/brands/{brandId}/address/{addressId}/responsibles": {
       "post": {
         "description": "Add a new responsible to a addresss.",
         "operationId": "createAddressResponsible",
@@ -1144,9 +1144,7 @@
         "tags": [
           "Workspace ⌁ Brands"
         ]
-      }
-    },
-    "/api/v1/workspace/brands/{brandId}/address/{addressId}/responsibles": {
+      },
       "delete": {
         "description": "Delete brand address responsibles for given ids.",
         "operationId": "deleteBrandAddressResponsibles",

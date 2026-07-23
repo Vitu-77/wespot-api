@@ -65,6 +65,11 @@ export type Invite = Prisma.InviteModel
  */
 export type Notification = Prisma.NotificationModel
 /**
+ * Model Plan
+ * 
+ */
+export type Plan = Prisma.PlanModel
+/**
  * Model Spot
  * 
  */

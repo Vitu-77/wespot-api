@@ -56,6 +56,7 @@ export const ModelName = {
   BrandResponsible: 'BrandResponsible',
   Invite: 'Invite',
   Notification: 'Notification',
+  Plan: 'Plan',
   Spot: 'Spot',
   SpotInput: 'SpotInput',
   SpotCost: 'SpotCost',
@@ -158,6 +159,19 @@ export const NotificationScalarFieldEnum = {
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
+export const PlanScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  resources: 'resources',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlanScalarFieldEnum = (typeof PlanScalarFieldEnum)[keyof typeof PlanScalarFieldEnum]
+
+
 export const SpotScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -208,7 +222,8 @@ export const SubscriptionScalarFieldEnum = {
   creditCardMask: 'creditCardMask',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  workspaceId: 'workspaceId'
+  workspaceId: 'workspaceId',
+  planId: 'planId'
 } as const
 
 export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
@@ -263,6 +278,7 @@ export const WorkspaceScalarFieldEnum = {
   name: 'name',
   type: 'type',
   slug: 'slug',
+  isTrial: 'isTrial',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

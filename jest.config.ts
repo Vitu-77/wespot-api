@@ -20,6 +20,7 @@ const config: Config = {
 
   moduleNameMapper: {
     "^src/(.*)$": "<rootDir>/src/$1",
+    "^test/(.*)$": "<rootDir>/test/$1",
     "^prisma-types/(.*)$": "<rootDir>/prisma-types/$1",
     "^(\\.{1,2}/.*)\\.js$": "$1",
   },

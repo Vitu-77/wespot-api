@@ -40,10 +40,10 @@ export class CreateBrandsService {
       );
     }
 
-    const uploadedFile = await this.storageService.upload({
+    const uploadedFile = await this.storageService.uploadToWorkspace({
       file: logoFile,
-      bucket: "BRAND_LOGOS",
       workspace,
+      folder: "BRAND_LOGOS",
     });
 
     return this.brandRepository.createBrand({

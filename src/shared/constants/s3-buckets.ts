@@ -1,6 +1,4 @@
 export const S3_BUCKETS = {
-  SPOTS: "spots",
-  SOUNDTRACKS: "soundtracks",
-  VOICE_SAMPLES: "voice-samples",
-  BRAND_LOGOS: "brands-logos",
+  WORKSPACE_ASSETS: "workspaces-assets",
+  PUBLIC_ASSETS: "public-assets",
 };
